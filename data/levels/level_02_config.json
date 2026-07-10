@@ -1,0 +1,13 @@
+{
+  "level_id": "level_02",
+  "area_name": "Banana-burbs",
+  "intro_event": "Shrububu finds a too-happy monkey suburb and an abandoned lab.",
+  "mini_boss_id": "nitin",
+  "main_boss_id": "deepak_reddy",
+  "reward_gear_id": "banana_gun",
+  "clue_ids": ["165_files"],
+  "growth_stage_unlock": 3,
+  "town_state_after_defeat": "Monkeys regain agency and reveal SRMT's wider threat.",
+  "next_level_id": "level_03",
+  "required_story_flags": ["165_files_collected", "nitin_defeated", "deepak_reddy_defeated"]
+}

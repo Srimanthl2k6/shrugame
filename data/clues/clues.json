@@ -1,0 +1,37 @@
+{
+  "divorce_records": {
+    "display_name": "Divorce Records",
+    "level_id": "level_01",
+    "summary": "Records showing Satyaki's grudge over the divorce and his control of Divorcee Harbour.",
+    "journal_text": "The rain has softened the ink, but the shape of Satyaki's grudge is still readable: property, money, pride, and SRMT's stamp in the margin. The records do not point to KFC, but they do point to the east dock and the first real boss of Ishiville.",
+    "unlocks": ["satyaki_tirumal", "level_01_main_boss_route"]
+  },
+  "165_files": {
+    "display_name": "165-files",
+    "level_id": "level_02",
+    "summary": "Secret lab documents proving Deepak Reddy's joy spell over Banana-burbs.",
+    "journal_text": "The 165-files prove Banana-burbs was engineered into permanent happiness. Deepak Reddy calls it protection from SRMT's world, but the lab records call it compliance. Shrububu's backup KFC popcorn box may be the only evidence stronger than the spell.",
+    "unlocks": ["nitin", "deepak_reddy", "mayor_office_route"]
+  },
+  "berry_contract": {
+    "display_name": "Berry Contract",
+    "level_id": "level_03",
+    "summary": "The fake fried-chicken agreement behind Niggesh Nishal's 1000 berry demand.",
+    "journal_text": "Niggesh Nishal promised fried chicken for 1000 bark berries, but the contract contains every ingredient except chicken. The forest treats this as legal fraud, culinary fraud, and an insult to Shrububu's KFC search. Ankit's anger waits behind the lie.",
+    "unlocks": ["niggesh_nishal", "ankit", "berry_potions"]
+  },
+  "hospital_records": {
+    "display_name": "Hospital Records",
+    "level_id": "level_04",
+    "summary": "Files exposing Doctor Sushan's fictional control serum and dependency scheme.",
+    "journal_text": "Doctor Sushan's records describe Pattern Serum loops, repeat appointments, and SRMT-approved civic quiet. Auticity's problem is not weirdness; it is choice being squeezed into a profitable shape. The Aeon Festival becomes the town's first loud answer.",
+    "unlocks": ["doctor_sushan", "aeon_festival", "mitta"]
+  },
+  "mansion_court_clues": {
+    "display_name": "Mansion/Court Clues",
+    "level_id": "level_05",
+    "summary": "Ruined mansion and court records leading from Area 111 to SRMT's throne and IshiYoga.",
+    "journal_text": "Every clue from Ishiville bends into Area 111's ruined court: the bike, the musical guitar, the KFC grease, and the throne door. SRMT is no longer distant weather. He is sitting in the court, eating the thing Shrububu came for, with IshiYoga chained behind him.",
+    "unlocks": ["srmt", "ishiyoga", "kfc_dungeon"]
+  }
+}

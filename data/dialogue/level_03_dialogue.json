@@ -1,0 +1,177 @@
+{
+  "tickroot_intro": {
+    "speaker": "Tickroot",
+    "tags": ["minor_npc", "optional", "prototype_echo"],
+    "lines": [
+      "Every fruit here ripens into a choice already made.",
+      "Reset the clock-fruit if you must, but Berry Barks has louder problems.",
+      "SRMT's fog has been licking the fir roots, and it tastes like unpaid debt."
+    ],
+    "complete_flag": "met_tickroot"
+  },
+  "tickroot_after_battle": {
+    "speaker": "Tickroot",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "There. The minute hand finally stopped apologizing.",
+      "Now follow the berry glow before it gets hungry.",
+      "Shrububu still wants KFC, but the forest is offering foreshadowing with syrup on it."
+    ],
+    "complete_flag": "tickroot_after_battle_seen"
+  },
+  "nishal_intro": {
+    "speaker": "Niggesh Nishal",
+    "tags": ["mini_boss_intro"],
+    "lines": [
+      "Shrububu wants KFC. Berry Barks can provide a miracle, maybe.",
+      "Bring me 1000 berries from the Douglas Fir bark and I will prepare fried chicken.",
+      "Do not count them one by one. The forest hates inefficient UI, and SRMT hates anyone getting fed without permission."
+    ],
+    "complete_flag": "nishal_intro_seen"
+  },
+  "berry_contract": {
+    "speaker": "Shrububu",
+    "tags": ["clue_object", "kfc_thread"],
+    "lines": [
+      "The berry contract says 1000 berries, zero chicken, and several stains shaped like lies.",
+      "Niggesh Nishal signed it with gravy-colored ink.",
+      "Shrububu has discovered fraud and is still hungry."
+    ],
+    "complete_flag": "berry_contract_seen"
+  },
+  "nishal_defeat": {
+    "speaker": "Niggesh Nishal",
+    "tags": ["mini_boss_defeat", "post_mini_boss"],
+    "lines": [
+      "Fine. There was never fried chicken.",
+      "The berries were payment for a meal I had already imagined eating.",
+      "Please do not tell Ankit his chef is unavailable. Also do not tell SRMT that I misplaced his forest tax."
+    ],
+    "complete_flag": "nishal_defeat_seen"
+  },
+  "berry_share": {
+    "speaker": "Berry Barks Resident",
+    "tags": ["minor_npc", "post_mini_boss"],
+    "lines": [
+      "Shrububu shares the 1000 berries as clusters, bowls, and suspiciously powerful berry potions.",
+      "The town stops waiting for one greedy chef.",
+      "The berry potions are yours. Try not to drink the glowing one near paperwork, KFC wrappers, or people named Ankit."
+    ],
+    "complete_flag": "berry_share_seen"
+  },
+  "ankit_intro": {
+    "speaker": "Ankit",
+    "tags": ["main_boss_intro"],
+    "lines": [
+      "You beat Niggesh Nishal.",
+      "That was my chef, Shrububu. Now I have nothing to eat but bark berries and consequences.",
+      "SRMT sends famine through kings and chefs alike. I hope your berry potions are combat-ready."
+    ],
+    "complete_flag": "ankit_intro_seen"
+  },
+  "ankit_defeat": {
+    "speaker": "Ankit",
+    "tags": ["main_boss_defeat", "post_boss"],
+    "lines": [
+      "The berries are actually pretty good.",
+      "Fine. Berry Barks is free, and you are somehow larger again.",
+      "Still no KFC, though. The trees keep whispering about Auticity and SRMT's hospital lights."
+    ],
+    "complete_flag": "ankit_defeat_seen"
+  },
+  "fir_grandmother": {
+    "speaker": "Fir Grandmother",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "The berries grow from bark because the trees are tired of keeping secrets inside.",
+      "When SRMT's tax crows come, they peck only the sweetest ones.",
+      "You smell like KFC hope and harbour rain."
+    ],
+    "complete_flag": "fir_grandmother_seen"
+  },
+  "berry_picker_kid": {
+    "speaker": "Berry Picker",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "I collect berries in clusters of fifty because nobody should press a button one thousand times.",
+      "Nishal said the chicken would be crispy enough to scare the moon.",
+      "The moon did not look concerned."
+    ],
+    "complete_flag": "berry_picker_kid_seen"
+  },
+  "mist_ranger": {
+    "speaker": "Mist Ranger",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "Stay on the red trail. The blue trail loops back to your worst snack decision.",
+      "Ankit's house is the one with plates nailed to the door.",
+      "SRMT's scouts avoid Berry Barks because the mist asks follow-up questions."
+    ],
+    "complete_flag": "mist_ranger_seen"
+  },
+  "berry_apothecary": {
+    "speaker": "Berry Apothecary",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "One berry heals. Two berries glow. Three berries remember your embarrassing haircut.",
+      "I can make potions, but I cannot make KFC.",
+      "That is a culinary boundary, not a moral one."
+    ],
+    "complete_flag": "berry_apothecary_seen"
+  },
+  "bark_choir": {
+    "speaker": "Bark Choir",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "The trees hum after Ankit falls.",
+      "Their song has three notes: berry, freedom, chicken.",
+      "The fourth note is SRMT, but nobody wants to sing it indoors."
+    ],
+    "complete_flag": "bark_choir_seen"
+  },
+  "clue_sap_invoice": {
+    "speaker": "Sap Invoice",
+    "tags": ["clue_object"],
+    "lines": [
+      "The invoice bills Nishal for berries, gravy ink, and 'imaginary poultry consulting.'",
+      "A footer warns that unpaid forest debts are forwarded to SRMT's ruined court."
+    ],
+    "complete_flag": "clue_sap_invoice_seen"
+  },
+  "clue_empty_fryer": {
+    "speaker": "Empty Fryer",
+    "tags": ["clue_object"],
+    "lines": [
+      "Nishal's fryer is cold, spotless, and deeply unemployed.",
+      "The basket contains a note that says, 'Tell Shrububu the chicken is meditating.'"
+    ],
+    "complete_flag": "clue_empty_fryer_seen"
+  },
+  "clue_red_berry_map": {
+    "speaker": "Red Berry Map",
+    "tags": ["clue_object"],
+    "lines": [
+      "The map marks berry clusters, Ankit's pantry, and a mist road toward Auticity.",
+      "Someone circled the word KFC and wrote, 'not here, obviously, but keep her moving.'"
+    ],
+    "complete_flag": "clue_red_berry_map_seen"
+  },
+  "berry_post_clear_potions": {
+    "speaker": "Potion Shelf",
+    "tags": ["post_clear"],
+    "lines": [
+      "After Ankit is beaten, the shelf labels itself without being asked.",
+      "Berry potions: for healing, splash counterplay, and pretending the KFC search is going well."
+    ],
+    "complete_flag": "berry_post_clear_potions_seen"
+  },
+  "berry_post_clear_path": {
+    "speaker": "Forest Path",
+    "tags": ["post_clear"],
+    "lines": [
+      "The mist parts toward Auticity.",
+      "The trees whisper that SRMT's control gets cleaner, brighter, and more expensive from here."
+    ],
+    "complete_flag": "berry_post_clear_path_seen"
+  }
+}

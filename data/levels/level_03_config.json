@@ -1,0 +1,13 @@
+{
+  "level_id": "level_03",
+  "area_name": "Berry Barks",
+  "intro_event": "Shrububu is promised fried chicken for collecting bark berries.",
+  "mini_boss_id": "niggesh_nishal",
+  "main_boss_id": "ankit",
+  "reward_gear_id": "berry_potions",
+  "clue_ids": ["berry_contract"],
+  "growth_stage_unlock": 4,
+  "town_state_after_defeat": "Residents receive shared berries and stop depending on one selfish supplier.",
+  "next_level_id": "level_04",
+  "required_story_flags": ["berry_contract_collected", "niggesh_nishal_defeated", "ankit_defeated"]
+}

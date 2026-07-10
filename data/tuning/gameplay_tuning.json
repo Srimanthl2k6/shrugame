@@ -1,0 +1,18 @@
+{
+  "overworld": {
+    "player_speed": 86.0,
+    "player_collision_size": [10.0, 16.0],
+    "camera_smoothing_speed": 9.5,
+    "interaction_size": [38.0, 24.0]
+  },
+  "battle": {
+    "enemy_phase_seconds": 1.35,
+    "enemy_phase_damage": 1,
+    "pattern_telegraph_seconds": 0.6,
+    "bullet_count": 4,
+    "bullet_radius": 2.5,
+    "bullet_start_x": 40.0,
+    "bullet_start_y": 20.0,
+    "bullet_spacing": 28.0
+  }
+}

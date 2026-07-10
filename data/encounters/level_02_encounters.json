@@ -1,0 +1,69 @@
+{
+  "vela_practice": {
+    "enemy_name": "Vela",
+    "enemy_hp": 6,
+    "player_hp": 20,
+    "resonance_goal": 2,
+    "return_scene": "res://scenes/levels/level_02.tscn",
+    "boss_type": "practice",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "reflection",
+        "intro_dialogue": "Vela's old prototype reflection ripples outward.",
+        "patterns": [{"type": "rings", "count": 4}],
+        "clear_threshold": 0
+      }
+    ],
+    "defeated_flag": "vela_practice_cleared"
+  },
+  "nitin_janitor_boss": {
+    "enemy_name": "Nitin the Janitor",
+    "enemy_hp": 12,
+    "player_hp": 26,
+    "resonance_goal": 4,
+    "return_scene": "res://scenes/levels/level_02.tscn",
+    "boss_type": "mini_boss",
+    "defeated_flag": "nitin_defeated",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "mop_lines",
+        "intro_dialogue": "Nitin sweeps mop lanes across the abandoned lab.",
+        "patterns": [{"type": "straight_lanes", "count": 5}],
+        "clear_threshold": 6
+      },
+      {
+        "id": "hazard_signs",
+        "intro_dialogue": "Wet-floor signs tumble from the ceiling.",
+        "patterns": [{"type": "falling_objects", "count": 6}],
+        "clear_threshold": 0
+      }
+    ]
+  },
+  "deepak_reddy_boss": {
+    "enemy_name": "Deepak Reddy",
+    "enemy_hp": 18,
+    "player_hp": 28,
+    "resonance_goal": 6,
+    "return_scene": "res://scenes/levels/level_02.tscn",
+    "boss_type": "main_boss",
+    "defeated_flag": "deepak_reddy_defeated",
+    "growth_stage_reward": 3,
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "forced_smiles",
+        "intro_dialogue": "Deepak casts cheerful loops through the mayor office speakers.",
+        "patterns": [{"type": "rings", "count": 7}],
+        "clear_threshold": 9
+      },
+      {
+        "id": "banana_decree",
+        "intro_dialogue": "The banana seal of office bends into sweeping beams.",
+        "patterns": [{"type": "sweeping_beams", "count": 5}],
+        "clear_threshold": 0
+      }
+    ]
+  }
+}

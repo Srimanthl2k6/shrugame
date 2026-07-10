@@ -1,0 +1,13 @@
+{
+  "level_id": "level_01",
+  "area_name": "Divorcee Harbour",
+  "intro_event": "Shrububu enters Ishiville looking for KFC, slams a fake chicken building door, and breaks the building.",
+  "mini_boss_id": "poojan",
+  "main_boss_id": "satyaki_tirumal",
+  "reward_gear_id": "revolver",
+  "clue_ids": ["divorce_records"],
+  "growth_stage_unlock": 2,
+  "town_state_after_defeat": "Harbour residents realize Shrububu can free Ishiville.",
+  "next_level_id": "level_02",
+  "required_story_flags": ["poojan_defeated", "divorce_records_collected", "satyaki_tirumal_defeated"]
+}

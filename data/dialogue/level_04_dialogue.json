@@ -1,0 +1,188 @@
+{
+  "luma_intro": {
+    "speaker": "Judge Luma",
+    "tags": ["minor_npc", "optional", "prototype_echo"],
+    "lines": [
+      "This court records what you do. It rarely records why.",
+      "Auticity keeps old prototype lanterns in its basements and newer hospital receipts in its gutters.",
+      "SRMT prefers towns that explain themselves into knots."
+    ],
+    "complete_flag": "met_luma"
+  },
+  "luma_after_battle": {
+    "speaker": "Judge Luma",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "The record will show restraint.",
+      "The hospital lights are much stranger than my lantern.",
+      "If Shrububu wants KFC, she should hurry before the festival vendors invent a pun-based substitute."
+    ],
+    "complete_flag": "luma_after_battle_seen"
+  },
+  "pun_loop": {
+    "speaker": "Auticity Resident",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "Welcome to Auticity. The streets are pun-der construction.",
+      "Shrububu asks for KFC and receives only recursive wordplay.",
+      "The hospital is down the road. It has excellent patience and terrible patients."
+    ],
+    "complete_flag": "pun_loop_seen"
+  },
+  "hospital_records": {
+    "speaker": "Hospital Terminal",
+    "tags": ["clue_object"],
+    "lines": [
+      "Pattern Serum intake is up. Doctor Sushan recommends repeat appointments.",
+      "The serum narrows behavior loops until residents keep returning for treatment.",
+      "Billing note: SRMT favors quiet towns, profitable symptoms, and paperwork that glows.",
+      "Shrububu files this under extremely suspicious hospital nonsense."
+    ],
+    "complete_flag": "hospital_records_seen"
+  },
+  "sushan_intro": {
+    "speaker": "Doctor Sushan",
+    "tags": ["mini_boss_intro"],
+    "lines": [
+      "You should not be in the Pattern Serum lab.",
+      "Auticity runs smoothly when everyone follows the same loop.",
+      "One injection, Shrububu, and you will stop interrupting my revenue model and my festival plans."
+    ],
+    "complete_flag": "sushan_intro_seen"
+  },
+  "sushan_defeat": {
+    "speaker": "Doctor Sushan",
+    "tags": ["mini_boss_defeat", "post_mini_boss"],
+    "lines": [
+      "The Pattern Serum failed on you.",
+      "Fireworks? In my hospital?",
+      "Mitta will hear about this before the Aeon Festival lights finish warming up, and SRMT will hate the noise."
+    ],
+    "complete_flag": "sushan_defeat_seen"
+  },
+  "aeon_festival": {
+    "speaker": "Festival Host",
+    "tags": ["story_event", "post_mini_boss"],
+    "lines": [
+      "The Aeon Festival begins because Auticity can finally choose its own rhythm.",
+      "Shrububu stands under fireworks that spell something almost like KFC.",
+      "Mitta is smiling too hard from the stage."
+    ],
+    "complete_flag": "aeon_festival_seen"
+  },
+  "mitta_intro": {
+    "speaker": "Mitta",
+    "tags": ["main_boss_intro"],
+    "lines": [
+      "Doctor Sushan was mine, and you broke his perfect little system.",
+      "This Aeon Festival was supposed to be our victory lap.",
+      "Outshine me if you can, Shrububu. SRMT's stage lights are watching."
+    ],
+    "complete_flag": "mitta_intro_seen"
+  },
+  "mitta_defeat": {
+    "speaker": "Mitta",
+    "tags": ["main_boss_defeat", "post_boss"],
+    "lines": [
+      "Fine. You outshone the stage, the serum, and my entire festival budget.",
+      "Auticity is free, and you are enormous enough to worry the sky.",
+      "Area 111 is where SRMT keeps the ugliest pink secrets and, rumor says, the real KFC."
+    ],
+    "complete_flag": "mitta_defeat_seen"
+  },
+  "pun_vendor": {
+    "speaker": "Pun Vendor",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "I sell wordplay by the syllable and soup by mistake.",
+      "No KFC, but I can offer a bucket of consonants.",
+      "Please do not tell Doctor Sushan that my punchlines are improving."
+    ],
+    "complete_flag": "pun_vendor_seen"
+  },
+  "clinic_receptionist": {
+    "speaker": "Clinic Receptionist",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "Appointments repeat every thirteen minutes, whether anyone booked them or not.",
+      "Doctor Sushan says repetition is wellness.",
+      "The waiting room says SRMT's name when the lights flicker."
+    ],
+    "complete_flag": "clinic_receptionist_seen"
+  },
+  "festival_drummer": {
+    "speaker": "Festival Drummer",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "I used to drum on schedule. Now I drum when the plaza feels nervous.",
+      "That is usually whenever Shrububu mentions KFC.",
+      "Mitta hates unscripted rhythm more than rain hates paper."
+    ],
+    "complete_flag": "festival_drummer_seen"
+  },
+  "neon_patient": {
+    "speaker": "Neon Patient",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "The Pattern Serum made my days fold into little boxes.",
+      "After Sushan fell, I unfolded Wednesday and found three jokes I never chose to tell.",
+      "That feels like freedom, or at least like a hallway with an exit sign."
+    ],
+    "complete_flag": "neon_patient_seen"
+  },
+  "aeon_mask_maker": {
+    "speaker": "Aeon Mask Maker",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "I made masks for the festival, but after Mitta fell they started making faces back.",
+      "One mask asked for KFC.",
+      "I told it to get in line behind Shrububu."
+    ],
+    "complete_flag": "aeon_mask_maker_seen"
+  },
+  "clue_serum_ledger": {
+    "speaker": "Serum Ledger",
+    "tags": ["clue_object"],
+    "lines": [
+      "The ledger lists repeat injections, repeat invoices, and repeat excuses.",
+      "A red stamp reads: 'Approved under SRMT Civic Quiet Initiative.'"
+    ],
+    "complete_flag": "clue_serum_ledger_seen"
+  },
+  "clue_aeon_flyer": {
+    "speaker": "Aeon Flyer",
+    "tags": ["clue_object"],
+    "lines": [
+      "The flyer promises lights, music, and 'mandatory spontaneous joy.'",
+      "Someone scribbled: 'If Shrububu asks for KFC, stall until Mitta arrives.'"
+    ],
+    "complete_flag": "clue_aeon_flyer_seen"
+  },
+  "clue_hospital_map": {
+    "speaker": "Hospital Map",
+    "tags": ["clue_object"],
+    "lines": [
+      "The map marks the lobby, the Pattern Serum lab, and a supply closet labeled 'fireworks for failed injection contingency.'",
+      "It also points toward Area 111 with a sticky note: 'SRMT wants results by midnight.'"
+    ],
+    "complete_flag": "clue_hospital_map_seen"
+  },
+  "auticity_post_clear_plaza": {
+    "speaker": "Festival Plaza",
+    "tags": ["post_clear"],
+    "lines": [
+      "After Mitta falls, the plaza lights stop blinking in command patterns.",
+      "They blink badly drawn chicken buckets instead."
+    ],
+    "complete_flag": "auticity_post_clear_plaza_seen"
+  },
+  "auticity_post_clear_resident": {
+    "speaker": "Auticity Resident",
+    "tags": ["post_clear"],
+    "lines": [
+      "The puns are still terrible, but now they arrive by choice.",
+      "Area 111 is ahead, Shrububu. SRMT is out of administrators and almost out of places to hide the KFC."
+    ],
+    "complete_flag": "auticity_post_clear_resident_seen"
+  }
+}

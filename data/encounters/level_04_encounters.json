@@ -1,0 +1,70 @@
+{
+  "luma_practice": {
+    "enemy_name": "Judge Luma",
+    "enemy_hp": 8,
+    "player_hp": 20,
+    "resonance_goal": 3,
+    "return_scene": "res://scenes/levels/level_04.tscn",
+    "boss_type": "practice",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "lantern",
+        "intro_dialogue": "Judge Luma narrows the old lantern court pattern.",
+        "patterns": [{"type": "sweeping_beams", "count": 3}],
+        "clear_threshold": 0
+      }
+    ],
+    "defeated_flag": "luma_practice_cleared"
+  },
+  "doctor_sushan_boss": {
+    "enemy_name": "Doctor Sushan",
+    "enemy_hp": 16,
+    "player_hp": 30,
+    "resonance_goal": 5,
+    "return_scene": "res://scenes/levels/level_04.tscn",
+    "boss_type": "mini_boss",
+    "defeated_flag": "doctor_sushan_defeated",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "pattern_serum",
+        "intro_dialogue": "Sushan launches Pattern Serum syringes through hospital lanes.",
+        "patterns": [{"type": "straight_lanes", "count": 6}],
+        "clear_threshold": 8
+      },
+      {
+        "id": "firework_failure",
+        "intro_dialogue": "The serum fails and fireworks scramble the bullet box.",
+        "patterns": [{"type": "callback_mix", "count": 8}],
+        "clear_threshold": 0
+      }
+    ]
+  },
+  "mitta_boss": {
+    "enemy_name": "Mitta",
+    "enemy_hp": 22,
+    "player_hp": 32,
+    "resonance_goal": 7,
+    "return_scene": "res://scenes/levels/level_04.tscn",
+    "boss_type": "main_boss",
+    "defeated_flag": "mitta_defeated",
+    "reward_gear": "festival_clearance",
+    "growth_stage_reward": 5,
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "festival_lights",
+        "intro_dialogue": "Mitta turns Aeon Festival lights into rhythm attacks.",
+        "patterns": [{"type": "musical_notes", "count": 7}],
+        "clear_threshold": 11
+      },
+      {
+        "id": "pageant_finale",
+        "intro_dialogue": "The stage erupts into beams, notes, and bitter spectacle.",
+        "patterns": [{"type": "sweeping_beams", "count": 6}],
+        "clear_threshold": 0
+      }
+    ]
+  }
+}

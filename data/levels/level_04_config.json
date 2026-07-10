@@ -1,0 +1,13 @@
+{
+  "level_id": "level_04",
+  "area_name": "Auticity",
+  "intro_event": "Shrububu reaches a pun-heavy town and discovers hospital injections controlling residents.",
+  "mini_boss_id": "doctor_sushan",
+  "main_boss_id": "mitta",
+  "reward_gear_id": "festival_clearance",
+  "clue_ids": ["hospital_records"],
+  "growth_stage_unlock": 5,
+  "town_state_after_defeat": "The city regains self-direction after the Aeon festival conflict.",
+  "next_level_id": "level_05",
+  "required_story_flags": ["hospital_records_collected", "doctor_sushan_defeated", "mitta_defeated"]
+}

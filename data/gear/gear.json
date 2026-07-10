@@ -1,0 +1,37 @@
+{
+  "revolver": {
+    "display_name": "Poojan's Revolver",
+    "weapon_type": "precision",
+    "unlock_level": "level_01",
+    "battle_use": "Precise shots with clean timing windows.",
+    "story_use": "Intimidation checks and early boss pressure after Sheriff Poojan is defeated."
+  },
+  "banana_gun": {
+    "display_name": "Banana Gun",
+    "weapon_type": "spread",
+    "unlock_level": "level_02",
+    "battle_use": "Curved spread shots that cover multiple lanes.",
+    "story_use": "Monkey army reward and access key for some Banana-burbs logic."
+  },
+  "berry_potions": {
+    "display_name": "Berry Potions",
+    "weapon_type": "support",
+    "unlock_level": "level_03",
+    "battle_use": "Healing and berry splash counterplay.",
+    "story_use": "Made after sharing bark berries with Berry Barks residents."
+  },
+  "musical_guitar": {
+    "display_name": "Musical Guitar",
+    "weapon_type": "music",
+    "unlock_level": "level_05",
+    "battle_use": "Shoots musical notes and counters SRMT callback attacks.",
+    "story_use": "Taken from Suhas and required for the final fight."
+  },
+  "festival_clearance": {
+    "display_name": "Aeon Festival Clearance",
+    "weapon_type": "story_access",
+    "unlock_level": "level_04",
+    "battle_use": "No direct attack. Marks Auticity as cleared and keeps route logic stable.",
+    "story_use": "Earned after Mitta is defeated, proving the Aeon Festival is free of SRMT's control chain."
+  }
+}

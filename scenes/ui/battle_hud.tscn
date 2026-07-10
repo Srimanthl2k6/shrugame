@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/battle_hud.gd" id="1_battle_hud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.0941176, 0.101961, 0.141176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.901961, 0.854902, 0.729412, 1)
+
+[node name="BattleHud" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_battle_hud")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -56.0
+offset_right = -10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="EnemyLabel" type="Label" parent="Panel"]
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 116.0
+offset_bottom = 20.0
+text = "Enemy"
+
+[node name="BossStatusLabel" type="Label" parent="Panel"]
+offset_left = 8.0
+offset_top = 18.0
+offset_right = 116.0
+offset_bottom = 34.0
+text = "RES 0/0"
+text_overrun_behavior = 3
+
+[node name="HpLabel" type="Label" parent="Panel"]
+offset_left = 120.0
+offset_top = 4.0
+offset_right = 292.0
+offset_bottom = 20.0
+text = "HP 20/20"
+
+[node name="PlayerStatusLabel" type="Label" parent="Panel"]
+offset_left = 120.0
+offset_top = 18.0
+offset_right = 292.0
+offset_bottom = 34.0
+text = "Shrububu steady"
+text_overrun_behavior = 3
+
+[node name="PhaseLabel" type="Label" parent="Panel"]
+offset_left = 8.0
+offset_top = 34.0
+offset_right = 128.0
+offset_bottom = 50.0
+text = "Player Command"
+
+[node name="CommandLabel" type="Label" parent="Panel"]
+offset_left = 136.0
+offset_top = 34.0
+offset_right = 292.0
+offset_bottom = 50.0
+text = "E: Act | Item | Gear | Guard"
+text_overrun_behavior = 3

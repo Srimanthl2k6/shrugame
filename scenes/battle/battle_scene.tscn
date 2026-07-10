@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/battle/battle_manager.gd" id="1_manager"]
+[ext_resource type="PackedScene" path="res://scenes/battle/soul_cursor.tscn" id="2_soul"]
+[ext_resource type="Script" path="res://scripts/battle/bullet_pattern_base.gd" id="3_pattern"]
+[ext_resource type="PackedScene" path="res://scenes/ui/battle_hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/cutins/cut_in_player.tscn" id="5_cutin"]
+[ext_resource type="Script" path="res://scripts/visual/screen_shake.gd" id="6_shake"]
+[ext_resource type="Script" path="res://scripts/visual/hit_flash.gd" id="7_flash"]
+[ext_resource type="Script" path="res://scripts/visual/juice_particles.gd" id="8_particles"]
+[ext_resource type="PackedScene" path="res://scenes/ui/scene_transition.tscn" id="9_transition"]
+[ext_resource type="Texture2D" path="res://assets/level_01/sprites/battle_bg_divorcee_harbour.png" id="10_battle_bg"]
+[ext_resource type="Texture2D" path="res://assets/level_01/sprites/battle_poojan_strength_test.png" id="11_poojan_battle"]
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_manager")
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0.025, 0.025, 0.035, 1)
+polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
+
+[node name="BattleBackplate" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(160, 90)
+texture = ExtResource("10_battle_bg")
+
+[node name="BattleReadabilityLayer" type="CanvasLayer" parent="."]
+
+[node name="EnemyNameplate" type="Label" parent="BattleReadabilityLayer"]
+offset_left = 96.0
+offset_top = 8.0
+offset_right = 224.0
+offset_bottom = 24.0
+text = "Enemy"
+horizontal_alignment = 1
+
+[node name="ArenaInstruction" type="Label" parent="BattleReadabilityLayer"]
+offset_left = 82.0
+offset_top = 48.0
+offset_right = 238.0
+offset_bottom = 62.0
+text = "Dodge inside the box"
+horizontal_alignment = 1
+
+[node name="CommandHintStrip" type="Label" parent="BattleReadabilityLayer"]
+offset_left = 26.0
+offset_top = 158.0
+offset_right = 294.0
+offset_bottom = 176.0
+text = "Act builds RES | Item heals | Gear swaps | Guard halves damage"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="BulletLegend" type="Label" parent="BattleReadabilityLayer"]
+offset_left = 38.0
+offset_top = 28.0
+offset_right = 282.0
+offset_bottom = 44.0
+text = "Pattern: badge warnings"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="EnemyPlaceholder" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(160, 42)
+color = Color(0.72, 0.68, 0.56, 1)
+polygon = PackedVector2Array(-14, -14, 14, -14, 14, 14, 0, 22, -14, 14)
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(160, 42)
+texture = ExtResource("11_poojan_battle")
+
+[node name="Arena" type="Node2D" parent="."]
+position = Vector2(80, 62)
+
+[node name="ArenaBox" type="Polygon2D" parent="Arena"]
+color = Color(0.05, 0.055, 0.07, 1)
+polygon = PackedVector2Array(0, 0, 160, 0, 160, 96, 0, 96)
+
+[node name="ArenaBorder" type="Line2D" parent="Arena"]
+points = PackedVector2Array(0, 0, 160, 0, 160, 96, 0, 96, 0, 0)
+width = 2.0
+default_color = Color(0.9, 0.86, 0.76, 1)
+
+[node name="SoulCursor" parent="Arena" instance=ExtResource("2_soul")]
+
+[node name="BulletPattern" type="Node2D" parent="Arena"]
+script = ExtResource("3_pattern")
+
+[node name="HudLayer" type="CanvasLayer" parent="."]
+
+[node name="BattleHud" parent="HudLayer" instance=ExtResource("4_hud")]
+
+[node name="BossCutIn" parent="HudLayer" instance=ExtResource("5_cutin")]
+
+[node name="SceneTransition" parent="HudLayer" instance=ExtResource("9_transition")]
+
+[node name="JuiceLayer" type="Node2D" parent="."]
+
+[node name="ScreenShake" type="Node2D" parent="JuiceLayer"]
+script = ExtResource("6_shake")
+default_strength = 2.5
+default_duration = 0.16
+
+[node name="HitFlash" type="ColorRect" parent="JuiceLayer"]
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+script = ExtResource("7_flash")
+
+[node name="JuiceParticles" type="Node2D" parent="JuiceLayer"]
+position = Vector2(160, 46)
+script = ExtResource("8_particles")
+particle_count = 10

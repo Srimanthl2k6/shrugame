@@ -1,0 +1,109 @@
+{
+  "marn_practice": {
+    "enemy_name": "Marn",
+    "enemy_hp": 5,
+    "player_hp": 20,
+    "resonance_goal": 2,
+    "return_scene": "res://scenes/levels/level_01.tscn",
+    "boss_type": "practice",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "opening",
+        "intro_dialogue": "Marn blocks the way for the old prototype practice fight.",
+        "patterns": [{"type": "straight_lanes", "count": 3}],
+        "clear_threshold": 0
+      }
+    ],
+    "defeated_flag": "marn_practice_cleared"
+  },
+  "framework_test_boss": {
+    "enemy_name": "Framework Boss",
+    "enemy_hp": 8,
+    "player_hp": 20,
+    "resonance_goal": 4,
+    "return_scene": "res://scenes/levels/level_01.tscn",
+    "boss_type": "test_boss",
+    "reward_gear": "revolver",
+    "defeated_flag": "framework_test_boss_defeated",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "opening",
+        "intro_dialogue": "The framework boss tests command flow.",
+        "patterns": [{"type": "straight_lanes", "count": 3}],
+        "clear_threshold": 4
+      },
+      {
+        "id": "pressure",
+        "intro_dialogue": "The framework boss changes pattern rules.",
+        "patterns": [{"type": "rings", "count": 4}],
+        "clear_threshold": 0
+      }
+    ]
+  },
+  "poojan_strength_test": {
+    "enemy_name": "Sheriff Poojan",
+    "enemy_hp": 10,
+    "player_hp": 24,
+    "resonance_goal": 4,
+    "return_scene": "res://scenes/levels/level_01.tscn",
+    "boss_type": "mini_boss",
+    "battle_visual": "res://assets/level_01/sprites/battle_poojan_strength_test.png",
+    "battle_backplate": "res://assets/level_01/sprites/battle_bg_divorcee_harbour.png",
+    "bullet_legend": "Badge warnings and rainy revolver lanes.",
+    "bullet_visuals": ["res://assets/level_01/sprites/bullet_badge_warning.png"],
+    "pacing_note": "Readable first boss pacing: badge warning, clear lanes, short ring burst.",
+    "reward_gear": "revolver",
+    "defeated_flag": "poojan_defeated",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "badge_check",
+        "intro_dialogue": "Poojan tests whether Shrububu's door-slam strength was a fluke.",
+        "readability_hint": "Poojan marks four badge lanes before the shots arrive.",
+        "patterns": [{"type": "straight_lanes", "count": 4, "telegraph_seconds": 0.6, "safe_hint": "Four badge lanes. Stand between the warnings.", "visual_id": "badge"}],
+        "clear_threshold": 5
+      },
+      {
+        "id": "harbour_showdown",
+        "intro_dialogue": "Poojan fires warning shots through the rainy harbour mist.",
+        "readability_hint": "The ring burst starts from the center and leaves time to sidestep.",
+        "patterns": [{"type": "rings", "count": 5, "telegraph_seconds": 0.65, "safe_hint": "Ring burst starts from center. Move after the badge flash.", "visual_id": "badge"}],
+        "clear_threshold": 0
+      }
+    ]
+  },
+  "satyaki_tirumal_boss": {
+    "enemy_name": "Satyaki Tirumal",
+    "enemy_hp": 16,
+    "player_hp": 26,
+    "resonance_goal": 6,
+    "return_scene": "res://scenes/levels/level_01.tscn",
+    "boss_type": "main_boss",
+    "battle_visual": "res://assets/level_01/sprites/battle_satyaki_tirumal.png",
+    "battle_backplate": "res://assets/level_01/sprites/battle_bg_divorcee_harbour.png",
+    "bullet_legend": "Dodge legal papers, broken rings, and property deeds.",
+    "bullet_visuals": ["res://assets/level_01/sprites/bullet_legal_paper.png", "res://assets/level_01/sprites/bullet_broken_ring.png"],
+    "pacing_note": "Readable main boss pacing: papers fall first, then slower sweeping property beams.",
+    "defeated_flag": "satyaki_tirumal_defeated",
+    "growth_stage_reward": 2,
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "legal_papers",
+        "intro_dialogue": "Satyaki hurls divorce papers, broken rings, and property deeds.",
+        "readability_hint": "Marked columns show where legal papers will fall.",
+        "patterns": [{"type": "falling_objects", "count": 5, "telegraph_seconds": 0.65, "safe_hint": "Papers fall from marked columns. Start under a gap.", "visual_id": "legal_paper"}],
+        "clear_threshold": 8
+      },
+      {
+        "id": "property_storm",
+        "intro_dialogue": "The harbour court records spiral into a money storm.",
+        "readability_hint": "Property beams flash before sweeping across the box.",
+        "patterns": [{"type": "sweeping_beams", "count": 4, "telegraph_seconds": 0.75, "safe_hint": "Property beams sweep sideways. Cross after the flash.", "visual_id": "broken_ring"}],
+        "clear_threshold": 0
+      }
+    ]
+  }
+}

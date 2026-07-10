@@ -1,0 +1,199 @@
+{
+  "nulla_intro": {
+    "speaker": "Nulla",
+    "tags": ["minor_npc", "optional", "prototype_echo"],
+    "lines": [
+      "The static door is still here, but Area 111 is louder now.",
+      "Gather the memory static if you want the old prototype to stop humming.",
+      "SRMT's throne is less subtle than any door and somehow worse at hospitality."
+    ],
+    "complete_flag": "met_nulla"
+  },
+  "nulla_after_battle": {
+    "speaker": "Nulla",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "The static clears.",
+      "SRMT's throne is less subtle than any door.",
+      "If Shrububu smells KFC from here, believe her. Area 111 lies about everything except grease."
+    ],
+    "complete_flag": "nulla_after_battle_seen"
+  },
+  "pub_gummies": {
+    "speaker": "Pub Keeper",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "Welcome to Area 111, ruined pink capital of questionable nightlife.",
+      "Shrububu asks for KFC. We serve Gummies.",
+      "Suhas at the bar has already decided this is somehow your fault, and SRMT's tax bell just laughed."
+    ],
+    "complete_flag": "pub_gummies_seen"
+  },
+  "suhas_intro": {
+    "speaker": "Suhas",
+    "tags": ["mini_boss_intro"],
+    "lines": [
+      "You walk into my pub, insult the Gummies, and ask for chicken?",
+      "Fine, Shrububu. Bar fight.",
+      "If you win, take the bike. Take the musical guitar. Take my dignity too, apparently."
+    ],
+    "complete_flag": "suhas_intro_seen"
+  },
+  "suhas_defeat": {
+    "speaker": "Suhas",
+    "tags": ["mini_boss_defeat", "post_mini_boss"],
+    "lines": [
+      "The floor is very close, and I respect it now.",
+      "Take the bike. Take the guitar. SRMT never liked my music anyway.",
+      "If you find KFC, do not bring me Gummies as revenge."
+    ],
+    "complete_flag": "suhas_defeat_seen"
+  },
+  "guitar_reward": {
+    "speaker": "Shrububu",
+    "tags": ["story_event", "kfc_thread"],
+    "lines": [
+      "Suhas is down. The bike keys are sticky. The musical guitar shoots notes.",
+      "This is not KFC, but it is useful.",
+      "ehehehe.",
+      "Area 111 opens toward the fallen mansion."
+    ],
+    "complete_flag": "guitar_reward_seen"
+  },
+  "mansion_court_clues": {
+    "speaker": "Ruined Court Record",
+    "tags": ["clue_object"],
+    "lines": [
+      "The fallen mansion puzzle points to SRMT's court.",
+      "Every clue from Ishiville bends toward the throne room.",
+      "Behind SRMT: KFC storage. Behind the storage: IshiYoga."
+    ],
+    "complete_flag": "mansion_court_clues_seen"
+  },
+  "srmt_intro": {
+    "speaker": "SRMT",
+    "tags": ["main_boss_intro"],
+    "lines": [
+      "Shrububu, welcome to the ruined court of Area 111.",
+      "I am eating KFC because tyranny should have texture.",
+      "Bring the musical guitar or do not waste my bucket time."
+    ],
+    "complete_flag": "srmt_intro_seen"
+  },
+  "srmt_defeat": {
+    "speaker": "SRMT",
+    "tags": ["main_boss_defeat", "post_boss"],
+    "lines": [
+      "The notes... the bike grease... the accumulated inconvenience...",
+      "Fine. Take the KFC. Take Ishiville.",
+      "IshiYoga is behind the throne, which was poor dungeon planning."
+    ],
+    "complete_flag": "srmt_defeat_seen"
+  },
+  "ishiyoga_rescue": {
+    "speaker": "Shrububu",
+    "tags": ["ending", "post_clear"],
+    "lines": [
+      "Shrububu frees IshiYoga from the KFC dungeon corner.",
+      "They open the bucket together.",
+      "ehehehe.",
+      "Ishiville smells like rain, neon, and finally KFC."
+    ],
+    "complete_flag": "ishiyoga_rescued"
+  },
+  "pink_hooligan": {
+    "speaker": "Pink Hooligan",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "We ruined the cute-town vibe on purpose. It was too emotionally organized.",
+      "SRMT said chaos is cheaper than maintenance.",
+      "Then you arrived asking for KFC and somehow made us look subtle."
+    ],
+    "complete_flag": "pink_hooligan_seen"
+  },
+  "gummy_regular": {
+    "speaker": "Gummy Regular",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "I have eaten Gummies for six years and can now hear wallpaper.",
+      "The wallpaper says SRMT keeps chicken behind the court.",
+      "The wallpaper has been right about parking tickets before."
+    ],
+    "complete_flag": "gummy_regular_seen"
+  },
+  "bike_mechanic": {
+    "speaker": "Bike Mechanic",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "Suhas's bike runs on spite, club smoke, and one missing screw named Kevin.",
+      "The guitar rack is welded to the side because Area 111 zoning died years ago.",
+      "Ride toward the mansion if you want SRMT. Ride away if you want dental insurance."
+    ],
+    "complete_flag": "bike_mechanic_seen"
+  },
+  "hello_ruin_vendor": {
+    "speaker": "Cute-Ruin Vendor",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "I sell tiny pink crowns from the old town mascot era.",
+      "SRMT melted the mascot statue into a throne cupholder.",
+      "No KFC coupons, but one crown is shaped like a drumstick if you squint angrily."
+    ],
+    "complete_flag": "hello_ruin_vendor_seen"
+  },
+  "court_bailiff_echo": {
+    "speaker": "Bailiff Echo",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "All rise for the defendant, the plaintiff, the bucket, and the impossibly large woman with a guitar.",
+      "The court recognizes Shrububu's claim to KFC.",
+      "The court also recognizes that SRMT should have hidden IshiYoga somewhere less obvious."
+    ],
+    "complete_flag": "court_bailiff_echo_seen"
+  },
+  "clue_pub_menu": {
+    "speaker": "Pub Menu",
+    "tags": ["clue_object"],
+    "lines": [
+      "The menu lists Gummies in twelve textures and zero acceptable dinners.",
+      "A grease stain on the back points toward SRMT's court, which is suspiciously close to actual KFC smell."
+    ],
+    "complete_flag": "clue_pub_menu_seen"
+  },
+  "clue_bike_keys": {
+    "speaker": "Bike Keys",
+    "tags": ["clue_object"],
+    "lines": [
+      "Suhas's keys jingle in a rhythm the musical guitar answers.",
+      "The keychain says, 'Do not ride into throne room unless dramatically necessary.'"
+    ],
+    "complete_flag": "clue_bike_keys_seen"
+  },
+  "clue_throne_bucket_grease": {
+    "speaker": "Throne Grease",
+    "tags": ["clue_object"],
+    "lines": [
+      "Fresh KFC grease trails from SRMT's throne to a dungeon door.",
+      "Every previous clue suddenly feels less metaphorical and much more delicious."
+    ],
+    "complete_flag": "clue_throne_bucket_grease_seen"
+  },
+  "area111_post_clear_pub": {
+    "speaker": "Pub Keeper",
+    "tags": ["post_clear"],
+    "lines": [
+      "After SRMT falls, the Gummies are demoted to side dish.",
+      "The pub adds KFC to the menu by writing it in huge letters and hoping Shrububu approves."
+    ],
+    "complete_flag": "area111_post_clear_pub_seen"
+  },
+  "area111_post_clear_court": {
+    "speaker": "Ruined Court",
+    "tags": ["post_clear"],
+    "lines": [
+      "The court is silent after IshiYoga is freed.",
+      "Then the throne burps out one last SRMT receipt and the whole room pretends not to see it."
+    ],
+    "complete_flag": "area111_post_clear_court_seen"
+  }
+}

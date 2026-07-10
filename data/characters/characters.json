@@ -1,0 +1,86 @@
+{
+  "shrububu": {
+    "display_name": "Shrububu",
+    "role": "player",
+    "level_id": "global",
+    "dialogue_state_ids": ["intro", "growth_form_2", "growth_form_3", "growth_form_4", "growth_form_5"],
+    "summary": "KFC-seeking liberator of Ishiville who grows after every level."
+  },
+  "ishiyoga": {
+    "display_name": "IshiYoga",
+    "role": "former_queen",
+    "level_id": "level_05",
+    "dialogue_state_ids": ["chained", "freed", "ending_feast"],
+    "summary": "Former queen of Ishiville, chained behind SRMT's throne until Shrububu frees her."
+  },
+  "srmt": {
+    "display_name": "SRMT",
+    "role": "final_boss",
+    "level_id": "level_05",
+    "dialogue_state_ids": ["throne_intro", "kfc_bucket_taunt", "defeated"],
+    "summary": "Demon king ruling Ishiville from Area 111 while hoarding KFC."
+  },
+  "poojan": {
+    "display_name": "Sheriff Poojan",
+    "role": "mini_boss",
+    "level_id": "level_01",
+    "dialogue_state_ids": ["strength_test", "defeated", "revolver_reward"],
+    "summary": "Local sheriff who tests Shrububu after the fake chicken building collapse."
+  },
+  "satyaki_tirumal": {
+    "display_name": "Satyaki Tirumal",
+    "role": "main_boss",
+    "level_id": "level_01",
+    "dialogue_state_ids": ["ex_husband_intro", "property_revenge", "defeated"],
+    "summary": "Shrububu's ex-husband, tormenting Divorcee Harbour over the divorce."
+  },
+  "nitin": {
+    "display_name": "Nitin the Janitor",
+    "role": "mini_boss",
+    "level_id": "level_02",
+    "dialogue_state_ids": ["lab_block", "cleaning_warning", "defeated"],
+    "summary": "Janitor guarding the abandoned lab and the 165-files."
+  },
+  "deepak_reddy": {
+    "display_name": "Deepak Reddy",
+    "role": "main_boss",
+    "level_id": "level_02",
+    "dialogue_state_ids": ["mayor_intro", "joy_spell", "moral_twist"],
+    "summary": "Monkey king mayor who forced Banana-burbs into happiness to protect it from SRMT's world."
+  },
+  "niggesh_nishal": {
+    "display_name": "Niggesh Nishal",
+    "role": "mini_boss",
+    "level_id": "level_03",
+    "dialogue_state_ids": ["fried_chicken_promise", "lie_revealed", "defeated"],
+    "summary": "Chef who promises fried chicken for berries and then fails to deliver."
+  },
+  "ankit": {
+    "display_name": "Ankit",
+    "role": "main_boss",
+    "level_id": "level_03",
+    "dialogue_state_ids": ["chef_grief", "hunger_rage", "defeated"],
+    "summary": "Angry because Shrububu beat his chef and disrupted his food supply."
+  },
+  "doctor_sushan": {
+    "display_name": "Doctor Sushan",
+    "role": "mini_boss",
+    "level_id": "level_04",
+    "dialogue_state_ids": ["hospital_intro", "serum_scheme", "failed_injection"],
+    "summary": "Doctor using a fictional control serum to make residents dependent on his hospital."
+  },
+  "mitta": {
+    "display_name": "Mitta",
+    "role": "main_boss",
+    "level_id": "level_04",
+    "dialogue_state_ids": ["aeon_host", "festival_attack", "defeated"],
+    "summary": "Festival mayor who attacks after Sushan's scheme collapses."
+  },
+  "suhas": {
+    "display_name": "Suhas",
+    "role": "mini_boss",
+    "level_id": "level_05",
+    "dialogue_state_ids": ["pub_argument", "bar_fight", "bike_guitar_taken"],
+    "summary": "Drunk bar fighter whose bike and musical guitar become Shrububu's final tools."
+  }
+}

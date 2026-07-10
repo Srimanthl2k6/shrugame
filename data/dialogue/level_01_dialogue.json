@@ -1,0 +1,178 @@
+{
+  "marn_intro": {
+    "speaker": "Marn",
+    "tags": ["minor_npc", "optional", "prototype_echo"],
+    "lines": [
+      "This is not the pantry anymore, but I still check the shelves when the harbour rain starts counting.",
+      "Divorcee Harbour keeps old rooms under the floorboards. SRMT's weather makes every basement remember something wrong.",
+      "If Shrububu still wants KFC, she should follow whoever is most afraid of her appetite."
+    ],
+    "complete_flag": "met_marn"
+  },
+  "marn_after_battle": {
+    "speaker": "Marn",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "The old practice echo is settled.",
+      "Now listen to the rain. It is spelling Satyaki, but the last letter keeps turning into a chicken leg.",
+      "When the harbour is free, do not trust the quiet. SRMT has a talent for sending silence ahead of him."
+    ],
+    "complete_flag": "marn_after_battle_seen"
+  },
+  "opening_not_kfc": {
+    "speaker": "Shrububu",
+    "tags": ["opening", "kfc_thread"],
+    "lines": [
+      "This sign promised crispy destiny.",
+      "This is not KFC.",
+      "Unprovoked. The door made its choice, and the building followed.",
+      "Shrububu is disappointed enough to close the door normally next time, if the next door deserves it."
+    ],
+    "complete_flag": "level_01_opening_seen"
+  },
+  "resident_satyaki_clue": {
+    "speaker": "Harbour Resident",
+    "tags": ["minor_npc", "clue_hint"],
+    "lines": [
+      "You broke the whole building with one disappointed door slam.",
+      "Poojan saw it. The sheriff wants to know if Ishiville finally has a chance.",
+      "If you are really Shrububu, follow the divorce records toward Satyaki before SRMT's collectors notice the noise."
+    ],
+    "complete_flag": "resident_satyaki_clue_seen"
+  },
+  "poojan_intro": {
+    "speaker": "Sheriff Poojan",
+    "tags": ["mini_boss_intro"],
+    "lines": [
+      "Name is Poojan. I keep order in Divorcee Harbour, or what passes for order in SRMT weather.",
+      "That building was cursed, but you still folded it like wet cardboard.",
+      "Fight me once. If you stand, the revolver is yours, and the town gets to hope without whispering."
+    ],
+    "complete_flag": "poojan_intro_seen"
+  },
+  "poojan_after": {
+    "speaker": "Sheriff Poojan",
+    "tags": ["mini_boss_defeat", "post_mini_boss"],
+    "lines": [
+      "All right, Shrububu. You are not a rumor.",
+      "Take the revolver. Satyaki Tirumal understands paperwork, not mercy.",
+      "The harbour women have waited long enough, and every gull here is carrying SRMT's bad news."
+    ],
+    "complete_flag": "poojan_after_seen"
+  },
+  "satyaki_intro": {
+    "speaker": "Satyaki Tirumal",
+    "tags": ["main_boss_intro"],
+    "lines": [
+      "Shrububu. You took half my money, half my property, and somehow all the weather.",
+      "I turned this harbour into a filing cabinet because revenge requires documentation.",
+      "SRMT lets me keep this dock as long as I keep the town afraid. Sign here, then vanish."
+    ],
+    "complete_flag": "satyaki_intro_seen"
+  },
+  "satyaki_defeat": {
+    "speaker": "Satyaki Tirumal",
+    "tags": ["main_boss_defeat", "post_boss"],
+    "lines": [
+      "The deeds... the rings... the arguments...",
+      "Fine. Keep the harbour. Keep getting larger. SRMT will notice.",
+      "There is still no KFC here, which is the only victory I have left."
+    ],
+    "complete_flag": "satyaki_defeat_seen"
+  },
+  "divorcee_lantern_woman": {
+    "speaker": "Lantern Woman",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "Every porch lamp in Divorcee Harbour blinks twice when Satyaki lies.",
+      "Tonight they are blinking like a cheap motel sign.",
+      "Ask the docks about KFC if you want, but they only serve fog and custody paperwork."
+    ],
+    "complete_flag": "divorcee_lantern_woman_seen"
+  },
+  "divorcee_boathouse_woman": {
+    "speaker": "Boathouse Woman",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "The tide brings legal envelopes in, and we throw them back before they hatch.",
+      "Satyaki thinks the harbour owes him sympathy.",
+      "I think Shrububu owes him a concise explanation delivered with a revolver."
+    ],
+    "complete_flag": "divorcee_boathouse_woman_seen"
+  },
+  "divorcee_raincoat_woman": {
+    "speaker": "Raincoat Woman",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "You came for KFC and found us instead.",
+      "That is how Ishiville works now: wrong doors, wet clues, and SRMT laughing through the storm drains.",
+      "If you grow any taller, please duck under my laundry line."
+    ],
+    "complete_flag": "divorcee_raincoat_woman_seen"
+  },
+  "divorcee_radio_woman": {
+    "speaker": "Radio Woman",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "My radio only plays static, weather reports, and Satyaki complaining about alimony.",
+      "Last night it coughed out the words 'Area 111' and then demanded chicken.",
+      "That felt like your kind of omen."
+    ],
+    "complete_flag": "divorcee_radio_woman_seen"
+  },
+  "divorcee_dock_woman": {
+    "speaker": "Dock Woman",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "After Satyaki falls, the dock stops creaking his name.",
+      "The first boat out is carrying everyone who wants a normal breakfast.",
+      "The second boat is for your KFC search, if it survives SRMT's fog."
+    ],
+    "complete_flag": "divorcee_dock_woman_seen"
+  },
+  "clue_damp_divorce_records": {
+    "speaker": "Damp Divorce Records",
+    "tags": ["clue_object"],
+    "lines": [
+      "The pages list properties, grudges, and one furious note: 'Shrububu got the good ceiling fans.'",
+      "Satyaki stamped SRMT's sigil in the margin like a man proud of selling out to weather."
+    ],
+    "complete_flag": "clue_damp_divorce_records_seen"
+  },
+  "clue_fake_chicken_sign": {
+    "speaker": "Fake Chicken Sign",
+    "tags": ["clue_object"],
+    "lines": [
+      "The sign says 'Kentucky-Adjacent Feelings Cafe' in peeling yellow paint.",
+      "A tiny disclaimer says it has never served KFC, chicken, or emotional stability."
+    ],
+    "complete_flag": "clue_fake_chicken_sign_seen"
+  },
+  "clue_sheriff_notice": {
+    "speaker": "Sheriff Notice",
+    "tags": ["clue_object"],
+    "lines": [
+      "Poojan's notice warns residents not to approach the east dock without proof.",
+      "Below it, someone wrote: 'Proof is a woman who can break a building by being disappointed.'"
+    ],
+    "complete_flag": "clue_sheriff_notice_seen"
+  },
+  "harbour_post_clear_lamps": {
+    "speaker": "Harbour Lamps",
+    "tags": ["post_clear"],
+    "lines": [
+      "After Satyaki's defeat, the lamps stop blinking warnings and start blinking menu items.",
+      "None of the menu items are KFC, but the harbour is trying."
+    ],
+    "complete_flag": "harbour_post_clear_lamps_seen"
+  },
+  "harbour_post_clear_resident": {
+    "speaker": "Harbour Resident",
+    "tags": ["post_clear"],
+    "lines": [
+      "Divorcee Harbour is ours again.",
+      "Go inland, Shrububu. Banana-burbs is too happy, and nobody under SRMT should be that relaxed."
+    ],
+    "complete_flag": "harbour_post_clear_resident_seen"
+  }
+}

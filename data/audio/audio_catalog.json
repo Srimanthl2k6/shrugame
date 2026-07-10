@@ -1,0 +1,104 @@
+{
+	"banana_gun": {
+		"description": "Banana gun curved shot cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/banana_gun.wav",
+		"type": "sfx"
+	},
+	"battle_phase": {
+		"description": "Battle phase change cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/battle_phase.wav",
+		"type": "sfx"
+	},
+	"berry_potion": {
+		"description": "Berry potion splash/heal cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/berry_potion.wav",
+		"type": "sfx"
+	},
+	"boss_defeat": {
+		"description": "Boss defeat collapse cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/boss_defeat.wav",
+		"type": "sfx"
+	},
+	"boss_hurt": {
+		"description": "Boss hurt impact cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/boss_hurt.wav",
+		"type": "sfx"
+	},
+	"building_break": {
+		"description": "Building collapse crunch cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/building_break.wav",
+		"type": "sfx"
+	},
+	"clue_pickup": {
+		"description": "Clue pickup cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/clue_pickup.wav",
+		"type": "sfx"
+	},
+	"door_slam": {
+		"description": "Heavy door slam cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/door_slam.wav",
+		"type": "sfx"
+	},
+	"growth_transform": {
+		"description": "Shrububu growth transformation cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/growth_transform.wav",
+		"type": "sfx"
+	},
+	"guitar_note": {
+		"description": "Musical guitar note cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/guitar_note.wav",
+		"type": "sfx"
+	},
+	"level_01_rainy_harbor_noir": {
+		"description": "Rainy harbour noir loop for Divorcee Harbour.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/level_01_rainy_harbor_noir.wav",
+		"type": "music"
+	},
+	"level_02_uncanny_suburb_jingle": {
+		"description": "Too-happy suburb jingle loop for Banana-burbs.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/level_02_uncanny_suburb_jingle.wav",
+		"type": "music"
+	},
+	"level_03_forest_mystery": {
+		"description": "Misty forest mystery loop for Berry Barks.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/level_03_forest_mystery.wav",
+		"type": "music"
+	},
+	"level_04_hospital_festival_synth": {
+		"description": "Hospital-to-festival synth loop for Auticity.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/level_04_hospital_festival_synth.wav",
+		"type": "music"
+	},
+	"level_05_ruined_club_court_finale": {
+		"description": "Ruined club and final court loop for Area 111.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/level_05_ruined_club_court_finale.wav",
+		"type": "music"
+	},
+	"revolver": {
+		"description": "Poojan revolver shot cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/revolver.wav",
+		"type": "sfx"
+	},
+	"transition_wipe": {
+		"description": "Scene transition wipe cue.",
+		"loop": false,
+		"path": "res://assets/shared/audio/sfx/transition_wipe.wav",
+		"type": "sfx"
+	}
+}

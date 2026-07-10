@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/clue_journal.gd" id="1_clue_journal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.03, 0.035, 0.045, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78, 0.72, 0.58, 1)
+
+[node name="ClueJournal" type="Control"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_clue_journal")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 12.0
+offset_top = 118.0
+offset_right = 308.0
+offset_bottom = 162.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="ClueLabel" type="Label" parent="Panel"]
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 298.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 7
+text = "No clues yet."
+autowrap_mode = 3

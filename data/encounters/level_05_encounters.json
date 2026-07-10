@@ -1,0 +1,77 @@
+{
+  "nulla_practice": {
+    "enemy_name": "Nulla",
+    "enemy_hp": 10,
+    "player_hp": 20,
+    "resonance_goal": 3,
+    "return_scene": "res://scenes/levels/level_05.tscn",
+    "boss_type": "practice",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "static",
+        "intro_dialogue": "Nulla repeats the old static-door pattern.",
+        "patterns": [{"type": "callback_mix", "count": 5}],
+        "clear_threshold": 0
+      }
+    ],
+    "defeated_flag": "nulla_practice_cleared"
+  },
+  "suhas_bar_fight": {
+    "enemy_name": "Suhas",
+    "enemy_hp": 18,
+    "player_hp": 32,
+    "resonance_goal": 5,
+    "return_scene": "res://scenes/levels/level_05.tscn",
+    "boss_type": "mini_boss",
+    "reward_gear": "musical_guitar",
+    "defeated_flag": "suhas_defeated",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "bar_stumble",
+        "intro_dialogue": "Suhas throws pub stools and gummy bowls.",
+        "patterns": [{"type": "falling_objects", "count": 7}],
+        "clear_threshold": 9
+      },
+      {
+        "id": "bike_keys",
+        "intro_dialogue": "Bike keys and guitar picks ricochet around the bar.",
+        "patterns": [{"type": "musical_notes", "count": 7}],
+        "clear_threshold": 0
+      }
+    ]
+  },
+  "srmt_final_boss": {
+    "enemy_name": "SRMT",
+    "enemy_hp": 30,
+    "player_hp": 36,
+    "resonance_goal": 9,
+    "return_scene": "res://scenes/levels/level_05.tscn",
+    "boss_type": "final_boss",
+    "required_weapon": "musical_guitar",
+    "defeated_flag": "srmt_defeated",
+    "growth_stage_reward": 5,
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "kfc_throne",
+        "intro_dialogue": "SRMT eats KFC on the throne and opens with callback attacks.",
+        "patterns": [{"type": "callback_mix", "count": 9}],
+        "clear_threshold": 20
+      },
+      {
+        "id": "ishiville_callback",
+        "intro_dialogue": "Divorce papers, bananas, berries, serum lights, and club notes return together.",
+        "patterns": [{"type": "sweeping_beams", "count": 7}],
+        "clear_threshold": 10
+      },
+      {
+        "id": "bucket_counterpoint",
+        "intro_dialogue": "The musical guitar answers SRMT's final KFC bucket solo.",
+        "patterns": [{"type": "musical_notes", "count": 10}],
+        "clear_threshold": 0
+      }
+    ]
+  }
+}

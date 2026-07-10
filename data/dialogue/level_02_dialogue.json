@@ -1,0 +1,189 @@
+{
+  "vela_intro": {
+    "speaker": "Vela",
+    "tags": ["minor_npc", "optional", "prototype_echo"],
+    "lines": [
+      "The old canal reflection is still here, under the banana pavement.",
+      "Prototype echoes make useful test subjects, but Banana-burbs makes even my reflection smile too long.",
+      "If Shrububu finds KFC here, check it for mayoral stamps."
+    ],
+    "complete_flag": "met_vela"
+  },
+  "vela_after_battle": {
+    "speaker": "Vela",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "The reflection clears.",
+      "Banana-burbs is louder than the canal ever was.",
+      "SRMT's shadow hates honest noise, so keep making it."
+    ],
+    "complete_flag": "vela_after_battle_seen"
+  },
+  "monkey_loop": {
+    "speaker": "Happy Monkey",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "Today is perfect. Yesterday was perfect. Tomorrow has already agreed.",
+      "Shrububu is searching for KFC? That sounds unnecessary because we are happy.",
+      "We love our identical banana houses. We love not asking why the mayor's smile is painted on the moon."
+    ],
+    "complete_flag": "monkey_loop_seen"
+  },
+  "lab_165_files": {
+    "speaker": "Lab Recorder",
+    "tags": ["clue_object"],
+    "lines": [
+      "165-files recovered. Mayor Deepak Reddy maintains town-wide joy compliance.",
+      "Nitin is assigned to keep the records invisible and the floors aggressively clean.",
+      "SRMT pressure index rising. Banana-burbs morale spell marked 'protective' by the mayor and 'useful' by the throne.",
+      "Shrububu should not be reading this, which is why Shrububu absolutely is."
+    ],
+    "complete_flag": "lab_165_files_seen"
+  },
+  "nitin_intro": {
+    "speaker": "Nitin",
+    "tags": ["mini_boss_intro"],
+    "lines": [
+      "Step away from the 165-files.",
+      "I have mopped this lab for years and I will mop the truth off your shoes.",
+      "The mayor likes clean floors, cleaner memories, and no KFC crumbs in evidence storage."
+    ],
+    "complete_flag": "nitin_intro_seen"
+  },
+  "nitin_defeat": {
+    "speaker": "Nitin",
+    "tags": ["mini_boss_defeat", "post_mini_boss"],
+    "lines": [
+      "The mop... has failed the office.",
+      "Take the 165-files, but understand this: Deepak thinks fear is what SRMT left us with.",
+      "Also wipe your shoes. I still have standards."
+    ],
+    "complete_flag": "nitin_defeat_seen"
+  },
+  "popcorn_reveal": {
+    "speaker": "Shrububu",
+    "tags": ["story_event", "kfc_thread"],
+    "lines": [
+      "Words failed. Logic failed. Fine.",
+      "Shrububu opens the backup KFC popcorn box.",
+      "Ek Bihari, Sab pe Bhaari.",
+      "The monkeys taste something happier than the spell and remember how to be angry."
+    ],
+    "complete_flag": "popcorn_reveal_seen"
+  },
+  "deepak_intro": {
+    "speaker": "Deepak Reddy",
+    "tags": ["main_boss_intro"],
+    "lines": [
+      "You broke the rhythm of Banana-burbs with fried chicken crumbs.",
+      "I am Deepak Reddy, mayor, monkey king, and keeper of the smile.",
+      "If the outside world wants cruelty, I choose joy by force. If SRMT wants obedience, I give him a town too happy to notice."
+    ],
+    "complete_flag": "deepak_intro_seen"
+  },
+  "deepak_defeat": {
+    "speaker": "Deepak Reddy",
+    "tags": ["main_boss_defeat", "post_boss"],
+    "lines": [
+      "I did not serve SRMT because I loved him.",
+      "I kept them happy because the outside world was too cruel to monkeys who had only learned joy.",
+      "Take the banana gun, Shrububu. Maybe freedom can survive without a spell, and maybe KFC can be more than bait."
+    ],
+    "complete_flag": "deepak_defeat_seen"
+  },
+  "monkey_mailman": {
+    "speaker": "Monkey Mailman",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "I deliver the same postcard to the same house every morning.",
+      "It says, 'Great job being happy,' and the stamp has Deepak's face.",
+      "When I smelled KFC popcorn, I remembered I hate postcards."
+    ],
+    "complete_flag": "monkey_mailman_seen"
+  },
+  "monkey_lawnkeeper": {
+    "speaker": "Monkey Lawnkeeper",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "All lawns are trimmed to identical joy height.",
+      "One blade grew crooked last week. Nitin arrived with a mop and a warning.",
+      "SRMT's rain never reaches this suburb, which should have been our first clue."
+    ],
+    "complete_flag": "monkey_lawnkeeper_seen"
+  },
+  "monkey_accountant": {
+    "speaker": "Monkey Accountant",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "The mayor's happiness budget is enormous.",
+      "The banana budget is also enormous.",
+      "The line for 'emergency fried chicken exposure' was blank until you arrived."
+    ],
+    "complete_flag": "monkey_accountant_seen"
+  },
+  "monkey_child": {
+    "speaker": "Monkey Child",
+    "tags": ["minor_npc", "optional"],
+    "lines": [
+      "My toy train only goes in circles, but everyone claps like it discovered a continent.",
+      "Do trains go to KFC?",
+      "If they do, can they also go away from SRMT?"
+    ],
+    "complete_flag": "monkey_child_seen"
+  },
+  "monkey_radio_host": {
+    "speaker": "Monkey Radio Host",
+    "tags": ["minor_npc", "optional", "post_clear"],
+    "lines": [
+      "This is Banana-burbs radio, finally broadcasting unscheduled emotions.",
+      "Today's weather: confused, banana-scented, and free.",
+      "Shrububu, if you hear this, the monkey army still believes the KFC popcorn was a holy event."
+    ],
+    "complete_flag": "monkey_radio_host_seen"
+  },
+  "clue_smile_meter": {
+    "speaker": "Smile Meter",
+    "tags": ["clue_object"],
+    "lines": [
+      "The lab meter records every smile in Banana-burbs and sounds an alarm when one becomes complicated.",
+      "The alarm log spikes whenever SRMT is mentioned."
+    ],
+    "complete_flag": "clue_smile_meter_seen"
+  },
+  "clue_mayor_poster": {
+    "speaker": "Mayor Poster",
+    "tags": ["clue_object"],
+    "lines": [
+      "Deepak's poster reads: 'Happiness is safety. Safety is obedience. Obedience is optional, technically.'",
+      "Someone drew a KFC bucket over his crown and then apologized to the poster."
+    ],
+    "complete_flag": "clue_mayor_poster_seen"
+  },
+  "clue_lab_banana_gun_case": {
+    "speaker": "Banana Gun Case",
+    "tags": ["clue_object"],
+    "lines": [
+      "The empty case says the banana gun is issued only during civic awakening.",
+      "A note below it says: 'Do not point at mayor unless the spell breaks first.'"
+    ],
+    "complete_flag": "clue_lab_banana_gun_case_seen"
+  },
+  "banana_post_clear_army": {
+    "speaker": "Monkey Army",
+    "tags": ["post_clear"],
+    "lines": [
+      "The monkeys gather with banana guns, lunch boxes, and new opinions.",
+      "They do not know how to fight SRMT yet, but they know they were lied to."
+    ],
+    "complete_flag": "banana_post_clear_army_seen"
+  },
+  "banana_post_clear_mayor_office": {
+    "speaker": "Mayor Office",
+    "tags": ["post_clear"],
+    "lines": [
+      "Deepak's office is quiet after the fight.",
+      "On his desk: one apology, one banana peel, and a map pointing toward Berry Barks where no KFC is promised honestly."
+    ],
+    "complete_flag": "banana_post_clear_mayor_office_seen"
+  }
+}

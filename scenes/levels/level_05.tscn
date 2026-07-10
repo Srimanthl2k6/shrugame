@@ -1,0 +1,554 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_dialogue_box"]
+[ext_resource type="Script" path="res://scripts/levels/level_05_controller.gd" id="4_controller"]
+[ext_resource type="PackedScene" path="res://scenes/ui/objective_tracker.tscn" id="5_objective"]
+[ext_resource type="PackedScene" path="res://scenes/ui/clue_journal.tscn" id="6_journal"]
+[ext_resource type="Script" path="res://scripts/visual/animated_fx.gd" id="7_fx"]
+[ext_resource type="Script" path="res://scripts/core/music_trigger.gd" id="8_music"]
+[ext_resource type="Script" path="res://scripts/visual/playable_frame.gd" id="9_frame"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(34, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
+size = Vector2(42, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(28, 30)
+
+[node name="Level05" type="Node2D"]
+script = ExtResource("4_controller")
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("8_music")
+music_id = "level_05_ruined_club_court_finale"
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0.07, 0.045, 0.07, 1)
+polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="PlayableFrame" type="Node2D" parent="World"]
+z_index = 9
+script = ExtResource("9_frame")
+frame_color = Color(1, 0.54, 0.88, 0.86)
+corner_color = Color(1, 0.78, 0.95, 0.92)
+
+[node name="PinkRuins" type="Node2D" parent="World"]
+
+[node name="RuinedStreet" type="Polygon2D" parent="World/PinkRuins"]
+color = Color(0.2, 0.13, 0.2, 1)
+polygon = PackedVector2Array(10, 24, 310, 24, 310, 164, 10, 164)
+
+[node name="CuteRubble" type="Polygon2D" parent="World/PinkRuins"]
+color = Color(0.88, 0.42, 0.72, 1)
+polygon = PackedVector2Array(26, 44, 78, 44, 68, 76, 34, 78)
+
+[node name="RouteGuides" type="Node2D" parent="World"]
+z_index = -2
+
+[node name="PubGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(34, 132, 58, 100, 72, 80)
+width = 3.0
+default_color = Color(1, 0.48, 0.82, 0.78)
+
+[node name="SuhasGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(72, 80, 102, 90, 126, 98)
+width = 3.0
+default_color = Color(1, 0.62, 0.34, 0.76)
+
+[node name="BikeGuitarGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(126, 98, 164, 132, 198, 132)
+width = 3.0
+default_color = Color(1, 0.86, 0.28, 0.78)
+
+[node name="MansionGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(198, 132, 214, 104, 232, 82)
+width = 3.0
+default_color = Color(0.82, 0.72, 1, 0.78)
+
+[node name="SRMTGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(232, 82, 260, 94, 276, 112)
+width = 3.0
+default_color = Color(1, 0.22, 0.32, 0.8)
+
+[node name="IshiYogaGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(276, 112, 264, 132, 252, 146)
+width = 3.0
+default_color = Color(0.52, 0.9, 1, 0.78)
+
+[node name="EndingGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(252, 146, 284, 112, 294, 76)
+width = 3.0
+default_color = Color(0.62, 1, 0.72, 0.78)
+
+[node name="ClarityLayer" type="Node2D" parent="World"]
+z_index = -4
+
+[node name="PubRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.48, 0.12, 0.34, 0.44)
+polygon = PackedVector2Array(42, 58, 104, 58, 104, 100, 42, 102)
+
+[node name="SuhasRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.42, 0.2, 0.12, 0.42)
+polygon = PackedVector2Array(104, 78, 152, 78, 152, 118, 104, 118)
+
+[node name="BikeGuitarRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.42, 0.34, 0.08, 0.44)
+polygon = PackedVector2Array(148, 118, 220, 118, 220, 150, 148, 150)
+
+[node name="MansionRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.32, 0.2, 0.46, 0.42)
+polygon = PackedVector2Array(190, 40, 268, 40, 268, 96, 190, 96)
+
+[node name="SRMTRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.5, 0.08, 0.12, 0.46)
+polygon = PackedVector2Array(248, 94, 306, 94, 306, 138, 248, 138)
+
+[node name="IshiYogaRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.12, 0.34, 0.48, 0.44)
+polygon = PackedVector2Array(220, 132, 284, 132, 284, 166, 220, 166)
+
+[node name="EndingRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.12, 0.36, 0.24, 0.46)
+polygon = PackedVector2Array(268, 56, 314, 56, 314, 94, 270, 100)
+
+[node name="CriticalPathRail" type="Line2D" parent="World/ClarityLayer"]
+points = PackedVector2Array(34, 132, 72, 80, 126, 98, 164, 132, 198, 132, 232, 82, 276, 112, 252, 146, 294, 76)
+width = 3.0
+default_color = Color(1, 0.68, 0.88, 0.76)
+
+[node name="FirstRouteSteps" type="Node2D" parent="World/ClarityLayer"]
+
+[node name="StepPub" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(46, 94)
+custom_minimum_size = Vector2(70, 14)
+size = Vector2(70, 14)
+theme_override_colors/font_color = Color(1, 0.58, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "1 Pub"
+horizontal_alignment = 1
+
+[node name="StepSuhas" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(102, 112)
+custom_minimum_size = Vector2(80, 14)
+size = Vector2(80, 14)
+theme_override_colors/font_color = Color(1, 0.66, 0.38, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "2 Suhas"
+horizontal_alignment = 1
+
+[node name="StepGear" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(150, 142)
+custom_minimum_size = Vector2(98, 14)
+size = Vector2(98, 14)
+theme_override_colors/font_color = Color(1, 0.9, 0.36, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "3 Bike+Guitar"
+horizontal_alignment = 1
+
+[node name="StepMansion" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(188, 38)
+custom_minimum_size = Vector2(100, 14)
+size = Vector2(100, 14)
+theme_override_colors/font_color = Color(0.86, 0.76, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "4 Mansion"
+horizontal_alignment = 1
+
+[node name="StepSRMT" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(250, 126)
+custom_minimum_size = Vector2(72, 14)
+size = Vector2(72, 14)
+theme_override_colors/font_color = Color(1, 0.34, 0.42, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "5 SRMT"
+horizontal_alignment = 1
+
+[node name="StepIshiYoga" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(218, 160)
+custom_minimum_size = Vector2(102, 14)
+size = Vector2(102, 14)
+theme_override_colors/font_color = Color(0.62, 0.94, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "6 IshiYoga"
+horizontal_alignment = 1
+
+[node name="StepEnding" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(252, 58)
+custom_minimum_size = Vector2(76, 14)
+size = Vector2(76, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "7 Ending"
+horizontal_alignment = 1
+
+[node name="LandmarkLabels" type="Node2D" parent="World"]
+z_index = 8
+
+[node name="PubLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(38, 58)
+custom_minimum_size = Vector2(92, 14)
+size = Vector2(92, 14)
+theme_override_colors/font_color = Color(1, 0.58, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Gummies Pub"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="SuhasLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(96, 78)
+custom_minimum_size = Vector2(72, 14)
+size = Vector2(72, 14)
+theme_override_colors/font_color = Color(1, 0.66, 0.38, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Suhas"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="BikeLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(136, 118)
+custom_minimum_size = Vector2(64, 14)
+size = Vector2(64, 14)
+theme_override_colors/font_color = Color(0.8, 0.82, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Bike"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="GuitarLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(172, 118)
+custom_minimum_size = Vector2(72, 14)
+size = Vector2(72, 14)
+theme_override_colors/font_color = Color(1, 0.9, 0.36, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Guitar"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="MansionLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(184, 42)
+custom_minimum_size = Vector2(118, 14)
+size = Vector2(118, 14)
+theme_override_colors/font_color = Color(0.86, 0.76, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Fallen Mansion"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="SRMTLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(236, 94)
+custom_minimum_size = Vector2(94, 14)
+size = Vector2(94, 14)
+theme_override_colors/font_color = Color(1, 0.34, 0.42, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "SRMT Throne"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="IshiYogaLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(212, 132)
+custom_minimum_size = Vector2(94, 14)
+size = Vector2(94, 14)
+theme_override_colors/font_color = Color(0.62, 0.94, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "IshiYoga"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="EndingLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(250, 60)
+custom_minimum_size = Vector2(76, 14)
+size = Vector2(76, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Ending"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="GummiesPub" type="Area2D" parent="World"]
+position = Vector2(72, 80)
+script = ExtResource("2_interaction")
+interaction_message = "The pub serves Gummies instead of chicken."
+dialogue_id = "pub_gummies"
+dialogue_file_path = "res://data/dialogue/level_05_dialogue.json"
+flag_on_interact = "pub_gummies_seen"
+item_id = "gummies"
+item_amount = 1
+objective_text = "Survive the bar fight with Suhas."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/GummiesPub"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/GummiesPub"]
+color = Color(0.72, 0.2, 0.44, 1)
+polygon = PackedVector2Array(-20, -14, 20, -14, 20, 14, -20, 14)
+
+[node name="SuhasBarFight" type="Area2D" parent="World"]
+position = Vector2(126, 98)
+script = ExtResource("2_interaction")
+interaction_message = "Suhas starts a bar fight over Gummies and chicken."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+required_flags = PackedStringArray("pub_gummies_seen")
+locked_message = "Suhas is not angry enough until Shrububu asks about chicken."
+encounter_id = "suhas_bar_fight"
+objective_text = "Beat Suhas and take the bike and guitar."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SuhasBarFight"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="Visual" type="Polygon2D" parent="World/SuhasBarFight"]
+color = Color(0.54, 0.26, 0.18, 1)
+polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 17, -12, 10)
+
+[node name="BikeReward" type="Area2D" parent="World"]
+position = Vector2(164, 132)
+script = ExtResource("2_interaction")
+interaction_message = "Shrububu steals Suhas's bike keys."
+required_flags = PackedStringArray("suhas_defeated")
+locked_message = "The bike is blocked by Suhas until the bar fight is over."
+flag_on_interact = "bike_unlocked"
+objective_text = "Use the bike route toward the fallen mansion."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BikeReward"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/BikeReward"]
+color = Color(0.18, 0.18, 0.22, 1)
+polygon = PackedVector2Array(-16, -6, 16, -6, 16, 6, -16, 6)
+
+[node name="GuitarReward" type="Area2D" parent="World"]
+position = Vector2(198, 132)
+script = ExtResource("2_interaction")
+interaction_message = "Shrububu takes Suhas's musical guitar."
+dialogue_id = "guitar_reward"
+dialogue_file_path = "res://data/dialogue/level_05_dialogue.json"
+required_flags = PackedStringArray("suhas_defeated")
+locked_message = "The guitar is still in Suhas's hands."
+flag_on_interact = "musical_guitar_unlocked"
+gear_id = "musical_guitar"
+objective_text = "Solve the fallen mansion and ruined court clues."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/GuitarReward"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/GuitarReward"]
+color = Color(0.86, 0.66, 0.2, 1)
+polygon = PackedVector2Array(-14, -5, 14, -5, 14, 5, -14, 5)
+
+[node name="FallenMansion" type="Node2D" parent="World"]
+position = Vector2(226, 62)
+
+[node name="MansionBody" type="Polygon2D" parent="World/FallenMansion"]
+color = Color(0.48, 0.28, 0.42, 1)
+polygon = PackedVector2Array(-34, -20, 34, -20, 28, 28, -32, 24)
+
+[node name="MansionCourtClues" type="Area2D" parent="World"]
+position = Vector2(232, 82)
+script = ExtResource("2_interaction")
+interaction_message = "You solve the mansion and court clues leading to SRMT."
+dialogue_id = "mansion_court_clues"
+dialogue_file_path = "res://data/dialogue/level_05_dialogue.json"
+required_flags = PackedStringArray("bike_unlocked", "musical_guitar_unlocked")
+locked_message = "The mansion route needs the bike and musical guitar."
+flag_on_interact = "mansion_court_clues_collected"
+clue_id = "mansion_court_clues"
+objective_text = "Ride to SRMT's ruined court."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MansionCourtClues"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/MansionCourtClues"]
+color = Color(0.78, 0.68, 0.9, 1)
+polygon = PackedVector2Array(-13, -8, 13, -8, 12, 9, -12, 9)
+
+[node name="RuinedCourt" type="Node2D" parent="World"]
+position = Vector2(276, 78)
+
+[node name="CourtThrone" type="Polygon2D" parent="World/RuinedCourt"]
+color = Color(0.42, 0.22, 0.38, 1)
+polygon = PackedVector2Array(-20, -18, 20, -18, 18, 22, -18, 22)
+
+[node name="SRMTBoss" type="Area2D" parent="World"]
+position = Vector2(276, 112)
+script = ExtResource("2_interaction")
+interaction_message = "SRMT eats KFC on the ruined throne."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+required_flags = PackedStringArray("suhas_defeated", "musical_guitar_unlocked", "mansion_court_clues_collected")
+locked_message = "SRMT requires the guitar, Suhas defeated, and the mansion/court clues."
+encounter_id = "srmt_final_boss"
+objective_text = "Defeat SRMT and reach the KFC dungeon."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SRMTBoss"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="Visual" type="Polygon2D" parent="World/SRMTBoss"]
+color = Color(0.76, 0.12, 0.16, 1)
+polygon = PackedVector2Array(-14, -18, 14, -18, 16, 14, 0, 22, -16, 14)
+
+[node name="KfcDungeon" type="Node2D" parent="World"]
+position = Vector2(226, 146)
+
+[node name="BucketWall" type="Polygon2D" parent="World/KfcDungeon"]
+color = Color(0.9, 0.72, 0.28, 1)
+polygon = PackedVector2Array(-24, -10, 24, -10, 24, 10, -24, 10)
+
+[node name="IshiYogaCell" type="Area2D" parent="World"]
+position = Vector2(252, 146)
+script = ExtResource("2_interaction")
+interaction_message = "Shrububu frees IshiYoga beside the KFC storage."
+dialogue_id = "ishiyoga_rescue"
+dialogue_file_path = "res://data/dialogue/level_05_dialogue.json"
+required_flags = PackedStringArray("srmt_defeated")
+locked_message = "IshiYoga is behind SRMT."
+flag_on_interact = "ishiyoga_rescued"
+objective_text = "Eat KFC with IshiYoga and restore Ishiville."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/IshiYogaCell"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/IshiYogaCell"]
+color = Color(0.62, 0.82, 0.92, 1)
+polygon = PackedVector2Array(-10, -14, 10, -14, 10, 14, -10, 14)
+
+[node name="Nulla" type="Area2D" parent="World"]
+position = Vector2(44, 118)
+script = ExtResource("2_interaction")
+interaction_message = "Nulla speaks from behind the static door."
+dialogue_id = "nulla_intro"
+dialogue_file_path = "res://data/dialogue/level_05_dialogue.json"
+flag_on_interact = "met_nulla"
+post_flag = "nulla_practice_cleared"
+post_dialogue_id = "nulla_after_battle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Nulla"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/Nulla"]
+color = Color(0.8, 0.82, 0.95, 1)
+polygon = PackedVector2Array(-10, -15, 10, -15, 10, 15, -10, 15)
+
+[node name="Objective" type="Area2D" parent="World"]
+position = Vector2(66, 142)
+script = ExtResource("2_interaction")
+interaction_message = "You gather the memory static without erasing it."
+flag_on_interact = "level_05_objective_done"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Objective"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/Objective"]
+color = Color(0.75, 0.75, 0.95, 1)
+polygon = PackedVector2Array(-13, -13, 13, -13, 13, 13, -13, 13)
+
+[node name="PracticeEncounter" type="Area2D" parent="World"]
+position = Vector2(88, 142)
+script = ExtResource("2_interaction")
+interaction_message = "The static door repeats every pattern you survived."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+encounter_id = "nulla_practice"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PracticeEncounter"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/PracticeEncounter"]
+color = Color(0.45, 0.45, 0.68, 1)
+polygon = PackedVector2Array(-14, -12, 14, -12, 14, 12, -14, 12)
+
+[node name="SavePoint" type="Area2D" parent="World"]
+position = Vector2(40, 148)
+script = ExtResource("2_interaction")
+interaction_message = "A sticky gummy wrapper saves your place."
+save_on_interact = true
+level_id = "level_05"
+spawn_point = "gummy_wrapper"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SavePoint"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/SavePoint"]
+color = Color(0.4, 0.7, 0.9, 1)
+polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
+
+[node name="TransitionDoor" type="Area2D" parent="World"]
+position = Vector2(294, 76)
+script = ExtResource("2_interaction")
+interaction_message = "IshiYoga is free. Ishiville gets KFC."
+target_scene_path = "res://scenes/ending.tscn"
+required_flags = PackedStringArray("mansion_court_clues_collected", "suhas_defeated", "srmt_defeated", "ishiyoga_rescued", "level_05_objective_done", "nulla_practice_cleared")
+locked_message = "The ending needs Suhas beaten, SRMT defeated, and IshiYoga rescued."
+objective_text = "Rule Ishiville with IshiYoga and KFC."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TransitionDoor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Visual" type="Polygon2D" parent="World/TransitionDoor"]
+color = Color(0.68, 0.38, 0.72, 1)
+polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
+
+[node name="VisualFxLayer" type="Node2D" parent="."]
+
+[node name="ClubStatic" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(102, 54)
+script = ExtResource("7_fx")
+fx_id = "club_static"
+frame_count = 4
+loop_seconds = 0.28
+pulse_color_a = Color(0.95, 0.25, 0.68, 0.26)
+pulse_color_b = Color(0.2, 0.88, 1, 0.68)
+motion_axis = Vector2(1, 0)
+motion_pixels = 1.0
+
+[node name="MusicalNotes" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(158, 88)
+script = ExtResource("7_fx")
+fx_id = "musical_notes"
+frame_count = 4
+loop_seconds = 0.75
+pulse_color_a = Color(0.2, 0.88, 1, 0.3)
+pulse_color_b = Color(1, 0.84, 0.22, 0.72)
+motion_axis = Vector2(1, -1)
+motion_pixels = 3.0
+
+[node name="ThroneReveal" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(262, 66)
+script = ExtResource("7_fx")
+fx_id = "throne_reveal"
+frame_count = 4
+loop_seconds = 1.4
+pulse_color_a = Color(0.24, 0.04, 0.32, 0.34)
+pulse_color_b = Color(1, 0.48, 0.72, 0.76)
+motion_axis = Vector2(0, -1)
+motion_pixels = 1.5
+
+[node name="Player" parent="World" instance=ExtResource("1_player")]
+position = Vector2(34, 132)
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
+
+[node name="UiLayer" type="CanvasLayer" parent="."]
+
+[node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
+
+[node name="ClueJournal" parent="UiLayer" instance=ExtResource("6_journal")]

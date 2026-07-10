@@ -1,0 +1,13 @@
+{
+  "level_id": "level_05",
+  "area_name": "Area 111",
+  "intro_event": "Shrububu enters ruined pink cute-town nightlife, finds Gummies instead of chicken, and starts a bar fight.",
+  "mini_boss_id": "suhas",
+  "main_boss_id": "srmt",
+  "reward_gear_id": "musical_guitar",
+  "clue_ids": ["mansion_court_clues"],
+  "growth_stage_unlock": 5,
+  "town_state_after_defeat": "SRMT is defeated, IshiYoga is freed, and Ishiville is restored.",
+  "next_level_id": "ending",
+  "required_story_flags": ["mansion_court_clues_collected", "suhas_defeated", "srmt_defeated"]
+}

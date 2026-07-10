@@ -1,0 +1,21 @@
+# Godot import/cache files
+.godot/
+.import/
+*.import
+
+# Godot export output
+export/
+build/
+builds/
+*.pck
+*.exe
+
+# Local portable Godot engine install
+tools/godot/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

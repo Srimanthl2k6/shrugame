@@ -1,0 +1,267 @@
+{
+	"bosses": [
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "poojan",
+			"level": "level_01",
+			"sprite_dir": "res://assets/level_01/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "satyaki_tirumal",
+			"level": "level_01",
+			"sprite_dir": "res://assets/level_01/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "nitin",
+			"level": "level_02",
+			"sprite_dir": "res://assets/level_02/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "deepak_reddy",
+			"level": "level_02",
+			"sprite_dir": "res://assets/level_02/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "niggesh_nishal",
+			"level": "level_03",
+			"sprite_dir": "res://assets/level_03/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "ankit",
+			"level": "level_03",
+			"sprite_dir": "res://assets/level_03/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "doctor_sushan",
+			"level": "level_04",
+			"sprite_dir": "res://assets/level_04/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "mitta",
+			"level": "level_04",
+			"sprite_dir": "res://assets/level_04/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "suhas",
+			"level": "level_05",
+			"sprite_dir": "res://assets/level_05/sprites/"
+		},
+		{
+			"animations": [
+				"intro",
+				"idle",
+				"talk",
+				"attack",
+				"hurt",
+				"defeat"
+			],
+			"id": "srmt",
+			"level": "level_05",
+			"sprite_dir": "res://assets/level_05/sprites/"
+		}
+	],
+	"cutins": [
+		{
+			"frame_count": 6,
+			"id": "door_slam",
+			"path": "res://assets/shared/sprites/cutins/door_slam.png"
+		},
+		{
+			"frame_count": 6,
+			"id": "weapon_unlocks",
+			"path": "res://assets/shared/sprites/cutins/weapon_unlocks.png"
+		},
+		{
+			"frame_count": 6,
+			"id": "boss_intro",
+			"path": "res://assets/shared/sprites/cutins/boss_intro.png"
+		},
+		{
+			"frame_count": 8,
+			"id": "growth_transform",
+			"path": "res://assets/shared/sprites/cutins/growth_transform.png"
+		},
+		{
+			"frame_count": 8,
+			"id": "srmt_throne_reveal",
+			"path": "res://assets/shared/sprites/cutins/srmt_throne_reveal.png"
+		},
+		{
+			"frame_count": 8,
+			"id": "ishiyoga_rescue",
+			"path": "res://assets/shared/sprites/cutins/ishiyoga_rescue.png"
+		}
+	],
+	"environment_fx": [
+		{
+			"frame_count": 4,
+			"id": "rain_loop",
+			"level": "level_01",
+			"path": "res://assets/level_01/sprites/fx_rain_loop.png"
+		},
+		{
+			"frame_count": 4,
+			"id": "neon_flicker",
+			"level": "level_01",
+			"path": "res://assets/level_01/sprites/fx_neon_flicker.png"
+		},
+		{
+			"frame_count": 4,
+			"id": "paper_flutter",
+			"level": "level_01",
+			"path": "res://assets/level_01/sprites/fx_paper_flutter.png"
+		},
+		{
+			"frame_count": 2,
+			"id": "monkey_loop",
+			"level": "level_02",
+			"path": "res://assets/level_02/sprites/fx_monkey_loop.png"
+		},
+		{
+			"frame_count": 4,
+			"id": "lab_monitor_pulse",
+			"level": "level_02",
+			"path": "res://assets/level_02/sprites/fx_lab_monitor_pulse.png"
+		},
+		{
+			"frame_count": 4,
+			"id": "mist_drift",
+			"level": "level_03",
+			"path": "res://assets/level_03/sprites/fx_mist_drift.png"
+		},
+		{
+			"frame_count": 4,
+			"id": "berry_glow",
+			"level": "level_03",
+			"path": "res://assets/level_03/sprites/fx_berry_glow.png"
+		},
+		{
+			"frame_count": 2,
+			"id": "fluorescent_buzz",
+			"level": "level_04",
+			"path": "res://assets/level_04/sprites/fx_fluorescent_buzz.png"
+		},
+		{
+			"frame_count": 8,
+			"id": "aeon_fireworks",
+			"level": "level_04",
+			"path": "res://assets/level_04/sprites/fx_aeon_fireworks.png"
+		},
+		{
+			"frame_count": 4,
+			"id": "club_static",
+			"level": "level_05",
+			"path": "res://assets/level_05/sprites/fx_club_static.png"
+		},
+		{
+			"frame_count": 6,
+			"id": "musical_notes",
+			"level": "level_05",
+			"path": "res://assets/level_05/sprites/fx_musical_notes.png"
+		},
+		{
+			"frame_count": 8,
+			"id": "throne_reveal",
+			"level": "level_05",
+			"path": "res://assets/level_05/sprites/fx_throne_reveal.png"
+		}
+	],
+	"shrububu_forms": [
+		{
+			"growth_stage": 1,
+			"id": "form_01",
+			"sprite_dir": "res://assets/shared/sprites/shrububu/form_01/"
+		},
+		{
+			"growth_stage": 2,
+			"id": "form_02",
+			"sprite_dir": "res://assets/shared/sprites/shrububu/form_02/"
+		},
+		{
+			"growth_stage": 3,
+			"id": "form_03",
+			"sprite_dir": "res://assets/shared/sprites/shrububu/form_03/"
+		},
+		{
+			"growth_stage": 4,
+			"id": "form_04",
+			"sprite_dir": "res://assets/shared/sprites/shrububu/form_04/"
+		},
+		{
+			"growth_stage": 5,
+			"id": "form_05",
+			"sprite_dir": "res://assets/shared/sprites/shrububu/form_05/"
+		}
+	]
+}

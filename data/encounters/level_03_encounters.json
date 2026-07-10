@@ -1,0 +1,69 @@
+{
+  "tickroot_practice": {
+    "enemy_name": "Tickroot",
+    "enemy_hp": 7,
+    "player_hp": 20,
+    "resonance_goal": 2,
+    "return_scene": "res://scenes/levels/level_03.tscn",
+    "boss_type": "practice",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "rewind",
+        "intro_dialogue": "Tickroot rewinds the old prototype pattern.",
+        "patterns": [{"type": "rings", "count": 4}],
+        "clear_threshold": 0
+      }
+    ],
+    "defeated_flag": "tickroot_practice_cleared"
+  },
+  "niggesh_nishal_boss": {
+    "enemy_name": "Niggesh Nishal",
+    "enemy_hp": 14,
+    "player_hp": 28,
+    "resonance_goal": 4,
+    "return_scene": "res://scenes/levels/level_03.tscn",
+    "boss_type": "mini_boss",
+    "defeated_flag": "niggesh_nishal_defeated",
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "berry_invoice",
+        "intro_dialogue": "Nishal throws fake invoices and berry baskets.",
+        "patterns": [{"type": "falling_objects", "count": 6}],
+        "clear_threshold": 7
+      },
+      {
+        "id": "chef_panic",
+        "intro_dialogue": "The chef hut fills with red berry splashes.",
+        "patterns": [{"type": "straight_lanes", "count": 5}],
+        "clear_threshold": 0
+      }
+    ]
+  },
+  "ankit_boss": {
+    "enemy_name": "Ankit",
+    "enemy_hp": 20,
+    "player_hp": 30,
+    "resonance_goal": 6,
+    "return_scene": "res://scenes/levels/level_03.tscn",
+    "boss_type": "main_boss",
+    "defeated_flag": "ankit_defeated",
+    "growth_stage_reward": 4,
+    "commands": ["act", "item", "gear", "guard"],
+    "phases": [
+      {
+        "id": "empty_plate",
+        "intro_dialogue": "Ankit attacks with empty plates and betrayed appetite.",
+        "patterns": [{"type": "rings", "count": 7}],
+        "clear_threshold": 10
+      },
+      {
+        "id": "berry_potion_storm",
+        "intro_dialogue": "Berry potions splash across the forest path.",
+        "patterns": [{"type": "callback_mix", "count": 8}],
+        "clear_threshold": 0
+      }
+    ]
+  }
+}

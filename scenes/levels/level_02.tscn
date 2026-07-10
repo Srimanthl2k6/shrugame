@@ -1,0 +1,569 @@
+[gd_scene load_steps=26 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_dialogue_box"]
+[ext_resource type="Script" path="res://scripts/levels/level_02_controller.gd" id="4_controller"]
+[ext_resource type="PackedScene" path="res://scenes/ui/objective_tracker.tscn" id="5_objective"]
+[ext_resource type="PackedScene" path="res://scenes/ui/clue_journal.tscn" id="6_journal"]
+[ext_resource type="Script" path="res://scripts/visual/animated_fx.gd" id="7_fx"]
+[ext_resource type="Script" path="res://scripts/core/music_trigger.gd" id="8_music"]
+[ext_resource type="Script" path="res://scripts/visual/playable_frame.gd" id="9_frame"]
+[ext_resource type="Texture2D" path="res://assets/level_02/tilesets/tiles_banana_burbs_backplate.png" id="10_backplate"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/prop_banana_house_row.png" id="11_houses"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/prop_165_files_lab.png" id="12_lab"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/prop_mayor_office.png" id="13_mayor_office"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/prop_165_files.png" id="14_files"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/prop_kfc_popcorn_box.png" id="15_popcorn"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/prop_banana_mailbox.png" id="16_mailbox"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/prop_banana_exit_gate.png" id="17_exit_gate"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/npc_happy_monkey_idle.png" id="18_monkey"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/npc_vela_echo_idle.png" id="19_vela"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/boss_nitin_overworld.png" id="20_nitin"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/boss_deepak_reddy_overworld.png" id="21_deepak"]
+[ext_resource type="Texture2D" path="res://assets/level_02/sprites/fx_level02_monkey_loop_sheet.png" id="22_monkey_sheet"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(34, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
+size = Vector2(42, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(28, 30)
+
+[node name="Level02" type="Node2D"]
+script = ExtResource("4_controller")
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("8_music")
+music_id = "level_02_uncanny_suburb_jingle"
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0.07, 0.11, 0.07, 1)
+polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="PlayableFrame" type="Node2D" parent="World"]
+z_index = 9
+script = ExtResource("9_frame")
+frame_color = Color(0.98, 0.88, 0.36, 0.86)
+corner_color = Color(1, 0.96, 0.62, 0.92)
+
+[node name="SceneArt" type="Node2D" parent="World"]
+z_index = -10
+
+[node name="BananaBurbsBackplate" type="Sprite2D" parent="World/SceneArt"]
+texture_filter = 1
+position = Vector2(160, 90)
+texture = ExtResource("10_backplate")
+
+[node name="BananaHouseRow" type="Sprite2D" parent="World/SceneArt"]
+texture_filter = 1
+position = Vector2(78, 77)
+texture = ExtResource("11_houses")
+
+[node name="LabExterior" type="Sprite2D" parent="World/SceneArt"]
+texture_filter = 1
+position = Vector2(236, 58)
+texture = ExtResource("12_lab")
+
+[node name="MayorOfficeSprite" type="Sprite2D" parent="World/SceneArt"]
+texture_filter = 1
+position = Vector2(242, 122)
+texture = ExtResource("13_mayor_office")
+
+[node name="SuburbLawn" type="Polygon2D" parent="World"]
+visible = false
+color = Color(0.18, 0.28, 0.12, 1)
+polygon = PackedVector2Array(10, 24, 310, 24, 310, 164, 10, 164)
+
+[node name="LabConcrete" type="Polygon2D" parent="World"]
+visible = false
+color = Color(0.12, 0.13, 0.12, 1)
+polygon = PackedVector2Array(170, 22, 306, 22, 306, 90, 170, 90)
+
+[node name="BananaHouses" type="Node2D" parent="World"]
+
+[node name="HouseA" type="Polygon2D" parent="World/BananaHouses"]
+visible = false
+color = Color(0.82, 0.68, 0.2, 1)
+polygon = PackedVector2Array(28, 40, 70, 40, 70, 76, 28, 76)
+
+[node name="HouseB" type="Polygon2D" parent="World/BananaHouses"]
+visible = false
+color = Color(0.78, 0.64, 0.18, 1)
+polygon = PackedVector2Array(82, 40, 124, 40, 124, 76, 82, 76)
+
+[node name="HouseC" type="Polygon2D" parent="World/BananaHouses"]
+visible = false
+color = Color(0.84, 0.7, 0.22, 1)
+polygon = PackedVector2Array(28, 88, 70, 88, 70, 124, 28, 124)
+
+[node name="RouteGuides" type="Node2D" parent="World"]
+z_index = -2
+
+[node name="SuburbGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(36, 118, 104, 106, 132, 134)
+width = 3.0
+default_color = Color(1, 0.88, 0.28, 0.74)
+
+[node name="LabGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(132, 134, 170, 92, 210, 52, 262, 66)
+width = 3.0
+default_color = Color(0.48, 1, 0.72, 0.72)
+
+[node name="MayorGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(132, 134, 188, 132, 234, 118, 278, 126)
+width = 3.0
+default_color = Color(1, 0.78, 0.22, 0.76)
+
+[node name="ExitArrowGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(278, 126, 294, 74, 306, 66)
+width = 3.0
+default_color = Color(0.38, 1, 0.62, 0.78)
+
+[node name="ClarityLayer" type="Node2D" parent="World"]
+z_index = -4
+
+[node name="SuburbRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.5, 0.42, 0.12, 0.4)
+polygon = PackedVector2Array(22, 96, 150, 96, 158, 146, 24, 150)
+
+[node name="LabRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.1, 0.34, 0.26, 0.44)
+polygon = PackedVector2Array(168, 18, 306, 18, 306, 90, 168, 94)
+
+[node name="MayorRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.54, 0.4, 0.1, 0.42)
+polygon = PackedVector2Array(172, 104, 306, 104, 306, 146, 172, 148)
+
+[node name="ExitRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.12, 0.36, 0.24, 0.46)
+polygon = PackedVector2Array(268, 56, 314, 56, 314, 92, 270, 98)
+
+[node name="CriticalPathRail" type="Line2D" parent="World/ClarityLayer"]
+points = PackedVector2Array(36, 118, 104, 106, 210, 52, 262, 66, 132, 134, 234, 118, 278, 126, 294, 74)
+width = 3.0
+default_color = Color(1, 0.9, 0.36, 0.72)
+
+[node name="FirstRouteSteps" type="Node2D" parent="World/ClarityLayer"]
+
+[node name="StepMonkey" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(72, 88)
+custom_minimum_size = Vector2(82, 14)
+size = Vector2(82, 14)
+theme_override_colors/font_color = Color(1, 0.9, 0.42, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "1 Monkeys"
+horizontal_alignment = 1
+
+[node name="StepFiles" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(174, 34)
+custom_minimum_size = Vector2(76, 14)
+size = Vector2(76, 14)
+theme_override_colors/font_color = Color(0.58, 1, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "2 Files"
+horizontal_alignment = 1
+
+[node name="StepNitin" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(228, 46)
+custom_minimum_size = Vector2(78, 14)
+size = Vector2(78, 14)
+theme_override_colors/font_color = Color(0.58, 1, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "3 Nitin"
+horizontal_alignment = 1
+
+[node name="StepPopcorn" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(92, 142)
+custom_minimum_size = Vector2(88, 14)
+size = Vector2(88, 14)
+theme_override_colors/font_color = Color(1, 0.88, 0.34, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "4 Popcorn"
+horizontal_alignment = 1
+
+[node name="StepDeepak" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(232, 140)
+custom_minimum_size = Vector2(82, 14)
+size = Vector2(82, 14)
+theme_override_colors/font_color = Color(1, 0.54, 0.28, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "5 Deepak"
+horizontal_alignment = 1
+
+[node name="StepExit" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(252, 58)
+custom_minimum_size = Vector2(62, 14)
+size = Vector2(62, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "6 Exit"
+horizontal_alignment = 1
+
+[node name="LandmarkLabels" type="Node2D" parent="World"]
+z_index = 8
+
+[node name="MonkeyLoopLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(60, 84)
+custom_minimum_size = Vector2(92, 14)
+size = Vector2(92, 14)
+theme_override_colors/font_color = Color(1, 0.9, 0.42, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Happy Monkeys"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="LabLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(174, 22)
+custom_minimum_size = Vector2(96, 14)
+size = Vector2(96, 14)
+theme_override_colors/font_color = Color(0.58, 1, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "165-files Lab"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="NitinLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(232, 78)
+custom_minimum_size = Vector2(70, 14)
+size = Vector2(70, 14)
+theme_override_colors/font_color = Color(0.72, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Nitin"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="PopcornLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(88, 118)
+custom_minimum_size = Vector2(98, 14)
+size = Vector2(98, 14)
+theme_override_colors/font_color = Color(1, 0.88, 0.34, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "KFC Popcorn"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="MayorLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(196, 98)
+custom_minimum_size = Vector2(92, 14)
+size = Vector2(92, 14)
+theme_override_colors/font_color = Color(1, 0.78, 0.22, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Mayor Office"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="DeepakLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(238, 108)
+custom_minimum_size = Vector2(76, 14)
+size = Vector2(76, 14)
+theme_override_colors/font_color = Color(1, 0.54, 0.28, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Deepak"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ExitLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(226, 58)
+custom_minimum_size = Vector2(88, 14)
+size = Vector2(88, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Berry Barks"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="HappyMonkeyLoop" type="Area2D" parent="World"]
+position = Vector2(104, 106)
+script = ExtResource("2_interaction")
+interaction_message = "A monkey repeats a perfect little wave."
+dialogue_id = "monkey_loop"
+dialogue_file_path = "res://data/dialogue/level_02_dialogue.json"
+flag_on_interact = "monkey_loop_seen"
+objective_text = "Find out why Banana-burbs is too happy."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/HappyMonkeyLoop"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/HappyMonkeyLoop"]
+visible = false
+color = Color(0.62, 0.44, 0.24, 1)
+polygon = PackedVector2Array(-8, -12, 8, -12, 9, 8, 0, 14, -9, 8)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/HappyMonkeyLoop"]
+texture_filter = 1
+texture = ExtResource("18_monkey")
+
+[node name="LabRecords" type="Area2D" parent="World"]
+position = Vector2(210, 52)
+script = ExtResource("2_interaction")
+interaction_message = "You recover the 165-files from the abandoned lab."
+dialogue_id = "lab_165_files"
+dialogue_file_path = "res://data/dialogue/level_02_dialogue.json"
+flag_on_interact = "165_files_collected"
+clue_id = "165_files"
+objective_text = "Escape the lab before Nitin hides the files again."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LabRecords"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/LabRecords"]
+visible = false
+color = Color(0.72, 0.84, 0.72, 1)
+polygon = PackedVector2Array(-12, -8, 12, -8, 12, 8, -12, 8)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/LabRecords"]
+texture_filter = 1
+texture = ExtResource("14_files")
+
+[node name="NitinJanitor" type="Area2D" parent="World"]
+position = Vector2(262, 66)
+script = ExtResource("2_interaction")
+interaction_message = "Nitin blocks the lab exit with a mop."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+required_flags = PackedStringArray("165_files_collected")
+locked_message = "Nitin ignores you until the 165-files are in your hands."
+encounter_id = "nitin_janitor_boss"
+objective_text = "Beat Nitin and get the 165-files back to town."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/NitinJanitor"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="Visual" type="Polygon2D" parent="World/NitinJanitor"]
+visible = false
+color = Color(0.58, 0.68, 0.74, 1)
+polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 17, -12, 10)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/NitinJanitor"]
+texture_filter = 1
+texture = ExtResource("20_nitin")
+
+[node name="PopcornShare" type="Area2D" parent="World"]
+position = Vector2(132, 134)
+script = ExtResource("2_interaction")
+interaction_message = "Shrububu shares the backup KFC popcorn. The monkey army wakes up."
+dialogue_id = "popcorn_reveal"
+dialogue_file_path = "res://data/dialogue/level_02_dialogue.json"
+required_flags = PackedStringArray("165_files_collected", "nitin_defeated")
+locked_message = "The monkeys will not listen until the 165-files are safe and Nitin is beaten."
+flag_on_interact = "monkeys_spell_broken"
+gear_id = "banana_gun"
+objective_text = "Use the monkey army and banana gun to reach Deepak Reddy."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PopcornShare"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/PopcornShare"]
+visible = false
+color = Color(0.9, 0.72, 0.34, 1)
+polygon = PackedVector2Array(-13, -8, 13, -8, 10, 10, -10, 10)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/PopcornShare"]
+texture_filter = 1
+texture = ExtResource("15_popcorn")
+
+[node name="MayorOffice" type="Area2D" parent="World"]
+position = Vector2(234, 118)
+script = ExtResource("2_interaction")
+interaction_message = "The monkey army opens the mayor office route."
+required_flags = PackedStringArray("165_files_collected", "nitin_defeated", "monkeys_spell_broken")
+locked_message = "The mayor route needs the files, Nitin defeated, and the popcorn scene."
+flag_on_interact = "mayor_office_open"
+objective_text = "Challenge Deepak Reddy in the mayor office."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MayorOffice"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/MayorOffice"]
+visible = false
+color = Color(0.74, 0.58, 0.18, 1)
+polygon = PackedVector2Array(-18, -12, 18, -12, 18, 12, -18, 12)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/MayorOffice"]
+texture_filter = 1
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("13_mayor_office")
+
+[node name="DeepakBoss" type="Area2D" parent="World"]
+position = Vector2(278, 126)
+script = ExtResource("2_interaction")
+interaction_message = "Deepak Reddy smiles from behind the mayor desk."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+required_flags = PackedStringArray("165_files_collected", "nitin_defeated", "monkeys_spell_broken")
+locked_message = "Deepak will not face you until the monkey army opens the route."
+encounter_id = "deepak_reddy_boss"
+objective_text = "Defeat Deepak Reddy and learn why he used the spell."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DeepakBoss"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="Visual" type="Polygon2D" parent="World/DeepakBoss"]
+visible = false
+color = Color(0.92, 0.78, 0.28, 1)
+polygon = PackedVector2Array(-12, -16, 12, -16, 14, 12, 0, 20, -14, 12)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/DeepakBoss"]
+texture_filter = 1
+texture = ExtResource("21_deepak")
+
+[node name="Vela" type="Area2D" parent="World"]
+position = Vector2(70, 132)
+script = ExtResource("2_interaction")
+interaction_message = "Vela's old reflection survives as a prototype echo."
+dialogue_id = "vela_intro"
+dialogue_file_path = "res://data/dialogue/level_02_dialogue.json"
+flag_on_interact = "met_vela"
+post_flag = "vela_practice_cleared"
+post_dialogue_id = "vela_after_battle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Vela"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/Vela"]
+visible = false
+color = Color(0.42, 0.76, 0.9, 1)
+polygon = PackedVector2Array(-9, -13, 9, -13, 9, 11, 0, 16, -9, 11)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/Vela"]
+texture_filter = 1
+texture = ExtResource("19_vela")
+
+[node name="Objective" type="Area2D" parent="World"]
+position = Vector2(76, 92)
+script = ExtResource("2_interaction")
+interaction_message = "You rotate a leftover mirror marker from the old prototype."
+flag_on_interact = "level_02_objective_done"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Objective"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/Objective"]
+visible = false
+color = Color(0.7, 0.95, 1, 1)
+polygon = PackedVector2Array(0, -13, 13, 0, 0, 13, -13, 0)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/Objective"]
+texture_filter = 1
+modulate = Color(0.72, 0.94, 1, 1)
+texture = ExtResource("14_files")
+
+[node name="PracticeEncounter" type="Area2D" parent="World"]
+position = Vector2(98, 150)
+script = ExtResource("2_interaction")
+interaction_message = "Vela's reflected bullets ripple outward."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+encounter_id = "vela_practice"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PracticeEncounter"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/PracticeEncounter"]
+visible = false
+color = Color(0.18, 0.52, 0.72, 1)
+polygon = PackedVector2Array(-14, -12, 14, -12, 14, 12, -14, 12)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/PracticeEncounter"]
+texture_filter = 1
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("22_monkey_sheet")
+
+[node name="SavePoint" type="Area2D" parent="World"]
+position = Vector2(38, 146)
+script = ExtResource("2_interaction")
+interaction_message = "A banana-shaped mailbox saves your place."
+save_on_interact = true
+level_id = "level_02"
+spawn_point = "banana_mailbox"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SavePoint"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/SavePoint"]
+visible = false
+color = Color(0.4, 0.7, 0.9, 1)
+polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/SavePoint"]
+texture_filter = 1
+texture = ExtResource("16_mailbox")
+
+[node name="TransitionDoor" type="Area2D" parent="World"]
+position = Vector2(294, 74)
+script = ExtResource("2_interaction")
+interaction_message = "Banana-burbs is awake. Berry Barks waits beyond the trees."
+target_scene_path = "res://scenes/levels/level_03.tscn"
+required_flags = PackedStringArray("165_files_collected", "nitin_defeated", "monkeys_spell_broken", "deepak_reddy_defeated", "level_02_objective_done", "vela_practice_cleared")
+locked_message = "Banana-burbs is not free yet."
+objective_text = "Continue the KFC search in Berry Barks."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TransitionDoor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Visual" type="Polygon2D" parent="World/TransitionDoor"]
+visible = false
+color = Color(0.26, 0.46, 0.2, 1)
+polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/TransitionDoor"]
+texture_filter = 1
+texture = ExtResource("17_exit_gate")
+
+[node name="VisualFxLayer" type="Node2D" parent="."]
+
+[node name="MonkeyLoopSprite" type="Sprite2D" parent="VisualFxLayer"]
+texture_filter = 1
+z_index = 4
+position = Vector2(86, 64)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("22_monkey_sheet")
+
+[node name="MonkeyLoop" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(86, 64)
+script = ExtResource("7_fx")
+fx_id = "monkey_loop"
+frame_count = 2
+loop_seconds = 0.8
+pulse_color_a = Color(0.84, 0.68, 0.2, 0.32)
+pulse_color_b = Color(0.98, 0.86, 0.32, 0.64)
+motion_axis = Vector2(0, 1)
+motion_pixels = 1.5
+
+[node name="LabMonitorPulse" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(214, 50)
+script = ExtResource("7_fx")
+fx_id = "lab_monitor_pulse"
+frame_count = 4
+loop_seconds = 0.65
+pulse_color_a = Color(0.08, 0.6, 0.44, 0.28)
+pulse_color_b = Color(0.5, 1, 0.72, 0.7)
+motion_pixels = 0.0
+
+[node name="Player" parent="World" instance=ExtResource("1_player")]
+position = Vector2(36, 118)
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
+
+[node name="UiLayer" type="CanvasLayer" parent="."]
+
+[node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
+
+[node name="ClueJournal" parent="UiLayer" instance=ExtResource("6_journal")]

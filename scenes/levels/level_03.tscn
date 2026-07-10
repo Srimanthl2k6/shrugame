@@ -1,0 +1,441 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_dialogue_box"]
+[ext_resource type="Script" path="res://scripts/levels/level_03_controller.gd" id="4_controller"]
+[ext_resource type="PackedScene" path="res://scenes/ui/objective_tracker.tscn" id="5_objective"]
+[ext_resource type="PackedScene" path="res://scenes/ui/clue_journal.tscn" id="6_journal"]
+[ext_resource type="Script" path="res://scripts/visual/animated_fx.gd" id="7_fx"]
+[ext_resource type="Script" path="res://scripts/core/music_trigger.gd" id="8_music"]
+[ext_resource type="Script" path="res://scripts/visual/playable_frame.gd" id="9_frame"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(34, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
+size = Vector2(42, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(28, 30)
+
+[node name="Level03" type="Node2D"]
+script = ExtResource("4_controller")
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("8_music")
+music_id = "level_03_forest_mystery"
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0.07, 0.095, 0.065, 1)
+polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="PlayableFrame" type="Node2D" parent="World"]
+z_index = 9
+script = ExtResource("9_frame")
+frame_color = Color(0.92, 0.38, 0.5, 0.86)
+corner_color = Color(1, 0.58, 0.68, 0.92)
+
+[node name="ForestFloor" type="Polygon2D" parent="World"]
+color = Color(0.15, 0.19, 0.12, 1)
+polygon = PackedVector2Array(10, 24, 310, 24, 310, 164, 10, 164)
+
+[node name="DouglasFirTown" type="Node2D" parent="World"]
+
+[node name="FirA" type="Polygon2D" parent="World/DouglasFirTown"]
+color = Color(0.09, 0.24, 0.14, 1)
+polygon = PackedVector2Array(30, 92, 52, 34, 74, 92)
+
+[node name="FirB" type="Polygon2D" parent="World/DouglasFirTown"]
+color = Color(0.08, 0.21, 0.13, 1)
+polygon = PackedVector2Array(82, 112, 110, 32, 138, 112)
+
+[node name="FirC" type="Polygon2D" parent="World/DouglasFirTown"]
+color = Color(0.1, 0.26, 0.16, 1)
+polygon = PackedVector2Array(182, 104, 208, 28, 234, 104)
+
+[node name="RouteGuides" type="Node2D" parent="World"]
+z_index = -2
+
+[node name="BerryGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(34, 132, 78, 132, 116, 108)
+width = 3.0
+default_color = Color(1, 0.36, 0.48, 0.76)
+
+[node name="ContractGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(78, 132, 112, 92, 144, 60)
+width = 3.0
+default_color = Color(1, 0.84, 0.42, 0.72)
+
+[node name="ChefGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(144, 60, 174, 66, 202, 72)
+width = 3.0
+default_color = Color(0.82, 0.62, 0.44, 0.74)
+
+[node name="AnkitGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(116, 108, 178, 116, 270, 124)
+width = 3.0
+default_color = Color(1, 0.52, 0.3, 0.76)
+
+[node name="ExitArrowGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(270, 124, 294, 76, 306, 68)
+width = 3.0
+default_color = Color(0.48, 1, 0.66, 0.78)
+
+[node name="ClarityLayer" type="Node2D" parent="World"]
+z_index = -4
+
+[node name="BerryRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.5, 0.08, 0.18, 0.42)
+polygon = PackedVector2Array(24, 116, 128, 116, 134, 148, 24, 150)
+
+[node name="ContractRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.42, 0.34, 0.16, 0.4)
+polygon = PackedVector2Array(104, 44, 174, 44, 174, 84, 102, 88)
+
+[node name="ChefRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.36, 0.24, 0.16, 0.44)
+polygon = PackedVector2Array(172, 54, 232, 54, 232, 92, 172, 94)
+
+[node name="AnkitRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.48, 0.2, 0.1, 0.44)
+polygon = PackedVector2Array(164, 104, 306, 104, 306, 148, 164, 148)
+
+[node name="ExitRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.12, 0.36, 0.24, 0.46)
+polygon = PackedVector2Array(268, 56, 314, 56, 314, 94, 270, 100)
+
+[node name="CriticalPathRail" type="Line2D" parent="World/ClarityLayer"]
+points = PackedVector2Array(34, 132, 78, 132, 144, 60, 202, 72, 116, 108, 270, 124, 294, 76)
+width = 3.0
+default_color = Color(1, 0.72, 0.42, 0.74)
+
+[node name="FirstRouteSteps" type="Node2D" parent="World/ClarityLayer"]
+
+[node name="StepBerries" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(40, 142)
+custom_minimum_size = Vector2(82, 14)
+size = Vector2(82, 14)
+theme_override_colors/font_color = Color(1, 0.42, 0.54, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "1 Berries"
+horizontal_alignment = 1
+
+[node name="StepContract" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(108, 42)
+custom_minimum_size = Vector2(94, 14)
+size = Vector2(94, 14)
+theme_override_colors/font_color = Color(1, 0.86, 0.48, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "2 Contract"
+horizontal_alignment = 1
+
+[node name="StepNishal" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(166, 84)
+custom_minimum_size = Vector2(82, 14)
+size = Vector2(82, 14)
+theme_override_colors/font_color = Color(0.88, 0.66, 0.48, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "3 Nishal"
+horizontal_alignment = 1
+
+[node name="StepShare" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(76, 94)
+custom_minimum_size = Vector2(78, 14)
+size = Vector2(78, 14)
+theme_override_colors/font_color = Color(1, 0.42, 0.54, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "4 Share"
+horizontal_alignment = 1
+
+[node name="StepAnkit" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(232, 140)
+custom_minimum_size = Vector2(76, 14)
+size = Vector2(76, 14)
+theme_override_colors/font_color = Color(1, 0.58, 0.34, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "5 Ankit"
+horizontal_alignment = 1
+
+[node name="StepExit" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(252, 58)
+custom_minimum_size = Vector2(62, 14)
+size = Vector2(62, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "6 Exit"
+horizontal_alignment = 1
+
+[node name="LandmarkLabels" type="Node2D" parent="World"]
+z_index = 8
+
+[node name="BerryClustersLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(36, 116)
+custom_minimum_size = Vector2(94, 14)
+size = Vector2(94, 14)
+theme_override_colors/font_color = Color(1, 0.42, 0.54, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "1000 Berries"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ContractLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(100, 48)
+custom_minimum_size = Vector2(104, 14)
+size = Vector2(104, 14)
+theme_override_colors/font_color = Color(1, 0.86, 0.48, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Berry Contract"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="NishalLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(168, 58)
+custom_minimum_size = Vector2(78, 14)
+size = Vector2(78, 14)
+theme_override_colors/font_color = Color(0.88, 0.66, 0.48, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Nishal"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="BerryShareLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(72, 92)
+custom_minimum_size = Vector2(90, 14)
+size = Vector2(90, 14)
+theme_override_colors/font_color = Color(1, 0.42, 0.54, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Berry Share"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="AnkitLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(238, 106)
+custom_minimum_size = Vector2(72, 14)
+size = Vector2(72, 14)
+theme_override_colors/font_color = Color(1, 0.58, 0.34, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Ankit"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ExitLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(234, 60)
+custom_minimum_size = Vector2(78, 14)
+size = Vector2(78, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Auticity"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="BerryClusters" type="Area2D" parent="World"]
+position = Vector2(78, 132)
+script = ExtResource("2_interaction")
+interaction_message = "You collect the 1000 berries as glowing clusters instead of individual chores."
+flag_on_interact = "berries_collected"
+item_id = "berry_order"
+item_amount = 1
+objective_text = "Bring the berry order to Niggesh Nishal."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryClusters"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/BerryClusters"]
+color = Color(0.8, 0.08, 0.18, 1)
+polygon = PackedVector2Array(-14, -8, 14, -8, 10, 10, -10, 10)
+
+[node name="BerryContract" type="Area2D" parent="World"]
+position = Vector2(144, 60)
+script = ExtResource("2_interaction")
+interaction_message = "You find the suspicious 1000 berry contract."
+dialogue_id = "berry_contract"
+dialogue_file_path = "res://data/dialogue/level_03_dialogue.json"
+flag_on_interact = "berry_contract_collected"
+clue_id = "berry_contract"
+objective_text = "Confront Niggesh Nishal about the fake chicken promise."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryContract"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/BerryContract"]
+color = Color(0.84, 0.78, 0.56, 1)
+polygon = PackedVector2Array(-13, -8, 13, -8, 12, 9, -12, 9)
+
+[node name="ChefNishal" type="Area2D" parent="World"]
+position = Vector2(202, 72)
+script = ExtResource("2_interaction")
+interaction_message = "Niggesh Nishal defends the fake fried chicken deal."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+required_flags = PackedStringArray("berries_collected", "berry_contract_collected")
+locked_message = "Nishal wants the berry clusters and the contract exposed first."
+encounter_id = "niggesh_nishal_boss"
+objective_text = "Beat Nishal and share the berries."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/ChefNishal"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="Visual" type="Polygon2D" parent="World/ChefNishal"]
+color = Color(0.46, 0.34, 0.28, 1)
+polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 17, -12, 10)
+
+[node name="BerryShare" type="Area2D" parent="World"]
+position = Vector2(116, 108)
+script = ExtResource("2_interaction")
+interaction_message = "Shrububu shares the berries and mixes berry potions for the town."
+dialogue_id = "berry_share"
+dialogue_file_path = "res://data/dialogue/level_03_dialogue.json"
+required_flags = PackedStringArray("niggesh_nishal_defeated")
+locked_message = "The town will not gather until Nishal is beaten."
+flag_on_interact = "berries_shared"
+gear_id = "berry_potions"
+objective_text = "Use berry potions to survive Ankit's food rage."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryShare"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/BerryShare"]
+color = Color(0.86, 0.18, 0.28, 1)
+polygon = PackedVector2Array(-12, -10, 12, -10, 12, 10, -12, 10)
+
+[node name="AnkitBoss" type="Area2D" parent="World"]
+position = Vector2(270, 124)
+script = ExtResource("2_interaction")
+interaction_message = "Ankit arrives hungry and furious."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+required_flags = PackedStringArray("berry_contract_collected", "niggesh_nishal_defeated", "berries_shared")
+locked_message = "Ankit will not appear until Nishal is beaten and the berries are shared."
+encounter_id = "ankit_boss"
+objective_text = "Defeat Ankit and leave Berry Barks."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/AnkitBoss"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="Visual" type="Polygon2D" parent="World/AnkitBoss"]
+color = Color(0.64, 0.28, 0.16, 1)
+polygon = PackedVector2Array(-12, -16, 12, -16, 14, 12, 0, 20, -14, 12)
+
+[node name="Tickroot" type="Area2D" parent="World"]
+position = Vector2(46, 74)
+script = ExtResource("2_interaction")
+interaction_message = "Tickroot's branches tick in different directions."
+dialogue_id = "tickroot_intro"
+dialogue_file_path = "res://data/dialogue/level_03_dialogue.json"
+flag_on_interact = "met_tickroot"
+post_flag = "tickroot_practice_cleared"
+post_dialogue_id = "tickroot_after_battle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Tickroot"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/Tickroot"]
+color = Color(0.62, 0.42, 0.2, 1)
+polygon = PackedVector2Array(-12, -16, 12, -16, 8, 12, 0, 18, -8, 12)
+
+[node name="Objective" type="Area2D" parent="World"]
+position = Vector2(62, 104)
+script = ExtResource("2_interaction")
+interaction_message = "You let one clock-fruit stop instead of resetting it."
+flag_on_interact = "level_03_objective_done"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Objective"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/Objective"]
+color = Color(0.9, 0.72, 0.25, 1)
+polygon = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
+
+[node name="PracticeEncounter" type="Area2D" parent="World"]
+position = Vector2(86, 104)
+script = ExtResource("2_interaction")
+interaction_message = "Tickroot rewinds the bullet pattern."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+encounter_id = "tickroot_practice"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PracticeEncounter"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/PracticeEncounter"]
+color = Color(0.58, 0.32, 0.18, 1)
+polygon = PackedVector2Array(-14, -12, 14, -12, 14, 12, -14, 12)
+
+[node name="SavePoint" type="Area2D" parent="World"]
+position = Vector2(46, 142)
+script = ExtResource("2_interaction")
+interaction_message = "A berry-stained watch saves your place."
+save_on_interact = true
+level_id = "level_03"
+spawn_point = "berry_watch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SavePoint"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/SavePoint"]
+color = Color(0.4, 0.7, 0.9, 1)
+polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
+
+[node name="TransitionDoor" type="Area2D" parent="World"]
+position = Vector2(294, 76)
+script = ExtResource("2_interaction")
+interaction_message = "Berry Barks is fed. Auticity waits past the mist."
+target_scene_path = "res://scenes/levels/level_04.tscn"
+required_flags = PackedStringArray("berry_contract_collected", "niggesh_nishal_defeated", "berries_shared", "ankit_defeated", "level_03_objective_done", "tickroot_practice_cleared")
+locked_message = "Berry Barks is not free yet."
+objective_text = "Continue the KFC search in Auticity."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TransitionDoor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Visual" type="Polygon2D" parent="World/TransitionDoor"]
+color = Color(0.34, 0.52, 0.24, 1)
+polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
+
+[node name="VisualFxLayer" type="Node2D" parent="."]
+
+[node name="MistDrift" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(96, 76)
+script = ExtResource("7_fx")
+fx_id = "mist_drift"
+frame_count = 4
+loop_seconds = 1.6
+pulse_color_a = Color(0.58, 0.7, 0.62, 0.16)
+pulse_color_b = Color(0.82, 0.92, 0.84, 0.3)
+motion_axis = Vector2(1, 0)
+motion_pixels = 3.5
+
+[node name="BerryGlow" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(176, 58)
+script = ExtResource("7_fx")
+fx_id = "berry_glow"
+frame_count = 4
+loop_seconds = 0.85
+pulse_color_a = Color(0.45, 0.02, 0.16, 0.32)
+pulse_color_b = Color(1, 0.16, 0.38, 0.72)
+motion_pixels = 0.0
+
+[node name="Player" parent="World" instance=ExtResource("1_player")]
+position = Vector2(34, 132)
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
+
+[node name="UiLayer" type="CanvasLayer" parent="."]
+
+[node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
+
+[node name="ClueJournal" parent="UiLayer" instance=ExtResource("6_journal")]

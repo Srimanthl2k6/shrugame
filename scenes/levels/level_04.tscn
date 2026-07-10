@@ -1,0 +1,468 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_dialogue_box"]
+[ext_resource type="Script" path="res://scripts/levels/level_04_controller.gd" id="4_controller"]
+[ext_resource type="PackedScene" path="res://scenes/ui/objective_tracker.tscn" id="5_objective"]
+[ext_resource type="PackedScene" path="res://scenes/ui/clue_journal.tscn" id="6_journal"]
+[ext_resource type="Script" path="res://scripts/visual/animated_fx.gd" id="7_fx"]
+[ext_resource type="Script" path="res://scripts/core/music_trigger.gd" id="8_music"]
+[ext_resource type="Script" path="res://scripts/visual/playable_frame.gd" id="9_frame"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(34, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
+size = Vector2(42, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(28, 30)
+
+[node name="Level04" type="Node2D"]
+script = ExtResource("4_controller")
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("8_music")
+music_id = "level_04_hospital_festival_synth"
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0.08, 0.075, 0.105, 1)
+polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="PlayableFrame" type="Node2D" parent="World"]
+z_index = 9
+script = ExtResource("9_frame")
+frame_color = Color(0.78, 0.94, 1, 0.86)
+corner_color = Color(0.62, 1, 0.9, 0.92)
+
+[node name="CityFloor" type="Polygon2D" parent="World"]
+color = Color(0.15, 0.14, 0.18, 1)
+polygon = PackedVector2Array(10, 24, 310, 24, 310, 164, 10, 164)
+
+[node name="RouteGuides" type="Node2D" parent="World"]
+z_index = -2
+
+[node name="PunGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(34, 132, 58, 70, 130, 72)
+width = 3.0
+default_color = Color(0.78, 0.52, 1, 0.76)
+
+[node name="HospitalGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(58, 70, 130, 72, 170, 80)
+width = 3.0
+default_color = Color(0.72, 0.9, 1, 0.76)
+
+[node name="SushanGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(170, 80, 220, 92, 244, 108)
+width = 3.0
+default_color = Color(0.48, 1, 0.88, 0.78)
+
+[node name="FestivalGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(244, 108, 180, 126, 108, 128)
+width = 3.0
+default_color = Color(1, 0.78, 0.24, 0.78)
+
+[node name="MittaGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(108, 128, 190, 132, 268, 130)
+width = 3.0
+default_color = Color(1, 0.48, 0.86, 0.78)
+
+[node name="ExitArrowGuide" type="Line2D" parent="World/RouteGuides"]
+points = PackedVector2Array(268, 130, 294, 76, 306, 68)
+width = 3.0
+default_color = Color(0.48, 1, 0.66, 0.78)
+
+[node name="ClarityLayer" type="Node2D" parent="World"]
+z_index = -4
+
+[node name="PunRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.34, 0.16, 0.5, 0.42)
+polygon = PackedVector2Array(22, 54, 100, 54, 104, 90, 22, 94)
+
+[node name="HospitalRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.22, 0.32, 0.42, 0.42)
+polygon = PackedVector2Array(126, 26, 222, 26, 222, 94, 126, 94)
+
+[node name="SushanRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.08, 0.42, 0.38, 0.44)
+polygon = PackedVector2Array(210, 72, 276, 72, 276, 126, 210, 126)
+
+[node name="FestivalRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.5, 0.34, 0.08, 0.42)
+polygon = PackedVector2Array(66, 112, 152, 112, 152, 150, 66, 150)
+
+[node name="MittaRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.48, 0.16, 0.38, 0.44)
+polygon = PackedVector2Array(190, 112, 306, 112, 306, 150, 190, 150)
+
+[node name="ExitRoutePanel" type="Polygon2D" parent="World/ClarityLayer"]
+color = Color(0.12, 0.36, 0.24, 0.46)
+polygon = PackedVector2Array(268, 56, 314, 56, 314, 94, 270, 100)
+
+[node name="CriticalPathRail" type="Line2D" parent="World/ClarityLayer"]
+points = PackedVector2Array(34, 132, 58, 70, 170, 80, 244, 108, 108, 128, 268, 130, 294, 76)
+width = 3.0
+default_color = Color(0.95, 0.86, 0.54, 0.74)
+
+[node name="FirstRouteSteps" type="Node2D" parent="World/ClarityLayer"]
+
+[node name="StepPuns" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(20, 58)
+custom_minimum_size = Vector2(70, 14)
+size = Vector2(70, 14)
+theme_override_colors/font_color = Color(0.86, 0.62, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "1 Puns"
+horizontal_alignment = 1
+
+[node name="StepRecords" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(128, 88)
+custom_minimum_size = Vector2(90, 14)
+size = Vector2(90, 14)
+theme_override_colors/font_color = Color(0.78, 0.94, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "2 Records"
+horizontal_alignment = 1
+
+[node name="StepSushan" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(214, 118)
+custom_minimum_size = Vector2(84, 14)
+size = Vector2(84, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.9, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "3 Sushan"
+horizontal_alignment = 1
+
+[node name="StepFestival" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(70, 142)
+custom_minimum_size = Vector2(88, 14)
+size = Vector2(88, 14)
+theme_override_colors/font_color = Color(1, 0.84, 0.38, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "4 Festival"
+horizontal_alignment = 1
+
+[node name="StepMitta" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(230, 142)
+custom_minimum_size = Vector2(74, 14)
+size = Vector2(74, 14)
+theme_override_colors/font_color = Color(1, 0.56, 0.9, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "5 Mitta"
+horizontal_alignment = 1
+
+[node name="StepExit" type="Label" parent="World/ClarityLayer/FirstRouteSteps"]
+position = Vector2(252, 58)
+custom_minimum_size = Vector2(62, 14)
+size = Vector2(62, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "6 Exit"
+horizontal_alignment = 1
+
+[node name="LandmarkLabels" type="Node2D" parent="World"]
+z_index = 8
+
+[node name="PunStreetLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(20, 52)
+custom_minimum_size = Vector2(84, 14)
+size = Vector2(84, 14)
+theme_override_colors/font_color = Color(0.86, 0.62, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Pun Street"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="HospitalLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(132, 30)
+custom_minimum_size = Vector2(88, 14)
+size = Vector2(88, 14)
+theme_override_colors/font_color = Color(0.78, 0.94, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Hospital"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="RecordsLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(120, 88)
+custom_minimum_size = Vector2(116, 14)
+size = Vector2(116, 14)
+theme_override_colors/font_color = Color(0.78, 0.94, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Hospital Records"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="SushanLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(204, 94)
+custom_minimum_size = Vector2(106, 14)
+size = Vector2(106, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.9, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Doctor Sushan"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="FestivalLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(62, 112)
+custom_minimum_size = Vector2(104, 14)
+size = Vector2(104, 14)
+theme_override_colors/font_color = Color(1, 0.84, 0.38, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Aeon Festival"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="MittaLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(238, 112)
+custom_minimum_size = Vector2(70, 14)
+size = Vector2(70, 14)
+theme_override_colors/font_color = Color(1, 0.56, 0.9, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Mitta"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ExitLabel" type="Label" parent="World/LandmarkLabels"]
+position = Vector2(234, 60)
+custom_minimum_size = Vector2(78, 14)
+size = Vector2(78, 14)
+theme_override_colors/font_color = Color(0.62, 1, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Area 111"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="PunStreet" type="Area2D" parent="World"]
+position = Vector2(58, 70)
+script = ExtResource("2_interaction")
+interaction_message = "A pun-heavy resident blocks the sidewalk with wordplay."
+dialogue_id = "pun_loop"
+dialogue_file_path = "res://data/dialogue/level_04_dialogue.json"
+flag_on_interact = "pun_loop_seen"
+objective_text = "Reach the hospital and inspect Doctor Sushan's records."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PunStreet"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/PunStreet"]
+color = Color(0.58, 0.44, 0.78, 1)
+polygon = PackedVector2Array(-9, -13, 9, -13, 9, 11, 0, 16, -9, 11)
+
+[node name="Hospital" type="Node2D" parent="World"]
+position = Vector2(176, 54)
+
+[node name="HospitalBody" type="Polygon2D" parent="World/Hospital"]
+color = Color(0.56, 0.62, 0.68, 1)
+polygon = PackedVector2Array(-44, -22, 44, -22, 44, 30, -44, 30)
+
+[node name="HospitalCross" type="Polygon2D" parent="World/Hospital"]
+color = Color(0.88, 0.18, 0.24, 1)
+polygon = PackedVector2Array(-5, -16, 5, -16, 5, -5, 16, -5, 16, 5, 5, 5, 5, 16, -5, 16, -5, 5, -16, 5, -16, -5, -5, -5)
+
+[node name="HospitalRecords" type="Area2D" parent="World"]
+position = Vector2(170, 80)
+script = ExtResource("2_interaction")
+interaction_message = "You collect hospital records about Pattern Serum."
+dialogue_id = "hospital_records"
+dialogue_file_path = "res://data/dialogue/level_04_dialogue.json"
+flag_on_interact = "hospital_records_collected"
+clue_id = "hospital_records"
+objective_text = "Confront Doctor Sushan in the Pattern Serum lab."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/HospitalRecords"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/HospitalRecords"]
+color = Color(0.78, 0.86, 0.9, 1)
+polygon = PackedVector2Array(-13, -8, 13, -8, 12, 9, -12, 9)
+
+[node name="PatternSerumLab" type="Node2D" parent="World"]
+position = Vector2(236, 80)
+
+[node name="LabTable" type="Polygon2D" parent="World/PatternSerumLab"]
+color = Color(0.22, 0.24, 0.3, 1)
+polygon = PackedVector2Array(-26, -8, 26, -8, 26, 8, -26, 8)
+
+[node name="SerumGlow" type="Polygon2D" parent="World/PatternSerumLab"]
+color = Color(0.6, 0.95, 0.88, 1)
+polygon = PackedVector2Array(-6, -18, 6, -18, 9, -4, -9, -4)
+
+[node name="DoctorSushan" type="Area2D" parent="World"]
+position = Vector2(244, 108)
+script = ExtResource("2_interaction")
+interaction_message = "Doctor Sushan prepares the Pattern Serum."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+required_flags = PackedStringArray("hospital_records_collected")
+locked_message = "Sushan will not reveal the lab until the hospital records are found."
+encounter_id = "doctor_sushan_boss"
+objective_text = "Beat Doctor Sushan and start the Aeon Festival."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DoctorSushan"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="Visual" type="Polygon2D" parent="World/DoctorSushan"]
+color = Color(0.82, 0.86, 0.92, 1)
+polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 17, -12, 10)
+
+[node name="AeonFestival" type="Area2D" parent="World"]
+position = Vector2(108, 128)
+script = ExtResource("2_interaction")
+interaction_message = "The Aeon Festival starts with fireworks and reclaimed rhythm."
+dialogue_id = "aeon_festival"
+dialogue_file_path = "res://data/dialogue/level_04_dialogue.json"
+required_flags = PackedStringArray("doctor_sushan_defeated")
+locked_message = "The festival cannot begin until Doctor Sushan is beaten."
+flag_on_interact = "aeon_festival_started"
+objective_text = "Face Mitta at the Aeon Festival stage."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/AeonFestival"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/AeonFestival"]
+color = Color(0.98, 0.76, 0.28, 1)
+polygon = PackedVector2Array(-18, -10, 18, -10, 18, 10, -18, 10)
+
+[node name="MittaBoss" type="Area2D" parent="World"]
+position = Vector2(268, 130)
+script = ExtResource("2_interaction")
+interaction_message = "Mitta takes the festival stage."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+required_flags = PackedStringArray("hospital_records_collected", "doctor_sushan_defeated", "aeon_festival_started")
+locked_message = "Mitta waits for the hospital truth and the Aeon Festival."
+encounter_id = "mitta_boss"
+objective_text = "Defeat Mitta and leave Auticity."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MittaBoss"]
+shape = SubResource("RectangleShape2D_boss")
+
+[node name="Visual" type="Polygon2D" parent="World/MittaBoss"]
+color = Color(0.78, 0.36, 0.72, 1)
+polygon = PackedVector2Array(-12, -16, 12, -16, 14, 12, 0, 20, -14, 12)
+
+[node name="JudgeLuma" type="Area2D" parent="World"]
+position = Vector2(44, 108)
+script = ExtResource("2_interaction")
+interaction_message = "Judge Luma lifts a lantern toward your shadow."
+dialogue_id = "luma_intro"
+dialogue_file_path = "res://data/dialogue/level_04_dialogue.json"
+flag_on_interact = "met_luma"
+post_flag = "luma_practice_cleared"
+post_dialogue_id = "luma_after_battle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/JudgeLuma"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/JudgeLuma"]
+color = Color(0.92, 0.78, 0.34, 1)
+polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 17, -12, 10)
+
+[node name="Objective" type="Area2D" parent="World"]
+position = Vector2(64, 132)
+script = ExtResource("2_interaction")
+interaction_message = "You choose the kindest truthful witness account."
+flag_on_interact = "level_04_objective_done"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Objective"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/Objective"]
+color = Color(0.98, 0.86, 0.42, 1)
+polygon = PackedVector2Array(-14, -10, 14, -10, 14, 10, -14, 10)
+
+[node name="PracticeEncounter" type="Area2D" parent="World"]
+position = Vector2(86, 132)
+script = ExtResource("2_interaction")
+interaction_message = "The lantern court narrows into a bullet box."
+target_scene_path = "res://scenes/battle/battle_scene.tscn"
+encounter_id = "luma_practice"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PracticeEncounter"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/PracticeEncounter"]
+color = Color(0.72, 0.46, 0.18, 1)
+polygon = PackedVector2Array(-14, -12, 14, -12, 14, 12, -14, 12)
+
+[node name="SavePoint" type="Area2D" parent="World"]
+position = Vector2(44, 146)
+script = ExtResource("2_interaction")
+interaction_message = "A festival wristband saves your place."
+save_on_interact = true
+level_id = "level_04"
+spawn_point = "festival_wristband"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SavePoint"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="Visual" type="Polygon2D" parent="World/SavePoint"]
+color = Color(0.4, 0.7, 0.9, 1)
+polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
+
+[node name="TransitionDoor" type="Area2D" parent="World"]
+position = Vector2(294, 76)
+script = ExtResource("2_interaction")
+interaction_message = "Auticity is free. Area 111 flashes pink in the distance."
+target_scene_path = "res://scenes/levels/level_05.tscn"
+required_flags = PackedStringArray("hospital_records_collected", "doctor_sushan_defeated", "aeon_festival_started", "mitta_defeated", "level_04_objective_done", "luma_practice_cleared")
+locked_message = "Auticity is not free yet."
+objective_text = "Continue the KFC search in Area 111."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TransitionDoor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Visual" type="Polygon2D" parent="World/TransitionDoor"]
+color = Color(0.58, 0.42, 0.68, 1)
+polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
+
+[node name="VisualFxLayer" type="Node2D" parent="."]
+
+[node name="FluorescentBuzz" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(172, 42)
+script = ExtResource("7_fx")
+fx_id = "fluorescent_buzz"
+frame_count = 2
+loop_seconds = 0.32
+pulse_color_a = Color(0.72, 0.88, 1, 0.24)
+pulse_color_b = Color(1, 1, 0.82, 0.62)
+motion_pixels = 0.0
+
+[node name="AeonFireworks" type="Node2D" parent="VisualFxLayer"]
+position = Vector2(242, 58)
+script = ExtResource("7_fx")
+fx_id = "aeon_fireworks"
+frame_count = 8
+loop_seconds = 1.2
+pulse_color_a = Color(0.25, 0.4, 1, 0.28)
+pulse_color_b = Color(1, 0.78, 0.18, 0.82)
+motion_axis = Vector2(0, -1)
+motion_pixels = 2.5
+
+[node name="Player" parent="World" instance=ExtResource("1_player")]
+position = Vector2(34, 132)
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
+
+[node name="UiLayer" type="CanvasLayer" parent="."]
+
+[node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
+
+[node name="ClueJournal" parent="UiLayer" instance=ExtResource("6_journal")]

@@ -1,0 +1,39 @@
+{
+  "kfc_popcorn_box": {
+    "display_name": "Backup KFC Popcorn Box",
+    "type": "story_item",
+    "description": "Shrububu's emergency popcorn box. Breaks Banana-burbs' joy spell when shared.",
+    "flavor_text": "Kept for emotional emergencies, civic spellbreaking, and situations where regular dialogue cannot compete with fried chicken scent.",
+    "level_id": "level_02",
+    "heal_amount": 8
+  },
+  "gummies": {
+    "display_name": "Gummies",
+    "type": "consumable",
+    "description": "The only thing served at the Area 111 pub. Technically edible, spiritually offensive.",
+    "flavor_text": "Soft, neon, and accused of being dinner by people who have forgotten what dinner is supposed to do.",
+    "level_id": "level_05",
+    "heal_amount": 4
+  },
+  "kfc_bucket": {
+    "display_name": "KFC Bucket",
+    "type": "ending_item",
+    "description": "The object of Shrububu's search and SRMT's final insult from the throne.",
+    "flavor_text": "The bucket smells like victory, tyranny, dungeon keys, and a journey that got completely out of hand.",
+    "level_id": "level_05"
+  },
+  "divorce_papers": {
+    "display_name": "Divorce Papers",
+    "type": "clue_item",
+    "description": "Paper trail tying Satyaki's revenge to Divorcee Harbour's suffering.",
+    "flavor_text": "Waterlogged pages, bitter margins, and enough resentment to qualify as structural support.",
+    "level_id": "level_01"
+  },
+  "berry_order": {
+    "display_name": "1000 Berry Order",
+    "type": "objective_item",
+    "description": "A suspiciously large berry request made under the promise of fried chicken.",
+    "flavor_text": "A huge order, a fake promise, and the exact moment Berry Barks learns Shrububu reads the fine print.",
+    "level_id": "level_03"
+  }
+}
