@@ -44,6 +44,11 @@ jobs:
             Copy-Item tools/godot/template-unpack/templates/* $templateDir -Recurse -Force
           }
       - run: npm ci --prefix electron
+      - name: Bootstrap Godot imports
+        shell: pwsh
+        run: |
+          & tools/godot/Godot_v4.7-stable_win64_console.exe --headless --editor --path . --quit
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - run: npm run build:win --prefix electron
       - name: Electron runtime smoke
         run: npm run smoke --prefix electron -- level_01
@@ -110,4 +115,3 @@ jobs:
           else
             gh release create "$RELEASE_TAG" "${files[@]}" --title "Shrugame 1.0.0" --notes-file docs/RELEASE_NOTES_1.0.0.md
           fi
-

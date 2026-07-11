@@ -35,6 +35,11 @@ jobs:
           npm ci --prefix site
       - name: Synchronize version
         run: node tools/sync-version.cjs
+      - name: Bootstrap Godot imports
+        shell: pwsh
+        run: |
+          & tools/godot/Godot_v4.7-stable_win64_console.exe --headless --editor --path . --quit
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Parse project
         shell: pwsh
         run: |
@@ -49,4 +54,3 @@ jobs:
       - name: Audit private references
         shell: pwsh
         run: ./tools/audit_release_files.ps1 -SourceOnly
-
