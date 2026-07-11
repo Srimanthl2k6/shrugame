@@ -80,7 +80,8 @@ jobs:
           name: godot-web-export
           path: electron/godot-export/web
       - name: Build unsigned Intel and Apple-silicon packages
-        run: npx --prefix electron electron-builder --config electron/electron-builder.yml --projectDir electron --mac --x64 --arm64
+        working-directory: electron
+        run: npx electron-builder --mac --x64 --arm64 --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: macos-builds
