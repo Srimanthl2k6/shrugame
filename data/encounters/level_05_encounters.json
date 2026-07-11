@@ -21,57 +21,114 @@
     "enemy_name": "Suhas",
     "enemy_hp": 18,
     "player_hp": 32,
-    "resonance_goal": 5,
-    "return_scene": "res://scenes/levels/level_05.tscn",
+    "resonance_goal": 9,
+    "return_scene": "res://scenes/levels/districts/level_05.tscn",
     "boss_type": "mini_boss",
+    "battle_visual": "res://assets/level_05/sprites/boss_suhas_idle.png",
+    "battle_backplate": "res://assets/level_05/backgrounds/rooms/gummies_pub.png",
+    "battle_frames": 4,
+    "bullet_legend": "Read the floor flash before stools, gummies, and guitar picks arrive.",
     "reward_gear": "musical_guitar",
     "defeated_flag": "suhas_defeated",
     "commands": ["act", "item", "gear", "guard"],
     "phases": [
       {
         "id": "bar_stumble",
-        "intro_dialogue": "Suhas throws pub stools and gummy bowls.",
-        "patterns": [{"type": "falling_objects", "count": 7}],
-        "clear_threshold": 9
+        "intro_dialogue": "Suhas kicks away the stool and sends gummy bowls raining from the rafters.",
+        "readability_hint": "Pink floor marks show where the heavy bowls will land.",
+        "patterns": [{"type": "falling_objects", "count": 7, "telegraph_seconds": 0.7, "safe_hint": "Move under an unmarked ceiling gap.", "visual_id": "gummy"}],
+        "clear_threshold": 13
       },
       {
-        "id": "bike_keys",
-        "intro_dialogue": "Bike keys and guitar picks ricochet around the bar.",
-        "patterns": [{"type": "musical_notes", "count": 7}],
+        "id": "unprovoked_ricochet",
+        "intro_dialogue": "Suhas calls the fight unprovoked. His bike keys disagree and ricochet around the bar.",
+        "readability_hint": "Each key flashes at its next rebound point.",
+        "patterns": [{"type": "ricochets", "count": 8, "telegraph_seconds": 0.6, "safe_hint": "Let the key pass, then move into its old lane.", "visual_id": "bike_key"}],
+        "clear_threshold": 7
+      },
+      {
+        "id": "last_call_solo",
+        "intro_dialogue": "Suhas tears one final chord from the guitar he refuses to surrender.",
+        "readability_hint": "Notes travel on visible staff lines. Change lanes between measures.",
+        "patterns": [{"type": "rhythm_notes", "count": 9, "telegraph_seconds": 0.55, "safe_hint": "Follow the empty beat between note groups.", "visual_id": "music_note"}],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.4, "bullet_speed_multiplier": 0.4, "telegraph_multiplier": 2.1},
+      "srmt": {"bullet_count_multiplier": 2.3, "bullet_speed_multiplier": 2.0, "telegraph_multiplier": 0.55}
+    }
   },
   "srmt_final_boss": {
     "enemy_name": "SRMT",
-    "enemy_hp": 30,
+    "enemy_hp": 40,
     "player_hp": 36,
-    "resonance_goal": 9,
-    "return_scene": "res://scenes/levels/level_05.tscn",
+    "resonance_goal": 15,
+    "return_scene": "res://scenes/levels/districts/level_05.tscn",
     "boss_type": "final_boss",
+    "battle_visual": "res://assets/level_05/sprites/boss_srmt_idle.png",
+    "battle_backplate": "res://assets/level_05/backgrounds/rooms/ruined_court.png",
+    "battle_frames": 4,
+    "bullet_legend": "Five readable movements recall every district before the guitar counterpoint.",
     "required_weapon": "musical_guitar",
     "defeated_flag": "srmt_defeated",
     "growth_stage_reward": 5,
     "commands": ["act", "item", "gear", "guard"],
     "phases": [
       {
-        "id": "kfc_throne",
-        "intro_dialogue": "SRMT eats KFC on the throne and opens with callback attacks.",
-        "patterns": [{"type": "callback_mix", "count": 9}],
-        "clear_threshold": 20
+        "id": "harbour_decree",
+        "intro_dialogue": "SRMT signs the harbour away without looking up from the bucket.",
+        "readability_hint": "Stamped columns fall first; broken rings follow their open side.",
+        "patterns": [
+          {"type": "falling_objects", "count": 8, "telegraph_seconds": 0.75, "safe_hint": "Stand beneath the unstamped column.", "visual_id": "legal_paper"},
+          {"type": "arcs", "count": 6, "telegraph_seconds": 0.65, "safe_hint": "Pass through each broken ring opening.", "visual_id": "broken_ring"}
+        ],
+        "clear_threshold": 32
       },
       {
-        "id": "ishiville_callback",
-        "intro_dialogue": "Divorce papers, bananas, berries, serum lights, and club notes return together.",
-        "patterns": [{"type": "sweeping_beams", "count": 7}],
-        "clear_threshold": 10
+        "id": "banana_broadcast",
+        "intro_dialogue": "The throne broadcasts a smile too wide for any living face.",
+        "readability_hint": "Banana arcs leave a calm wedge behind each cheerful pulse.",
+        "patterns": [
+          {"type": "arcs", "count": 9, "telegraph_seconds": 0.65, "safe_hint": "Follow the dark wedge behind the yellow arc.", "visual_id": "banana"},
+          {"type": "rings", "count": 7, "telegraph_seconds": 0.6, "safe_hint": "Change rings only after the smile flickers.", "visual_id": "smile"}
+        ],
+        "clear_threshold": 24
+      },
+      {
+        "id": "berry_hunger",
+        "intro_dialogue": "Berry Barks rises through the court floor, roots carrying every unpaid promise.",
+        "readability_hint": "Glowing roots mark the sweep direction before berry clusters burst.",
+        "patterns": [
+          {"type": "sweeping_beams", "count": 7, "telegraph_seconds": 0.7, "safe_hint": "Cross behind the root after its glow passes.", "visual_id": "root"},
+          {"type": "environmental_hazards", "count": 8, "telegraph_seconds": 0.65, "safe_hint": "The unlit patch stays safe for one full beat.", "visual_id": "berry"}
+        ],
+        "clear_threshold": 16
+      },
+      {
+        "id": "aeon_spectacle",
+        "intro_dialogue": "Hospital grids become festival lights. SRMT conducts both with one hand.",
+        "readability_hint": "Clinical lines flash once; festival beams sweep on the second pulse.",
+        "patterns": [
+          {"type": "straight_lanes", "count": 9, "telegraph_seconds": 0.65, "safe_hint": "Choose the lane without a second pulse.", "visual_id": "serum_light"},
+          {"type": "sweeping_beams", "count": 8, "telegraph_seconds": 0.6, "safe_hint": "Move opposite the stage-light sweep.", "visual_id": "festival_light"}
+        ],
+        "clear_threshold": 8
       },
       {
         "id": "bucket_counterpoint",
-        "intro_dialogue": "The musical guitar answers SRMT's final KFC bucket solo.",
-        "patterns": [{"type": "musical_notes", "count": 10}],
+        "intro_dialogue": "Shrububu raises the guitar. The court answers in counterpoint.",
+        "readability_hint": "Gold notes are the melody. Hold their lane and answer between phrases.",
+        "patterns": [
+          {"type": "rhythm_notes", "count": 12, "telegraph_seconds": 0.55, "safe_hint": "Stay between the paired notes, then cross on the rest.", "visual_id": "music_note"},
+          {"type": "callback_mix", "count": 10, "telegraph_seconds": 0.6, "safe_hint": "Each district color repeats its original safe rule.", "visual_id": "callback"}
+        ],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.32, "bullet_speed_multiplier": 0.36, "telegraph_multiplier": 2.35, "player_hp_multiplier": 1.45, "enemy_damage_multiplier": 0.45},
+      "srmt": {"bullet_count_multiplier": 2.55, "bullet_speed_multiplier": 2.2, "telegraph_multiplier": 0.48, "enemy_hp_multiplier": 1.35, "enemy_damage_multiplier": 2.2}
+    }
   }
 }

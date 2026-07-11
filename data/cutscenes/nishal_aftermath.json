@@ -1,0 +1,13 @@
+{
+  "id": "nishal_aftermath",
+  "caption": "THE CHEF'S EMPTY FRYER",
+  "trigger": {"flag": "niggesh_nishal_defeated", "unless_flag": "nishal_defeat_seen"},
+  "completion_flag": "nishal_defeat_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Niggesh Nishal", "lines": ["Fine. There was never fried chicken.", "The berries were payment for a meal I had already imagined eating.", "Do not tell Ankit his chef is unavailable. He has never handled an empty plate with dignity."]},
+    {"type": "set_objective", "text": "Share the berries with Berry Barks before Ankit arrives."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

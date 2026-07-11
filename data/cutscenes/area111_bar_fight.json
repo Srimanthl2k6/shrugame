@@ -1,0 +1,15 @@
+{
+  "id": "area111_bar_fight",
+  "caption": "AREA 111 / GUMMIES PUB",
+  "trigger": {"interaction": "GummiesBar", "unless_flag": "suhas_defeated"},
+  "completion_flag": "suhas_intro_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Bartender", "lines": ["Chicken? No. Gummies only.", "Please do not ask what is in the red ones."]},
+    {"type": "dialogue", "speaker": "Suhas", "lines": ["Nobody insults Gummies in my pub.", "Also that is my bike outside. Stop looking at it."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["No chicken. Loud stranger. Convenient bike.", "Unprovoked."]},
+    {"type": "cut_in", "id": "suhas_bar_fight", "title": "SUHAS"},
+    {"type": "start_battle", "encounter_id": "suhas_bar_fight", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

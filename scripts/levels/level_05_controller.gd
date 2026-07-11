@@ -16,8 +16,9 @@ const ROUTE_SUMMARY := [
 func _ready() -> void:
 	var game_state := _get_game_state()
 	if game_state != null:
+		var entering_level: bool = game_state.current_level_id != "level_05"
 		game_state.current_level_id = "level_05"
-		if game_state.has_method("get_current_objective") and game_state.get_current_objective().is_empty():
+		if entering_level or (game_state.has_method("get_current_objective") and game_state.get_current_objective().is_empty()):
 			game_state.set_current_objective("Find KFC in Area 111.")
 	_sync_progression_rewards()
 	_refresh_exit_hint()

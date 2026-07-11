@@ -1,0 +1,19 @@
+{
+  "id": "door_slam_collapse",
+  "caption": "THE KENTUCKY-ADJACENT FEELINGS CAFE",
+  "trigger": {"interaction": "KfcDoor", "unless_flag": "building_broken"},
+  "completion_flag": "building_broken",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "face_actor", "target": "Player", "direction": "up"},
+    {"type": "cut_in", "id": "door_slam", "title": "DISAPPOINTMENT, APPLIED"},
+    {"type": "actor_animation", "target": "Player", "animation": "door_slam", "fps": 12.0, "duration": 0.48},
+    {"type": "sfx", "id": "door_slam"},
+    {"type": "shake", "strength": 5.0, "duration": 0.45},
+    {"type": "sfx", "id": "building_break"},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["This is not KFC.", "That sign has committed fraud."]},
+    {"type": "set_objective", "text": "Ask the harbour why everyone is staring."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

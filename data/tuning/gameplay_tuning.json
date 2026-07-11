@@ -11,6 +11,7 @@
     "pattern_telegraph_seconds": 0.6,
     "bullet_count": 4,
     "bullet_radius": 2.5,
+    "bullet_speed": 42.0,
     "bullet_start_x": 40.0,
     "bullet_start_y": 20.0,
     "bullet_spacing": 28.0

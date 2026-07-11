@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/cutscenes/cutscene_letterbox.gd" id="1_letterbox"]
+[ext_resource type="PackedScene" path="res://scenes/ui/cutins/cut_in_player.tscn" id="2_cutin"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_caption"]
+bg_color = Color(0.02, 0.027, 0.031, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.88, 0.72, 0.3, 0.75)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="CutsceneLetterbox" type="Control"]
+process_mode = 3
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+script = ExtResource("1_letterbox")
+
+[node name="TopBar" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 18.0
+color = Color(0.004, 0.006, 0.008, 1)
+
+[node name="BottomBar" type="ColorRect" parent="."]
+offset_top = 162.0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.004, 0.006, 0.008, 1)
+
+[node name="CaptionPanel" type="Panel" parent="."]
+offset_left = 78.0
+offset_top = 19.0
+offset_right = 242.0
+offset_bottom = 35.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_caption")
+
+[node name="Caption" type="Label" parent="."]
+offset_left = 82.0
+offset_top = 21.0
+offset_right = 238.0
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(0.95, 0.84, 0.54, 1)
+theme_override_font_sizes/font_size = 7
+text = "CUTSCENE"
+horizontal_alignment = 1
+
+[node name="SkipLabel" type="Label" parent="."]
+offset_left = 238.0
+offset_top = 166.0
+offset_right = 314.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0.48, 0.58, 0.58, 1)
+theme_override_font_sizes/font_size = 6
+text = "HOLD ESC: SKIP"
+horizontal_alignment = 2
+
+[node name="Fade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="CutInPlayer" parent="." instance=ExtResource("2_cutin")]
+offset_top = 50.0
+offset_bottom = 130.0

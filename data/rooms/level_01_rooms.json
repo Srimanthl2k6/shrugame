@@ -1,0 +1,88 @@
+{
+  "level_id": "level_01",
+  "start_room": "arrival",
+  "post_battle_cutscenes": [
+    {"flag": "poojan_defeated", "unless_flag": "poojan_after_seen", "cutscene_id": "poojan_aftermath"},
+    {"flag": "satyaki_tirumal_defeated", "unless_flag": "satyaki_defeat_seen", "cutscene_id": "satyaki_aftermath"}
+  ],
+  "rooms": {
+    "arrival": {
+      "id": "arrival",
+      "display_name": "Ishiville Arrival",
+      "background": "res://assets/level_01/backgrounds/rooms/arrival.png",
+      "ambience_id": "level_01_rainy_harbor_noir",
+      "spawn_points": {"start": [116, 292], "default": [116, 292], "from_square": [548, 286]},
+      "blockers": [[86, 48, 420, 120]],
+      "interactions": [
+        {"id": "KfcDoor", "position": [314, 190], "display_name": "Kentucky-Adjacent Cafe", "interaction_message": "The sign promises chicken. The room provides disappointment.", "cutscene_id": "door_slam_collapse", "disabled_if_flag": "building_broken", "one_shot": true, "interaction_size": [86, 48], "objective_text": "Ask why the whole harbour is staring."},
+        {"id": "FakeChickenSign", "position": [468, 194], "display_name": "Suspicious chicken sign", "dialogue_id": "clue_fake_chicken_sign", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "clue_id": "fake_chicken_sign", "one_shot": true, "interaction_size": [38, 34]},
+        {"id": "LanternResident", "position": [188, 252], "visual": "res://assets/level_01/sprites/npc_lantern_woman_idle.png", "display_name": "Lantern Woman", "dialogue_id": "divorcee_lantern_woman", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "post_flag": "satyaki_tirumal_defeated", "post_dialogue_id": "harbour_post_clear_resident", "interaction_size": [38, 48], "bob_pixels": 1.0}
+      ],
+      "exits": [{"id": "east_to_square", "position": [606, 276], "size": [44, 112], "target_room_id": "harbour_square", "target_spawn_id": "from_arrival"}]
+    },
+    "harbour_square": {
+      "id": "harbour_square",
+      "display_name": "Harbour Square",
+      "background": "res://assets/level_01/backgrounds/rooms/harbour_square.png",
+      "ambience_id": "level_01_rainy_harbor_noir",
+      "spawn_points": {"default": [92, 282], "from_arrival": [92, 282], "from_docks": [548, 282]},
+      "blockers": [[160, 34, 322, 104], [258, 142, 124, 54]],
+      "interactions": [
+        {"id": "SheriffPoojan", "position": [346, 236], "visual": "res://assets/level_01/sprites/boss_poojan_overworld.png", "frames": 1, "display_name": "Sheriff Poojan", "interaction_message": "Poojan measures the broken building and then measures Shrububu.", "cutscene_id": "poojan_challenge", "required_flags": ["building_broken"], "locked_message": "Poojan is still inspecting the intact cafe.", "disabled_if_flag": "poojan_defeated", "hide_when_disabled": true, "interaction_size": [46, 58]},
+        {"id": "BoathouseResident", "position": [182, 260], "visual": "res://assets/level_01/sprites/npc_boathouse_woman_idle.png", "display_name": "Boathouse Woman", "dialogue_id": "divorcee_boathouse_woman", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "post_flag": "satyaki_tirumal_defeated", "post_dialogue_id": "divorcee_boathouse_woman_post", "interaction_size": [38, 48]},
+        {"id": "SheriffNotice", "position": [454, 216], "visual": "res://assets/level_01/sprites/prop_save_notice.png", "display_name": "Sheriff notice", "dialogue_id": "clue_sheriff_notice", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "clue_id": "sheriff_notice", "one_shot": true, "interaction_size": [34, 34]}
+      ],
+      "exits": [
+        {"id": "west_to_arrival", "position": [34, 278], "size": [40, 108], "target_room_id": "arrival", "target_spawn_id": "from_square"},
+        {"id": "east_to_docks", "position": [606, 278], "size": [40, 108], "target_room_id": "residences_docks", "target_spawn_id": "from_square"}
+      ]
+    },
+    "residences_docks": {
+      "id": "residences_docks",
+      "display_name": "Divorcee Residences And Docks",
+      "background": "res://assets/level_01/backgrounds/rooms/residences_docks.png",
+      "ambience_id": "level_01_rainy_harbor_noir",
+      "spawn_points": {"default": [88, 282], "from_square": [88, 282], "from_records": [548, 282]},
+      "blockers": [[84, 32, 472, 100], [438, 154, 112, 76]],
+      "interactions": [
+        {"id": "RaincoatResident", "position": [208, 258], "visual": "res://assets/level_01/sprites/npc_raincoat_woman_idle.png", "display_name": "Raincoat Woman", "dialogue_id": "divorcee_raincoat_woman", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "post_flag": "satyaki_tirumal_defeated", "post_dialogue_id": "divorcee_raincoat_woman_post", "interaction_size": [38, 48]},
+        {"id": "RadioResident", "position": [326, 246], "visual": "res://assets/level_01/sprites/npc_radio_woman_idle.png", "display_name": "Radio Woman", "dialogue_id": "divorcee_radio_woman", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "post_flag": "satyaki_tirumal_defeated", "post_dialogue_id": "divorcee_radio_woman_post", "interaction_size": [38, 48]},
+        {"id": "DockResident", "position": [434, 270], "visual": "res://assets/level_01/sprites/npc_dock_woman_idle.png", "display_name": "Dock Woman", "dialogue_id": "divorcee_dock_woman_intro", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "post_flag": "satyaki_tirumal_defeated", "post_dialogue_id": "harbour_post_clear_resident", "interaction_size": [38, 48]}
+      ],
+      "exits": [
+        {"id": "west_to_square", "position": [34, 278], "size": [40, 108], "target_room_id": "harbour_square", "target_spawn_id": "from_docks"},
+        {"id": "east_to_records", "position": [606, 278], "size": [40, 108], "target_room_id": "records_alley", "target_spawn_id": "from_docks", "required_flags": ["poojan_defeated"], "locked_objective": "Poojan must finish the strength test before the records office opens."}
+      ]
+    },
+    "records_alley": {
+      "id": "records_alley",
+      "display_name": "Records Alley",
+      "background": "res://assets/level_01/backgrounds/rooms/records_alley.png",
+      "ambience_id": "level_01_rainy_harbor_noir",
+      "spawn_points": {"default": [86, 286], "from_docks": [86, 286], "from_waterfront": [550, 286]},
+      "blockers": [[82, 26, 476, 120]],
+      "interactions": [
+        {"id": "DivorceRecords", "position": [330, 224], "visual": "res://assets/level_01/sprites/prop_divorce_records.png", "display_name": "Damp divorce records", "dialogue_id": "clue_damp_divorce_records", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "flag_on_interact": "divorce_records_collected", "clue_id": "divorce_records", "one_shot": true, "interaction_size": [44, 38], "objective_text": "Follow Satyaki's paper trail to the east waterfront."},
+        {"id": "ArchiveResident", "position": [204, 262], "visual": "res://assets/level_01/sprites/npc_radio_woman_idle.png", "display_name": "Archive Resident", "dialogue_id": "resident_satyaki_clue", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "post_flag": "satyaki_tirumal_defeated", "post_dialogue_id": "harbour_post_clear_lamps", "interaction_size": [38, 48]},
+        {"id": "RecordsSave", "position": [474, 270], "visual": "res://assets/level_01/sprites/prop_save_notice.png", "display_name": "Dry corner of the archive", "interaction_message": "A surprisingly dry filing cabinet saves your place.", "save_on_interact": true, "level_id": "level_01", "spawn_point": "from_docks", "interaction_size": [34, 34]}
+      ],
+      "exits": [
+        {"id": "west_to_docks", "position": [34, 280], "size": [40, 108], "target_room_id": "residences_docks", "target_spawn_id": "from_records"},
+        {"id": "east_to_waterfront", "position": [606, 280], "size": [40, 108], "target_room_id": "satyaki_waterfront", "target_spawn_id": "from_records", "required_flags": ["divorce_records_collected"], "locked_objective": "Find the records tying Satyaki to the harbour."}
+      ]
+    },
+    "satyaki_waterfront": {
+      "id": "satyaki_waterfront",
+      "display_name": "Satyaki Waterfront",
+      "background": "res://assets/level_01/backgrounds/rooms/satyaki_waterfront.png",
+      "ambience_id": "level_01_rainy_harbor_noir",
+      "spawn_points": {"default": [86, 284], "from_records": [86, 284]},
+      "blockers": [[94, 30, 456, 96], [442, 148, 104, 68]],
+      "interactions": [
+        {"id": "SatyakiBoss", "position": [418, 226], "visual": "res://assets/level_01/sprites/boss_satyaki_tirumal_overworld.png", "display_name": "Satyaki Tirumal", "interaction_message": "Satyaki waits with a folder and a grudge.", "cutscene_id": "satyaki_reveal", "required_flags": ["poojan_defeated", "divorce_records_collected"], "disabled_if_flag": "satyaki_tirumal_defeated", "hide_when_disabled": true, "interaction_size": [50, 62]},
+        {"id": "BananaRoad", "position": [544, 276], "visual": "res://assets/level_01/sprites/prop_dock_route.png", "display_name": "Road to Banana-burbs", "interaction_message": "The inland road smells faintly of bananas and municipal optimism.", "target_scene_path": "res://scenes/levels/districts/level_02.tscn", "required_flags": ["satyaki_tirumal_defeated"], "locked_message": "Satyaki still controls the waterfront.", "objective_text": "Continue the KFC search in Banana-burbs.", "interaction_size": [72, 58]}
+      ],
+      "exits": [{"id": "west_to_records", "position": [34, 280], "size": [40, 108], "target_room_id": "records_alley", "target_spawn_id": "from_waterfront"}]
+    }
+  }
+}

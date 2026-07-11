@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/production_room.gd" id="1_room"]
+
+[node name="Suburb" type="Node2D"]
+script = ExtResource("1_room")
+room_id = "suburb"
+definition_path = "res://data/rooms/level_02_rooms.json"
+room_key = "suburb"

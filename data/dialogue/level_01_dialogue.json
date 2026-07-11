@@ -25,7 +25,7 @@
     "lines": [
       "This sign promised crispy destiny.",
       "This is not KFC.",
-      "Unprovoked. The door made its choice, and the building followed.",
+      "The door made its choice, and the building followed.",
       "Shrububu is disappointed enough to close the door normally next time, if the next door deserves it."
     ],
     "complete_flag": "level_01_opening_seen"
@@ -174,5 +174,45 @@
       "Go inland, Shrububu. Banana-burbs is too happy, and nobody under SRMT should be that relaxed."
     ],
     "complete_flag": "harbour_post_clear_resident_seen"
+  },
+  "divorcee_boathouse_woman_post": {
+    "speaker": "Boathouse Woman",
+    "tags": ["minor_npc", "post_clear"],
+    "lines": [
+      "The tide returned every legal envelope unopened.",
+      "Satyaki's dock key dissolved the moment he lost. Very theatrical metalwork.",
+      "Go find your chicken. We will turn his filing cabinet into a bait shop."
+    ],
+    "complete_flag": "divorcee_boathouse_woman_post_seen"
+  },
+  "divorcee_raincoat_woman_post": {
+    "speaker": "Raincoat Woman",
+    "tags": ["minor_npc", "post_clear"],
+    "lines": [
+      "The rain feels like rain again instead of surveillance.",
+      "You are taller. My laundry line has filed a formal complaint.",
+      "Banana-burbs is east. Their smiles arrive half a second before their faces."
+    ],
+    "complete_flag": "divorcee_raincoat_woman_post_seen"
+  },
+  "divorcee_radio_woman_post": {
+    "speaker": "Radio Woman",
+    "tags": ["minor_npc", "post_clear"],
+    "lines": [
+      "The static stopped repeating Satyaki's bank balance.",
+      "Now it says 'one-six-five' whenever the wind points inland.",
+      "SRMT does not like loose files. You should become a loose file."
+    ],
+    "complete_flag": "divorcee_radio_woman_post_seen"
+  },
+  "divorcee_dock_woman_intro": {
+    "speaker": "Dock Woman",
+    "tags": ["minor_npc", "optional", "clue_hint"],
+    "lines": [
+      "Satyaki sealed the east dock with two locks: Poojan's doubt and his own paperwork.",
+      "Beat the first. Steal the second from the records office.",
+      "Then knock. He hates knocking. It sounds too much like consequences."
+    ],
+    "complete_flag": "divorcee_dock_woman_intro_seen"
   }
 }

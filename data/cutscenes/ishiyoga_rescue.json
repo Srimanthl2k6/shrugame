@@ -1,0 +1,19 @@
+{
+  "id": "ishiyoga_rescue",
+  "caption": "THE DUNGEON BEHIND THE THRONE",
+  "trigger": {"flag": "srmt_defeated", "unless_flag": "ishiyoga_rescued"},
+  "completion_flag": "ishiyoga_rescued",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "sfx", "id": "transition_wipe"},
+    {"type": "camera_pan", "target": "Player/Camera2D", "offset": [76, 0], "duration": 0.55},
+    {"type": "cut_in", "id": "ishiyoga_rescue", "title": "FORMER QUEEN ISHIYOGA"},
+    {"type": "dialogue", "speaker": "IshiYoga", "lines": ["I heard every boss fall through the pipes.", "Papers, bananas, berries, fireworks, then a guitar solo strong enough to shake the chains loose.", "I also heard you asking each guard about KFC.", "You are exactly as the town described.", "Ishiville has been waiting for someone impossible."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["There is enough chicken for two rulers.", "We free the town first. Then we eat before the bucket gets cold.", "ehehehe. Come upstairs."]},
+    {"type": "camera_pan", "target": "Player/Camera2D", "offset": [0, 0], "duration": 0.35},
+    {"type": "checkpoint", "flag": "ishiyoga_rescue_checkpoint"},
+    {"type": "set_objective", "text": "Open the final KFC bucket."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

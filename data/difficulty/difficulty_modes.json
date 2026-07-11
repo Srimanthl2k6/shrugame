@@ -1,0 +1,30 @@
+{
+  "shrububu": {
+    "display_name": "Shrububu",
+    "description": "Extremely easy. For story, chaos, clues, and KFC.",
+    "player_hp_multiplier": 3.0,
+    "enemy_hp_multiplier": 0.45,
+    "enemy_damage_multiplier": 0.25,
+    "bullet_speed_multiplier": 0.45,
+    "bullet_count_multiplier": 0.45,
+    "telegraph_multiplier": 1.8,
+    "interaction_range_multiplier": 1.35,
+    "item_drop_multiplier": 2.0,
+    "clue_hint_level": 2,
+    "forgive_failed_puzzles": true
+  },
+  "srmt": {
+    "display_name": "SRMT",
+    "description": "Extremely hard. Fast bullets, strict resources, brutal bosses.",
+    "player_hp_multiplier": 0.75,
+    "enemy_hp_multiplier": 1.8,
+    "enemy_damage_multiplier": 2.5,
+    "bullet_speed_multiplier": 1.8,
+    "bullet_count_multiplier": 2.0,
+    "telegraph_multiplier": 0.65,
+    "interaction_range_multiplier": 0.9,
+    "item_drop_multiplier": 0.6,
+    "clue_hint_level": 0,
+    "forgive_failed_puzzles": false
+  }
+}

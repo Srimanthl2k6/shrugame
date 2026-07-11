@@ -1,0 +1,16 @@
+{
+  "id": "popcorn_spell_break",
+  "caption": "BANANA-BURBS EXPERIENCES FLAVOUR",
+  "trigger": {"requires": ["nitin_defeated", "165_files_collected"], "unless_flag": "monkeys_spell_broken"},
+  "completion_flag": "monkeys_spell_broken",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "cut_in", "id": "kfc_popcorn", "title": "BACKUP POPCORN"},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["Emergency KFC popcorn. One piece each.", "Do not make this emotional. It is the backup box."]},
+    {"type": "dialogue", "speaker": "Monkey Crowd", "lines": ["This happiness has texture.", "The mayor's smile-song is gone.", "OPEN THE MAYOR ROAD!"]},
+    {"type": "unlock_gear", "id": "banana_gun"},
+    {"type": "set_objective", "text": "Lead the monkey crowd to Deepak Reddy."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "mitta_aftermath",
+  "caption": "AUTICITY CHOOSES ITS OWN RHYTHM",
+  "trigger": {"flag": "mitta_defeated", "unless_flag": "mitta_defeat_seen"},
+  "completion_flag": "mitta_defeat_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Mitta", "lines": ["Fine. You outshone the stage, the serum, and my entire festival budget.", "Auticity is free. The puns will have to survive without a schedule.", "Area 111 is where SRMT keeps his ugliest pink secrets and, rumor says, the real KFC."]},
+    {"type": "cut_in", "id": "growth_form_05", "title": "SHRUBUBU GREW"},
+    {"type": "sfx", "id": "growth_transform"},
+    {"type": "set_growth_stage", "stage": 5},
+    {"type": "unlock_gear", "id": "festival_clearance"},
+    {"type": "set_objective", "text": "Leave Auticity for Area 111."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

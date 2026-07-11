@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            electron/package-lock.json
+            site/package-lock.json
+      - name: Install Godot 4.7
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force tools/godot | Out-Null
+          Invoke-WebRequest -Uri "https://github.com/godotengine/godot-builds/releases/download/4.7-stable/Godot_v4.7-stable_win64.exe.zip" -OutFile tools/godot/godot.zip
+          Expand-Archive tools/godot/godot.zip tools/godot -Force
+      - name: Install JavaScript dependencies
+        shell: pwsh
+        run: |
+          npm ci --prefix electron
+          npm ci --prefix site
+      - name: Synchronize version
+        run: node tools/sync-version.cjs
+      - name: Parse project
+        shell: pwsh
+        run: |
+          $output = & tools/godot/Godot_v4.7-stable_win64_console.exe --headless --editor --path . --quit 2>&1
+          $output | Write-Host
+          if ($LASTEXITCODE -ne 0 -or $output -match 'ERROR:|Parse Error|SCRIPT ERROR') { exit 1 }
+      - name: Run release regression suite
+        shell: pwsh
+        run: ./tools/run_release_tests.ps1
+      - name: Build landing page
+        run: npm run build --prefix site
+      - name: Audit private references
+        shell: pwsh
+        run: ./tools/audit_release_files.ps1 -SourceOnly
+

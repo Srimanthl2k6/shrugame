@@ -17,6 +17,12 @@
 		"path": "res://assets/shared/audio/sfx/berry_potion.wav",
 		"type": "sfx"
 	},
+	"boss_confrontation": {
+		"description": "Ten-boss confrontation theme.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/boss_confrontation.wav",
+		"type": "music"
+	},
 	"boss_defeat": {
 		"description": "Boss defeat collapse cue.",
 		"loop": false,
@@ -47,6 +53,12 @@
 		"path": "res://assets/shared/audio/sfx/door_slam.wav",
 		"type": "sfx"
 	},
+	"ending_feast": {
+		"description": "IshiYoga rescue and birthday feast theme.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/ending_feast.wav",
+		"type": "music"
+	},
 	"growth_transform": {
 		"description": "Shrububu growth transformation cue.",
 		"loop": false,
@@ -66,7 +78,7 @@
 		"type": "music"
 	},
 	"level_02_uncanny_suburb_jingle": {
-		"description": "Too-happy suburb jingle loop for Banana-burbs.",
+		"description": "Too-happy suburb jingle with an unstable municipal pulse.",
 		"loop": true,
 		"path": "res://assets/shared/audio/music/level_02_uncanny_suburb_jingle.wav",
 		"type": "music"
@@ -78,7 +90,7 @@
 		"type": "music"
 	},
 	"level_04_hospital_festival_synth": {
-		"description": "Hospital-to-festival synth loop for Auticity.",
+		"description": "Clinical pulse turning into Aeon Festival synth.",
 		"loop": true,
 		"path": "res://assets/shared/audio/music/level_04_hospital_festival_synth.wav",
 		"type": "music"
@@ -94,6 +106,18 @@
 		"loop": false,
 		"path": "res://assets/shared/audio/sfx/revolver.wav",
 		"type": "sfx"
+	},
+	"srmt_finale": {
+		"description": "Five-movement SRMT final battle counterpoint.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/srmt_finale.wav",
+		"type": "music"
+	},
+	"title_theme": {
+		"description": "Ishiville title theme: rain, mystery, and an unreasonable appetite.",
+		"loop": true,
+		"path": "res://assets/shared/audio/music/title_theme.wav",
+		"type": "music"
 	},
 	"transition_wipe": {
 		"description": "Scene transition wipe cue.",

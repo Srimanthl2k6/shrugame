@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3]
+[gd_scene load_steps=36 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/clue_journal.tscn" id="6_journal"]
 [ext_resource type="Script" path="res://scripts/visual/animated_fx.gd" id="7_fx"]
 [ext_resource type="Script" path="res://scripts/core/music_trigger.gd" id="8_music"]
-[ext_resource type="Texture2D" path="res://assets/level_01/tilesets/tiles_divorcee_harbour_ground.png" id="9_ground"]
+[ext_resource type="Texture2D" path="res://assets/level_01/backgrounds/divorcee_harbour_intact_game.png" id="9_ground"]
 [ext_resource type="Texture2D" path="res://assets/level_01/sprites/prop_fake_chicken_storefront.png" id="10_storefront"]
 [ext_resource type="Texture2D" path="res://assets/level_01/sprites/prop_sheriff_office.png" id="11_sheriff_office"]
 [ext_resource type="Texture2D" path="res://assets/level_01/sprites/prop_dock_route.png" id="12_dock_route"]
@@ -22,6 +22,12 @@
 [ext_resource type="Texture2D" path="res://assets/level_01/sprites/boss_satyaki_tirumal_overworld.png" id="20_satyaki"]
 [ext_resource type="Texture2D" path="res://assets/level_01/sprites/fx_level01_rain_sheet.png" id="21_rain_sheet"]
 [ext_resource type="Script" path="res://scripts/visual/playable_frame.gd" id="22_frame"]
+[ext_resource type="Texture2D" path="res://assets/level_01/backgrounds/divorcee_harbour_game.png" id="23_collapsed"]
+[ext_resource type="Texture2D" path="res://assets/level_01/sprites/npc_lantern_woman_idle.png" id="24_lantern_woman"]
+[ext_resource type="Texture2D" path="res://assets/level_01/sprites/npc_boathouse_woman_idle.png" id="25_boathouse_woman"]
+[ext_resource type="Texture2D" path="res://assets/level_01/sprites/npc_raincoat_woman_idle.png" id="26_raincoat_woman"]
+[ext_resource type="Texture2D" path="res://assets/level_01/sprites/npc_radio_woman_idle.png" id="27_radio_woman"]
+[ext_resource type="Texture2D" path="res://assets/level_01/sprites/npc_dock_woman_idle.png" id="28_dock_woman"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
 size = Vector2(34, 22)
@@ -52,16 +58,21 @@ script = ExtResource("8_music")
 music_id = "level_01_rainy_harbor_noir"
 
 [node name="Background" type="Polygon2D" parent="."]
+scale = Vector2(2, 2)
+z_index = -20
 color = Color(0.045, 0.052, 0.066, 1)
 polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
 
 [node name="RainTint" type="Polygon2D" parent="."]
+z_index = -5
 color = Color(0.09, 0.13, 0.16, 0.42)
 polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
 
 [node name="World" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="PlayableFrame" type="Node2D" parent="World"]
+visible = false
 z_index = 9
 script = ExtResource("22_frame")
 frame_color = Color(0.76, 0.88, 1, 0.86)
@@ -71,16 +82,26 @@ corner_color = Color(0.96, 0.98, 1, 0.92)
 z_index = -10
 
 [node name="HarbourBackplate" type="Sprite2D" parent="World/SceneArt"]
-texture_filter = 1
+texture_filter = 0
 position = Vector2(160, 90)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_ground")
 
+[node name="CollapsedBackplate" type="Sprite2D" parent="World/SceneArt"]
+visible = false
+texture_filter = 0
+position = Vector2(160, 90)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("23_collapsed")
+
 [node name="SheriffOffice" type="Sprite2D" parent="World/SceneArt"]
+visible = false
 texture_filter = 1
 position = Vector2(164, 58)
 texture = ExtResource("11_sheriff_office")
 
 [node name="DockRoute" type="Sprite2D" parent="World/SceneArt"]
+visible = false
 texture_filter = 1
 position = Vector2(250, 126)
 texture = ExtResource("12_dock_route")
@@ -106,6 +127,7 @@ position = Vector2(56, 52)
 shape = SubResource("RectangleShape2D_fake_store_blocker")
 
 [node name="DebugTint" type="Polygon2D" parent="World/CollisionBlockers/FakeChickenStoreBlocker"]
+visible = false
 color = Color(0.02, 0.03, 0.04, 0.18)
 polygon = PackedVector2Array(-36, -15, 36, -15, 36, 15, -36, 15)
 
@@ -116,6 +138,7 @@ position = Vector2(164, 52)
 shape = SubResource("RectangleShape2D_sheriff_office_blocker")
 
 [node name="DebugTint" type="Polygon2D" parent="World/CollisionBlockers/SheriffOfficeBlocker"]
+visible = false
 color = Color(0.02, 0.03, 0.04, 0.16)
 polygon = PackedVector2Array(-32, -12, 32, -12, 32, 12, -32, 12)
 
@@ -126,6 +149,7 @@ position = Vector2(160, 20)
 shape = SubResource("RectangleShape2D_water_edge_blocker")
 
 [node name="DebugTint" type="Polygon2D" parent="World/CollisionBlockers/HarbourWaterEdgeBlocker"]
+visible = false
 color = Color(0.08, 0.16, 0.2, 0.22)
 polygon = PackedVector2Array(-146, -4, 146, -4, 146, 4, -146, 4)
 
@@ -136,6 +160,7 @@ position = Vector2(250, 116)
 shape = SubResource("RectangleShape2D_dock_rail_blocker")
 
 [node name="DebugTint" type="Polygon2D" parent="World/CollisionBlockers/DockRailBlocker"]
+visible = false
 color = Color(0.1, 0.07, 0.05, 0.26)
 polygon = PackedVector2Array(-45, -4, 45, -4, 45, 4, -45, 4)
 
@@ -298,6 +323,7 @@ horizontal_alignment = 1
 text_overrun_behavior = 3
 
 [node name="PantryShelves" type="Node2D" parent="World"]
+visible = false
 
 [node name="LegacyShelf" type="Polygon2D" parent="World/PantryShelves"]
 visible = false
@@ -305,6 +331,7 @@ color = Color(0.28, 0.22, 0.19, 0.8)
 polygon = PackedVector2Array(18, 150, 104, 150, 104, 160, 18, 160)
 
 [node name="Crates" type="Node2D" parent="World"]
+visible = false
 
 [node name="LegacyCrate" type="Polygon2D" parent="World/Crates"]
 visible = false
@@ -325,6 +352,7 @@ color = Color(0.82, 0.62, 0.18, 1)
 polygon = PackedVector2Array(-24, -34, 28, -34, 28, -24, -24, -24)
 
 [node name="StorefrontSprite" type="Sprite2D" parent="World/BrokenChickenBuilding"]
+visible = false
 texture_filter = 1
 texture = ExtResource("10_storefront")
 
@@ -337,6 +365,9 @@ dialogue_id = "opening_not_kfc"
 dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
 flag_on_interact = "building_broken"
 objective_text = "Ask Divorcee Harbour why everyone is staring."
+disabled_if_flag = "building_broken"
+one_shot = true
+cutscene_id = "door_slam_collapse"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/KfcDoor"]
 shape = SubResource("RectangleShape2D_door")
@@ -347,6 +378,7 @@ color = Color(0.66, 0.19, 0.14, 1)
 polygon = PackedVector2Array(-10, -14, 10, -14, 10, 14, -10, 14)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/KfcDoor"]
+visible = false
 texture_filter = 1
 texture = ExtResource("15_kfc_door")
 
@@ -359,6 +391,8 @@ dialogue_id = "resident_satyaki_clue"
 dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
 flag_on_interact = "resident_satyaki_clue_seen"
 objective_text = "Let Sheriff Poojan test Shrububu's strength."
+post_flag = "satyaki_tirumal_defeated"
+post_dialogue_id = "harbour_post_clear_resident"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/HarbourResident"]
 shape = SubResource("RectangleShape2D_interact")
@@ -370,13 +404,116 @@ polygon = PackedVector2Array(-8, -13, 8, -13, 8, 11, 0, 16, -8, 11)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/HarbourResident"]
 texture_filter = 1
+z_index = 2
 texture = ExtResource("17_resident")
+
+[node name="LanternWoman" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+position = Vector2(94, 138)
+script = ExtResource("2_interaction")
+display_name = "Lantern woman"
+dialogue_id = "divorcee_lantern_woman"
+dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
+flag_on_interact = "divorcee_lantern_woman_seen"
+post_flag = "satyaki_tirumal_defeated"
+post_dialogue_id = "harbour_post_clear_lamps"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LanternWoman"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/LanternWoman"]
+texture_filter = 1
+z_index = 2
+texture = ExtResource("24_lantern_woman")
+
+[node name="BoathouseWoman" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+position = Vector2(128, 116)
+script = ExtResource("2_interaction")
+display_name = "Boathouse woman"
+dialogue_id = "divorcee_boathouse_woman"
+dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
+flag_on_interact = "divorcee_boathouse_woman_seen"
+post_flag = "satyaki_tirumal_defeated"
+post_dialogue_id = "divorcee_boathouse_woman_post"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BoathouseWoman"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/BoathouseWoman"]
+texture_filter = 1
+z_index = 2
+texture = ExtResource("25_boathouse_woman")
+
+[node name="RaincoatWoman" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+position = Vector2(194, 104)
+script = ExtResource("2_interaction")
+display_name = "Raincoat woman"
+dialogue_id = "divorcee_raincoat_woman"
+dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
+flag_on_interact = "divorcee_raincoat_woman_seen"
+post_flag = "satyaki_tirumal_defeated"
+post_dialogue_id = "divorcee_raincoat_woman_post"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/RaincoatWoman"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/RaincoatWoman"]
+texture_filter = 1
+z_index = 2
+texture = ExtResource("26_raincoat_woman")
+
+[node name="RadioWoman" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+position = Vector2(236, 142)
+script = ExtResource("2_interaction")
+display_name = "Radio woman"
+dialogue_id = "divorcee_radio_woman"
+dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
+flag_on_interact = "divorcee_radio_woman_seen"
+post_flag = "satyaki_tirumal_defeated"
+post_dialogue_id = "divorcee_radio_woman_post"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/RadioWoman"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/RadioWoman"]
+texture_filter = 1
+z_index = 2
+texture = ExtResource("27_radio_woman")
+
+[node name="DockWoman" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+position = Vector2(272, 98)
+script = ExtResource("2_interaction")
+display_name = "Dock woman"
+dialogue_id = "divorcee_dock_woman_intro"
+dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
+flag_on_interact = "divorcee_dock_woman_intro_seen"
+post_flag = "satyaki_tirumal_defeated"
+post_dialogue_id = "divorcee_dock_woman"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DockWoman"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/DockWoman"]
+texture_filter = 1
+z_index = 2
+texture = ExtResource("28_dock_woman")
 
 [node name="NoticeSign" type="Area2D" parent="World"]
 position = Vector2(136, 120)
 script = ExtResource("2_interaction")
 interaction_message = "Rainwater curls around a sign: Divorcee Harbour sees everything."
 display_name = "Harbour notice"
+dialogue_id = "clue_sheriff_notice"
+dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/NoticeSign"]
 shape = SubResource("RectangleShape2D_interact")
@@ -387,10 +524,13 @@ color = Color(0.5, 0.36, 0.24, 1)
 polygon = PackedVector2Array(-15, -8, 15, -8, 15, 8, -15, 8)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/NoticeSign"]
+visible = false
 texture_filter = 1
 texture = ExtResource("13_save_notice")
 
 [node name="Marn" type="Area2D" parent="World"]
+visible = false
+monitoring = false
 position = Vector2(146, 146)
 script = ExtResource("2_interaction")
 interaction_message = "Marn adjusts an old shelf that should not still be here."
@@ -414,6 +554,8 @@ texture_filter = 1
 texture = ExtResource("18_shelf_echo")
 
 [node name="TagFlour" type="Area2D" parent="World"]
+visible = false
+monitoring = false
 position = Vector2(166, 146)
 script = ExtResource("2_interaction")
 interaction_message = "You return the FLOUR tag to the harbour shelf echo."
@@ -433,6 +575,8 @@ texture_filter = 1
 texture = ExtResource("16_tag")
 
 [node name="TagCups" type="Area2D" parent="World"]
+visible = false
+monitoring = false
 position = Vector2(188, 146)
 script = ExtResource("2_interaction")
 interaction_message = "You return the CUPS tag to the harbour shelf echo."
@@ -452,6 +596,8 @@ texture_filter = 1
 texture = ExtResource("16_tag")
 
 [node name="TagBroom" type="Area2D" parent="World"]
+visible = false
+monitoring = false
 position = Vector2(210, 146)
 script = ExtResource("2_interaction")
 interaction_message = "You return the BROOM tag to the harbour shelf echo."
@@ -471,6 +617,8 @@ texture_filter = 1
 texture = ExtResource("16_tag")
 
 [node name="PracticeEncounter" type="Area2D" parent="World"]
+visible = false
+monitoring = false
 position = Vector2(232, 146)
 script = ExtResource("2_interaction")
 interaction_message = "Marn's old practice encounter flickers in the rain."
@@ -500,6 +648,9 @@ required_flags = PackedStringArray("building_broken")
 locked_message = "Poojan waits until the fake chicken building incident is impossible to ignore."
 encounter_id = "poojan_strength_test"
 objective_text = "Beat Poojan and take the revolver."
+disabled_if_flag = "poojan_defeated"
+hide_when_disabled = true
+cutscene_id = "poojan_challenge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/SheriffPoojan"]
 shape = SubResource("RectangleShape2D_boss")
@@ -511,6 +662,7 @@ polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 18, -12, 10)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/SheriffPoojan"]
 texture_filter = 1
+z_index = 2
 texture = ExtResource("19_poojan")
 
 [node name="DivorceRecords" type="Area2D" parent="World"]
@@ -521,6 +673,11 @@ display_name = "Divorce records"
 flag_on_interact = "divorce_records_collected"
 clue_id = "divorce_records"
 objective_text = "Use the records to reach Satyaki Tirumal."
+dialogue_id = "clue_damp_divorce_records"
+dialogue_file_path = "res://data/dialogue/level_01_dialogue.json"
+disabled_if_flag = "divorce_records_collected"
+one_shot = true
+hide_when_disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/DivorceRecords"]
 shape = SubResource("RectangleShape2D_interact")
@@ -532,6 +689,7 @@ polygon = PackedVector2Array(-13, -8, 13, -8, 11, 9, -11, 9)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/DivorceRecords"]
 texture_filter = 1
+z_index = 1
 texture = ExtResource("14_records")
 
 [node name="SatyakiApproach" type="Area2D" parent="World"]
@@ -553,6 +711,7 @@ color = Color(0.36, 0.28, 0.22, 1)
 polygon = PackedVector2Array(-16, -8, 16, -8, 16, 8, -16, 8)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/SatyakiApproach"]
+visible = false
 texture_filter = 1
 scale = Vector2(0.42, 0.42)
 texture = ExtResource("12_dock_route")
@@ -567,6 +726,9 @@ required_flags = PackedStringArray("poojan_defeated", "divorce_records_collected
 locked_message = "Satyaki will not appear until Poojan is beaten and the records are found."
 encounter_id = "satyaki_tirumal_boss"
 objective_text = "Defeat Satyaki and free Divorcee Harbour."
+disabled_if_flag = "satyaki_tirumal_defeated"
+hide_when_disabled = true
+cutscene_id = "satyaki_reveal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/SatyakiBoss"]
 shape = SubResource("RectangleShape2D_boss")
@@ -578,6 +740,7 @@ polygon = PackedVector2Array(-12, -16, 12, -16, 14, 12, 0, 20, -14, 12)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/SatyakiBoss"]
 texture_filter = 1
+z_index = 2
 texture = ExtResource("20_satyaki")
 
 [node name="SavePoint" type="Area2D" parent="World"]
@@ -599,6 +762,7 @@ polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/SavePoint"]
 texture_filter = 1
+z_index = 1
 texture = ExtResource("13_save_notice")
 
 [node name="TransitionDoor" type="Area2D" parent="World"]
@@ -620,11 +784,13 @@ color = Color(0.18, 0.42, 0.34, 1)
 polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/TransitionDoor"]
+visible = false
 texture_filter = 1
 modulate = Color(0.55, 1, 0.72, 1)
 texture = ExtResource("15_kfc_door")
 
 [node name="VisualFxLayer" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="RainSprite" type="Sprite2D" parent="VisualFxLayer"]
 texture_filter = 1
@@ -668,10 +834,12 @@ motion_pixels = 2.0
 position = Vector2(34, 132)
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
 
 [node name="UiLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
 

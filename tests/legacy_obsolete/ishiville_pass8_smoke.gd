@@ -61,8 +61,12 @@ func _check_level_scene(failures: Array[String]) -> void:
 		if level.get_node_or_null(node_path) == null:
 			failures.append("Level 3 scene missing %s" % node_path)
 	var berries = level.get_node_or_null("World/BerryClusters")
-	if berries != null and berries.get("flag_on_interact") != "berries_collected":
-		failures.append("BerryClusters must set berries_collected")
+	if berries != null and berries.get("flag_on_interact") != "berry_cluster_01":
+		failures.append("BerryClusters must be the first 250-berry cluster")
+	for cluster_path in ["World/BerryClusters", "World/BerryCluster02", "World/BerryCluster03", "World/BerryCluster04"]:
+		var cluster = level.get_node_or_null(cluster_path)
+		if cluster == null or int(cluster.get("item_amount")) != 250:
+			failures.append("%s must award one 250-berry cluster" % cluster_path)
 	var contract = level.get_node_or_null("World/BerryContract")
 	if contract != null and contract.get("clue_id") != "berry_contract":
 		failures.append("BerryContract must collect berry_contract clue")

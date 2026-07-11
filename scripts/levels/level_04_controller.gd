@@ -15,11 +15,17 @@ const ROUTE_SUMMARY := [
 func _ready() -> void:
 	var game_state := _get_game_state()
 	if game_state != null:
+		var entering_level: bool = game_state.current_level_id != "level_04"
 		game_state.current_level_id = "level_04"
-		if game_state.has_method("get_current_objective") and game_state.get_current_objective().is_empty():
+		if entering_level or (game_state.has_method("get_current_objective") and game_state.get_current_objective().is_empty()):
 			game_state.set_current_objective("Follow the puns to Auticity hospital.")
 	_sync_progression_rewards()
+	_apply_world_state()
 	_refresh_exit_hint()
+	var director := get_node_or_null("/root/CutsceneDirector")
+	if director != null and not director.cutscene_completed.is_connected(_on_cutscene_completed):
+		director.cutscene_completed.connect(_on_cutscene_completed)
+	_play_pending_return_cutscene.call_deferred()
 
 
 func complete_objective() -> void:
@@ -32,11 +38,14 @@ func complete_objective() -> void:
 
 func collect_objective(flag_name: String = "") -> void:
 	var game_state := _get_game_state()
-	if game_state != null and not flag_name.is_empty():
+	if game_state == null:
+		return
+	if not flag_name.is_empty():
 		game_state.set_flag(flag_name, true)
 	if flag_name == "aeon_festival_started":
 		complete_objective()
 	_sync_progression_rewards()
+	_apply_world_state()
 	_refresh_exit_hint()
 
 
@@ -66,6 +75,50 @@ func _sync_progression_rewards() -> void:
 		game_state.set_flag("luma_practice_cleared", true)
 		if game_state.has_method("set_current_objective"):
 			game_state.set_current_objective("Auticity is free. Leave for Area 111.")
+
+
+func _apply_world_state() -> void:
+	var game_state := _get_game_state()
+	if game_state == null:
+		return
+	var doctor := get_node_or_null("World/DoctorSushan") as Area2D
+	if doctor != null:
+		var doctor_active: bool = game_state.get_flag("hospital_records_collected") and not game_state.get_flag("doctor_sushan_defeated")
+		doctor.visible = doctor_active
+		doctor.monitoring = doctor_active
+		doctor.monitorable = doctor_active
+	var festival := get_node_or_null("World/AeonFestival") as Area2D
+	if festival != null:
+		var festival_visible: bool = game_state.get_flag("doctor_sushan_defeated")
+		var festival_active: bool = festival_visible and not game_state.get_flag("aeon_festival_started")
+		festival.visible = festival_visible
+		festival.monitoring = festival_active
+		festival.monitorable = festival_active
+	var mitta := get_node_or_null("World/MittaBoss") as Area2D
+	if mitta != null:
+		var mitta_active: bool = game_state.get_flag("aeon_festival_started") and not game_state.get_flag("mitta_defeated")
+		mitta.visible = mitta_active
+		mitta.monitoring = mitta_active
+		mitta.monitorable = mitta_active
+
+
+func _play_pending_return_cutscene() -> void:
+	var game_state := _get_game_state()
+	var director := get_node_or_null("/root/CutsceneDirector")
+	if game_state == null or director == null or director.is_playing:
+		return
+	if game_state.get_flag("mitta_defeated") and not game_state.get_flag("mitta_defeat_seen"):
+		director.play("mitta_aftermath", self)
+		return
+	if game_state.get_flag("doctor_sushan_defeated") and not game_state.get_flag("sushan_defeat_seen"):
+		director.play("sushan_aftermath", self)
+
+
+func _on_cutscene_completed(cutscene_id: String, _skipped: bool) -> void:
+	if cutscene_id in ["sushan_injection_failure", "sushan_aftermath", "aeon_festival", "mitta_confrontation", "mitta_aftermath"]:
+		_sync_progression_rewards()
+		_apply_world_state()
+		_refresh_exit_hint()
 
 
 func _has_flags(game_state: Node, flag_names: Array) -> bool:

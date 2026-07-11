@@ -1,0 +1,14 @@
+{
+  "id": "nitin_confrontation",
+  "caption": "BANANA-BURBS LAB / CLEANUP PROTOCOL",
+  "trigger": {"requires": ["165_files_collected"], "unless_flag": "nitin_defeated"},
+  "completion_flag": "nitin_intro_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Nitin", "lines": ["Those files were arranged by secrecy level, not reading order.", "Mayor Deepak pays me to clean spills, footprints, and inconvenient conclusions.", "Put File 165 back."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["Your mop has a security clearance.", "That is upsettingly professional."]},
+    {"type": "cut_in", "id": "nitin_boss", "title": "NITIN THE JANITOR"},
+    {"type": "start_battle", "encounter_id": "nitin_janitor_boss", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

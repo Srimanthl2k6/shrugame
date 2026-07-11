@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/controls_panel.gd" id="1_controls"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_controls"]
+bg_color = Color(0.018, 0.027, 0.034, 0.99)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94, 0.78, 0.34, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="ControlsPanel" type="Control"]
+process_mode = 3
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_controls")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.003, 0.006, 0.008, 0.9)
+
+[node name="Panel" type="Panel" parent="Dim"]
+offset_left = 38.0
+offset_top = 8.0
+offset_right = 282.0
+offset_bottom = 172.0
+theme_override_styles/panel = SubResource("StyleBox_controls")
+
+[node name="Title" type="Label" parent="Dim/Panel"]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 232.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 10
+text = "CONTROLS"
+
+[node name="Rows" type="VBoxContainer" parent="Dim/Panel"]
+offset_left = 14.0
+offset_top = 28.0
+offset_right = 230.0
+offset_bottom = 124.0
+theme_override_constants/separation = 2
+
+[node name="Status" type="Label" parent="Dim/Panel"]
+offset_left = 14.0
+offset_top = 127.0
+offset_right = 230.0
+offset_bottom = 138.0
+theme_override_colors/font_color = Color(0.55, 0.78, 0.78, 1)
+theme_override_font_sizes/font_size = 6
+text = "SELECT A BINDING"
+horizontal_alignment = 1
+
+[node name="ResetButton" type="Button" parent="Dim/Panel"]
+offset_left = 14.0
+offset_top = 142.0
+offset_right = 112.0
+offset_bottom = 157.0
+theme_override_font_sizes/font_size = 6
+text = "RESET DEFAULTS"
+
+[node name="BackButton" type="Button" parent="Dim/Panel"]
+offset_left = 154.0
+offset_top = 142.0
+offset_right = 230.0
+offset_bottom = 157.0
+theme_override_font_sizes/font_size = 6
+text = "BACK"

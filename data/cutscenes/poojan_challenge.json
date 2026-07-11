@@ -1,0 +1,14 @@
+{
+  "id": "poojan_challenge",
+  "caption": "SHERIFF'S STRENGTH TEST",
+  "trigger": {"interaction": "SheriffPoojan", "requires": ["building_broken"], "unless_flag": "poojan_defeated"},
+  "completion_flag": "poojan_intro_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "move_actor", "target": "World/Player", "position": [146, 84], "duration": 0.35},
+    {"type": "dialogue", "speaker": "Sheriff Poojan", "lines": ["Name is Poojan. I keep order in Divorcee Harbour, or what passes for order in SRMT weather.", "You folded a cursed building like wet cardboard.", "Fight me once. If you stand, the revolver is yours and this town gets to hope out loud."]},
+    {"type": "cut_in", "id": "poojan_strength_test", "title": "SHERIFF POOJAN"},
+    {"type": "start_battle", "encounter_id": "poojan_strength_test", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

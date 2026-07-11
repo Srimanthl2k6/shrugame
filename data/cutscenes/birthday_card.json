@@ -1,0 +1,11 @@
+{
+  "id": "birthday_card",
+  "caption": "ONE LAST MESSAGE FROM ISHIVILLE",
+  "trigger": {"flag": "ishiyoga_rescued", "unless_flag": "birthday_card_seen"},
+  "completion_flag": "birthday_card_seen",
+  "skippable": false,
+  "steps": [
+    {"type": "fade", "alpha": 1.0, "duration": 0.5},
+    {"type": "change_scene", "path": "res://scenes/ending.tscn"}
+  ]
+}

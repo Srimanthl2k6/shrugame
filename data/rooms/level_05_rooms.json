@@ -1,0 +1,126 @@
+{
+  "level_id": "level_05",
+  "start_room": "ruined_boulevard",
+  "post_battle_cutscenes": [
+    {"flag": "suhas_defeated", "unless_flag": "guitar_acquired", "cutscene_id": "bike_guitar_acquisition"},
+    {"flag": "srmt_defeated", "unless_flag": "srmt_defeat_seen", "cutscene_id": "srmt_aftermath"}
+  ],
+  "rooms": {
+    "ruined_boulevard": {
+      "id": "ruined_boulevard",
+      "display_name": "Ruined Pink Boulevard",
+      "background": "res://assets/level_05/backgrounds/rooms/ruined_boulevard.png",
+      "ambience_id": "level_05_ruined_club_court_finale",
+      "spawn_points": {"start": [90, 284], "default": [90, 284], "from_pub": [548, 284]},
+      "blockers": [[58, 24, 524, 108]],
+      "interactions": [
+        {"id": "PinkHooligan", "position": [196, 256], "visual": "res://assets/level_05/sprites/npc_pink_hooligan_idle.png", "display_name": "Pink Hooligan", "dialogue_id": "pink_hooligan", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "post_flag": "srmt_defeated", "post_dialogue_id": "area111_post_clear_court", "interaction_size": [40, 54]},
+        {"id": "RuinVendor", "position": [390, 250], "visual": "res://assets/level_05/sprites/npc_ruin_vendor_idle.png", "display_name": "Cute-Ruin Vendor", "dialogue_id": "hello_ruin_vendor", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "post_flag": "srmt_defeated", "post_dialogue_id": "area111_post_clear_pub", "interaction_size": [42, 56]},
+        {"id": "PubMenuClue", "position": [500, 222], "visual": "res://assets/level_05/sprites/prop_gummies_bar.png", "scale": [0.42, 0.42], "display_name": "Gummies menu", "dialogue_id": "clue_pub_menu", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "clue_id": "pub_menu", "one_shot": true, "interaction_size": [50, 40]}
+      ],
+      "exits": [{"id": "east_to_pub", "position": [606, 278], "size": [40, 108], "target_room_id": "gummies_pub", "target_spawn_id": "from_boulevard"}]
+    },
+    "gummies_pub": {
+      "id": "gummies_pub",
+      "display_name": "Gummies Pub",
+      "background": "res://assets/level_05/backgrounds/rooms/gummies_pub.png",
+      "ambience_id": "level_05_ruined_club_court_finale",
+      "spawn_points": {"default": [86, 284], "from_boulevard": [86, 284], "from_alley": [548, 284]},
+      "blockers": [[80, 24, 480, 148]],
+      "interactions": [
+        {"id": "GummiesBar", "position": [326, 232], "visual": "res://assets/level_05/sprites/npc_pub_keeper_idle.png", "display_name": "Gummies Pub Keeper", "interaction_message": "The pub keeper confirms that Gummies are not chicken.", "cutscene_id": "area111_bar_fight", "disabled_if_flag": "suhas_defeated", "interaction_size": [46, 58]},
+        {"id": "GummyRegular", "position": [188, 266], "visual": "res://assets/level_05/sprites/npc_pink_hooligan_idle.png", "display_name": "Gummy Regular", "dialogue_id": "gummy_regular", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "post_flag": "suhas_defeated", "post_dialogue_id": "area111_post_clear_pub", "flip_h": true, "interaction_size": [40, 54]},
+        {"id": "SuhasBoss", "position": [454, 246], "visual": "res://assets/level_05/sprites/boss_suhas_overworld.png", "display_name": "Suhas", "interaction_message": "Suhas is already involved once the bar argument begins.", "cutscene_id": "area111_bar_fight", "disabled_if_flag": "suhas_defeated", "hide_when_disabled": true, "interaction_size": [50, 64]}
+      ],
+      "exits": [
+        {"id": "west_to_boulevard", "position": [34, 280], "size": [40, 108], "target_room_id": "ruined_boulevard", "target_spawn_id": "from_pub"},
+        {"id": "east_to_alley", "position": [606, 280], "size": [40, 108], "target_room_id": "hooligan_alley", "target_spawn_id": "from_pub", "required_flags": ["suhas_defeated"], "locked_objective": "Suhas still owns the alley, bike, and volume level."}
+      ]
+    },
+    "hooligan_alley": {
+      "id": "hooligan_alley",
+      "display_name": "Hooligan Bike Alley",
+      "background": "res://assets/level_05/backgrounds/rooms/hooligan_alley.png",
+      "ambience_id": "level_05_ruined_club_court_finale",
+      "spawn_points": {"default": [88, 284], "from_pub": [88, 284], "from_bike": [548, 284]},
+      "blockers": [[74, 24, 492, 100]],
+      "decorations": [
+        {"id": "SuhasBike", "position": [330, 244], "visual": "res://assets/level_05/sprites/prop_suhas_motorcycle.png", "z_index": 240},
+        {"id": "MusicalGuitar", "position": [430, 232], "visual": "res://assets/level_05/sprites/prop_musical_guitar.png", "scale": [0.72, 0.72], "z_index": 230}
+      ],
+      "interactions": [
+        {"id": "BikeMechanic", "position": [194, 256], "visual": "res://assets/level_05/sprites/npc_bike_mechanic_idle.png", "display_name": "Bike Mechanic", "dialogue_id": "bike_mechanic", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "post_flag": "guitar_acquired", "post_dialogue_id": "area111_post_clear_pub", "interaction_size": [42, 56]},
+        {"id": "BikeKeysClue", "position": [344, 278], "visual": "res://assets/level_05/sprites/prop_suhas_motorcycle.png", "scale": [0.48, 0.48], "display_name": "Suhas's bike keys", "dialogue_id": "clue_bike_keys", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "clue_id": "bike_keys", "required_flags": ["suhas_defeated"], "one_shot": true, "interaction_size": [52, 42]}
+      ],
+      "exits": [
+        {"id": "west_to_pub", "position": [34, 280], "size": [40, 108], "target_room_id": "gummies_pub", "target_spawn_id": "from_alley"},
+        {"id": "east_to_bike", "position": [606, 280], "size": [40, 108], "target_room_id": "bike_route", "target_spawn_id": "from_alley", "required_flags": ["bike_acquired", "guitar_acquired"], "locked_objective": "Take the bike and musical guitar before leaving the alley."}
+      ]
+    },
+    "bike_route": {
+      "id": "bike_route",
+      "display_name": "Neon Bike Route",
+      "background": "res://assets/level_05/backgrounds/rooms/bike_route.png",
+      "ambience_id": "level_05_ruined_club_court_finale",
+      "spawn_points": {"default": [88, 284], "from_alley": [88, 284], "from_mansion": [548, 284]},
+      "blockers": [[56, 24, 528, 86], [258, 146, 124, 54]],
+      "decorations": [{"id": "BikeRouteProp", "position": [320, 242], "visual": "res://assets/level_05/sprites/prop_suhas_motorcycle.png", "z_index": 240}],
+      "interactions": [
+        {"id": "BikeRouteCheckpoint", "position": [324, 280], "visual": "res://assets/level_05/sprites/prop_musical_guitar.png", "scale": [0.52, 0.52], "display_name": "Musical bike checkpoint", "interaction_message": "The bike crosses the neon ruin while the guitar answers every broken streetlight.", "flag_on_interact": "bike_route_completed", "required_flags": ["bike_acquired", "guitar_acquired"], "one_shot": true, "objective_text": "Enter the fallen mansion and assemble the court clues.", "interaction_size": [48, 44]}
+      ],
+      "exits": [
+        {"id": "west_to_alley", "position": [34, 280], "size": [40, 108], "target_room_id": "hooligan_alley", "target_spawn_id": "from_bike"},
+        {"id": "east_to_mansion", "position": [606, 280], "size": [40, 108], "target_room_id": "mansion_foyer", "target_spawn_id": "from_bike", "required_flags": ["bike_route_completed"], "locked_objective": "Ride the marked route before entering the mansion."}
+      ]
+    },
+    "mansion_foyer": {
+      "id": "mansion_foyer",
+      "display_name": "Fallen Mansion Foyer",
+      "background": "res://assets/level_05/backgrounds/rooms/mansion_foyer.png",
+      "ambience_id": "level_05_ruined_club_court_finale",
+      "spawn_points": {"default": [88, 284], "from_bike": [88, 284], "from_clues": [548, 284]},
+      "blockers": [[80, 22, 480, 106]],
+      "interactions": [
+        {"id": "MansionConsole", "position": [326, 222], "visual": "res://assets/level_05/sprites/prop_mansion_clue_console.png", "display_name": "Fallen mansion console", "dialogue_id": "mansion_court_clues", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "flag_on_interact": "mansion_foyer_solved", "clue_id": "mansion_foyer", "required_flags": ["bike_route_completed"], "one_shot": true, "interaction_size": [78, 56], "objective_text": "Use clues from Ishiville to unlock the mansion chambers."},
+        {"id": "CourtEcho", "position": [478, 258], "visual": "res://assets/level_05/sprites/npc_ruin_vendor_idle.png", "display_name": "Court Bailiff Echo", "dialogue_id": "court_bailiff_echo", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "post_flag": "srmt_defeated", "post_dialogue_id": "area111_post_clear_court", "flip_h": true, "interaction_size": [42, 56]}
+      ],
+      "exits": [
+        {"id": "west_to_bike", "position": [34, 280], "size": [40, 108], "target_room_id": "bike_route", "target_spawn_id": "from_mansion"},
+        {"id": "east_to_clues", "position": [606, 280], "size": [40, 108], "target_room_id": "clue_chambers", "target_spawn_id": "from_foyer", "required_flags": ["mansion_foyer_solved"], "locked_objective": "Solve the foyer console before entering the clue chambers."}
+      ]
+    },
+    "clue_chambers": {
+      "id": "clue_chambers",
+      "display_name": "Mansion Clue Chambers",
+      "background": "res://assets/level_05/backgrounds/rooms/clue_chambers.png",
+      "ambience_id": "level_05_ruined_club_court_finale",
+      "spawn_points": {"default": [88, 284], "from_foyer": [88, 284], "from_court": [548, 284]},
+      "blockers": [[76, 22, 488, 116]],
+      "interactions": [
+        {"id": "CourtClueConsole", "position": [326, 184], "display_name": "Ishiville clue lock", "dialogue_id": "mansion_court_clues", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "clue_id": "mansion_court_clues", "required_flags": ["mansion_foyer_solved"], "one_shot": true, "interaction_size": [96, 54], "objective_text": "Enter SRMT's ruined court with the musical guitar."},
+        {"id": "ThroneGreaseClue", "position": [482, 246], "visual": "res://assets/level_05/sprites/prop_srmt_throne.png", "scale": [0.46, 0.46], "display_name": "Bucket grease trail", "dialogue_id": "clue_throne_bucket_grease", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "clue_id": "throne_bucket_grease", "one_shot": true, "interaction_size": [44, 44]},
+        {"id": "MansionSave", "position": [188, 266], "visual": "res://assets/level_05/sprites/prop_musical_guitar.png", "scale": [0.46, 0.46], "display_name": "Resonant mansion string", "interaction_message": "A loose string hums the route back and saves your place.", "save_on_interact": true, "level_id": "level_05", "spawn_point": "from_foyer", "interaction_size": [38, 44]}
+      ],
+      "exits": [
+        {"id": "west_to_foyer", "position": [34, 280], "size": [40, 108], "target_room_id": "mansion_foyer", "target_spawn_id": "from_clues"},
+        {"id": "east_to_court", "position": [606, 280], "size": [40, 108], "target_room_id": "ruined_court", "target_spawn_id": "from_clues", "required_flags": ["mansion_court_clues_collected", "guitar_acquired"], "locked_objective": "The ruined court requires the completed clue lock and musical guitar."}
+      ]
+    },
+    "ruined_court": {
+      "id": "ruined_court",
+      "display_name": "SRMT's Ruined Court",
+      "background": "res://assets/level_05/backgrounds/rooms/ruined_court.png",
+      "ambience_id": "level_05_ruined_club_court_finale",
+      "spawn_points": {"default": [88, 284], "from_clues": [88, 284]},
+      "blockers": [[74, 20, 492, 92]],
+      "decorations": [{"id": "Throne", "position": [394, 176], "visual": "res://assets/level_05/sprites/prop_srmt_throne.png", "z_index": 170}],
+      "interactions": [
+        {"id": "SrmtBoss", "position": [394, 220], "visual": "res://assets/level_05/sprites/boss_srmt_overworld.png", "display_name": "Demon King SRMT", "interaction_message": "SRMT eats fried chicken on a throne built from every district's silence.", "cutscene_id": "srmt_throne_reveal", "required_flags": ["mansion_court_clues_collected", "guitar_acquired"], "disabled_if_flag": "srmt_defeated", "hide_when_disabled": true, "interaction_size": [56, 72]},
+        {"id": "IshiYogaCell", "position": [516, 246], "visual": "res://assets/level_05/sprites/prop_kfc_dungeon_gate.png", "display_name": "IshiYoga's dungeon gate", "interaction_message": "The gate opens onto KFC storage and the former queen.", "cutscene_id": "ishiyoga_rescue", "required_flags": ["srmt_defeated"], "disabled_if_flag": "ishiyoga_rescued", "one_shot": true, "interaction_size": [76, 72]},
+        {"id": "IshiYoga", "position": [516, 258], "visual": "res://assets/level_05/sprites/npc_ishiyoga_idle.png", "display_name": "IshiYoga", "dialogue_id": "ishiyoga_rescue", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "required_flags": ["srmt_defeated"], "disabled_if_flag": "ishiyoga_rescued", "interaction_size": [46, 64]},
+        {"id": "FinalFeast", "position": [294, 272], "visual": "res://assets/level_05/sprites/prop_ending_feast.png", "display_name": "Ishiville's KFC feast", "interaction_message": "Shrububu and IshiYoga finally sit down with the real chicken.", "cutscene_id": "birthday_card", "required_flags": ["ishiyoga_rescued"], "interaction_size": [92, 62]}
+      ],
+      "exits": [{"id": "west_to_clues", "position": [34, 280], "size": [40, 108], "target_room_id": "clue_chambers", "target_spawn_id": "from_court"}]
+    }
+  }
+}

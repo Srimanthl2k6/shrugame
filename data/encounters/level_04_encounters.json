@@ -24,22 +24,40 @@
     "resonance_goal": 5,
     "return_scene": "res://scenes/levels/level_04.tscn",
     "boss_type": "mini_boss",
+    "battle_visual": "res://assets/level_04/sprites/boss_doctor_sushan_idle.png",
+    "battle_backplate": "res://assets/level_04/backgrounds/auticity_game.png",
+    "battle_frames": 4,
+    "bullet_legend": "Pattern Serum lanes, fluorescent sweeps, and failed-contingency fireworks.",
+    "pacing_note": "Clinical order breaks into readable chaos as each phase invalidates Sushan's control model.",
     "defeated_flag": "doctor_sushan_defeated",
     "commands": ["act", "item", "gear", "guard"],
     "phases": [
       {
         "id": "pattern_serum",
         "intro_dialogue": "Sushan launches Pattern Serum syringes through hospital lanes.",
-        "patterns": [{"type": "straight_lanes", "count": 6}],
+        "readability_hint": "Cyan monitors identify every active serum lane before the syringes fire.",
+        "patterns": [{"type": "straight_lanes", "count": 6, "telegraph_seconds": 0.7, "safe_hint": "Serum lanes flash cyan before firing. Hold the unlit lane.", "visual_id": "pattern_serum"}],
         "clear_threshold": 8
+      },
+      {
+        "id": "fluorescent_rounds",
+        "intro_dialogue": "The ward lights sweep the battle box in a perfect repeating schedule.",
+        "readability_hint": "The fluorescent tubes blink twice before their sweep and pause.",
+        "patterns": [{"type": "sweeping_beams", "count": 5, "telegraph_seconds": 0.68, "safe_hint": "Hospital lights sweep twice, then pause. Cross during the pause.", "visual_id": "hospital_light"}],
+        "clear_threshold": 4
       },
       {
         "id": "firework_failure",
         "intro_dialogue": "The serum fails and fireworks scramble the bullet box.",
-        "patterns": [{"type": "callback_mix", "count": 8}],
+        "readability_hint": "Each firework color announces which familiar pattern returns.",
+        "patterns": [{"type": "callback_mix", "count": 8, "telegraph_seconds": 0.74, "safe_hint": "Each firework color recalls a familiar pattern. Read the flash first.", "visual_id": "aeon_firework"}],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.4, "bullet_speed_multiplier": 0.4, "telegraph_multiplier": 2.15},
+      "srmt": {"bullet_count_multiplier": 2.4, "bullet_speed_multiplier": 2.05, "telegraph_multiplier": 0.54}
+    }
   },
   "mitta_boss": {
     "enemy_name": "Mitta",
@@ -48,6 +66,11 @@
     "resonance_goal": 7,
     "return_scene": "res://scenes/levels/level_04.tscn",
     "boss_type": "main_boss",
+    "battle_visual": "res://assets/level_04/sprites/boss_mitta_idle.png",
+    "battle_backplate": "res://assets/level_04/backgrounds/auticity_game.png",
+    "battle_frames": 4,
+    "bullet_legend": "Festival notes, pageant curtains, and spotlight sweeps.",
+    "pacing_note": "Mitta's fight is a three-act stage show whose rhythm remains readable before each spectacle lands.",
     "defeated_flag": "mitta_defeated",
     "reward_gear": "festival_clearance",
     "growth_stage_reward": 5,
@@ -56,15 +79,28 @@
       {
         "id": "festival_lights",
         "intro_dialogue": "Mitta turns Aeon Festival lights into rhythm attacks.",
-        "patterns": [{"type": "musical_notes", "count": 7}],
+        "readability_hint": "Stage bulbs pulse on the attack beat; the dark count is safe movement time.",
+        "patterns": [{"type": "musical_notes", "count": 7, "telegraph_seconds": 0.68, "safe_hint": "Notes pulse on the beat. Move on the dark count.", "visual_id": "festival_note"}],
         "clear_threshold": 11
+      },
+      {
+        "id": "pageant_curtain",
+        "intro_dialogue": "Mitta drops the pageant curtains in alternating columns.",
+        "readability_hint": "Curtain shadows identify the next blocked column.",
+        "patterns": [{"type": "falling_objects", "count": 8, "telegraph_seconds": 0.64, "safe_hint": "Curtain shadows mark the fall. Change columns after each drop.", "visual_id": "festival_curtain"}],
+        "clear_threshold": 6
       },
       {
         "id": "pageant_finale",
         "intro_dialogue": "The stage erupts into beams, notes, and bitter spectacle.",
-        "patterns": [{"type": "sweeping_beams", "count": 6}],
+        "readability_hint": "The applauding side lights first; move behind the spotlight sweep.",
+        "patterns": [{"type": "sweeping_beams", "count": 7, "telegraph_seconds": 0.7, "safe_hint": "Spotlights sweep from the applauding side. Follow their trailing edge.", "visual_id": "spotlight"}],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.42, "bullet_speed_multiplier": 0.42, "telegraph_multiplier": 2.05},
+      "srmt": {"bullet_count_multiplier": 2.5, "bullet_speed_multiplier": 2.12, "telegraph_multiplier": 0.5}
+    }
   }
 }

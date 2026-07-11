@@ -1,9 +1,18 @@
 extends Node
 
+const DIFFICULTY_PATH := "res://data/difficulty/difficulty_modes.json"
+const SAVE_SCHEMA_VERSION := 3
+
 var story_flags: Dictionary = {}
+var schema_version := SAVE_SCHEMA_VERSION
 var current_level_id := "level_01"
+var current_room_id := "arrival"
 var spawn_point := "start"
+var playtime_seconds := 0.0
 var pending_encounter_id := "marn_practice"
+var difficulty_id := "shrububu"
+var difficulty_locked := false
+var save_created_unix := 0
 var growth_stage := 1
 var inventory: Dictionary = {}
 var gear: Dictionary = {}
@@ -11,6 +20,15 @@ var clues: Dictionary = {}
 var defeated_bosses: Dictionary = {}
 var current_weapon := ""
 var current_objective := ""
+
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+
+
+func _process(delta: float) -> void:
+	if not get_tree().paused:
+		playtime_seconds += delta
 
 
 func set_flag(flag_name: String, value: bool = true) -> void:
@@ -34,6 +52,10 @@ func clear_flags() -> void:
 
 
 func reset_progression() -> void:
+	schema_version = SAVE_SCHEMA_VERSION
+	current_room_id = "arrival"
+	spawn_point = "start"
+	playtime_seconds = 0.0
 	growth_stage = 1
 	inventory.clear()
 	gear.clear()
@@ -41,6 +63,44 @@ func reset_progression() -> void:
 	defeated_bosses.clear()
 	current_weapon = ""
 	current_objective = ""
+	difficulty_locked = false
+	save_created_unix = int(Time.get_unix_time_from_system())
+
+
+func set_difficulty(next_difficulty_id: String, force: bool = false) -> bool:
+	var modes := get_difficulty_modes()
+	if not modes.has(next_difficulty_id):
+		return false
+	if difficulty_locked and difficulty_id != next_difficulty_id and not force:
+		return false
+	difficulty_id = next_difficulty_id
+	return true
+
+
+func lock_difficulty() -> void:
+	difficulty_locked = true
+
+
+func get_difficulty_id() -> String:
+	return difficulty_id
+
+
+func get_difficulty_modes() -> Dictionary:
+	return _load_json_dict(DIFFICULTY_PATH)
+
+
+func get_difficulty_data() -> Dictionary:
+	var modes := get_difficulty_modes()
+	var data: Dictionary = modes.get(difficulty_id, modes.get("shrububu", {}))
+	return data.duplicate(true)
+
+
+func get_difficulty_multiplier(key: String, fallback: float = 1.0) -> float:
+	return float(get_difficulty_data().get(key, fallback))
+
+
+func is_story_difficulty() -> bool:
+	return difficulty_id == "shrububu"
 
 
 func add_item(item_id: String, amount: int = 1) -> int:

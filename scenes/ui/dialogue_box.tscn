@@ -2,47 +2,64 @@
 
 [ext_resource type="Script" path="res://scripts/dialogue/dialogue_box.gd" id="1_dialogue_box"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(0.0941176, 0.101961, 0.141176, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBox_dialogue"]
+bg_color = Color(0.015, 0.024, 0.029, 0.98)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.901961, 0.854902, 0.729412, 1)
+border_color = Color(0.49, 0.7, 0.7, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="DialogueBox" type="Control"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+process_mode = 3
+offset_right = 320.0
+offset_bottom = 180.0
 mouse_filter = 2
 script = ExtResource("1_dialogue_box")
 
 [node name="Panel" type="Panel" parent="."]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = -58.0
-offset_right = -12.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+offset_top = 122.0
+offset_right = 308.0
+offset_bottom = 172.0
+theme_override_styles/panel = SubResource("StyleBox_dialogue")
+
+[node name="SpeakerAccent" type="ColorRect" parent="Panel"]
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 9.0
+offset_bottom = 43.0
+color = Color(0.94, 0.76, 0.28, 1)
 
 [node name="SpeakerLabel" type="Label" parent="Panel"]
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 120.0
-offset_bottom = 20.0
-text = "Speaker"
+offset_left = 15.0
+offset_top = 5.0
+offset_right = 154.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.96, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 7
+text = "SPEAKER"
 
 [node name="LineLabel" type="Label" parent="Panel"]
-offset_left = 8.0
-offset_top = 22.0
-offset_right = 288.0
-offset_bottom = 48.0
+offset_left = 15.0
+offset_top = 19.0
+offset_right = 276.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0.88, 0.91, 0.87, 1)
+theme_override_font_sizes/font_size = 7
 text = "Dialogue line."
-autowrap_mode = 3
+autowrap_mode = 2
+
+[node name="ContinueLabel" type="Label" parent="Panel"]
+offset_left = 254.0
+offset_top = 35.0
+offset_right = 282.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.5, 0.72, 0.72, 1)
+theme_override_font_sizes/font_size = 6
+text = "E >"
+horizontal_alignment = 2

@@ -1,0 +1,15 @@
+{
+  "id": "satyaki_reveal",
+  "caption": "EAST DOCK / PROPERTY DISPUTE",
+  "trigger": {"interaction": "SatyakiBoss", "requires": ["poojan_defeated", "divorce_records_collected"], "unless_flag": "satyaki_tirumal_defeated"},
+  "completion_flag": "satyaki_intro_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "caption", "text": "THE RAIN STOPS TO LISTEN"},
+    {"type": "dialogue", "speaker": "Satyaki Tirumal", "lines": ["Shrububu. You took half my money, half my property, and somehow all the weather.", "SRMT lets me keep this dock as long as I keep the town afraid.", "Sign here. Then vanish."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["You kept the bad ceiling fans.", "And apparently every bad decision."]},
+    {"type": "cut_in", "id": "satyaki_tirumal_boss", "title": "SATYAKI TIRUMAL"},
+    {"type": "start_battle", "encounter_id": "satyaki_tirumal_boss", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

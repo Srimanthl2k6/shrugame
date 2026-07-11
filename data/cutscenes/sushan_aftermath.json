@@ -1,0 +1,15 @@
+{
+  "id": "sushan_aftermath",
+  "caption": "PATTERN FAILURE / FIREWORK CONTINGENCY",
+  "trigger": {"flag": "doctor_sushan_defeated", "unless_flag": "sushan_defeat_seen"},
+  "completion_flag": "sushan_defeat_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "cut_in", "id": "aeon_fireworks", "title": "NO PATTERN FOUND"},
+    {"type": "dialogue", "speaker": "Doctor Sushan", "lines": ["The serum found nothing it could narrow.", "Fireworks? In my hospital?", "Mitta will hear about this before the festival lights finish warming up."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["Your machine met a larger administrative problem.", "Open the plaza."]},
+    {"type": "set_objective", "text": "Begin the Aeon Festival in the plaza."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

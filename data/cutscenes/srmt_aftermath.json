@@ -1,0 +1,14 @@
+{
+  "id": "srmt_aftermath",
+  "caption": "THE THRONE GOES QUIET",
+  "trigger": {"flag": "srmt_defeated", "unless_flag": "srmt_defeat_seen"},
+  "completion_flag": "srmt_defeat_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "SRMT", "lines": ["Five districts. Ten fights. One impossible appetite.", "The dungeon is behind the throne.", "Take the bucket. Ishiville has already chosen you."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["The bucket was never yours.", "Neither was the town."]},
+    {"type": "set_objective", "text": "Open the dungeon gate and rescue IshiYoga."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

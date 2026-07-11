@@ -1,0 +1,15 @@
+{
+  "id": "aeon_festival",
+  "caption": "AEON FESTIVAL / PATTERNS OPTIONAL",
+  "trigger": {"requires": ["doctor_sushan_defeated"], "unless_flag": "aeon_festival_started"},
+  "completion_flag": "aeon_festival_started",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "cut_in", "id": "aeon_fireworks", "title": "AEON BEGINS"},
+    {"type": "dialogue", "speaker": "Festival Crowd", "lines": ["The hospital lights are off.", "The puns are still bad, but now they are voluntary.", "Mayor Mitta is taking the stage."]},
+    {"type": "dialogue", "speaker": "Mitta", "lines": ["You humiliated Sushan in his own ward.", "The festival belongs to us. The finale belongs to me."]},
+    {"type": "set_objective", "text": "Face Mitta at the Aeon Festival stage."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

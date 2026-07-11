@@ -11,10 +11,10 @@ const REQUIRED_ART := {
 	"res://assets/level_02/sprites/prop_kfc_popcorn_box.png": Vector2i(32, 24),
 	"res://assets/level_02/sprites/prop_banana_mailbox.png": Vector2i(24, 28),
 	"res://assets/level_02/sprites/prop_banana_exit_gate.png": Vector2i(30, 38),
-	"res://assets/level_02/sprites/npc_happy_monkey_idle.png": Vector2i(18, 24),
+	"res://assets/level_02/sprites/npc_happy_monkey_idle.png": Vector2i(32, 40),
 	"res://assets/level_02/sprites/npc_vela_echo_idle.png": Vector2i(18, 24),
-	"res://assets/level_02/sprites/boss_nitin_overworld.png": Vector2i(24, 34),
-	"res://assets/level_02/sprites/boss_deepak_reddy_overworld.png": Vector2i(32, 40),
+	"res://assets/level_02/sprites/boss_nitin_overworld.png": Vector2i(38, 54),
+	"res://assets/level_02/sprites/boss_deepak_reddy_overworld.png": Vector2i(42, 58),
 	"res://assets/level_02/sprites/fx_level02_monkey_loop_sheet.png": Vector2i(128, 64)
 }
 

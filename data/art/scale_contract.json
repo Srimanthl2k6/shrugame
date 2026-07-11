@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "viewport": [640, 360],
+  "default_window": [1280, 720],
+  "tile_size": [16, 16],
+  "battle_arena": [384, 152],
+  "cut_in_safe_size": [640, 160],
+  "shrububu_forms": {
+    "form_01": {"frame_size": [48, 64], "collision_size": [12, 18]},
+    "form_02": {"frame_size": [50, 68], "collision_size": [13, 19]},
+    "form_03": {"frame_size": [52, 72], "collision_size": [14, 20]},
+    "form_04": {"frame_size": [54, 76], "collision_size": [15, 22]},
+    "form_05": {"frame_size": [58, 80], "collision_size": [16, 24]}
+  },
+  "npc_classes": {
+    "small": [28, 36],
+    "standard": [34, 48],
+    "tall": [40, 56],
+    "feature_max": [48, 64]
+  },
+  "boss_minimums": {
+    "mini_overworld": [40, 56],
+    "mini_battle": [64, 74],
+    "main_overworld": [44, 62],
+    "main_battle": [80, 92],
+    "srmt_battle": [112, 128]
+  }
+}

@@ -12,11 +12,8 @@ border_color = Color(0.78, 0.72, 0.58, 1)
 
 [node name="ClueJournal" type="Control"]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 320.0
+offset_bottom = 180.0
 script = ExtResource("1_clue_journal")
 
 [node name="Panel" type="Panel" parent="."]

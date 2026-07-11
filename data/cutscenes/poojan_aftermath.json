@@ -1,0 +1,17 @@
+{
+  "id": "poojan_aftermath",
+  "caption": "SHERIFF'S OFFICE / TEST CONCLUDED",
+  "trigger": {"requires": ["poojan_defeated"], "unless_flag": "poojan_after_seen"},
+  "completion_flag": "poojan_after_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Sheriff Poojan", "lines": ["All right, Shrububu. You are not a rumor.", "Take the revolver. Satyaki understands paperwork, not mercy.", "The records office keeps his wet little empire indexed. Find the folder with your name bitten into it."]},
+    {"type": "cut_in", "id": "revolver_unlock", "title": "POOJAN'S REVOLVER"},
+    {"type": "sfx", "id": "clue_pickup"},
+    {"type": "unlock_gear", "id": "revolver"},
+    {"type": "checkpoint", "flag": "revolver_reward_checkpoint"},
+    {"type": "set_objective", "text": "Search the records office for Satyaki's paper trail."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

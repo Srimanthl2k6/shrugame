@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/visual/animated_fx.gd" id="7_fx"]
 [ext_resource type="Script" path="res://scripts/core/music_trigger.gd" id="8_music"]
 [ext_resource type="Script" path="res://scripts/visual/playable_frame.gd" id="9_frame"]
+[ext_resource type="Texture2D" path="res://assets/level_05/backgrounds/area_111_game.png" id="10_premium_backplate"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
 size = Vector2(34, 22)
@@ -27,16 +28,27 @@ script = ExtResource("8_music")
 music_id = "level_05_ruined_club_court_finale"
 
 [node name="Background" type="Polygon2D" parent="."]
+scale = Vector2(2, 2)
+z_index = -20
 color = Color(0.07, 0.045, 0.07, 1)
 polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
 
 [node name="World" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="PlayableFrame" type="Node2D" parent="World"]
+visible = false
 z_index = 9
 script = ExtResource("9_frame")
 frame_color = Color(1, 0.54, 0.88, 0.86)
 corner_color = Color(1, 0.78, 0.95, 0.92)
+
+[node name="PremiumBackplate" type="Sprite2D" parent="World"]
+texture_filter = 0
+z_index = -10
+position = Vector2(160, 90)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_premium_backplate")
 
 [node name="PinkRuins" type="Node2D" parent="World"]
 
@@ -506,6 +518,7 @@ color = Color(0.68, 0.38, 0.72, 1)
 polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
 
 [node name="VisualFxLayer" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="ClubStatic" type="Node2D" parent="VisualFxLayer"]
 position = Vector2(102, 54)
@@ -544,10 +557,12 @@ motion_pixels = 1.5
 position = Vector2(34, 132)
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
 
 [node name="UiLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
 

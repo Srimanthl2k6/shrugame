@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const VIEWPORT_SIZE := Vector2(320.0, 180.0)
+const PAUSE_MENU_SCENE := preload("res://scenes/ui/pause_menu.tscn")
 const WALL_THICKNESS := 8.0
 const OVERLAY_FONT_SIZE := 7
 const OVERLAY_SMALL_FONT_SIZE := 6
@@ -98,6 +99,15 @@ func decorate_scene(level_root: Node) -> void:
 		_add_level_boundaries(world)
 	if world.get_node_or_null("ReadableMarkers") == null:
 		_add_readable_markers(world)
+	for obsolete_path in ["RouteGuides", "ClarityLayer", "LandmarkLabels", "ReadableMarkers", "MapLabels", "PlayableFrame", "ForestFloor", "DouglasFirTown", "CityFloor", "PinkRuins"]:
+		var obsolete := world.get_node_or_null(obsolete_path) as CanvasItem
+		if obsolete != null:
+			obsolete.visible = false
+	_hide_polygon_blockouts(world)
+	if level_root.get_node_or_null("PauseMenu") == null:
+		var pause_menu := PAUSE_MENU_SCENE.instantiate()
+		pause_menu.name = "PauseMenu"
+		level_root.add_child(pause_menu)
 	_scale_world_labels(world)
 
 
@@ -105,7 +115,9 @@ func build_pc_overlay() -> Control:
 	var root := Control.new()
 	root.name = "Root"
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	root.size = VIEWPORT_SIZE
+	root.scale = Vector2(2.0, 2.0)
 
 	var top_bar := Panel.new()
 	top_bar.name = "TopBar"
@@ -147,6 +159,7 @@ func build_pc_overlay() -> Control:
 	legend_panel.offset_bottom = 176.0
 	legend_panel.add_theme_stylebox_override("panel", _make_style_box(Color(0.01, 0.011, 0.018, 0.86), Color(0.5, 0.58, 0.64, 1.0)))
 	root.add_child(legend_panel)
+	legend_panel.visible = false
 
 	var legend_label := Label.new()
 	legend_label.name = "LegendLabel"
@@ -168,6 +181,7 @@ func build_pc_overlay() -> Control:
 	prompt_panel.offset_bottom = 152.0
 	prompt_panel.add_theme_stylebox_override("panel", _make_style_box(Color(0.012, 0.014, 0.02, 0.78), Color(0.86, 0.72, 0.34, 0.88)))
 	root.add_child(prompt_panel)
+	prompt_panel.visible = false
 
 	var prompt_label := Label.new()
 	prompt_label.name = "PromptLabel"
@@ -190,6 +204,7 @@ func build_pc_overlay() -> Control:
 	route_steps_panel.offset_bottom = 34.0
 	route_steps_panel.add_theme_stylebox_override("panel", _make_style_box(Color(0.014, 0.016, 0.022, 0.78), Color(0.98, 0.82, 0.28, 0.8)))
 	root.add_child(route_steps_panel)
+	route_steps_panel.visible = false
 
 	_route_steps_label = Label.new()
 	_route_steps_label.name = "RouteStepsLabel"
@@ -230,8 +245,15 @@ func _refresh_presentation() -> void:
 		decorate_scene(level_root)
 		_last_level_instance_id = instance_id
 	if _overlay != null:
-		_overlay.visible = not _title_layer_is_visible()
+		var show_objectives := true
+		var settings_manager := get_node_or_null("/root/SettingsManager")
+		if settings_manager != null:
+			show_objectives = bool(settings_manager.get_setting("show_objectives", true))
+		var director := get_node_or_null("/root/CutsceneDirector")
+		var cutscene_active: bool = director != null and bool(director.is_playing)
+		_overlay.visible = not _title_layer_is_visible() and not cutscene_active and show_objectives
 	_update_overlay_text(level_root)
+	_update_context_prompt(level_root)
 
 
 func _find_level_root() -> Node:
@@ -274,6 +296,33 @@ func _update_overlay_text(level_root: Node) -> void:
 		_route_steps_label.text = get_route_steps_text(str(level_root.name))
 
 
+func _update_context_prompt(level_root: Node) -> void:
+	if _overlay == null:
+		return
+	var prompt_panel := _overlay.get_node_or_null("PromptPanel") as Control
+	var prompt_label := _overlay.get_node_or_null("PromptPanel/PromptLabel") as Label
+	if prompt_panel == null or prompt_label == null:
+		return
+	var focused_area := _find_focused_area(level_root)
+	prompt_panel.visible = focused_area != null and _overlay.visible
+	if focused_area != null:
+		if focused_area.has_method("get_focus_prompt"):
+			prompt_label.text = focused_area.get_focus_prompt()
+		else:
+			prompt_label.text = "E/Enter: %s" % get_area_display_name(focused_area)
+
+
+func _find_focused_area(node: Node) -> Area2D:
+	for child in node.get_children():
+		var area := child as Area2D
+		if area != null and bool(area.get("_player_inside")):
+			return area
+		var nested := _find_focused_area(child)
+		if nested != null:
+			return nested
+	return null
+
+
 func _add_level_boundaries(world: Node2D) -> void:
 	var layer := Node2D.new()
 	layer.name = "BoundaryWalls"
@@ -311,6 +360,7 @@ func _add_wall(parent: Node2D, node_name: String, center: Vector2, size: Vector2
 func _add_readable_markers(world: Node2D) -> void:
 	var marker_layer := Node2D.new()
 	marker_layer.name = "ReadableMarkers"
+	marker_layer.visible = false
 	world.add_child(marker_layer)
 
 	var label_layer := Node2D.new()
@@ -333,6 +383,13 @@ func _collect_area_nodes(node: Node, area_nodes: Array[Area2D]) -> void:
 		if area != null:
 			area_nodes.append(area)
 		_collect_area_nodes(child, area_nodes)
+
+
+func _hide_polygon_blockouts(node: Node) -> void:
+	for child in node.get_children():
+		if child is Polygon2D and child.name == "Visual":
+			child.visible = false
+		_hide_polygon_blockouts(child)
 
 
 func _get_area_category(area: Area2D) -> String:

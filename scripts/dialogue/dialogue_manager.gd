@@ -43,6 +43,28 @@ func start_dialogue(dialogue_id: String, flag_on_complete: String = "") -> bool:
 	return true
 
 
+func start_inline_dialogue(speaker: String, lines: Array, flag_on_complete: String = "") -> bool:
+	if lines.is_empty():
+		return false
+	_active_entry = {"speaker": speaker}
+	_active_lines = lines.duplicate(true)
+	_active_index = 0
+	_active_flag = flag_on_complete
+	dialogue_started.emit(speaker, str(_active_lines[0]))
+	return true
+
+
+func cancel_dialogue(emit_finished: bool = true) -> void:
+	if not is_active():
+		return
+	_active_entry = {}
+	_active_lines = []
+	_active_index = 0
+	_active_flag = ""
+	if emit_finished:
+		dialogue_finished.emit("")
+
+
 func advance() -> bool:
 	if not is_active():
 		return false

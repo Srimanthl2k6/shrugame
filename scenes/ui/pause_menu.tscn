@@ -1,3 +1,146 @@
-[gd_scene format=3]
+[gd_scene load_steps=5 format=3]
 
-[node name="PauseMenu" type="Control"]
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_panel.tscn" id="2_settings"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_shell"]
+bg_color = Color(0.012, 0.019, 0.023, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.49, 0.68, 0.68, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_content"]
+bg_color = Color(0.035, 0.047, 0.052, 1)
+border_width_left = 1
+border_color = Color(0.25, 0.38, 0.39, 1)
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 80
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+script = ExtResource("1_pause")
+
+[node name="Root" type="Control" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="Dim" type="ColorRect" parent="Root"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.002, 0.005, 0.007, 0.86)
+
+[node name="Shell" type="Panel" parent="Root"]
+offset_left = 18.0
+offset_top = 12.0
+offset_right = 302.0
+offset_bottom = 168.0
+theme_override_styles/panel = SubResource("StyleBox_shell")
+
+[node name="Header" type="Label" parent="Root/Shell"]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 272.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(1, 0.93, 0.72, 1)
+theme_override_font_sizes/font_size = 11
+text = "ISHIVILLE FIELD NOTES"
+
+[node name="Left" type="Control" parent="Root/Shell"]
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 98.0
+offset_bottom = 146.0
+
+[node name="DifficultyLabel" type="Label" parent="Root/Shell/Left"]
+offset_right = 88.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0.56, 0.78, 0.78, 1)
+theme_override_font_sizes/font_size = 6
+text = "MODE: SHRUBUBU"
+
+[node name="ResumeButton" type="Button" parent="Root/Shell/Left"]
+offset_top = 18.0
+offset_right = 88.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 7
+text = "RESUME"
+
+[node name="JournalButton" type="Button" parent="Root/Shell/Left"]
+offset_top = 38.0
+offset_right = 88.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 7
+text = "JOURNAL"
+
+[node name="ItemsButton" type="Button" parent="Root/Shell/Left"]
+offset_top = 58.0
+offset_right = 88.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 7
+text = "BAG & GEAR"
+
+[node name="OptionsButton" type="Button" parent="Root/Shell/Left"]
+offset_top = 78.0
+offset_right = 88.0
+offset_bottom = 94.0
+theme_override_font_sizes/font_size = 7
+text = "OPTIONS"
+
+[node name="SaveButton" type="Button" parent="Root/Shell/Left"]
+offset_top = 98.0
+offset_right = 88.0
+offset_bottom = 114.0
+theme_override_font_sizes/font_size = 7
+text = "SAVE"
+
+[node name="TitleButton" type="Button" parent="Root/Shell/Left"]
+offset_top = 118.0
+offset_right = 88.0
+offset_bottom = 134.0
+theme_override_font_sizes/font_size = 7
+text = "TITLE SCREEN"
+
+[node name="Content" type="Panel" parent="Root/Shell"]
+offset_left = 108.0
+offset_top = 30.0
+offset_right = 274.0
+offset_bottom = 146.0
+theme_override_styles/panel = SubResource("StyleBox_content")
+
+[node name="SectionTitle" type="Label" parent="Root/Shell/Content"]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 156.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.94, 0.78, 0.34, 1)
+theme_override_font_sizes/font_size = 8
+text = "CLUE JOURNAL"
+
+[node name="Rule" type="ColorRect" parent="Root/Shell/Content"]
+offset_left = 10.0
+offset_top = 25.0
+offset_right = 156.0
+offset_bottom = 26.0
+color = Color(0.24, 0.39, 0.4, 1)
+
+[node name="ContentText" type="RichTextLabel" parent="Root/Shell/Content"]
+offset_left = 10.0
+offset_top = 32.0
+offset_right = 156.0
+offset_bottom = 108.0
+theme_override_font_sizes/normal_font_size = 7
+bbcode_enabled = true
+fit_content = false
+scroll_active = true
+text = "NO CLUES YET\n\nThe rain has not admitted anything useful."
+
+[node name="SettingsPanel" parent="Root" instance=ExtResource("2_settings")]

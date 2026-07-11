@@ -10,16 +10,23 @@ const ROUTE_SUMMARY := [
 	"5. Defeat Deepak Reddy at the mayor office.",
 	"6. Exit to Berry Barks."
 ]
+const MONKEY_SPRITES := ["HappyMonkeyLoop", "HappyMonkeyResident02", "HappyMonkeyResident03", "HappyMonkeyResident04"]
 
 
 func _ready() -> void:
 	var game_state := _get_game_state()
 	if game_state != null:
+		var entering_level: bool = game_state.current_level_id != "level_02"
 		game_state.current_level_id = "level_02"
-		if game_state.has_method("get_current_objective") and game_state.get_current_objective().is_empty():
+		if entering_level or (game_state.has_method("get_current_objective") and game_state.get_current_objective().is_empty()):
 			game_state.set_current_objective("Investigate why Banana-burbs is too happy.")
 	_sync_progression_rewards()
+	_apply_population_state()
 	_refresh_exit_hint()
+	var director := get_node_or_null("/root/CutsceneDirector")
+	if director != null and not director.cutscene_completed.is_connected(_on_cutscene_completed):
+		director.cutscene_completed.connect(_on_cutscene_completed)
+	_play_pending_return_cutscene.call_deferred()
 
 
 func complete_objective() -> void:
@@ -37,6 +44,7 @@ func collect_objective(flag_name: String = "") -> void:
 	if flag_name == "monkeys_spell_broken":
 		complete_objective()
 	_sync_progression_rewards()
+	_apply_population_state()
 	_refresh_exit_hint()
 
 
@@ -73,6 +81,33 @@ func _sync_progression_rewards() -> void:
 		game_state.set_flag("vela_practice_cleared", true)
 		if game_state.has_method("set_current_objective"):
 			game_state.set_current_objective("Banana-burbs is awake. Leave for Berry Barks.")
+
+
+func _apply_population_state() -> void:
+	var game_state := _get_game_state()
+	if game_state == null:
+		return
+	var awake: bool = bool(game_state.get_flag("monkeys_spell_broken"))
+	for node_name in MONKEY_SPRITES:
+		var monkey := get_node_or_null("World/%s" % node_name) as CanvasItem
+		if monkey != null:
+			monkey.modulate = Color(0.9, 1.0, 0.9) if awake else Color(1.0, 0.94, 0.72)
+
+
+func _play_pending_return_cutscene() -> void:
+	var game_state := _get_game_state()
+	var director := get_node_or_null("/root/CutsceneDirector")
+	if game_state == null or director == null or director.is_playing:
+		return
+	if game_state.get_flag("deepak_reddy_defeated") and not game_state.get_flag("deepak_truth_heard"):
+		director.play("deepak_moral_twist", self)
+
+
+func _on_cutscene_completed(cutscene_id: String, _skipped: bool) -> void:
+	if cutscene_id in ["banana_lab_discovery", "popcorn_spell_break", "deepak_moral_twist"]:
+		_sync_progression_rewards()
+		_apply_population_state()
+		_refresh_exit_hint()
 
 
 func _refresh_exit_hint() -> void:

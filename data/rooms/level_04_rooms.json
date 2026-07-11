@@ -1,0 +1,89 @@
+{
+  "level_id": "level_04",
+  "start_room": "pun_street",
+  "post_battle_cutscenes": [
+    {"flag": "doctor_sushan_defeated", "unless_flag": "sushan_defeat_seen", "cutscene_id": "sushan_aftermath"},
+    {"flag": "mitta_defeated", "unless_flag": "mitta_defeat_seen", "cutscene_id": "mitta_aftermath"}
+  ],
+  "rooms": {
+    "pun_street": {
+      "id": "pun_street",
+      "display_name": "Pun Street",
+      "background": "res://assets/level_04/backgrounds/rooms/pun_street.png",
+      "ambience_id": "level_04_hospital_festival_synth",
+      "spawn_points": {"start": [90, 284], "default": [90, 284], "from_hospital": [548, 284]},
+      "blockers": [[62, 26, 516, 108]],
+      "interactions": [
+        {"id": "PunVendor", "position": [180, 258], "visual": "res://assets/level_04/sprites/npc_pun_vendor_idle.png", "display_name": "Pun Vendor", "dialogue_id": "pun_vendor", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "post_flag": "mitta_defeated", "post_dialogue_id": "auticity_post_clear_resident", "interaction_size": [40, 52]},
+        {"id": "PunCart", "position": [260, 236], "visual": "res://assets/level_04/sprites/prop_pun_vendor_cart.png", "display_name": "Pun cart", "dialogue_id": "pun_loop", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "interaction_size": [62, 46]},
+        {"id": "NeonPatient", "position": [422, 258], "visual": "res://assets/level_04/sprites/npc_neon_patient_idle.png", "display_name": "Neon Resident", "dialogue_id": "neon_patient", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "post_flag": "mitta_defeated", "post_dialogue_id": "auticity_post_clear_resident", "interaction_size": [40, 52]},
+        {"id": "AeonFlyer", "position": [508, 218], "visual": "res://assets/level_04/sprites/prop_save_kiosk.png", "display_name": "Aeon flyer", "dialogue_id": "clue_aeon_flyer", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "clue_id": "aeon_flyer", "one_shot": true, "interaction_size": [34, 40]}
+      ],
+      "exits": [{"id": "east_to_hospital", "position": [606, 278], "size": [40, 108], "target_room_id": "hospital_reception", "target_spawn_id": "from_street"}]
+    },
+    "hospital_reception": {
+      "id": "hospital_reception",
+      "display_name": "Auticity Hospital Reception",
+      "background": "res://assets/level_04/backgrounds/rooms/hospital_reception.png",
+      "ambience_id": "level_04_hospital_festival_synth",
+      "spawn_points": {"default": [88, 284], "from_street": [88, 284], "from_ward": [548, 284]},
+      "blockers": [[74, 22, 492, 112], [226, 146, 188, 48]],
+      "interactions": [
+        {"id": "ClinicReceptionist", "position": [208, 244], "visual": "res://assets/level_04/sprites/npc_clinic_receptionist_idle.png", "display_name": "Clinic Receptionist", "dialogue_id": "clinic_receptionist", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "post_flag": "doctor_sushan_defeated", "post_dialogue_id": "auticity_post_clear_resident", "interaction_size": [40, 52]},
+        {"id": "HospitalRecords", "position": [350, 220], "visual": "res://assets/level_04/sprites/prop_hospital_records_terminal.png", "display_name": "Hospital records terminal", "dialogue_id": "hospital_records", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "clue_id": "hospital_records", "one_shot": true, "interaction_size": [46, 48], "objective_text": "Confront Doctor Sushan in the Pattern Serum ward."},
+        {"id": "HospitalMap", "position": [478, 226], "visual": "res://assets/level_04/sprites/prop_save_kiosk.png", "display_name": "Hospital map", "dialogue_id": "clue_hospital_map", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "clue_id": "hospital_map", "one_shot": true, "interaction_size": [34, 40]}
+      ],
+      "exits": [
+        {"id": "west_to_street", "position": [34, 280], "size": [40, 108], "target_room_id": "pun_street", "target_spawn_id": "from_hospital"},
+        {"id": "east_to_ward", "position": [606, 280], "size": [40, 108], "target_room_id": "serum_ward", "target_spawn_id": "from_reception", "required_flags": ["hospital_records_collected"], "locked_objective": "Read the hospital records before entering the restricted ward."}
+      ]
+    },
+    "serum_ward": {
+      "id": "serum_ward",
+      "display_name": "Pattern Serum Ward",
+      "background": "res://assets/level_04/backgrounds/rooms/serum_ward.png",
+      "ambience_id": "level_04_hospital_festival_synth",
+      "spawn_points": {"default": [88, 284], "from_reception": [88, 284], "from_plaza": [548, 284]},
+      "blockers": [[34, 20, 572, 120], [274, 112, 92, 78]],
+      "interactions": [
+        {"id": "DoctorSushan", "position": [372, 226], "visual": "res://assets/level_04/sprites/boss_doctor_sushan_overworld.png", "display_name": "Doctor Sushan", "interaction_message": "Sushan holds a syringe full of glowing Pattern Serum.", "cutscene_id": "sushan_injection_failure", "required_flags": ["hospital_records_collected"], "disabled_if_flag": "doctor_sushan_defeated", "hide_when_disabled": true, "interaction_size": [50, 62]},
+        {"id": "SerumLedger", "position": [320, 194], "display_name": "Pattern Serum ledger", "dialogue_id": "clue_serum_ledger", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "clue_id": "serum_ledger", "one_shot": true, "interaction_size": [72, 48]},
+        {"id": "WardSave", "position": [500, 268], "visual": "res://assets/level_04/sprites/prop_save_kiosk.png", "display_name": "Quiet hospital kiosk", "interaction_message": "A kiosk with its pattern scanner disabled saves your place.", "save_on_interact": true, "level_id": "level_04", "spawn_point": "from_reception", "interaction_size": [34, 40]}
+      ],
+      "exits": [
+        {"id": "west_to_reception", "position": [34, 280], "size": [40, 108], "target_room_id": "hospital_reception", "target_spawn_id": "from_ward"},
+        {"id": "east_to_plaza", "position": [606, 280], "size": [40, 108], "target_room_id": "festival_plaza", "target_spawn_id": "from_ward", "required_flags": ["doctor_sushan_defeated"], "locked_objective": "Sushan still controls the ward doors."}
+      ]
+    },
+    "festival_plaza": {
+      "id": "festival_plaza",
+      "display_name": "Aeon Festival Plaza",
+      "background": "res://assets/level_04/backgrounds/rooms/festival_plaza.png",
+      "ambience_id": "level_04_hospital_festival_synth",
+      "spawn_points": {"default": [88, 284], "from_ward": [88, 284], "from_stage": [548, 284]},
+      "blockers": [[70, 22, 500, 90], [250, 138, 140, 58]],
+      "interactions": [
+        {"id": "AeonFestival", "position": [324, 210], "visual": "res://assets/level_04/sprites/prop_aeon_stage.png", "display_name": "Aeon Festival stage", "interaction_message": "The town waits for someone to start the unscheduled festival.", "cutscene_id": "aeon_festival", "required_flags": ["doctor_sushan_defeated"], "disabled_if_flag": "aeon_festival_started", "one_shot": true, "interaction_size": [72, 54]},
+        {"id": "FestivalDrummer", "position": [198, 258], "visual": "res://assets/level_04/sprites/npc_festival_drummer_idle.png", "display_name": "Festival Drummer", "dialogue_id": "festival_drummer", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "post_flag": "aeon_festival_started", "post_dialogue_id": "auticity_post_clear_plaza", "interaction_size": [40, 52]},
+        {"id": "MaskMaker", "position": [458, 258], "visual": "res://assets/level_04/sprites/npc_pun_vendor_idle.png", "display_name": "Aeon Mask Maker", "dialogue_id": "aeon_mask_maker", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "post_flag": "mitta_defeated", "post_dialogue_id": "auticity_post_clear_resident", "flip_h": true, "interaction_size": [40, 52]}
+      ],
+      "exits": [
+        {"id": "west_to_ward", "position": [34, 280], "size": [40, 108], "target_room_id": "serum_ward", "target_spawn_id": "from_plaza"},
+        {"id": "east_to_stage", "position": [606, 280], "size": [40, 108], "target_room_id": "mayor_stage", "target_spawn_id": "from_plaza", "required_flags": ["aeon_festival_started"], "locked_objective": "Start the Aeon Festival before approaching Mitta's stage."}
+      ]
+    },
+    "mayor_stage": {
+      "id": "mayor_stage",
+      "display_name": "Mitta's Festival Stage",
+      "background": "res://assets/level_04/backgrounds/rooms/mayor_stage.png",
+      "ambience_id": "level_04_hospital_festival_synth",
+      "spawn_points": {"default": [88, 284], "from_plaza": [88, 284]},
+      "blockers": [[90, 22, 460, 96]],
+      "interactions": [
+        {"id": "MittaBoss", "position": [372, 220], "visual": "res://assets/level_04/sprites/boss_mitta_overworld.png", "display_name": "Mayor Mitta", "interaction_message": "Mitta waits under a spotlight that follows no one else.", "cutscene_id": "mitta_confrontation", "required_flags": ["aeon_festival_started"], "disabled_if_flag": "mitta_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]},
+        {"id": "Area111Road", "position": [534, 266], "visual": "res://assets/level_04/sprites/prop_area111_exit.png", "display_name": "Road to Area 111", "interaction_message": "Pink static flickers beyond the festival gate.", "target_scene_path": "res://scenes/levels/districts/level_05.tscn", "required_flags": ["mitta_defeated"], "locked_message": "Mitta has not surrendered the festival route.", "interaction_size": [68, 68]}
+      ],
+      "exits": [{"id": "west_to_plaza", "position": [34, 280], "size": [40, 108], "target_room_id": "festival_plaza", "target_spawn_id": "from_stage"}]
+    }
+  }
+}

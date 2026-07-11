@@ -1,0 +1,94 @@
+{
+  "level_id": "level_03",
+  "start_room": "forest_entrance",
+  "completion_rules": [
+    {"requires": ["berry_cluster_01", "berry_cluster_02", "berry_cluster_03", "berry_cluster_04"], "set_flag": "berries_collected"}
+  ],
+  "post_battle_cutscenes": [
+    {"flag": "niggesh_nishal_defeated", "unless_flag": "nishal_defeat_seen", "cutscene_id": "nishal_aftermath"},
+    {"flag": "ankit_defeated", "unless_flag": "ankit_defeat_seen", "cutscene_id": "ankit_aftermath"}
+  ],
+  "rooms": {
+    "forest_entrance": {
+      "id": "forest_entrance",
+      "display_name": "Douglas Fir Entrance",
+      "background": "res://assets/level_03/backgrounds/rooms/forest_entrance.png",
+      "ambience_id": "level_03_forest_mystery",
+      "spawn_points": {"start": [92, 286], "default": [92, 286], "from_paths": [548, 286]},
+      "blockers": [[70, 24, 500, 98]],
+      "interactions": [
+        {"id": "FirGrandmother", "position": [190, 254], "visual": "res://assets/level_03/sprites/npc_fir_grandmother_idle.png", "display_name": "Fir Grandmother", "dialogue_id": "fir_grandmother", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "post_flag": "ankit_defeated", "post_dialogue_id": "berry_post_clear_path", "interaction_size": [40, 52]},
+        {"id": "MistRanger", "position": [380, 248], "visual": "res://assets/level_03/sprites/npc_mist_ranger_idle.png", "display_name": "Mist Ranger", "dialogue_id": "mist_ranger", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "post_flag": "ankit_defeated", "post_dialogue_id": "berry_post_clear_path", "interaction_size": [40, 52]},
+        {"id": "BerryMap", "position": [486, 222], "visual": "res://assets/level_03/sprites/prop_berry_contract.png", "display_name": "Red berry map", "dialogue_id": "clue_red_berry_map", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "clue_id": "red_berry_map", "one_shot": true, "interaction_size": [36, 38]}
+      ],
+      "exits": [{"id": "east_to_paths", "position": [606, 278], "size": [40, 108], "target_room_id": "berry_paths", "target_spawn_id": "from_entrance"}]
+    },
+    "berry_paths": {
+      "id": "berry_paths",
+      "display_name": "Mist And Berry Paths",
+      "background": "res://assets/level_03/backgrounds/rooms/berry_paths.png",
+      "ambience_id": "level_03_forest_mystery",
+      "spawn_points": {"default": [86, 286], "from_entrance": [86, 286], "from_hut": [548, 286]},
+      "blockers": [[90, 30, 132, 110], [418, 28, 132, 110]],
+      "interactions": [
+        {"id": "BerryCluster01", "position": [176, 226], "visual": "res://assets/level_03/sprites/prop_berry_cluster.png", "display_name": "Berry cluster 1 of 4", "interaction_message": "Shrububu gathers 250 bark berries.", "flag_on_interact": "berry_cluster_01", "item_id": "berry_order", "item_amount": 250, "one_shot": true, "hide_when_disabled": true, "disabled_if_flag": "berry_cluster_01", "interaction_size": [40, 44]},
+        {"id": "BerryCluster02", "position": [292, 270], "visual": "res://assets/level_03/sprites/prop_berry_cluster.png", "display_name": "Berry cluster 2 of 4", "interaction_message": "Shrububu gathers 250 more bark berries.", "flag_on_interact": "berry_cluster_02", "item_id": "berry_order", "item_amount": 250, "one_shot": true, "hide_when_disabled": true, "disabled_if_flag": "berry_cluster_02", "interaction_size": [40, 44]},
+        {"id": "BerryCluster03", "position": [404, 218], "visual": "res://assets/level_03/sprites/prop_berry_cluster.png", "display_name": "Berry cluster 3 of 4", "interaction_message": "The satchel now contains 750 berries.", "flag_on_interact": "berry_cluster_03", "item_id": "berry_order", "item_amount": 250, "one_shot": true, "hide_when_disabled": true, "disabled_if_flag": "berry_cluster_03", "interaction_size": [40, 44]},
+        {"id": "BerryCluster04", "position": [500, 270], "visual": "res://assets/level_03/sprites/prop_berry_cluster.png", "display_name": "Berry cluster 4 of 4", "interaction_message": "The 1000-berry order is complete.", "flag_on_interact": "berry_cluster_04", "item_id": "berry_order", "item_amount": 250, "one_shot": true, "hide_when_disabled": true, "disabled_if_flag": "berry_cluster_04", "objective_text": "Bring the complete order and contract to Nishal.", "interaction_size": [40, 44]},
+        {"id": "BerryPicker", "position": [330, 216], "visual": "res://assets/level_03/sprites/npc_berry_picker_idle.png", "display_name": "Berry Picker", "dialogue_id": "berry_picker_kid", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "post_flag": "ankit_defeated", "post_dialogue_id": "berry_post_clear_potions", "interaction_size": [38, 48]}
+      ],
+      "exits": [
+        {"id": "west_to_entrance", "position": [34, 280], "size": [40, 108], "target_room_id": "forest_entrance", "target_spawn_id": "from_paths"},
+        {"id": "east_to_hut", "position": [606, 280], "size": [40, 108], "target_room_id": "chef_hut", "target_spawn_id": "from_paths"}
+      ]
+    },
+    "chef_hut": {
+      "id": "chef_hut",
+      "display_name": "Nishal's Chef Hut",
+      "background": "res://assets/level_03/backgrounds/rooms/chef_hut.png",
+      "ambience_id": "level_03_forest_mystery",
+      "spawn_points": {"default": [90, 286], "from_paths": [90, 286], "from_clearing": [548, 286]},
+      "blockers": [[94, 24, 452, 112]],
+      "interactions": [
+        {"id": "BerryContract", "position": [218, 230], "visual": "res://assets/level_03/sprites/prop_berry_contract.png", "display_name": "1000-berry contract", "dialogue_id": "berry_contract", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "clue_id": "berry_contract", "one_shot": true, "interaction_size": [38, 40]},
+        {"id": "NishalBoss", "position": [398, 230], "visual": "res://assets/level_03/sprites/boss_niggesh_nishal_overworld.png", "display_name": "Niggesh Nishal", "interaction_message": "Nishal counts every berry and avoids mentioning a fryer.", "cutscene_id": "false_chicken_promise", "required_flags": ["berries_collected", "berry_contract_collected"], "disabled_if_flag": "niggesh_nishal_defeated", "hide_when_disabled": true, "interaction_size": [50, 62]},
+        {"id": "EmptyFryer", "position": [492, 246], "visual": "res://assets/level_03/sprites/prop_berry_share_table.png", "display_name": "Empty fryer", "dialogue_id": "clue_empty_fryer", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "clue_id": "empty_fryer", "one_shot": true, "interaction_size": [42, 38]}
+      ],
+      "exits": [
+        {"id": "west_to_paths", "position": [34, 280], "size": [40, 108], "target_room_id": "berry_paths", "target_spawn_id": "from_hut"},
+        {"id": "east_to_clearing", "position": [606, 280], "size": [40, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_hut", "required_flags": ["niggesh_nishal_defeated"], "locked_objective": "Nishal is still holding the berry order."}
+      ]
+    },
+    "sharing_clearing": {
+      "id": "sharing_clearing",
+      "display_name": "Community Sharing Clearing",
+      "background": "res://assets/level_03/backgrounds/rooms/sharing_clearing.png",
+      "ambience_id": "level_03_forest_mystery",
+      "spawn_points": {"default": [88, 284], "from_hut": [88, 284], "from_gate": [548, 284]},
+      "blockers": [[76, 24, 488, 92], [262, 146, 116, 46]],
+      "interactions": [
+        {"id": "BerryShare", "position": [322, 218], "visual": "res://assets/level_03/sprites/prop_berry_share_table.png", "display_name": "Community berry table", "interaction_message": "The whole town waits around a table built for sharing.", "cutscene_id": "berry_sharing", "required_flags": ["niggesh_nishal_defeated"], "disabled_if_flag": "berries_shared", "one_shot": true, "interaction_size": [70, 48]},
+        {"id": "BerryApothecary", "position": [194, 264], "visual": "res://assets/level_03/sprites/npc_berry_apothecary_idle.png", "display_name": "Berry Apothecary", "dialogue_id": "berry_apothecary", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "post_flag": "berries_shared", "post_dialogue_id": "berry_post_clear_potions", "interaction_size": [40, 52]},
+        {"id": "BarkChoir", "position": [456, 260], "visual": "res://assets/level_03/sprites/npc_fir_grandmother_idle.png", "display_name": "Bark Choir", "dialogue_id": "bark_choir", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "post_flag": "ankit_defeated", "post_dialogue_id": "berry_post_clear_path", "flip_h": true, "interaction_size": [40, 52]},
+        {"id": "BerrySave", "position": [520, 214], "visual": "res://assets/level_03/sprites/prop_berry_watch_save.png", "display_name": "Berry watch", "interaction_message": "A berry watch marks this moment in syrup and saves.", "save_on_interact": true, "level_id": "level_03", "spawn_point": "from_hut", "interaction_size": [34, 42]}
+      ],
+      "exits": [
+        {"id": "west_to_hut", "position": [34, 280], "size": [40, 108], "target_room_id": "chef_hut", "target_spawn_id": "from_clearing"},
+        {"id": "east_to_gate", "position": [606, 280], "size": [40, 108], "target_room_id": "ankit_gate", "target_spawn_id": "from_clearing", "required_flags": ["berries_shared"], "locked_objective": "Share the berries before leaving the town."}
+      ]
+    },
+    "ankit_gate": {
+      "id": "ankit_gate",
+      "display_name": "Ankit's Exit Route",
+      "background": "res://assets/level_03/backgrounds/rooms/ankit_gate.png",
+      "ambience_id": "level_03_forest_mystery",
+      "spawn_points": {"default": [88, 284], "from_clearing": [88, 284]},
+      "blockers": [[88, 24, 464, 98]],
+      "interactions": [
+        {"id": "AnkitBoss", "position": [378, 226], "visual": "res://assets/level_03/sprites/boss_ankit_overworld.png", "display_name": "Ankit", "interaction_message": "Ankit arrives with an empty plate and a full grievance.", "cutscene_id": "ankit_confrontation", "required_flags": ["berries_shared"], "disabled_if_flag": "ankit_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]},
+        {"id": "AuticityRoad", "position": [536, 270], "visual": "res://assets/level_03/sprites/prop_auticity_exit_arch.png", "display_name": "Mist road to Auticity", "interaction_message": "Hospital light glows beyond the fir mist.", "target_scene_path": "res://scenes/levels/districts/level_04.tscn", "required_flags": ["ankit_defeated"], "locked_message": "Ankit blocks the exit with an empty plate.", "interaction_size": [66, 66]}
+      ],
+      "exits": [{"id": "west_to_clearing", "position": [34, 280], "size": [40, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_gate"}]
+    }
+  }
+}

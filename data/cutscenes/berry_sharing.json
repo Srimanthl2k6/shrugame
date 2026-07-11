@@ -1,0 +1,15 @@
+{
+  "id": "berry_sharing",
+  "caption": "BERRY BARKS / COMMUNITY TABLE",
+  "trigger": {"requires": ["niggesh_nishal_defeated"], "unless_flag": "berries_shared"},
+  "completion_flag": "berries_shared",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["One thousand berries. Nobody is eating all of these alone.", "Take enough for dinner. The rest become potions."]},
+    {"type": "dialogue", "speaker": "Berry Barks Crowd", "lines": ["The trees are glowing red again.", "Ankit is coming. He heard what happened to his chef."]},
+    {"type": "unlock_gear", "id": "berry_potions"},
+    {"type": "set_objective", "text": "Brew berry potions and face Ankit at the forest exit."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

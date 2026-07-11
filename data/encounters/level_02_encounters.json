@@ -24,22 +24,40 @@
     "resonance_goal": 4,
     "return_scene": "res://scenes/levels/level_02.tscn",
     "boss_type": "mini_boss",
+    "battle_visual": "res://assets/level_02/sprites/boss_nitin_idle.png",
+    "battle_backplate": "res://assets/level_02/backgrounds/banana_burbs_game.png",
+    "battle_frames": 4,
+    "bullet_legend": "Mop lanes, falling wet-floor signs, and chemical sweeps.",
+    "pacing_note": "Nitin telegraphs every cleaning route before the lab becomes dangerous.",
     "defeated_flag": "nitin_defeated",
     "commands": ["act", "item", "gear", "guard"],
     "phases": [
       {
         "id": "mop_lines",
         "intro_dialogue": "Nitin sweeps mop lanes across the abandoned lab.",
-        "patterns": [{"type": "straight_lanes", "count": 5}],
+        "readability_hint": "The mop head squeaks across each lane before the dirty water follows.",
+        "patterns": [{"type": "straight_lanes", "count": 5, "telegraph_seconds": 0.75, "safe_hint": "Stand in the lane the mop leaves dry.", "visual_id": "mop_lane"}],
         "clear_threshold": 6
       },
       {
         "id": "hazard_signs",
         "intro_dialogue": "Wet-floor signs tumble from the ceiling.",
-        "patterns": [{"type": "falling_objects", "count": 6}],
+        "readability_hint": "Ceiling markers appear before every sign falls.",
+        "patterns": [{"type": "falling_objects", "count": 6, "telegraph_seconds": 0.65, "safe_hint": "Watch the ceiling markers. Stand beneath an empty column.", "visual_id": "hazard_sign"}],
+        "clear_threshold": 3
+      },
+      {
+        "id": "chemical_rinse",
+        "intro_dialogue": "Nitin opens the industrial rinse valve and sweeps the whole floor.",
+        "readability_hint": "The valve hisses on the side where the next rinse begins.",
+        "patterns": [{"type": "sweeping_beams", "count": 5, "telegraph_seconds": 0.7, "safe_hint": "The rinse sweeps in alternating directions. Cross behind it.", "visual_id": "chemical_drop"}],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.4, "bullet_speed_multiplier": 0.4, "telegraph_multiplier": 2.1},
+      "srmt": {"bullet_count_multiplier": 2.3, "bullet_speed_multiplier": 2.0, "telegraph_multiplier": 0.56}
+    }
   },
   "deepak_reddy_boss": {
     "enemy_name": "Deepak Reddy",
@@ -48,6 +66,11 @@
     "resonance_goal": 6,
     "return_scene": "res://scenes/levels/level_02.tscn",
     "boss_type": "main_boss",
+    "battle_visual": "res://assets/level_02/sprites/boss_deepak_reddy_idle.png",
+    "battle_backplate": "res://assets/level_02/backgrounds/banana_burbs_game.png",
+    "battle_frames": 4,
+    "bullet_legend": "Smile waves, banana decrees, and mayoral spell beams.",
+    "pacing_note": "Three cheerful phases gradually reveal the force hidden beneath Deepak's perfect suburb.",
     "defeated_flag": "deepak_reddy_defeated",
     "growth_stage_reward": 3,
     "commands": ["act", "item", "gear", "guard"],
@@ -55,15 +78,28 @@
       {
         "id": "forced_smiles",
         "intro_dialogue": "Deepak casts cheerful loops through the mayor office speakers.",
-        "patterns": [{"type": "rings", "count": 7}],
+        "readability_hint": "A grin opens on one side of every ring, marking the gap to follow.",
+        "patterns": [{"type": "rings", "count": 7, "telegraph_seconds": 0.75, "safe_hint": "Follow the unlit break as each smile ring expands.", "visual_id": "smile_ring"}],
         "clear_threshold": 9
       },
       {
         "id": "banana_decree",
         "intro_dialogue": "The banana seal of office bends into sweeping beams.",
-        "patterns": [{"type": "sweeping_beams", "count": 5}],
+        "readability_hint": "The mayoral seal stamps each column before the decree lands.",
+        "patterns": [{"type": "falling_objects", "count": 7, "telegraph_seconds": 0.7, "safe_hint": "Banana decrees arc toward marked columns. Move after the seal flashes.", "visual_id": "banana_decree"}],
+        "clear_threshold": 5
+      },
+      {
+        "id": "perfectly_happy_forever",
+        "intro_dialogue": "Deepak asks the whole town to smile one final time.",
+        "readability_hint": "The loudspeaker on the leading side crackles before the smile beam sweeps.",
+        "patterns": [{"type": "sweeping_beams", "count": 6, "telegraph_seconds": 0.65, "safe_hint": "The smile beams sweep outward. Stay near the trailing edge.", "visual_id": "smile_wave"}],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.42, "bullet_speed_multiplier": 0.42, "telegraph_multiplier": 2.0},
+      "srmt": {"bullet_count_multiplier": 2.4, "bullet_speed_multiplier": 2.05, "telegraph_multiplier": 0.54}
+    }
   }
 }

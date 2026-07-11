@@ -1,0 +1,199 @@
+:root {
+  color-scheme: dark;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #05080b;
+  color: #f5e8c2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+.shell,
+#game-frame {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: #05080b;
+}
+
+#game-frame {
+  display: block;
+  border: 0;
+  background: #000;
+}
+
+.loading {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  padding: 32px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(4, 10, 14, 0.74), rgba(4, 10, 14, 0.95)),
+    repeating-linear-gradient(90deg, #07151a 0 48px, #081116 48px 96px);
+  transition: opacity 320ms ease, visibility 320ms ease;
+}
+
+.loading.is-ready {
+  background:
+    linear-gradient(rgba(4, 10, 14, 0.58), rgba(4, 10, 14, 0.9)),
+    repeating-linear-gradient(90deg, #07151a 0 48px, #081116 48px 96px);
+}
+
+.loading.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.rain {
+  position: absolute;
+  inset: -25%;
+  opacity: 0.45;
+  background-image: repeating-linear-gradient(110deg, transparent 0 31px, #9ed5d9 32px 33px, transparent 34px 62px);
+  animation: rain-drift 1.2s linear infinite;
+}
+
+.loading > :not(.rain) {
+  position: relative;
+}
+
+.loading__mark {
+  display: grid;
+  width: 74px;
+  height: 74px;
+  place-items: center;
+  border: 2px solid #efc757;
+  border-radius: 4px;
+  background: #7e1f35;
+  box-shadow: 8px 8px 0 #101c20;
+  color: #fff2cb;
+  font-family: Georgia, serif;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.loading__eyebrow {
+  margin: 24px 0 4px;
+  color: #9ed5d9;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.loading h1 {
+  margin: 0;
+  color: #fff2cb;
+  font-family: Georgia, serif;
+  font-size: clamp(42px, 7vw, 82px);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.loading__status {
+  min-height: 24px;
+  margin: 14px 0 10px;
+  color: #d2d8d5;
+  font-size: 15px;
+}
+
+.loading__bar {
+  width: min(340px, 72vw);
+  height: 5px;
+  overflow: hidden;
+  border: 1px solid #426168;
+  background: #05080b;
+}
+
+.loading__bar span {
+  display: block;
+  width: 12%;
+  height: 100%;
+  background: #efc757;
+  transition: width 220ms ease;
+}
+
+#enter-game {
+  min-width: 180px;
+  margin-top: 20px;
+  padding: 10px 16px;
+  border: 1px solid #efc757;
+  border-radius: 3px;
+  background: #7e1f35;
+  color: #fff2cb;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#enter-game:hover,
+#enter-game:focus-visible {
+  outline: 2px solid #9ed5d9;
+  outline-offset: 3px;
+  background: #a12d49;
+}
+
+.loading__foot {
+  margin-top: 18px;
+  color: #7f9699;
+  font-size: 12px;
+}
+
+.window-tools {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+}
+
+.window-tools button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(158, 213, 217, 0.5);
+  border-radius: 3px;
+  background: rgba(5, 8, 11, 0.72);
+  color: #dceff0;
+  font-size: 22px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.window-tools button:hover,
+.window-tools button:focus-visible {
+  opacity: 1;
+  outline: 2px solid #efc757;
+}
+
+.build-label {
+  position: fixed;
+  right: 12px;
+  bottom: 8px;
+  z-index: 11;
+  margin: 0;
+  color: rgba(210, 216, 213, 0.55);
+  font-size: 10px;
+  pointer-events: none;
+}
+
+@keyframes rain-drift {
+  from { transform: translate3d(-12px, -24px, 0); }
+  to { transform: translate3d(12px, 24px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rain {
+    animation: none;
+  }
+}

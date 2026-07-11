@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
@@ -9,6 +9,19 @@
 [ext_resource type="Script" path="res://scripts/visual/animated_fx.gd" id="7_fx"]
 [ext_resource type="Script" path="res://scripts/core/music_trigger.gd" id="8_music"]
 [ext_resource type="Script" path="res://scripts/visual/playable_frame.gd" id="9_frame"]
+[ext_resource type="Texture2D" path="res://assets/level_04/backgrounds/auticity_game.png" id="10_premium_backplate"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/npc_pun_vendor_idle.png" id="11_pun_vendor"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/npc_clinic_receptionist_idle.png" id="12_receptionist"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/npc_festival_drummer_idle.png" id="13_drummer"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/npc_neon_patient_idle.png" id="14_patient"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/boss_doctor_sushan_overworld.png" id="15_sushan"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/boss_mitta_overworld.png" id="16_mitta"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/prop_pun_vendor_cart.png" id="17_vendor_cart"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/prop_hospital_records_terminal.png" id="18_records"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/prop_pattern_serum_lab.png" id="19_serum_lab"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/prop_aeon_stage.png" id="20_aeon_stage"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/prop_save_kiosk.png" id="21_save_kiosk"]
+[ext_resource type="Texture2D" path="res://assets/level_04/sprites/prop_area111_exit.png" id="22_area111_exit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
 size = Vector2(34, 22)
@@ -27,16 +40,27 @@ script = ExtResource("8_music")
 music_id = "level_04_hospital_festival_synth"
 
 [node name="Background" type="Polygon2D" parent="."]
+scale = Vector2(2, 2)
+z_index = -20
 color = Color(0.08, 0.075, 0.105, 1)
 polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
 
 [node name="World" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="PlayableFrame" type="Node2D" parent="World"]
+visible = false
 z_index = 9
 script = ExtResource("9_frame")
 frame_color = Color(0.78, 0.94, 1, 0.86)
 corner_color = Color(0.62, 1, 0.9, 0.92)
+
+[node name="PremiumBackplate" type="Sprite2D" parent="World"]
+texture_filter = 0
+z_index = -10
+position = Vector2(160, 90)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_premium_backplate")
 
 [node name="CityFloor" type="Polygon2D" parent="World"]
 color = Color(0.15, 0.14, 0.18, 1)
@@ -262,17 +286,30 @@ objective_text = "Reach the hospital and inspect Doctor Sushan's records."
 shape = SubResource("RectangleShape2D_interact")
 
 [node name="Visual" type="Polygon2D" parent="World/PunStreet"]
+visible = false
 color = Color(0.58, 0.44, 0.78, 1)
 polygon = PackedVector2Array(-9, -13, 9, -13, 9, 11, 0, 16, -9, 11)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/PunStreet"]
+texture_filter = 1
+texture = ExtResource("11_pun_vendor")
+
+[node name="VendorCart" type="Sprite2D" parent="World"]
+texture_filter = 1
+z_index = 1
+position = Vector2(34, 91)
+texture = ExtResource("17_vendor_cart")
 
 [node name="Hospital" type="Node2D" parent="World"]
 position = Vector2(176, 54)
 
 [node name="HospitalBody" type="Polygon2D" parent="World/Hospital"]
+visible = false
 color = Color(0.56, 0.62, 0.68, 1)
 polygon = PackedVector2Array(-44, -22, 44, -22, 44, 30, -44, 30)
 
 [node name="HospitalCross" type="Polygon2D" parent="World/Hospital"]
+visible = false
 color = Color(0.88, 0.18, 0.24, 1)
 polygon = PackedVector2Array(-5, -16, 5, -16, 5, -5, 16, -5, 16, 5, 5, 5, 5, 16, -5, 16, -5, 5, -16, 5, -16, -5, -5, -5)
 
@@ -290,21 +327,35 @@ objective_text = "Confront Doctor Sushan in the Pattern Serum lab."
 shape = SubResource("RectangleShape2D_interact")
 
 [node name="Visual" type="Polygon2D" parent="World/HospitalRecords"]
+visible = false
 color = Color(0.78, 0.86, 0.9, 1)
 polygon = PackedVector2Array(-13, -8, 13, -8, 12, 9, -12, 9)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/HospitalRecords"]
+texture_filter = 1
+texture = ExtResource("18_records")
 
 [node name="PatternSerumLab" type="Node2D" parent="World"]
 position = Vector2(236, 80)
 
 [node name="LabTable" type="Polygon2D" parent="World/PatternSerumLab"]
+visible = false
 color = Color(0.22, 0.24, 0.3, 1)
 polygon = PackedVector2Array(-26, -8, 26, -8, 26, 8, -26, 8)
 
 [node name="SerumGlow" type="Polygon2D" parent="World/PatternSerumLab"]
+visible = false
 color = Color(0.6, 0.95, 0.88, 1)
 polygon = PackedVector2Array(-6, -18, 6, -18, 9, -4, -9, -4)
 
+[node name="ReadableSprite" type="Sprite2D" parent="World/PatternSerumLab"]
+texture_filter = 1
+texture = ExtResource("19_serum_lab")
+
 [node name="DoctorSushan" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(244, 108)
 script = ExtResource("2_interaction")
 interaction_message = "Doctor Sushan prepares the Pattern Serum."
@@ -313,15 +364,24 @@ required_flags = PackedStringArray("hospital_records_collected")
 locked_message = "Sushan will not reveal the lab until the hospital records are found."
 encounter_id = "doctor_sushan_boss"
 objective_text = "Beat Doctor Sushan and start the Aeon Festival."
+cutscene_id = "sushan_injection_failure"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/DoctorSushan"]
 shape = SubResource("RectangleShape2D_boss")
 
 [node name="Visual" type="Polygon2D" parent="World/DoctorSushan"]
+visible = false
 color = Color(0.82, 0.86, 0.92, 1)
 polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 17, -12, 10)
 
+[node name="ReadableSprite" type="Sprite2D" parent="World/DoctorSushan"]
+texture_filter = 1
+texture = ExtResource("15_sushan")
+
 [node name="AeonFestival" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(108, 128)
 script = ExtResource("2_interaction")
 interaction_message = "The Aeon Festival starts with fireworks and reclaimed rhythm."
@@ -331,15 +391,24 @@ required_flags = PackedStringArray("doctor_sushan_defeated")
 locked_message = "The festival cannot begin until Doctor Sushan is beaten."
 flag_on_interact = "aeon_festival_started"
 objective_text = "Face Mitta at the Aeon Festival stage."
+cutscene_id = "aeon_festival"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/AeonFestival"]
 shape = SubResource("RectangleShape2D_interact")
 
 [node name="Visual" type="Polygon2D" parent="World/AeonFestival"]
+visible = false
 color = Color(0.98, 0.76, 0.28, 1)
 polygon = PackedVector2Array(-18, -10, 18, -10, 18, 10, -18, 10)
 
+[node name="ReadableSprite" type="Sprite2D" parent="World/AeonFestival"]
+texture_filter = 1
+texture = ExtResource("20_aeon_stage")
+
 [node name="MittaBoss" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(268, 130)
 script = ExtResource("2_interaction")
 interaction_message = "Mitta takes the festival stage."
@@ -348,15 +417,24 @@ required_flags = PackedStringArray("hospital_records_collected", "doctor_sushan_
 locked_message = "Mitta waits for the hospital truth and the Aeon Festival."
 encounter_id = "mitta_boss"
 objective_text = "Defeat Mitta and leave Auticity."
+cutscene_id = "mitta_confrontation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/MittaBoss"]
 shape = SubResource("RectangleShape2D_boss")
 
 [node name="Visual" type="Polygon2D" parent="World/MittaBoss"]
+visible = false
 color = Color(0.78, 0.36, 0.72, 1)
 polygon = PackedVector2Array(-12, -16, 12, -16, 14, 12, 0, 20, -14, 12)
 
+[node name="ReadableSprite" type="Sprite2D" parent="World/MittaBoss"]
+texture_filter = 1
+texture = ExtResource("16_mitta")
+
 [node name="JudgeLuma" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(44, 108)
 script = ExtResource("2_interaction")
 interaction_message = "Judge Luma lifts a lantern toward your shadow."
@@ -374,6 +452,9 @@ color = Color(0.92, 0.78, 0.34, 1)
 polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 17, -12, 10)
 
 [node name="Objective" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(64, 132)
 script = ExtResource("2_interaction")
 interaction_message = "You choose the kindest truthful witness account."
@@ -387,6 +468,9 @@ color = Color(0.98, 0.86, 0.42, 1)
 polygon = PackedVector2Array(-14, -10, 14, -10, 14, 10, -14, 10)
 
 [node name="PracticeEncounter" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(86, 132)
 script = ExtResource("2_interaction")
 interaction_message = "The lantern court narrows into a bullet box."
@@ -412,15 +496,20 @@ spawn_point = "festival_wristband"
 shape = SubResource("RectangleShape2D_interact")
 
 [node name="Visual" type="Polygon2D" parent="World/SavePoint"]
+visible = false
 color = Color(0.4, 0.7, 0.9, 1)
 polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/SavePoint"]
+texture_filter = 1
+texture = ExtResource("21_save_kiosk")
 
 [node name="TransitionDoor" type="Area2D" parent="World"]
 position = Vector2(294, 76)
 script = ExtResource("2_interaction")
 interaction_message = "Auticity is free. Area 111 flashes pink in the distance."
 target_scene_path = "res://scenes/levels/level_05.tscn"
-required_flags = PackedStringArray("hospital_records_collected", "doctor_sushan_defeated", "aeon_festival_started", "mitta_defeated", "level_04_objective_done", "luma_practice_cleared")
+required_flags = PackedStringArray("hospital_records_collected", "doctor_sushan_defeated", "aeon_festival_started", "mitta_defeated")
 locked_message = "Auticity is not free yet."
 objective_text = "Continue the KFC search in Area 111."
 
@@ -428,10 +517,82 @@ objective_text = "Continue the KFC search in Area 111."
 shape = SubResource("RectangleShape2D_door")
 
 [node name="Visual" type="Polygon2D" parent="World/TransitionDoor"]
+visible = false
 color = Color(0.58, 0.42, 0.68, 1)
 polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
 
+[node name="ReadableSprite" type="Sprite2D" parent="World/TransitionDoor"]
+texture_filter = 1
+texture = ExtResource("22_area111_exit")
+
+[node name="ClinicReceptionist" type="Area2D" parent="World"]
+position = Vector2(132, 112)
+script = ExtResource("2_interaction")
+display_name = "Clinic Receptionist"
+interaction_message = "The receptionist watches the appointment clock repeat."
+dialogue_id = "clinic_receptionist"
+dialogue_file_path = "res://data/dialogue/level_04_dialogue.json"
+flag_on_interact = "clinic_receptionist_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/ClinicReceptionist"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/ClinicReceptionist"]
+texture_filter = 1
+texture = ExtResource("12_receptionist")
+
+[node name="FestivalDrummer" type="Area2D" parent="World"]
+position = Vector2(92, 142)
+script = ExtResource("2_interaction")
+display_name = "Festival Drummer"
+interaction_message = "The drummer tests an unscheduled rhythm."
+dialogue_id = "festival_drummer"
+dialogue_file_path = "res://data/dialogue/level_04_dialogue.json"
+flag_on_interact = "festival_drummer_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FestivalDrummer"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/FestivalDrummer"]
+texture_filter = 1
+texture = ExtResource("13_drummer")
+
+[node name="NeonPatient" type="Area2D" parent="World"]
+position = Vector2(204, 138)
+script = ExtResource("2_interaction")
+display_name = "Neon Patient"
+interaction_message = "A cyan wristband blinks out of sequence."
+dialogue_id = "neon_patient"
+dialogue_file_path = "res://data/dialogue/level_04_dialogue.json"
+flag_on_interact = "neon_patient_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/NeonPatient"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/NeonPatient"]
+texture_filter = 1
+texture = ExtResource("14_patient")
+
+[node name="AeonMaskMaker" type="Area2D" parent="World"]
+position = Vector2(74, 112)
+script = ExtResource("2_interaction")
+display_name = "Aeon Mask Maker"
+interaction_message = "The mask maker waits for the festival lights to choose a face."
+dialogue_id = "aeon_mask_maker"
+dialogue_file_path = "res://data/dialogue/level_04_dialogue.json"
+flag_on_interact = "aeon_mask_maker_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/AeonMaskMaker"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/AeonMaskMaker"]
+texture_filter = 1
+modulate = Color(0.72, 0.94, 1, 1)
+flip_h = true
+texture = ExtResource("11_pun_vendor")
+
 [node name="VisualFxLayer" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="FluorescentBuzz" type="Node2D" parent="VisualFxLayer"]
 position = Vector2(172, 42)
@@ -458,10 +619,12 @@ motion_pixels = 2.5
 position = Vector2(34, 132)
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
 
 [node name="UiLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
 

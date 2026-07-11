@@ -24,22 +24,40 @@
     "resonance_goal": 4,
     "return_scene": "res://scenes/levels/level_03.tscn",
     "boss_type": "mini_boss",
+    "battle_visual": "res://assets/level_03/sprites/boss_niggesh_nishal_idle.png",
+    "battle_backplate": "res://assets/level_03/backgrounds/berry_barks_game.png",
+    "battle_frames": 4,
+    "bullet_legend": "Berry invoices, fryer baskets, and false-chicken tells.",
+    "pacing_note": "The first two phases teach falling and lane attacks before Nishal sweeps the kitchen clean.",
     "defeated_flag": "niggesh_nishal_defeated",
     "commands": ["act", "item", "gear", "guard"],
     "phases": [
       {
         "id": "berry_invoice",
         "intro_dialogue": "Nishal throws fake invoices and berry baskets.",
-        "patterns": [{"type": "falling_objects", "count": 6}],
+        "readability_hint": "Red stains mark the falling columns; clean bark remains safe.",
+        "patterns": [{"type": "falling_objects", "count": 6, "telegraph_seconds": 0.7, "safe_hint": "Invoices fall from red-stained columns. Stand beneath clean bark.", "visual_id": "berry_invoice"}],
         "clear_threshold": 7
       },
       {
         "id": "chef_panic",
         "intro_dialogue": "The chef hut fills with red berry splashes.",
-        "patterns": [{"type": "straight_lanes", "count": 5}],
+        "readability_hint": "Each berry lane glows before it splashes across the floor.",
+        "patterns": [{"type": "straight_lanes", "count": 5, "telegraph_seconds": 0.65, "safe_hint": "Berry lanes flash before they splash. Hold the clean lane.", "visual_id": "berry_splash"}],
+        "clear_threshold": 3
+      },
+      {
+        "id": "empty_fryer",
+        "intro_dialogue": "Nishal swings the empty fryer basket through the whole clearing.",
+        "readability_hint": "The basket rattles at the edge before reversing its sweep.",
+        "patterns": [{"type": "sweeping_beams", "count": 5, "telegraph_seconds": 0.72, "safe_hint": "The fryer sweep reverses once. Cross behind the basket.", "visual_id": "fryer_basket"}],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.4, "bullet_speed_multiplier": 0.4, "telegraph_multiplier": 2.1},
+      "srmt": {"bullet_count_multiplier": 2.35, "bullet_speed_multiplier": 2.0, "telegraph_multiplier": 0.55}
+    }
   },
   "ankit_boss": {
     "enemy_name": "Ankit",
@@ -48,6 +66,11 @@
     "resonance_goal": 6,
     "return_scene": "res://scenes/levels/level_03.tscn",
     "boss_type": "main_boss",
+    "battle_visual": "res://assets/level_03/sprites/boss_ankit_idle.png",
+    "battle_backplate": "res://assets/level_03/backgrounds/berry_barks_game.png",
+    "battle_frames": 4,
+    "bullet_legend": "Empty plates, food rage, and volatile berry potion splashes.",
+    "pacing_note": "Ankit escalates from readable plate rings into a mixed forest-food storm.",
     "defeated_flag": "ankit_defeated",
     "growth_stage_reward": 4,
     "commands": ["act", "item", "gear", "guard"],
@@ -55,15 +78,28 @@
       {
         "id": "empty_plate",
         "intro_dialogue": "Ankit attacks with empty plates and betrayed appetite.",
-        "patterns": [{"type": "rings", "count": 7}],
+        "readability_hint": "Every plate ring has one chipped gap that stays open while it expands.",
+        "patterns": [{"type": "rings", "count": 7, "telegraph_seconds": 0.68, "safe_hint": "The plate ring has one chipped gap. Follow it outward.", "visual_id": "empty_plate"}],
         "clear_threshold": 10
       },
       {
+        "id": "table_flip",
+        "intro_dialogue": "Ankit flips a whole dinner service into the mist.",
+        "readability_hint": "Place shadows settle on the floor before the plates arrive.",
+        "patterns": [{"type": "falling_objects", "count": 8, "telegraph_seconds": 0.62, "safe_hint": "Plates mark their landing spots. Keep moving between settings.", "visual_id": "empty_plate"}],
+        "clear_threshold": 5
+      },
+      {
         "id": "berry_potion_storm",
-        "intro_dialogue": "Berry potions splash across the forest path.",
-        "patterns": [{"type": "callback_mix", "count": 8}],
+        "intro_dialogue": "Berry potions splash across the forest path and wake every old attack at once.",
+        "readability_hint": "Potion color identifies the recalled pattern before it activates.",
+        "patterns": [{"type": "callback_mix", "count": 9, "telegraph_seconds": 0.72, "safe_hint": "Potion flashes announce the next recalled pattern. Read the color, then move.", "visual_id": "berry_potion"}],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.42, "bullet_speed_multiplier": 0.42, "telegraph_multiplier": 2.0},
+      "srmt": {"bullet_count_multiplier": 2.45, "bullet_speed_multiplier": 2.1, "telegraph_multiplier": 0.52}
+    }
   }
 }

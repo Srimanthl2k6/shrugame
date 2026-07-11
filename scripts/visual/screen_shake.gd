@@ -17,6 +17,9 @@ func _ready() -> void:
 
 
 func play(strength: float = -1.0, duration: float = -1.0) -> void:
+	var settings_manager := get_node_or_null("/root/SettingsManager")
+	if settings_manager != null and not bool(settings_manager.get_setting("screen_shake", true)):
+		return
 	_strength = default_strength if strength < 0.0 else strength
 	_duration = default_duration if duration < 0.0 else duration
 	_elapsed = 0.0

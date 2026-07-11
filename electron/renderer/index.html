@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; frame-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shrugame</title>
+    <link rel="stylesheet" href="/renderer/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <iframe
+        id="game-frame"
+        title="Shrugame"
+        src="/game/index.html"
+        allow="autoplay; fullscreen; gamepad"
+      ></iframe>
+
+      <section id="loading" class="loading" aria-live="polite">
+        <div class="rain" aria-hidden="true"></div>
+        <div class="loading__mark" aria-hidden="true">S</div>
+        <p class="loading__eyebrow">ISHIVILLE MUNICIPAL SIGNAL</p>
+        <h1>SHRUGAME</h1>
+        <p id="loading-status" class="loading__status">Waking the rain...</p>
+        <div class="loading__bar" aria-hidden="true"><span id="loading-progress"></span></div>
+        <button id="enter-game" type="button" hidden>Enter Ishiville</button>
+        <p class="loading__foot">A strange town. Five districts. One missing bucket.</p>
+      </section>
+
+      <nav class="window-tools" aria-label="Window controls">
+        <button id="fullscreen" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen (F11)">
+          <span aria-hidden="true">&#x26F6;</span>
+        </button>
+      </nav>
+
+      <p id="build-label" class="build-label"></p>
+    </main>
+    <script src="/renderer/loading.js"></script>
+  </body>
+</html>

@@ -9,5 +9,7 @@
   "growth_stage_unlock": 4,
   "town_state_after_defeat": "Residents receive shared berries and stop depending on one selfish supplier.",
   "next_level_id": "level_04",
-  "required_story_flags": ["berry_contract_collected", "niggesh_nishal_defeated", "ankit_defeated"]
+  "required_story_flags": ["berries_collected", "berry_contract_collected", "niggesh_nishal_defeated", "berries_shared", "ankit_defeated"],
+  "start_room_id": "forest_entrance",
+  "room_scene_paths": ["res://scenes/levels/rooms/level_03/forest_entrance.tscn", "res://scenes/levels/rooms/level_03/berry_paths.tscn", "res://scenes/levels/rooms/level_03/chef_hut.tscn", "res://scenes/levels/rooms/level_03/sharing_clearing.tscn", "res://scenes/levels/rooms/level_03/ankit_gate.tscn"]
 }

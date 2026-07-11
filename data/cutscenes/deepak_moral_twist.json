@@ -1,0 +1,14 @@
+{
+  "id": "deepak_moral_twist",
+  "caption": "THE MAYOR'S LAST SMILE",
+  "trigger": {"flag": "deepak_reddy_defeated", "unless_flag": "deepak_truth_heard"},
+  "completion_flag": "deepak_truth_heard",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Deepak Reddy", "lines": ["I did control them. I will not pretend otherwise.", "Outside these streets, SRMT's world treats monkeys like a joke until it needs their labour.", "I built a cruel happiness because I was afraid of a crueler freedom."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["A cage with a smile painted on it is still a cage.", "They get to choose what hurts now."]},
+    {"type": "set_objective", "text": "Take the banana gun and continue to Berry Barks."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

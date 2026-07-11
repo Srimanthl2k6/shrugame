@@ -1,0 +1,17 @@
+{
+  "id": "sushan_injection_failure",
+  "caption": "AUTICITY GENERAL / PATTERN SERUM WARD",
+  "trigger": {"interaction": "DoctorSushan", "requires": ["hospital_records_collected"], "unless_flag": "doctor_sushan_defeated"},
+  "completion_flag": "sushan_reveal_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Doctor Sushan", "lines": ["Every resident receives Pattern Serum. Every resident returns for adjustment.", "A town that never fits the pattern is excellent recurring business.", "Hold still, Shrububu."]},
+    {"type": "sfx", "id": "battle_phase"},
+    {"type": "wait", "seconds": 0.35},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["It did nothing.", "Your pattern machine cannot find a pattern."]},
+    {"type": "cut_in", "id": "aeon_fireworks", "title": "ALREADY UNCLASSIFIABLE"},
+    {"type": "cut_in", "id": "doctor_sushan_boss", "title": "DOCTOR SUSHAN"},
+    {"type": "start_battle", "encounter_id": "doctor_sushan_boss", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

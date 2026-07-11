@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
@@ -9,6 +9,18 @@
 [ext_resource type="Script" path="res://scripts/visual/animated_fx.gd" id="7_fx"]
 [ext_resource type="Script" path="res://scripts/core/music_trigger.gd" id="8_music"]
 [ext_resource type="Script" path="res://scripts/visual/playable_frame.gd" id="9_frame"]
+[ext_resource type="Texture2D" path="res://assets/level_03/backgrounds/berry_barks_game.png" id="10_premium_backplate"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/npc_fir_grandmother_idle.png" id="11_fir_grandmother"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/npc_berry_picker_idle.png" id="12_berry_picker"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/npc_mist_ranger_idle.png" id="13_mist_ranger"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/boss_niggesh_nishal_overworld.png" id="14_nishal"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/boss_ankit_overworld.png" id="15_ankit"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/npc_berry_apothecary_idle.png" id="16_apothecary"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/prop_berry_cluster.png" id="17_berry_cluster"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/prop_berry_contract.png" id="18_berry_contract"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/prop_berry_share_table.png" id="19_berry_share"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/prop_berry_watch_save.png" id="20_berry_watch"]
+[ext_resource type="Texture2D" path="res://assets/level_03/sprites/prop_auticity_exit_arch.png" id="21_exit_arch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
 size = Vector2(34, 22)
@@ -27,16 +39,27 @@ script = ExtResource("8_music")
 music_id = "level_03_forest_mystery"
 
 [node name="Background" type="Polygon2D" parent="."]
+scale = Vector2(2, 2)
+z_index = -20
 color = Color(0.07, 0.095, 0.065, 1)
 polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
 
 [node name="World" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="PlayableFrame" type="Node2D" parent="World"]
+visible = false
 z_index = 9
 script = ExtResource("9_frame")
 frame_color = Color(0.92, 0.38, 0.5, 0.86)
 corner_color = Color(1, 0.58, 0.68, 0.92)
+
+[node name="PremiumBackplate" type="Sprite2D" parent="World"]
+texture_filter = 0
+z_index = -10
+position = Vector2(160, 90)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_premium_backplate")
 
 [node name="ForestFloor" type="Polygon2D" parent="World"]
 color = Color(0.15, 0.19, 0.12, 1)
@@ -246,18 +269,87 @@ text_overrun_behavior = 3
 [node name="BerryClusters" type="Area2D" parent="World"]
 position = Vector2(78, 132)
 script = ExtResource("2_interaction")
-interaction_message = "You collect the 1000 berries as glowing clusters instead of individual chores."
-flag_on_interact = "berries_collected"
+display_name = "Berry Cluster 1/4"
+interaction_message = "You harvest 250 bark berries from one glowing cluster."
+flag_on_interact = "berry_cluster_01"
 item_id = "berry_order"
-item_amount = 1
-objective_text = "Bring the berry order to Niggesh Nishal."
+item_amount = 250
+objective_text = "Berry order: 250 / 1000. Find three more clusters."
+disabled_if_flag = "berry_cluster_01"
+one_shot = true
+hide_when_disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryClusters"]
 shape = SubResource("RectangleShape2D_interact")
 
 [node name="Visual" type="Polygon2D" parent="World/BerryClusters"]
+visible = false
 color = Color(0.8, 0.08, 0.18, 1)
 polygon = PackedVector2Array(-14, -8, 14, -8, 10, 10, -10, 10)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/BerryClusters"]
+texture_filter = 1
+texture = ExtResource("17_berry_cluster")
+
+[node name="BerryCluster02" type="Area2D" parent="World"]
+position = Vector2(50, 88)
+script = ExtResource("2_interaction")
+display_name = "Berry Cluster 2/4"
+interaction_message = "You harvest another 250 bark berries. The branch whispers about fryer oil."
+flag_on_interact = "berry_cluster_02"
+item_id = "berry_order"
+item_amount = 250
+objective_text = "Berry order: 500 / 1000. Find two more clusters."
+disabled_if_flag = "berry_cluster_02"
+one_shot = true
+hide_when_disabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryCluster02"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/BerryCluster02"]
+texture_filter = 1
+texture = ExtResource("17_berry_cluster")
+
+[node name="BerryCluster03" type="Area2D" parent="World"]
+position = Vector2(126, 142)
+script = ExtResource("2_interaction")
+display_name = "Berry Cluster 3/4"
+interaction_message = "You harvest 250 more berries. The basket now feels contractually heavy."
+flag_on_interact = "berry_cluster_03"
+item_id = "berry_order"
+item_amount = 250
+objective_text = "Berry order: 750 / 1000. One cluster remains."
+disabled_if_flag = "berry_cluster_03"
+one_shot = true
+hide_when_disabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryCluster03"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/BerryCluster03"]
+texture_filter = 1
+texture = ExtResource("17_berry_cluster")
+
+[node name="BerryCluster04" type="Area2D" parent="World"]
+position = Vector2(184, 112)
+script = ExtResource("2_interaction")
+display_name = "Berry Cluster 4/4"
+interaction_message = "The final 250 berries complete Nishal's suspicious order."
+flag_on_interact = "berry_cluster_04"
+item_id = "berry_order"
+item_amount = 250
+objective_text = "Berry order complete. Read the contract and confront Nishal."
+disabled_if_flag = "berry_cluster_04"
+one_shot = true
+hide_when_disabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryCluster04"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/BerryCluster04"]
+texture_filter = 1
+texture = ExtResource("17_berry_cluster")
 
 [node name="BerryContract" type="Area2D" parent="World"]
 position = Vector2(144, 60)
@@ -273,8 +365,13 @@ objective_text = "Confront Niggesh Nishal about the fake chicken promise."
 shape = SubResource("RectangleShape2D_interact")
 
 [node name="Visual" type="Polygon2D" parent="World/BerryContract"]
+visible = false
 color = Color(0.84, 0.78, 0.56, 1)
 polygon = PackedVector2Array(-13, -8, 13, -8, 12, 9, -12, 9)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/BerryContract"]
+texture_filter = 1
+texture = ExtResource("18_berry_contract")
 
 [node name="ChefNishal" type="Area2D" parent="World"]
 position = Vector2(202, 72)
@@ -285,13 +382,19 @@ required_flags = PackedStringArray("berries_collected", "berry_contract_collecte
 locked_message = "Nishal wants the berry clusters and the contract exposed first."
 encounter_id = "niggesh_nishal_boss"
 objective_text = "Beat Nishal and share the berries."
+cutscene_id = "false_chicken_promise"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/ChefNishal"]
 shape = SubResource("RectangleShape2D_boss")
 
 [node name="Visual" type="Polygon2D" parent="World/ChefNishal"]
+visible = false
 color = Color(0.46, 0.34, 0.28, 1)
 polygon = PackedVector2Array(-10, -15, 10, -15, 12, 10, 0, 17, -12, 10)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/ChefNishal"]
+texture_filter = 1
+texture = ExtResource("14_nishal")
 
 [node name="BerryShare" type="Area2D" parent="World"]
 position = Vector2(116, 108)
@@ -304,15 +407,24 @@ locked_message = "The town will not gather until Nishal is beaten."
 flag_on_interact = "berries_shared"
 gear_id = "berry_potions"
 objective_text = "Use berry potions to survive Ankit's food rage."
+cutscene_id = "berry_sharing"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryShare"]
 shape = SubResource("RectangleShape2D_interact")
 
 [node name="Visual" type="Polygon2D" parent="World/BerryShare"]
+visible = false
 color = Color(0.86, 0.18, 0.28, 1)
 polygon = PackedVector2Array(-12, -10, 12, -10, 12, 10, -12, 10)
 
+[node name="ReadableSprite" type="Sprite2D" parent="World/BerryShare"]
+texture_filter = 1
+texture = ExtResource("19_berry_share")
+
 [node name="AnkitBoss" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(270, 124)
 script = ExtResource("2_interaction")
 interaction_message = "Ankit arrives hungry and furious."
@@ -321,15 +433,24 @@ required_flags = PackedStringArray("berry_contract_collected", "niggesh_nishal_d
 locked_message = "Ankit will not appear until Nishal is beaten and the berries are shared."
 encounter_id = "ankit_boss"
 objective_text = "Defeat Ankit and leave Berry Barks."
+cutscene_id = "ankit_confrontation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/AnkitBoss"]
 shape = SubResource("RectangleShape2D_boss")
 
 [node name="Visual" type="Polygon2D" parent="World/AnkitBoss"]
+visible = false
 color = Color(0.64, 0.28, 0.16, 1)
 polygon = PackedVector2Array(-12, -16, 12, -16, 14, 12, 0, 20, -14, 12)
 
+[node name="ReadableSprite" type="Sprite2D" parent="World/AnkitBoss"]
+texture_filter = 1
+texture = ExtResource("15_ankit")
+
 [node name="Tickroot" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(46, 74)
 script = ExtResource("2_interaction")
 interaction_message = "Tickroot's branches tick in different directions."
@@ -347,6 +468,9 @@ color = Color(0.62, 0.42, 0.2, 1)
 polygon = PackedVector2Array(-12, -16, 12, -16, 8, 12, 0, 18, -8, 12)
 
 [node name="Objective" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(62, 104)
 script = ExtResource("2_interaction")
 interaction_message = "You let one clock-fruit stop instead of resetting it."
@@ -360,6 +484,9 @@ color = Color(0.9, 0.72, 0.25, 1)
 polygon = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
 
 [node name="PracticeEncounter" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(86, 104)
 script = ExtResource("2_interaction")
 interaction_message = "Tickroot rewinds the bullet pattern."
@@ -385,15 +512,20 @@ spawn_point = "berry_watch"
 shape = SubResource("RectangleShape2D_interact")
 
 [node name="Visual" type="Polygon2D" parent="World/SavePoint"]
+visible = false
 color = Color(0.4, 0.7, 0.9, 1)
 polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/SavePoint"]
+texture_filter = 1
+texture = ExtResource("20_berry_watch")
 
 [node name="TransitionDoor" type="Area2D" parent="World"]
 position = Vector2(294, 76)
 script = ExtResource("2_interaction")
 interaction_message = "Berry Barks is fed. Auticity waits past the mist."
 target_scene_path = "res://scenes/levels/level_04.tscn"
-required_flags = PackedStringArray("berry_contract_collected", "niggesh_nishal_defeated", "berries_shared", "ankit_defeated", "level_03_objective_done", "tickroot_practice_cleared")
+required_flags = PackedStringArray("berry_contract_collected", "niggesh_nishal_defeated", "berries_shared", "ankit_defeated")
 locked_message = "Berry Barks is not free yet."
 objective_text = "Continue the KFC search in Auticity."
 
@@ -401,10 +533,110 @@ objective_text = "Continue the KFC search in Auticity."
 shape = SubResource("RectangleShape2D_door")
 
 [node name="Visual" type="Polygon2D" parent="World/TransitionDoor"]
+visible = false
 color = Color(0.34, 0.52, 0.24, 1)
 polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
 
+[node name="ReadableSprite" type="Sprite2D" parent="World/TransitionDoor"]
+texture_filter = 1
+texture = ExtResource("21_exit_arch")
+
+[node name="FirGrandmother" type="Area2D" parent="World"]
+position = Vector2(38, 124)
+script = ExtResource("2_interaction")
+display_name = "Fir Grandmother"
+interaction_message = "Fir Grandmother watches the bark berries glow."
+dialogue_id = "fir_grandmother"
+dialogue_file_path = "res://data/dialogue/level_03_dialogue.json"
+flag_on_interact = "fir_grandmother_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/FirGrandmother"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/FirGrandmother"]
+texture_filter = 1
+texture = ExtResource("11_fir_grandmother")
+
+[node name="BerryPicker" type="Area2D" parent="World"]
+position = Vector2(92, 82)
+script = ExtResource("2_interaction")
+display_name = "Berry Picker"
+interaction_message = "A picker counts berries in sane quantities."
+dialogue_id = "berry_picker_kid"
+dialogue_file_path = "res://data/dialogue/level_03_dialogue.json"
+flag_on_interact = "berry_picker_kid_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryPicker"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/BerryPicker"]
+texture_filter = 1
+texture = ExtResource("12_berry_picker")
+
+[node name="MistRanger" type="Area2D" parent="World"]
+position = Vector2(236, 118)
+script = ExtResource("2_interaction")
+display_name = "Mist Ranger"
+interaction_message = "The ranger's lantern refuses to illuminate lies."
+dialogue_id = "mist_ranger"
+dialogue_file_path = "res://data/dialogue/level_03_dialogue.json"
+flag_on_interact = "mist_ranger_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MistRanger"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/MistRanger"]
+texture_filter = 1
+texture = ExtResource("13_mist_ranger")
+
+[node name="BerryApothecary" type="Area2D" parent="World"]
+position = Vector2(158, 145)
+script = ExtResource("2_interaction")
+display_name = "Berry Apothecary"
+interaction_message = "The apothecary labels one bottle 'probably healing.'"
+dialogue_id = "berry_apothecary"
+dialogue_file_path = "res://data/dialogue/level_03_dialogue.json"
+flag_on_interact = "berry_apothecary_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BerryApothecary"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="ReadableSprite" type="Sprite2D" parent="World/BerryApothecary"]
+texture_filter = 1
+texture = ExtResource("16_apothecary")
+
+[node name="BarkChoir" type="Area2D" parent="World"]
+position = Vector2(118, 48)
+script = ExtResource("2_interaction")
+display_name = "Bark Choir"
+interaction_message = "Three berry branches hum in inconvenient harmony."
+dialogue_id = "bark_choir"
+dialogue_file_path = "res://data/dialogue/level_03_dialogue.json"
+flag_on_interact = "bark_choir_seen"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/BarkChoir"]
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="BranchA" type="Sprite2D" parent="World/BarkChoir"]
+texture_filter = 1
+position = Vector2(-10, 0)
+scale = Vector2(0.62, 0.62)
+texture = ExtResource("17_berry_cluster")
+
+[node name="BranchB" type="Sprite2D" parent="World/BarkChoir"]
+texture_filter = 1
+position = Vector2(0, -3)
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("17_berry_cluster")
+
+[node name="BranchC" type="Sprite2D" parent="World/BarkChoir"]
+texture_filter = 1
+position = Vector2(10, 1)
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("17_berry_cluster")
+
 [node name="VisualFxLayer" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="MistDrift" type="Node2D" parent="VisualFxLayer"]
 position = Vector2(96, 76)
@@ -431,10 +663,12 @@ motion_pixels = 0.0
 position = Vector2(34, 132)
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
 
 [node name="UiLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
 

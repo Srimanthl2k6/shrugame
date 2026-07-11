@@ -2,11 +2,12 @@
 
 ## Core Pixel Specs
 
-- Base resolution: 320x180.
-- Integer scale target: 3x or 4x.
+- Base resolution: 640x360.
+- Default desktop presentation: 1280x720 at 2x integer scale.
+- Supported presentation: 960x540 minimum window through 1920x1080 fullscreen.
 - Tile size: 16x16.
-- Battle arena: 160x96.
-- Camera target: fixed room framing or gentle follow. Avoid fast scrolling until art is final.
+- Battle arena: 384x152 within the 640x360 battle composition.
+- Camera target: one 640x360 room at a time with gentle follow and hard room limits.
 - Texture filtering: nearest-neighbor only.
 - Outline rule: 1 pixel dark outline on characters, bosses, gear, and important interactables.
 - Readability rule: every interactable must read at 1x scale by silhouette, color contrast, or motion.
@@ -22,38 +23,47 @@
 ## Battle portrait/cut-in style
 
 - The battle portrait/cut-in style is a high-contrast bust or silhouette frame shown before major bosses and growth changes.
-- Cut-ins use 320x80 safe composition so they can slide across the 320x180 screen without hiding the HUD for long.
+- Cut-ins use a 640x160 safe composition so they can cross the 640x360 screen without hiding the HUD for long.
 - Major boss cut-ins should use 6 frames: anticipation, smear, hold, shake, flash, settle.
 - Shrububu growth cut-ins should use 8 frames: crouch, stretch, pop, shake, outfit/gear snap, stare, flash, settle.
 - SRMT throne reveal uses 8 frames plus a screen tint, but the actual animation can be built later from still layers.
 
 ## Sprite Scale Rules
 
+### Shrububu identity reference
+
+- Canonical concept: `assets/shared/concept/shrububu_forms_reference.png`.
+- The two private childhood photos inform only her playful eyes, side-glance, and mischievous expression. Shrububu remains an adult woman in every playable form.
+- The adult photos are the primary identity reference: medium-brown skin, large expressive dark eyes, long black hair with bangs or soft waves, optional clear-frame glasses, and a tall, slim silhouette.
+- Growth is shown through height, posture, confidence, equipment, coat length, and animation force. Her body does not widen as she grows.
+- Never portray Shrububu as fat, bulky, broad-bodied, inflated, childlike, or as a body-size joke.
+- Raw photo references are production-only and must never be packaged into the game, site, or release artifacts.
+
 ### Shrububu Growth Forms
 
 | Form | Story State | Overworld Sprite | Battle Sprite | Notes |
 | --- | --- | --- | --- | --- |
-| Form 1: KFC seeker | Arrives in Ishiville with no gear. | 16x24 | 32x40 | Normal size, impatient stance, empty hands. |
-| Form 2: revolver carrier | After Poojan gives the revolver. | 18x26 | 36x44 | Slightly taller, revolver holster visible. |
-| Form 3: banana gun + berry satchel | After Banana-burbs. | 20x28 | 40x48 | Banana gun silhouette and satchel strap. |
-| Form 4: oversized mythic town breaker | After Berry Barks. | 24x32 | 48x56 | Broader shoulders, stronger stomp, larger hair/coat shape. |
-| Form 5: biker guitar final form | Area 111 finale. | 28x36 | 56x64 | Bike jacket, guitar readable, final boss silhouette. |
+| Form 1: KFC seeker | Arrives in Ishiville with no gear. | 48x64 | 52x72 | Teal raincoat, impatient side-eye, unbranded fried-chicken bucket. |
+| Form 2: revolver carrier | After Poojan gives the revolver. | 50x68 | 54x76 | Slightly taller, maroon rain duster, clear-frame glasses, revolver holster. |
+| Form 3: banana gun + berry satchel | After Banana-burbs. | 52x72 | 56x80 | Taller field silhouette, banana gun and berry satchel. |
+| Form 4: mythic town breaker | After Berry Barks. | 54x76 | 58x84 | Taller long-coat silhouette, stronger stance and potion gear; no added body width. |
+| Form 5: biker guitar final form | Area 111 finale. | 58x80 | 62x88 | Tallest form, cropped biker jacket, fitted trousers, guitar and musical-note effects. |
 
 ### NPC sprite size classes
 
-- Small NPC: 12x18 for monkeys, kids, tiny weird residents.
-- Standard NPC: 16x24 for most town residents.
-- Tall NPC: 16x32 for sheriffs, doctors, festival hosts.
-- Wide NPC: 24x24 or 32x24 for bulky residents, furniture-like characters, and gag silhouettes.
+- Small NPC: 28x36 for monkeys and deliberately tiny weird residents.
+- Standard NPC: 34x48 for most town residents.
+- Tall NPC: 40x56 for sheriffs, doctors, and festival hosts.
+- Feature NPC: up to 48x64 for narratively important silhouettes.
 - Important NPCs get one extra color accent and at least a 2-frame idle.
 
 ### boss sprite sizes
 
-- Mini boss overworld sprite: 24x32 minimum.
-- Mini boss battle sprite: 48x56 minimum.
-- Main boss overworld sprite: 32x40 minimum.
-- Main boss battle sprite: 72x72 minimum.
-- SRMT battle sprite: 96x80, centered high in the arena scene.
+- Mini boss overworld sprite: 40x56 minimum.
+- Mini boss battle sprite: 64x74 minimum.
+- Main boss overworld sprite: 44x62 minimum.
+- Main boss battle sprite: 80x92 minimum.
+- SRMT battle sprite: 112x128 minimum, centered above the arena.
 - Boss silhouettes must be readable in grayscale before coloring.
 
 ## Level Art Specifications
@@ -175,6 +185,6 @@ Tileset filenames:
 
 - Do not resize the battle arena without updating gameplay tuning.
 - Do not use anti-aliased scaled sprites.
-- Larger Shrububu forms may need collision tuning in later gameplay passes; art should stay within the listed sprite boxes.
+- Shrububu collision footprints grow only slightly from 12x18 to 16x24 and remain centered on her feet. Growth must never make required routes inaccessible.
 - Boss sheets should be authored as horizontal frame strips unless a later importer requires another format.
 - All animation counts in this document are minimums, not maximums.

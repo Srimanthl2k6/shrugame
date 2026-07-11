@@ -10,12 +10,27 @@ builds/
 *.pck
 *.exe
 
+# Electron and website generated output
+electron/node_modules/
+electron/dist/
+electron/godot-export/web/*
+!electron/godot-export/web/.gitkeep
+site/node_modules/
+site/dist/
+release/windows/
+release/mac/
+release/checksums/
+
 # Local portable Godot engine install
 tools/godot/
 
 # OS/editor noise
 .DS_Store
 Thumbs.db
+
+# Private real-life character references. Never package or commit these.
+shrububu- child/
+shrububu- older/
 desktop.ini
 .vscode/
 .idea/

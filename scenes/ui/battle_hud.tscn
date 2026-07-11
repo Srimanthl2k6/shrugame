@@ -11,12 +11,9 @@ border_width_bottom = 2
 border_color = Color(0.901961, 0.854902, 0.729412, 1)
 
 [node name="BattleHud" type="Control"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 1
 script = ExtResource("1_battle_hud")
 
 [node name="Panel" type="Panel" parent="."]
@@ -25,44 +22,51 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = -56.0
+offset_top = -48.0
 offset_right = -10.0
-offset_bottom = -8.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="EnemyLabel" type="Label" parent="Panel"]
 offset_left = 8.0
-offset_top = 4.0
-offset_right = 116.0
-offset_bottom = 20.0
+offset_top = 3.0
+offset_right = 112.0
+offset_bottom = 14.0
 text = "Enemy"
+theme_override_font_sizes/font_size = 6
 
 [node name="BossStatusLabel" type="Label" parent="Panel"]
 offset_left = 8.0
-offset_top = 18.0
-offset_right = 116.0
-offset_bottom = 34.0
+offset_top = 14.0
+offset_right = 112.0
+offset_bottom = 25.0
 text = "RES 0/0"
+theme_override_font_sizes/font_size = 6
 text_overrun_behavior = 3
 
 [node name="HpLabel" type="Label" parent="Panel"]
-offset_left = 120.0
-offset_top = 4.0
+offset_left = 188.0
+offset_top = 3.0
 offset_right = 292.0
-offset_bottom = 20.0
+offset_bottom = 14.0
 text = "HP 20/20"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 6
 
 [node name="PlayerStatusLabel" type="Label" parent="Panel"]
-offset_left = 120.0
-offset_top = 18.0
+offset_left = 188.0
+offset_top = 14.0
 offset_right = 292.0
-offset_bottom = 34.0
+offset_bottom = 25.0
 text = "Shrububu steady"
+horizontal_alignment = 2
 text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 6
 
 [node name="PhaseLabel" type="Label" parent="Panel"]
+visible = false
 offset_left = 8.0
 offset_top = 34.0
 offset_right = 128.0
@@ -70,9 +74,82 @@ offset_bottom = 50.0
 text = "Player Command"
 
 [node name="CommandLabel" type="Label" parent="Panel"]
-offset_left = 136.0
-offset_top = 34.0
-offset_right = 292.0
-offset_bottom = 50.0
+visible = false
+z_index = 4
+offset_left = 6.0
+offset_top = 27.0
+offset_right = 294.0
+offset_bottom = 42.0
 text = "E: Act | Item | Gear | Guard"
+horizontal_alignment = 1
 text_overrun_behavior = 3
+
+[node name="ActButton" type="Button" parent="Panel"]
+offset_left = 7.0
+offset_top = 27.0
+offset_right = 74.0
+offset_bottom = 42.0
+tooltip_text = "Attack or build resonance"
+text = "1  ACT"
+theme_override_font_sizes/font_size = 6
+
+[node name="ItemButton" type="Button" parent="Panel"]
+offset_left = 80.0
+offset_top = 27.0
+offset_right = 147.0
+offset_bottom = 42.0
+tooltip_text = "Use the first available healing item"
+text = "2  ITEM"
+theme_override_font_sizes/font_size = 6
+
+[node name="GearButton" type="Button" parent="Panel"]
+offset_left = 153.0
+offset_top = 27.0
+offset_right = 220.0
+offset_bottom = 42.0
+tooltip_text = "Cycle unlocked weapons"
+text = "3  GEAR"
+theme_override_font_sizes/font_size = 6
+
+[node name="GuardButton" type="Button" parent="Panel"]
+offset_left = 226.0
+offset_top = 27.0
+offset_right = 293.0
+offset_bottom = 42.0
+tooltip_text = "Reduce damage during the next enemy phase"
+text = "4  GUARD"
+theme_override_font_sizes/font_size = 6
+
+[node name="ChoicePanel" type="Panel" parent="."]
+visible = false
+z_index = 20
+offset_left = 82.0
+offset_top = 42.0
+offset_right = 238.0
+offset_bottom = 132.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Title" type="Label" parent="ChoicePanel"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 148.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 7
+text = "CHOOSE"
+horizontal_alignment = 1
+
+[node name="Choices" type="VBoxContainer" parent="ChoicePanel"]
+offset_left = 8.0
+offset_top = 22.0
+offset_right = 148.0
+offset_bottom = 78.0
+theme_override_constants/separation = 2
+
+[node name="CancelHint" type="Label" parent="ChoicePanel"]
+offset_left = 8.0
+offset_top = 76.0
+offset_right = 148.0
+offset_bottom = 86.0
+theme_override_font_sizes/font_size = 5
+text = "ESC / B: BACK"
+horizontal_alignment = 1

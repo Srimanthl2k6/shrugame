@@ -1,0 +1,14 @@
+{
+  "id": "deepak_confrontation",
+  "caption": "BANANA-BURBS MAYOR COMPLEX",
+  "trigger": {"requires": ["monkeys_spell_broken"], "unless_flag": "deepak_reddy_defeated"},
+  "completion_flag": "deepak_intro_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Deepak Reddy", "lines": ["You replaced a stable civic emotion with seasoned popcorn.", "Do you know what waits for these monkeys outside my gate?", "I made happiness compulsory because suffering already was."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["Then let them choose both.", "Also your fountain is shaped like a banana."]},
+    {"type": "cut_in", "id": "deepak_reddy_boss", "title": "DEEPAK REDDY"},
+    {"type": "start_battle", "encounter_id": "deepak_reddy_boss", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

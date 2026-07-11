@@ -1,0 +1,50 @@
+appId: com.shrugame.desktop
+productName: Shrugame
+asar: true
+directories:
+  output: dist
+files:
+  - main.cjs
+  - preload.cjs
+  - renderer/**/*
+  - godot-export/web/**/*
+  - assets/**/*
+extraMetadata:
+  name: shrugame-desktop
+  version: 1.0.0
+win:
+  icon: assets/app-icon.png
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+nsis:
+  artifactName: "Shrugame-${version}-windows-${arch}-Setup.${ext}"
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+portable:
+  artifactName: "Shrugame-${version}-windows-${arch}-Portable.${ext}"
+mac:
+  icon: assets/app-icon.png
+  category: public.app-category.games
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+    - target: zip
+      arch:
+        - x64
+        - arm64
+  artifactName: "Shrugame-${version}-macos-${arch}.${ext}"
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  identity: null
+dmg:
+  title: "Shrugame ${version}"
+publish: null

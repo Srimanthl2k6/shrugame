@@ -1,0 +1,15 @@
+{
+  "id": "banana_lab_discovery",
+  "caption": "BANANA-BURBS / ABANDONED LAB",
+  "trigger": {"interaction": "LabRecords", "unless_flag": "165_files_collected"},
+  "completion_flag": "165_files_collected",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "sfx", "id": "clue_pickup"},
+    {"type": "collect_clue", "id": "165_files"},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["File 165: mandatory joy, municipal bananas, memory smoothing.", "Every happy monkey outside is under Deepak Reddy's spell.", "And the janitor has locked the exit. Very subtle."]},
+    {"type": "set_objective", "text": "Escape the lab and confront Nitin."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

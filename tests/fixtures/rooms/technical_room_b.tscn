@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/world_room.gd" id="1_room"]
+[ext_resource type="Script" path="res://scripts/world/room_transition.gd" id="2_transition"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape_exit"]
+size = Vector2(24, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape_wall"]
+size = Vector2(640, 24)
+
+[node name="TechnicalRoomB" type="Node2D"]
+script = ExtResource("1_room")
+room_id = "technical_b"
+display_name = "Technical Room B"
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0.19, 0.1, 0.22, 1)
+polygon = PackedVector2Array(0, 0, 640, 0, 640, 360, 0, 360)
+
+[node name="FloorBand" type="Polygon2D" parent="."]
+color = Color(0.37, 0.2, 0.38, 1)
+polygon = PackedVector2Array(0, 72, 640, 72, 640, 312, 0, 312)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(544, 180)
+
+[node name="from_a" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(72, 180)
+
+[node name="WestExit" type="Area2D" parent="."]
+position = Vector2(12, 180)
+script = ExtResource("2_transition")
+transition_id = "west"
+target_room_id = "technical_a"
+target_spawn_id = "from_b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WestExit"]
+shape = SubResource("RectangleShape_exit")
+
+[node name="NorthWall" type="StaticBody2D" parent="."]
+position = Vector2(320, 60)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NorthWall"]
+shape = SubResource("RectangleShape_wall")
+
+[node name="SouthWall" type="StaticBody2D" parent="."]
+position = Vector2(320, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SouthWall"]
+shape = SubResource("RectangleShape_wall")

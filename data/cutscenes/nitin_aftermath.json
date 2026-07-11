@@ -1,0 +1,13 @@
+{
+  "id": "nitin_aftermath",
+  "caption": "LAB EXIT / FLOOR STILL WET",
+  "trigger": {"flag": "nitin_defeated", "unless_flag": "nitin_defeat_seen"},
+  "completion_flag": "nitin_defeat_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Nitin", "lines": ["The evidence is no longer contained.", "The monkeys will not believe a document. They believe routines.", "Break the routine with something stronger than mandatory happiness."]},
+    {"type": "set_objective", "text": "Return to the monkey plaza with the backup popcorn box."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

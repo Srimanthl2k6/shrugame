@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=27 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/overworld/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/overworld/interaction_area.gd" id="2_interaction"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" path="res://assets/level_02/sprites/boss_nitin_overworld.png" id="20_nitin"]
 [ext_resource type="Texture2D" path="res://assets/level_02/sprites/boss_deepak_reddy_overworld.png" id="21_deepak"]
 [ext_resource type="Texture2D" path="res://assets/level_02/sprites/fx_level02_monkey_loop_sheet.png" id="22_monkey_sheet"]
+[ext_resource type="Texture2D" path="res://assets/level_02/backgrounds/banana_burbs_game.png" id="23_premium_backplate"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
 size = Vector2(34, 22)
@@ -40,19 +41,31 @@ script = ExtResource("8_music")
 music_id = "level_02_uncanny_suburb_jingle"
 
 [node name="Background" type="Polygon2D" parent="."]
+scale = Vector2(2, 2)
+z_index = -20
 color = Color(0.07, 0.11, 0.07, 1)
 polygon = PackedVector2Array(0, 0, 320, 0, 320, 180, 0, 180)
 
 [node name="World" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="PlayableFrame" type="Node2D" parent="World"]
+visible = false
 z_index = 9
 script = ExtResource("9_frame")
 frame_color = Color(0.98, 0.88, 0.36, 0.86)
 corner_color = Color(1, 0.96, 0.62, 0.92)
 
 [node name="SceneArt" type="Node2D" parent="World"]
+visible = false
 z_index = -10
+
+[node name="PremiumBackplate" type="Sprite2D" parent="World"]
+texture_filter = 0
+z_index = -10
+position = Vector2(160, 90)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("23_premium_backplate")
 
 [node name="BananaBurbsBackplate" type="Sprite2D" parent="World/SceneArt"]
 texture_filter = 1
@@ -291,7 +304,7 @@ horizontal_alignment = 1
 text_overrun_behavior = 3
 
 [node name="HappyMonkeyLoop" type="Area2D" parent="World"]
-position = Vector2(104, 106)
+position = Vector2(108, 119)
 script = ExtResource("2_interaction")
 interaction_message = "A monkey repeats a perfect little wave."
 dialogue_id = "monkey_loop"
@@ -311,6 +324,24 @@ polygon = PackedVector2Array(-8, -12, 8, -12, 9, 8, 0, 14, -9, 8)
 texture_filter = 1
 texture = ExtResource("18_monkey")
 
+[node name="HappyMonkeyResident02" type="Sprite2D" parent="World"]
+texture_filter = 1
+z_index = 2
+position = Vector2(72, 139)
+texture = ExtResource("18_monkey")
+
+[node name="HappyMonkeyResident03" type="Sprite2D" parent="World"]
+texture_filter = 1
+z_index = 2
+position = Vector2(142, 128)
+texture = ExtResource("18_monkey")
+
+[node name="HappyMonkeyResident04" type="Sprite2D" parent="World"]
+texture_filter = 1
+z_index = 2
+position = Vector2(198, 144)
+texture = ExtResource("18_monkey")
+
 [node name="LabRecords" type="Area2D" parent="World"]
 position = Vector2(210, 52)
 script = ExtResource("2_interaction")
@@ -320,6 +351,7 @@ dialogue_file_path = "res://data/dialogue/level_02_dialogue.json"
 flag_on_interact = "165_files_collected"
 clue_id = "165_files"
 objective_text = "Escape the lab before Nitin hides the files again."
+cutscene_id = "banana_lab_discovery"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/LabRecords"]
 shape = SubResource("RectangleShape2D_interact")
@@ -330,11 +362,12 @@ color = Color(0.72, 0.84, 0.72, 1)
 polygon = PackedVector2Array(-12, -8, 12, -8, 12, 8, -12, 8)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/LabRecords"]
+visible = false
 texture_filter = 1
 texture = ExtResource("14_files")
 
 [node name="NitinJanitor" type="Area2D" parent="World"]
-position = Vector2(262, 66)
+position = Vector2(201, 82)
 script = ExtResource("2_interaction")
 interaction_message = "Nitin blocks the lab exit with a mop."
 target_scene_path = "res://scenes/battle/battle_scene.tscn"
@@ -366,6 +399,7 @@ locked_message = "The monkeys will not listen until the 165-files are safe and N
 flag_on_interact = "monkeys_spell_broken"
 gear_id = "banana_gun"
 objective_text = "Use the monkey army and banana gun to reach Deepak Reddy."
+cutscene_id = "popcorn_spell_break"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/PopcornShare"]
 shape = SubResource("RectangleShape2D_interact")
@@ -376,6 +410,7 @@ color = Color(0.9, 0.72, 0.34, 1)
 polygon = PackedVector2Array(-13, -8, 13, -8, 10, 10, -10, 10)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/PopcornShare"]
+visible = false
 texture_filter = 1
 texture = ExtResource("15_popcorn")
 
@@ -397,6 +432,7 @@ color = Color(0.74, 0.58, 0.18, 1)
 polygon = PackedVector2Array(-18, -12, 18, -12, 18, 12, -18, 12)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/MayorOffice"]
+visible = false
 texture_filter = 1
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("13_mayor_office")
@@ -424,6 +460,9 @@ texture_filter = 1
 texture = ExtResource("21_deepak")
 
 [node name="Vela" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(70, 132)
 script = ExtResource("2_interaction")
 interaction_message = "Vela's old reflection survives as a prototype echo."
@@ -446,6 +485,9 @@ texture_filter = 1
 texture = ExtResource("19_vela")
 
 [node name="Objective" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(76, 92)
 script = ExtResource("2_interaction")
 interaction_message = "You rotate a leftover mirror marker from the old prototype."
@@ -465,6 +507,9 @@ modulate = Color(0.72, 0.94, 1, 1)
 texture = ExtResource("14_files")
 
 [node name="PracticeEncounter" type="Area2D" parent="World"]
+visible = false
+monitoring = false
+monitorable = false
 position = Vector2(98, 150)
 script = ExtResource("2_interaction")
 interaction_message = "Vela's reflected bullets ripple outward."
@@ -501,6 +546,7 @@ color = Color(0.4, 0.7, 0.9, 1)
 polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/SavePoint"]
+visible = false
 texture_filter = 1
 texture = ExtResource("16_mailbox")
 
@@ -509,7 +555,7 @@ position = Vector2(294, 74)
 script = ExtResource("2_interaction")
 interaction_message = "Banana-burbs is awake. Berry Barks waits beyond the trees."
 target_scene_path = "res://scenes/levels/level_03.tscn"
-required_flags = PackedStringArray("165_files_collected", "nitin_defeated", "monkeys_spell_broken", "deepak_reddy_defeated", "level_02_objective_done", "vela_practice_cleared")
+required_flags = PackedStringArray("165_files_collected", "nitin_defeated", "monkeys_spell_broken", "deepak_reddy_defeated")
 locked_message = "Banana-burbs is not free yet."
 objective_text = "Continue the KFC search in Berry Barks."
 
@@ -522,12 +568,15 @@ color = Color(0.26, 0.46, 0.2, 1)
 polygon = PackedVector2Array(-12, -14, 12, -14, 12, 14, -12, 14)
 
 [node name="ReadableSprite" type="Sprite2D" parent="World/TransitionDoor"]
+visible = false
 texture_filter = 1
 texture = ExtResource("17_exit_gate")
 
 [node name="VisualFxLayer" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="MonkeyLoopSprite" type="Sprite2D" parent="VisualFxLayer"]
+visible = false
 texture_filter = 1
 z_index = 4
 position = Vector2(86, 64)
@@ -559,10 +608,12 @@ motion_pixels = 0.0
 position = Vector2(36, 118)
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue_box")]
 
 [node name="UiLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("5_objective")]
 

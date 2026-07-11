@@ -1,22 +1,99 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://scenes/levels/level_01.tscn" id="1_level01"]
+[ext_resource type="PackedScene" path="res://scenes/levels/districts/level_01.tscn" id="1_level01"]
 [ext_resource type="Script" path="res://scripts/core/main_menu.gd" id="2_main_menu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_panel.tscn" id="3_settings"]
+[ext_resource type="Texture2D" path="res://assets/level_01/backgrounds/divorcee_harbour_game.png" id="4_title_art"]
+[ext_resource type="PackedScene" path="res://scenes/ui/controls_panel.tscn" id="5_controls"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title_panel"]
-bg_color = Color(0.04, 0.045, 0.06, 0.94)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu"]
+bg_color = Color(0.027, 0.039, 0.047, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.72, 0.73, 0.75)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.075, 0.102, 0.112, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.36, 0.48, 0.49, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.36, 0.105, 0.176, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.94, 0.78, 0.34, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal"]
+bg_color = Color(0.018, 0.027, 0.034, 0.99)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.9, 0.86, 0.72, 1)
+border_color = Color(0.94, 0.78, 0.34, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_story"]
+bg_color = Color(0.105, 0.235, 0.239, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.62, 0.88, 0.86, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hard"]
+bg_color = Color(0.33, 0.055, 0.102, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.98, 0.38, 0.38, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="Main" type="Node"]
+process_mode = 3
 script = ExtResource("2_main_menu")
 
 [node name="Level01" parent="." instance=ExtResource("1_level01")]
 
 [node name="TitleLayer" type="CanvasLayer" parent="."]
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+
+[node name="TitleArt" type="TextureRect" parent="TitleLayer"]
+offset_right = 320.0
+offset_bottom = 180.0
+texture_filter = 1
+texture = ExtResource("4_title_art")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Backdrop" type="ColorRect" parent="TitleLayer"]
 anchors_preset = 15
@@ -24,98 +101,310 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.006, 0.011, 0.018, 0.96)
+color = Color(0.005, 0.012, 0.016, 0.72)
 
-[node name="RainBandTop" type="ColorRect" parent="TitleLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 18.0
-grow_horizontal = 2
-color = Color(0.05, 0.12, 0.15, 0.62)
+[node name="FogBand" type="ColorRect" parent="TitleLayer"]
+offset_top = 116.0
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.155, 0.058, 0.102, 0.34)
 
-[node name="RainBandBottom" type="ColorRect" parent="TitleLayer"]
-anchors_preset = 12
-anchor_top = 1.0
+[node name="RainLeft" type="Line2D" parent="TitleLayer"]
+points = PackedVector2Array(18, 0, 8, 42, 52, 0, 42, 42, 86, 0, 76, 42, 120, 0, 110, 42, 154, 0, 144, 42, 188, 0, 178, 42, 222, 0, 212, 42, 256, 0, 246, 42, 290, 0, 280, 42, 324, 0, 314, 42)
+width = 1.0
+default_color = Color(0.42, 0.67, 0.68, 0.22)
+
+[node name="Brand" type="Control" parent="TitleLayer"]
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 178.0
+offset_bottom = 162.0
+
+[node name="Eyebrow" type="Label" parent="TitleLayer/Brand"]
+offset_right = 160.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0.62, 0.84, 0.84, 1)
+theme_override_font_sizes/font_size = 7
+text = "AN ISHIVILLE STORY"
+
+[node name="TitleLabel" type="Label" parent="TitleLayer/Brand"]
+offset_top = 18.0
+offset_right = 160.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(1, 0.94, 0.77, 1)
+theme_override_font_sizes/font_size = 25
+text = "SHRUGAME"
+
+[node name="Rule" type="ColorRect" parent="TitleLayer/Brand"]
+offset_top = 56.0
+offset_right = 104.0
+offset_bottom = 58.0
+color = Color(0.94, 0.78, 0.34, 1)
+
+[node name="Hook" type="Label" parent="TitleLayer/Brand"]
+offset_top = 66.0
+offset_right = 158.0
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(0.84, 0.87, 0.84, 1)
+theme_override_font_sizes/font_size = 8
+text = "Shrububu came for fried chicken.\nThe town gave her a demon king."
+autowrap_mode = 2
+
+[node name="Location" type="Label" parent="TitleLayer/Brand"]
+offset_top = 118.0
+offset_right = 160.0
+offset_bottom = 138.0
+theme_override_colors/font_color = Color(0.52, 0.64, 0.64, 1)
+theme_override_font_sizes/font_size = 6
+text = "RAIN WARNING / DIVORCEE HARBOUR"
+
+[node name="MenuPanel" type="Panel" parent="TitleLayer"]
+offset_left = 190.0
+offset_top = 14.0
+offset_right = 306.0
+offset_bottom = 170.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu")
+
+[node name="MenuLabel" type="Label" parent="TitleLayer/MenuPanel"]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 106.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.94, 0.78, 0.34, 1)
+theme_override_font_sizes/font_size = 7
+text = "TOWN DIRECTORY"
+
+[node name="NewGameButton" type="Button" parent="TitleLayer/MenuPanel"]
+offset_left = 10.0
+offset_top = 25.0
+offset_right = 106.0
+offset_bottom = 43.0
+focus_neighbor_bottom = NodePath("../ContinueButton")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "NEW GAME"
+
+[node name="ContinueButton" type="Button" parent="TitleLayer/MenuPanel"]
+offset_left = 10.0
+offset_top = 47.0
+offset_right = 106.0
+offset_bottom = 65.0
+focus_neighbor_top = NodePath("../NewGameButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "CONTINUE"
+
+[node name="OptionsButton" type="Button" parent="TitleLayer/MenuPanel"]
+offset_left = 10.0
+offset_top = 69.0
+offset_right = 106.0
+offset_bottom = 87.0
+focus_neighbor_top = NodePath("../ContinueButton")
+focus_neighbor_bottom = NodePath("../ControlsButton")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "OPTIONS"
+
+[node name="ControlsButton" type="Button" parent="TitleLayer/MenuPanel"]
+offset_left = 10.0
+offset_top = 91.0
+offset_right = 106.0
+offset_bottom = 107.0
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../CreditsButton")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "CONTROLS"
+
+[node name="CreditsButton" type="Button" parent="TitleLayer/MenuPanel"]
+offset_left = 10.0
+offset_top = 111.0
+offset_right = 106.0
+offset_bottom = 127.0
+focus_neighbor_top = NodePath("../ControlsButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "CREDITS"
+
+[node name="QuitButton" type="Button" parent="TitleLayer/MenuPanel"]
+offset_left = 10.0
+offset_top = 131.0
+offset_right = 106.0
+offset_bottom = 147.0
+focus_neighbor_top = NodePath("../CreditsButton")
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "QUIT"
+
+[node name="VersionLabel" type="Label" parent="TitleLayer/MenuPanel"]
+offset_left = 10.0
+offset_top = 151.0
+offset_right = 106.0
+offset_bottom = 163.0
+theme_override_colors/font_color = Color(0.42, 0.53, 0.54, 1)
+theme_override_font_sizes/font_size = 6
+text = "DESKTOP 1.0.0"
+horizontal_alignment = 2
+
+[node name="DifficultyLayer" type="Control" parent="TitleLayer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -20.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.08, 0.035, 0.065, 0.68)
-
-[node name="Panel" type="Panel" parent="TitleLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -146.0
-offset_top = -76.0
-offset_right = 146.0
-offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_title_panel")
 
-[node name="TitleLabel" type="Label" parent="TitleLayer/Panel"]
-offset_left = 18.0
+[node name="Dim" type="ColorRect" parent="TitleLayer/DifficultyLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.003, 0.007, 0.009, 0.88)
+
+[node name="Modal" type="Panel" parent="TitleLayer/DifficultyLayer"]
+offset_left = 24.0
+offset_top = 18.0
+offset_right = 296.0
+offset_bottom = 162.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+
+[node name="Title" type="Label" parent="TitleLayer/DifficultyLayer/Modal"]
+offset_left = 16.0
 offset_top = 10.0
-offset_right = 274.0
-offset_bottom = 30.0
-text = "SHRUGAME"
+offset_right = 256.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 0.94, 0.77, 1)
+theme_override_font_sizes/font_size = 12
+text = "CHOOSE YOUR TROUBLE"
 horizontal_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="TitleLayer/Panel"]
-offset_left = 12.0
+[node name="Subtitle" type="Label" parent="TitleLayer/DifficultyLayer/Modal"]
+offset_left = 16.0
 offset_top = 31.0
-offset_right = 280.0
-offset_bottom = 49.0
-text = "Shrububu enters Ishiville. SRMT has the KFC."
+offset_right = 256.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(0.61, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 6
+text = "Difficulty is locked to this save."
 horizontal_alignment = 1
 
-[node name="StatusLabel" type="Label" parent="TitleLayer/Panel"]
-offset_left = 12.0
+[node name="ShrububuButton" type="Button" parent="TitleLayer/DifficultyLayer/Modal"]
+offset_left = 14.0
 offset_top = 50.0
-offset_right = 280.0
-offset_bottom = 68.0
-text = "Five levels. One save. Windows build."
+offset_right = 130.0
+offset_bottom = 106.0
+focus_neighbor_right = NodePath("../SrmtButton")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_story")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "SHRUBUBU\n\nExtremely easy\nStory, chaos, KFC"
+
+[node name="SrmtButton" type="Button" parent="TitleLayer/DifficultyLayer/Modal"]
+offset_left = 142.0
+offset_top = 50.0
+offset_right = 258.0
+offset_bottom = 106.0
+focus_neighbor_left = NodePath("../ShrububuButton")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_hard")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "SRMT\n\nExtremely hard\nDemon law applies"
+
+[node name="Warning" type="Label" parent="TitleLayer/DifficultyLayer/Modal"]
+offset_left = 16.0
+offset_top = 111.0
+offset_right = 256.0
+offset_bottom = 123.0
+theme_override_colors/font_color = Color(0.72, 0.76, 0.73, 1)
+theme_override_font_sizes/font_size = 6
+text = "SRMT mode expects precise dodging and scarce items."
 horizontal_alignment = 1
 
-[node name="NewGameButton" type="Button" parent="TitleLayer/Panel"]
-offset_left = 26.0
-offset_top = 76.0
-offset_right = 118.0
-offset_bottom = 101.0
-text = "New Game"
+[node name="CancelButton" type="Button" parent="TitleLayer/DifficultyLayer/Modal"]
+offset_left = 99.0
+offset_top = 125.0
+offset_right = 173.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 7
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "BACK"
 
-[node name="ContinueButton" type="Button" parent="TitleLayer/Panel"]
-offset_left = 128.0
-offset_top = 76.0
-offset_right = 220.0
-offset_bottom = 101.0
-text = "Continue"
+[node name="CreditsLayer" type="Control" parent="TitleLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="QuitButton" type="Button" parent="TitleLayer/Panel"]
-offset_left = 230.0
-offset_top = 76.0
-offset_right = 266.0
-offset_bottom = 101.0
-text = "Quit"
+[node name="Dim" type="ColorRect" parent="TitleLayer/CreditsLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.003, 0.007, 0.009, 0.9)
 
-[node name="ControlsLabel" type="Label" parent="TitleLayer/Panel"]
-offset_left = 14.0
-offset_top = 114.0
-offset_right = 278.0
-offset_bottom = 136.0
-text = "WASD/Arrows move  |  E/Enter interact  |  Esc pause"
+[node name="Modal" type="Panel" parent="TitleLayer/CreditsLayer"]
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 272.0
+offset_bottom = 156.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+
+[node name="Title" type="Label" parent="TitleLayer/CreditsLayer/Modal"]
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 212.0
+offset_bottom = 25.0
+theme_override_colors/font_color = Color(1, 0.94, 0.77, 1)
+theme_override_font_sizes/font_size = 11
+text = "CREDITS"
 horizontal_alignment = 1
-text_overrun_behavior = 3
 
-[node name="FooterLabel" type="Label" parent="TitleLayer/Panel"]
-offset_left = 14.0
-offset_top = 136.0
-offset_right = 278.0
-offset_bottom = 150.0
-text = "Pacific Northwest weirdness, readable prototype mode"
+[node name="Body" type="Label" parent="TitleLayer/CreditsLayer/Modal"]
+offset_left = 16.0
+offset_top = 34.0
+offset_right = 208.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.75, 0.82, 0.8, 1)
+theme_override_font_sizes/font_size = 7
+text = "A game about Shrububu and Ishiville.\n\nCreated as a birthday adventure.\nBuilt with Godot and Electron.\n\nSilkscreen font under the SIL OFL."
 horizontal_alignment = 1
-text_overrun_behavior = 3
+
+[node name="BackButton" type="Button" parent="TitleLayer/CreditsLayer/Modal"]
+offset_left = 74.0
+offset_top = 106.0
+offset_right = 150.0
+offset_bottom = 123.0
+theme_override_font_sizes/font_size = 7
+text = "BACK"
+
+[node name="SettingsPanel" parent="TitleLayer" instance=ExtResource("3_settings")]
+
+[node name="ControlsPanel" parent="TitleLayer" instance=ExtResource("5_controls")]
+
+[node name="OverwriteDialog" type="ConfirmationDialog" parent="."]
+title = "Replace the current save?"
+initial_position = 1
+size = Vector2i(420, 170)
+dialog_text = "Starting a new game replaces the single Ishiville save."
+ok_button_text = "REPLACE SAVE"
+cancel_button_text = "CANCEL"

@@ -9,5 +9,7 @@
   "growth_stage_unlock": 5,
   "town_state_after_defeat": "The city regains self-direction after the Aeon festival conflict.",
   "next_level_id": "level_05",
-  "required_story_flags": ["hospital_records_collected", "doctor_sushan_defeated", "mitta_defeated"]
+  "required_story_flags": ["hospital_records_collected", "doctor_sushan_defeated", "aeon_festival_started", "mitta_defeated"],
+  "start_room_id": "pun_street",
+  "room_scene_paths": ["res://scenes/levels/rooms/level_04/pun_street.tscn", "res://scenes/levels/rooms/level_04/hospital_reception.tscn", "res://scenes/levels/rooms/level_04/serum_ward.tscn", "res://scenes/levels/rooms/level_04/festival_plaza.tscn", "res://scenes/levels/rooms/level_04/mayor_stage.tscn"]
 }

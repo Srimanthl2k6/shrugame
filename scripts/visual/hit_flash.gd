@@ -17,6 +17,9 @@ func play(duration: float = -1.0) -> void:
 	_duration = default_duration if duration < 0.0 else duration
 	_elapsed = 0.0
 	color = flash_color
+	var settings_manager := get_node_or_null("/root/SettingsManager")
+	if settings_manager != null and bool(settings_manager.get_setting("flash_reduction", false)):
+		color.a *= 0.28
 
 
 func _process(delta: float) -> void:

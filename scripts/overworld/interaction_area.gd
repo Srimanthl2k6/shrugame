@@ -26,23 +26,40 @@ const TuningLoader := preload("res://scripts/core/tuning_loader.gd")
 @export var growth_stage_on_interact := 0
 @export var objective_text := ""
 @export var interaction_size := Vector2(34.0, 22.0)
+@export var disabled_if_flag := ""
+@export var one_shot := false
+@export var hide_when_disabled := false
+@export var cutscene_id := ""
+@export var focus_highlight := true
 
 var _player_inside := false
+var _disabled := false
 
 
 func _ready() -> void:
 	_apply_tuning()
+	if not disabled_if_flag.is_empty() and _get_story_flag(disabled_if_flag):
+		_disable_interaction()
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not _player_inside:
+	if _disabled or not _player_inside:
 		return
 	if event.is_action_pressed("interact"):
 		if not _has_required_flags():
 			print(locked_message)
 			interacted.emit(locked_message)
+			get_viewport().set_input_as_handled()
+			return
+		if not cutscene_id.is_empty():
+			_play_ui_select()
+			var director := get_node_or_null("/root/CutsceneDirector")
+			if director != null and not director.is_playing:
+				director.play(cutscene_id, _find_level_root())
+			if one_shot:
+				call_deferred("_disable_interaction")
 			get_viewport().set_input_as_handled()
 			return
 
@@ -74,18 +91,22 @@ func _unhandled_input(event: InputEvent) -> void:
 				_play_encounter_start()
 			_play_transition_wipe()
 			get_tree().change_scene_to_file(target_scene_path)
+		if one_shot:
+			call_deferred("_disable_interaction")
 		get_viewport().set_input_as_handled()
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if not _disabled and body.is_in_group("player"):
 		_player_inside = true
+		_set_focus_highlight(true)
 		print(get_focus_prompt())
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_inside = false
+		_set_focus_highlight(false)
 
 
 func get_display_name() -> String:
@@ -95,7 +116,11 @@ func get_display_name() -> String:
 
 
 func get_focus_prompt() -> String:
-	return "%s: %s" % [prompt_action_text, get_display_name()]
+	var resolved_prompt := prompt_action_text
+	var input_manager := get_node_or_null("/root/InputManager")
+	if input_manager != null and prompt_action_text in ["E/Enter", "E/ENTER"]:
+		resolved_prompt = input_manager.get_interact_prompt()
+	return "%s: %s" % [resolved_prompt, get_display_name()]
 
 
 func _has_required_flags() -> bool:
@@ -133,6 +158,43 @@ func _set_story_flag(flag_name: String) -> void:
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state != null:
 		game_state.set_flag(flag_name, true)
+
+
+func _get_story_flag(flag_name: String) -> bool:
+	var game_state := get_node_or_null("/root/GameState")
+	return game_state != null and bool(game_state.get_flag(flag_name))
+
+
+func _disable_interaction() -> void:
+	_set_focus_highlight(false)
+	_disabled = true
+	_player_inside = false
+	monitoring = false
+	monitorable = false
+	if hide_when_disabled:
+		visible = false
+
+
+func _set_focus_highlight(active: bool) -> void:
+	if not focus_highlight:
+		return
+	for child in get_children():
+		var item := child as CanvasItem
+		if item == null:
+			continue
+		if not item.has_meta("interaction_base_modulate"):
+			item.set_meta("interaction_base_modulate", item.modulate)
+		var base: Color = item.get_meta("interaction_base_modulate")
+		item.modulate = base.lerp(Color(1.18, 1.14, 0.9, base.a), 0.34) if active else base
+
+
+func _find_level_root() -> Node:
+	var node: Node = self
+	while node != null:
+		if node.has_node("World"):
+			return node
+		node = node.get_parent()
+	return get_tree().current_scene
 
 
 func _notify_level_controller(flag_name: String) -> void:

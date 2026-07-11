@@ -1,0 +1,14 @@
+{
+  "id": "mitta_confrontation",
+  "caption": "AEON FESTIVAL / UNSCRIPTED FINALE",
+  "trigger": {"requires": ["aeon_festival_started"], "unless_flag": "mitta_intro_seen"},
+  "completion_flag": "mitta_intro_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Mitta", "lines": ["Sushan was my partner. I loved him, and you shattered the system we built together.", "This festival was supposed to prove Auticity still belonged to us.", "Outshine me if you can. SRMT's stage lights are watching."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["Love does not make his system innocent.", "Take the stage."]},
+    {"type": "cut_in", "id": "mitta_boss", "title": "MITTA"},
+    {"type": "start_battle", "encounter_id": "mitta_boss", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

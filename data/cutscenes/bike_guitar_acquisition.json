@@ -1,0 +1,19 @@
+{
+  "id": "bike_guitar_acquisition",
+  "caption": "UNLAWFUL VEHICLE AND INSTRUMENT TRANSFER",
+  "trigger": {"flag": "suhas_defeated", "unless_flag": "guitar_acquired"},
+  "completion_flag": "guitar_acquired",
+  "completion_flags": {"bike_acquired": true, "musical_guitar_unlocked": true},
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "cut_in", "id": "weapon_unlocks", "title": "MUSICAL GUITAR"},
+    {"type": "sfx", "id": "guitar_note"},
+    {"type": "unlock_gear", "id": "musical_guitar"},
+    {"type": "actor_animation", "target": "Player", "animation": "attack_musical_guitar", "fps": 12.0, "duration": 0.55},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["The guitar shoots notes. The bike starts without keys.", "Area 111 has finally contributed something useful."]},
+    {"type": "set_objective", "text": "Ride to the fallen mansion and open the ruined court."},
+    {"type": "checkpoint", "flag": "guitar_reward_checkpoint"},
+    {"type": "lock_player", "locked": false}
+  ]
+}

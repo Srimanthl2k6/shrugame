@@ -1,0 +1,23 @@
+{
+  "id": "srmt_throne_reveal",
+  "caption": "THE RUINED COURT",
+  "trigger": {"requires": ["mansion_court_clues_collected", "guitar_acquired"], "unless_flag": "srmt_intro_seen"},
+  "completion_flag": "srmt_intro_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "music_state", "id": "level_05_ruined_club_court_finale", "fade_seconds": 0.55},
+    {"type": "fade", "alpha": 1.0, "duration": 0.35},
+    {"type": "sfx", "id": "transition_wipe"},
+    {"type": "fade", "alpha": 0.0, "duration": 0.6},
+    {"type": "camera_pan", "target": "Player/Camera2D", "offset": [72, -28], "duration": 0.65},
+    {"type": "camera_zoom", "target": "Player/Camera2D", "zoom": [1.14, 1.14], "duration": 0.65},
+    {"type": "cut_in", "id": "srmt_throne_reveal", "title": "DEMON KING SRMT"},
+    {"type": "dialogue", "speaker": "SRMT", "lines": ["You crossed five districts for a bucket.", "Poojan gave you a gun. Deepak gave you an army. The forest gave you medicine.", "Auticity gave you a festival, and Area 111 gave you that unbearable guitar.", "I conquered Ishiville with fear. You conquered it by refusing to accept the wrong restaurant.", "Do you know what power is, Shrububu?", "It is eating the last piece while a kingdom waits outside.", "IshiYoga waited too. She was quieter than you.", "This KFC is mine."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["You should have hidden the smell.", "You should have hidden the queen.", "You should have hidden from every town you taught to be afraid.", "I came here hungry. Now I am also annoyed.", "Ek Bihari, Sab pe Bhaari."]},
+    {"type": "camera_pan", "target": "Player/Camera2D", "offset": [0, 0], "duration": 0.3},
+    {"type": "camera_zoom", "target": "Player/Camera2D", "zoom": [1.0, 1.0], "duration": 0.3},
+    {"type": "checkpoint", "flag": "srmt_intro_checkpoint"},
+    {"type": "start_battle", "encounter_id": "srmt_final_boss", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

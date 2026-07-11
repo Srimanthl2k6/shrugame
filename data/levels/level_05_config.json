@@ -9,5 +9,7 @@
   "growth_stage_unlock": 5,
   "town_state_after_defeat": "SRMT is defeated, IshiYoga is freed, and Ishiville is restored.",
   "next_level_id": "ending",
-  "required_story_flags": ["mansion_court_clues_collected", "suhas_defeated", "srmt_defeated"]
+  "required_story_flags": ["mansion_court_clues_collected", "suhas_defeated", "srmt_defeated", "ishiyoga_rescued"],
+  "start_room_id": "ruined_boulevard",
+  "room_scene_paths": ["res://scenes/levels/rooms/level_05/ruined_boulevard.tscn", "res://scenes/levels/rooms/level_05/gummies_pub.tscn", "res://scenes/levels/rooms/level_05/hooligan_alley.tscn", "res://scenes/levels/rooms/level_05/bike_route.tscn", "res://scenes/levels/rooms/level_05/mansion_foyer.tscn", "res://scenes/levels/rooms/level_05/clue_chambers.tscn", "res://scenes/levels/rooms/level_05/ruined_court.tscn"]
 }

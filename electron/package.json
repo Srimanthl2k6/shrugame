@@ -1,0 +1,26 @@
+{
+  "name": "shrugame-desktop",
+  "version": "1.0.0",
+  "description": "Electron desktop shell for Shrugame",
+  "main": "main.cjs",
+  "author": "Shrugame",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "sync:version": "node ../tools/sync-version.cjs",
+    "dev": "electron .",
+    "start": "electron .",
+    "export:godot": "node scripts/export-godot.cjs",
+    "smoke": "node scripts/smoke-test.cjs",
+    "build:win": "npm run sync:version && npm run export:godot && electron-builder --win",
+    "build:mac": "npm run sync:version && npm run export:godot && electron-builder --mac",
+    "dist": "npm run export:godot && electron-builder --win --mac"
+  },
+  "devDependencies": {
+    "electron": "43.1.0",
+    "electron-builder": "26.15.3"
+  }
+}

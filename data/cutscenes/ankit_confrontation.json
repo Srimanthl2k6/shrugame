@@ -1,0 +1,14 @@
+{
+  "id": "ankit_confrontation",
+  "caption": "BERRY BARKS / THE EMPTY PLATE",
+  "trigger": {"requires": ["berries_shared"], "unless_flag": "ankit_intro_seen"},
+  "completion_flag": "ankit_intro_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Ankit", "lines": ["You beat Niggesh Nishal.", "That was my chef. Now I have nothing to eat but bark berries and consequences.", "SRMT promised every appetite would have someone else to blame."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["The berries are free.", "Your plate is a personal problem."]},
+    {"type": "cut_in", "id": "ankit_boss", "title": "ANKIT"},
+    {"type": "start_battle", "encounter_id": "ankit_boss", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

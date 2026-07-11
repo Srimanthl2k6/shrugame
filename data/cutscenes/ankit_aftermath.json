@@ -1,0 +1,16 @@
+{
+  "id": "ankit_aftermath",
+  "caption": "BERRY BARKS EATS",
+  "trigger": {"flag": "ankit_defeated", "unless_flag": "ankit_defeat_seen"},
+  "completion_flag": "ankit_defeat_seen",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Ankit", "lines": ["The berries are actually pretty good.", "Fine. Berry Barks is free, and you are somehow taller again.", "The mist road leads to Auticity. Its hospital lights never blink at the same time."]},
+    {"type": "cut_in", "id": "growth_form_04", "title": "SHRUBUBU GREW"},
+    {"type": "sfx", "id": "growth_transform"},
+    {"type": "set_growth_stage", "stage": 4},
+    {"type": "set_objective", "text": "Leave Berry Barks for Auticity."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

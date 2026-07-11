@@ -9,5 +9,7 @@
   "growth_stage_unlock": 2,
   "town_state_after_defeat": "Harbour residents realize Shrububu can free Ishiville.",
   "next_level_id": "level_02",
-  "required_story_flags": ["poojan_defeated", "divorce_records_collected", "satyaki_tirumal_defeated"]
+  "required_story_flags": ["poojan_defeated", "divorce_records_collected", "satyaki_tirumal_defeated"],
+  "start_room_id": "arrival",
+  "room_scene_paths": ["res://scenes/levels/rooms/level_01/arrival.tscn", "res://scenes/levels/rooms/level_01/harbour_square.tscn", "res://scenes/levels/rooms/level_01/residences_docks.tscn", "res://scenes/levels/rooms/level_01/records_alley.tscn", "res://scenes/levels/rooms/level_01/satyaki_waterfront.tscn"]
 }

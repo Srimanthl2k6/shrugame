@@ -55,8 +55,8 @@
     "lines": [
       "Suhas is down. The bike keys are sticky. The musical guitar shoots notes.",
       "This is not KFC, but it is useful.",
-      "ehehehe.",
-      "Area 111 opens toward the fallen mansion."
+      "Area 111 opens toward the fallen mansion.",
+      "The guitar answers from inside its case."
     ],
     "complete_flag": "guitar_reward_seen"
   },
@@ -96,7 +96,7 @@
     "lines": [
       "Shrububu frees IshiYoga from the KFC dungeon corner.",
       "They open the bucket together.",
-      "ehehehe.",
+      "The bucket finally opens without a trap.",
       "Ishiville smells like rain, neon, and finally KFC."
     ],
     "complete_flag": "ishiyoga_rescued"

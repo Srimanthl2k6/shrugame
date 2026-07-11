@@ -1,0 +1,37 @@
+{
+  "id": "opening_arrival",
+  "caption": "DIVORCEE HARBOUR / RAIN WARNING",
+  "trigger": {"level": "level_01", "unless_flag": "level_01_opening_complete"},
+  "completion_flag": "level_01_opening_complete",
+  "completion_flags": {
+    "building_broken": true,
+    "level_01_opening_seen": true,
+    "resident_satyaki_clue_seen": true
+  },
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "music_state", "id": "level_01_rainy_harbor_noir", "fade_seconds": 0.6},
+    {"type": "fade", "alpha": 1.0, "duration": 0.05},
+    {"type": "caption", "text": "ISHIVILLE CITY LIMITS / 11:47 PM"},
+    {"type": "fade", "alpha": 0.0, "duration": 0.55},
+    {"type": "camera_zoom", "target": "Player/Camera2D", "zoom": [1.08, 1.08], "duration": 0.55},
+    {"type": "move_actor", "target": "Player", "position": [210, 282], "duration": 0.65},
+    {"type": "face_actor", "target": "Player", "direction": "up"},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["Ishiville. Population: damp.", "Somebody here has KFC. Shrububu can feel it in the weather."]},
+    {"type": "move_actor", "target": "Player", "position": [306, 224], "duration": 0.5},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["HOT KFC. Finally.", "...That sign has committed fraud."]},
+    {"type": "cut_in", "id": "door_slam", "title": "THIS IS NOT KFC"},
+    {"type": "actor_animation", "target": "Player", "animation": "door_slam", "fps": 12.0, "duration": 0.48},
+    {"type": "sfx", "id": "door_slam"},
+    {"type": "shake", "strength": 5.0, "duration": 0.45},
+    {"type": "sfx", "id": "building_break"},
+    {"type": "wait", "seconds": 0.35},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["Unprovoked.", "The door made its choice, and the building followed."]},
+    {"type": "dialogue", "speaker": "Harbour Resident", "lines": ["You broke the whole building with one disappointed door slam.", "Sheriff Poojan needs to see this. Maybe Ishiville finally has a chance.", "Follow the wet road east. Do not let Satyaki hear us hoping."]},
+    {"type": "camera_zoom", "target": "Player/Camera2D", "zoom": [1.0, 1.0], "duration": 0.35},
+    {"type": "checkpoint", "flag": "arrival_cinematic_checkpoint"},
+    {"type": "set_objective", "text": "Find Sheriff Poojan in Divorcee Harbour."},
+    {"type": "lock_player", "locked": false}
+  ]
+}

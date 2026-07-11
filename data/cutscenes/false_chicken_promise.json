@@ -1,0 +1,14 @@
+{
+  "id": "false_chicken_promise",
+  "caption": "BERRY BARKS / 1000-BERRY CONTRACT",
+  "trigger": {"requires": ["berries_collected", "berry_contract_collected"], "unless_flag": "nishal_lie_exposed"},
+  "completion_flag": "nishal_lie_exposed",
+  "skippable": true,
+  "steps": [
+    {"type": "lock_player", "locked": true},
+    {"type": "dialogue", "speaker": "Niggesh Nishal", "lines": ["A thousand berries. Counted, polished, contract-compliant.", "There is one administrative issue with the fried chicken.", "It never existed."]},
+    {"type": "dialogue", "speaker": "Shrububu", "lines": ["You used imaginary chicken as contract consideration.", "Ek Bihari, Sab pe Bhaari."]},
+    {"type": "cut_in", "id": "nishal_boss", "title": "NIGGESH NISHAL"},
+    {"type": "start_battle", "encounter_id": "niggesh_nishal_boss", "scene": "res://scenes/battle/battle_scene.tscn"}
+  ]
+}

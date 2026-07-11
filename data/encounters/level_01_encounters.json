@@ -46,11 +46,12 @@
     "enemy_name": "Sheriff Poojan",
     "enemy_hp": 10,
     "player_hp": 24,
-    "resonance_goal": 4,
+    "resonance_goal": 10,
     "return_scene": "res://scenes/levels/level_01.tscn",
     "boss_type": "mini_boss",
-    "battle_visual": "res://assets/level_01/sprites/battle_poojan_strength_test.png",
-    "battle_backplate": "res://assets/level_01/sprites/battle_bg_divorcee_harbour.png",
+    "battle_visual": "res://assets/level_01/sprites/boss_poojan_idle.png",
+    "battle_backplate": "res://assets/level_01/backgrounds/divorcee_harbour_game.png",
+    "battle_frames": 4,
     "bullet_legend": "Badge warnings and rainy revolver lanes.",
     "bullet_visuals": ["res://assets/level_01/sprites/bullet_badge_warning.png"],
     "pacing_note": "Readable first boss pacing: badge warning, clear lanes, short ring burst.",
@@ -63,47 +64,70 @@
         "intro_dialogue": "Poojan tests whether Shrububu's door-slam strength was a fluke.",
         "readability_hint": "Poojan marks four badge lanes before the shots arrive.",
         "patterns": [{"type": "straight_lanes", "count": 4, "telegraph_seconds": 0.6, "safe_hint": "Four badge lanes. Stand between the warnings.", "visual_id": "badge"}],
-        "clear_threshold": 5
+        "clear_threshold": 10
       },
       {
-        "id": "harbour_showdown",
-        "intro_dialogue": "Poojan fires warning shots through the rainy harbour mist.",
+        "id": "rain_badge_ring",
+        "intro_dialogue": "Poojan throws his badge into the rain and the whole street answers.",
         "readability_hint": "The ring burst starts from the center and leaves time to sidestep.",
         "patterns": [{"type": "rings", "count": 5, "telegraph_seconds": 0.65, "safe_hint": "Ring burst starts from center. Move after the badge flash.", "visual_id": "badge"}],
-        "clear_threshold": 0
+        "clear_threshold": 7
+      },
+      {
+        "id": "last_warning",
+        "intro_dialogue": "Poojan calls the final warning. No paperwork. No excuses.",
+        "readability_hint": "Two sweeping badge lines alternate directions.",
+        "patterns": [{"type": "sweeping_beams", "count": 4, "telegraph_seconds": 0.55, "safe_hint": "Sweeps alternate. Cross behind the first badge line.", "visual_id": "badge"}],
+        "clear_threshold": 3
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.38, "bullet_speed_multiplier": 0.4, "telegraph_multiplier": 2.0},
+      "srmt": {"bullet_count_multiplier": 2.25, "bullet_speed_multiplier": 1.95, "telegraph_multiplier": 0.58}
+    }
   },
   "satyaki_tirumal_boss": {
     "enemy_name": "Satyaki Tirumal",
     "enemy_hp": 16,
     "player_hp": 26,
-    "resonance_goal": 6,
+    "resonance_goal": 10,
     "return_scene": "res://scenes/levels/level_01.tscn",
     "boss_type": "main_boss",
-    "battle_visual": "res://assets/level_01/sprites/battle_satyaki_tirumal.png",
-    "battle_backplate": "res://assets/level_01/sprites/battle_bg_divorcee_harbour.png",
+    "battle_visual": "res://assets/level_01/sprites/boss_satyaki_tirumal_idle.png",
+    "battle_backplate": "res://assets/level_01/backgrounds/divorcee_harbour_game.png",
+    "battle_frames": 4,
     "bullet_legend": "Dodge legal papers, broken rings, and property deeds.",
     "bullet_visuals": ["res://assets/level_01/sprites/bullet_legal_paper.png", "res://assets/level_01/sprites/bullet_broken_ring.png"],
-    "pacing_note": "Readable main boss pacing: papers fall first, then slower sweeping property beams.",
+    "pacing_note": "Three-stage case: papers establish lanes, rings close space, then property beams sweep the dock.",
     "defeated_flag": "satyaki_tirumal_defeated",
     "growth_stage_reward": 2,
     "commands": ["act", "item", "gear", "guard"],
     "phases": [
       {
         "id": "legal_papers",
-        "intro_dialogue": "Satyaki hurls divorce papers, broken rings, and property deeds.",
+        "intro_dialogue": "Satyaki hurls divorce papers stamped with SRMT's seal.",
         "readability_hint": "Marked columns show where legal papers will fall.",
-        "patterns": [{"type": "falling_objects", "count": 5, "telegraph_seconds": 0.65, "safe_hint": "Papers fall from marked columns. Start under a gap.", "visual_id": "legal_paper"}],
-        "clear_threshold": 8
+        "patterns": [{"type": "falling_objects", "count": 5, "telegraph_seconds": 0.7, "safe_hint": "Papers fall from marked columns. Start under a gap.", "visual_id": "legal_paper"}],
+        "clear_threshold": 16
+      },
+      {
+        "id": "broken_ring_court",
+        "intro_dialogue": "Broken rings orbit the dock like witnesses who regret attending.",
+        "readability_hint": "The ring opens as it expands. Follow the widest gap.",
+        "patterns": [{"type": "rings", "count": 7, "telegraph_seconds": 0.65, "safe_hint": "The broken ring expands. Follow its missing piece.", "visual_id": "broken_ring"}],
+        "clear_threshold": 11
       },
       {
         "id": "property_storm",
-        "intro_dialogue": "The harbour court records spiral into a money storm.",
+        "intro_dialogue": "Satyaki liquidates the whole harbour into one last money storm.",
         "readability_hint": "Property beams flash before sweeping across the box.",
-        "patterns": [{"type": "sweeping_beams", "count": 4, "telegraph_seconds": 0.75, "safe_hint": "Property beams sweep sideways. Cross after the flash.", "visual_id": "broken_ring"}],
+        "patterns": [{"type": "sweeping_beams", "count": 5, "telegraph_seconds": 0.75, "safe_hint": "Property beams sweep sideways. Cross after the flash.", "visual_id": "broken_ring"}],
         "clear_threshold": 0
       }
-    ]
+    ],
+    "difficulty_overrides": {
+      "shrububu": {"bullet_count_multiplier": 0.42, "bullet_speed_multiplier": 0.42, "telegraph_multiplier": 2.0},
+      "srmt": {"bullet_count_multiplier": 2.35, "bullet_speed_multiplier": 2.05, "telegraph_multiplier": 0.55}
+    }
   }
 }
