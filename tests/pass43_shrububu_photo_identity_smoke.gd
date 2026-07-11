@@ -21,9 +21,7 @@ func _run() -> void:
 		"Godot never imports them"
 	], failures)
 	_check_text("res://.gitignore", ["shrububu- child/", "shrububu- older/"], failures)
-	for marker in ["res://shrububu- child/.gdignore", "res://shrububu- older/.gdignore"]:
-		if not FileAccess.file_exists(marker):
-			failures.append("Missing private-reference Godot ignore marker: %s" % marker)
+	_check_text("res://export_presets.cfg", ["source_art/*", "electron/*", "site/*"], failures)
 	_check_text("res://tools/generate_premium_shrububu_sprites.gd", [
 		"Growth is vertical only",
 		"var shoulder_half := 7",

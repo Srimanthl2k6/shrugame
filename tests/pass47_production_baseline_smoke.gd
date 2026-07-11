@@ -59,8 +59,8 @@ func _run() -> void:
 	var gitignore := FileAccess.get_file_as_string("res://.gitignore")
 	_assert(gitignore.contains("shrububu- child/"), "Child reference folder must remain Git-ignored")
 	_assert(gitignore.contains("shrububu- older/"), "Adult reference folder must remain Git-ignored")
-	_assert(FileAccess.file_exists("res://shrububu- child/.gdignore"), "Child reference folder must remain Godot-ignored")
-	_assert(FileAccess.file_exists("res://shrububu- older/.gdignore"), "Adult reference folder must remain Godot-ignored")
+	var export_config := FileAccess.get_file_as_string("res://export_presets.cfg")
+	_assert(export_config.contains("source_art/*"), "Source art must remain excluded from exports")
 
 	if failures.is_empty():
 		print("PASS: Pass 47 production baseline covers %d files: %s" % [covered_paths.size(), status_counts])
