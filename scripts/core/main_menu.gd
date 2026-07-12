@@ -218,6 +218,25 @@ func _run_electron_smoke_flow() -> void:
 		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/levels/districts/level_02.tscn")
 		return
+	if smoke_target == "right_edge_harbour_square":
+		var harbour_save := get_node_or_null("/root/SaveSystem")
+		if harbour_save != null:
+			harbour_save.new_game("shrububu")
+		var harbour_state := get_node_or_null("/root/GameState")
+		if harbour_state != null:
+			harbour_state.current_level_id = "level_01"
+			harbour_state.current_room_id = "harbour_square"
+			harbour_state.spawn_point = "from_docks"
+			harbour_state.pending_encounter_id = ""
+			harbour_state.set_flag("building_broken", true)
+			harbour_state.set_flag("opening_arrival_seen", true)
+			harbour_state.set_flag("tutorial_overworld_completed", true)
+			harbour_state.set_flag("tutorial_battle_completed", true)
+			harbour_state.set_current_objective("Keep walking east.")
+			harbour_save.save_game("level_01", "from_docks", "harbour_square")
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/levels/districts/level_01.tscn")
+		return
 	if smoke_target.begins_with("level_0"):
 		var level_number := smoke_target.trim_prefix("level_")
 		get_tree().paused = false

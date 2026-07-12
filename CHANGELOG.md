@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3 - 2026-07-12
+
+- Fixed Harbour Square and other rooms where collision geometry could stop Shrububu before the edge Area2D activated.
+- Added a universal far-right threshold that directly activates each room's east exit at `x=600`.
+- Kept story and boss requirements intact while ensuring movement is the only input needed to change rooms.
+- Added a 27-room engine regression and a dedicated Harbour Square Electron runtime probe.
+
 ## 1.0.2 - 2026-07-12
 
 - Anchored every forward room and district transition to the far-right edge of the screen.

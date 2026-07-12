@@ -255,7 +255,7 @@ async function runSmokeProbe(window) {
 	window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
 	const movementDuration = SMOKE_ROUTE === "transition_level_01"
 		? 7200
-		: (SMOKE_ROUTE === "right_edge_level_02" ? 2400 : 600);
+		: (["right_edge_level_02", "right_edge_harbour_square"].includes(SMOKE_ROUTE) ? 2400 : 600);
 	await wait(movementDuration);
 	window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
 	await wait(800);
@@ -284,6 +284,7 @@ async function runSmokeProbe(window) {
     && report.gameAudio?.continuousPlayers === 0
     && (SMOKE_ROUTE !== "transition_level_01" || report.godotDiagnostics?.level_id === "level_02")
     && (SMOKE_ROUTE !== "right_edge_level_02" || report.godotDiagnostics?.current_room === "lab_approach")
+    && (SMOKE_ROUTE !== "right_edge_harbour_square" || report.godotDiagnostics?.current_room === "residences_docks")
     && report.consoleErrors.length === 0;
   await wait(250);
   app.exit(passed ? 0 : 1);

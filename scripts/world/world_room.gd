@@ -30,3 +30,13 @@ func get_room_bounds() -> Rect2:
 func configure_player_camera(player: Node) -> void:
 	if player != null and player.has_method("configure_room_bounds"):
 		player.configure_room_bounds(get_room_bounds())
+
+
+func try_forward_exit(body: Node2D) -> bool:
+	var exits := get_node_or_null("Exits")
+	if exits == null:
+		return false
+	for candidate in exits.get_children():
+		if candidate.has_method("is_forward_exit") and candidate.call("is_forward_exit"):
+			return bool(candidate.call("try_transition", body))
+	return false

@@ -16,26 +16,36 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	try_transition(body)
+
+
+func try_transition(body: Node2D) -> bool:
 	if not enabled or not body.is_in_group("player"):
-		return
+		return false
 	if not _requirements_met():
 		var game_state := get_node_or_null("/root/GameState")
 		if game_state != null and not locked_objective.is_empty():
 			game_state.set_current_objective(locked_objective)
-		return
+		return false
 	if not target_level_id.is_empty():
 		enabled = false
 		var level_manager := get_node_or_null("/root/LevelManager")
 		if level_manager == null:
 			enabled = true
-			return
+			return false
 		var error: Error = level_manager.transition_to_level(target_level_id, target_room_id, target_spawn_id)
 		if error != OK:
 			enabled = true
-		return
+			return false
+		return true
 	var district := _find_district()
 	if district != null:
-		district.request_room_change(target_room_id, target_spawn_id)
+		return bool(district.request_room_change(target_room_id, target_spawn_id))
+	return false
+
+
+func is_forward_exit() -> bool:
+	return transition_id.to_lower().begins_with("east_to_")
 
 
 func _requirements_met() -> bool:

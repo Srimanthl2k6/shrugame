@@ -2,6 +2,8 @@ class_name DistrictLevel
 extends Node2D
 
 const RuntimeResourceManifest := preload("res://scripts/core/runtime_resource_manifest.gd")
+const FORWARD_EDGE_MARGIN := 40.0
+const FORWARD_EDGE_REARM_DISTANCE := 20.0
 
 signal room_change_started(from_room_id: String, to_room_id: String)
 signal room_changed(room_id: String, spawn_id: String)
@@ -20,6 +22,7 @@ var _room_paths: Dictionary = {}
 var _transitioning := false
 var _idle_seconds := 0.0
 var _reminder_sent := false
+var _forward_edge_armed := true
 var runtime_diagnostics: Dictionary = {}
 
 @onready var room_container: Node2D = get_node_or_null("RoomContainer") as Node2D
@@ -71,6 +74,20 @@ func _process(delta: float) -> void:
 		route_reminder_requested.emit(str(game_state.get_current_objective()))
 
 
+func _physics_process(_delta: float) -> void:
+	if player == null or current_room == null or _transitioning:
+		return
+	var local_x := current_room.to_local(player.global_position).x
+	var trigger_x := current_room.room_size.x - FORWARD_EDGE_MARGIN
+	if local_x < trigger_x - FORWARD_EDGE_REARM_DISTANCE:
+		_forward_edge_armed = true
+		return
+	if not _forward_edge_armed or local_x < trigger_x:
+		return
+	_forward_edge_armed = false
+	current_room.try_forward_exit(player)
+
+
 func request_room_change(target_room_id: String, target_spawn_id: String = "default") -> bool:
 	if _transitioning:
 		return false
@@ -97,6 +114,7 @@ func switch_room(target_room_id: String, target_spawn_id: String = "default", sa
 		return false
 	room_container.add_child(current_room)
 	current_room_id = target_room_id
+	_forward_edge_armed = true
 	_record_diagnostic("current_room", current_room_id)
 	current_room.configure_player_camera(player)
 	if player != null:
