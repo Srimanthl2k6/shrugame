@@ -35,9 +35,6 @@ func _ready() -> void:
 	_difficulty_layer.visible = false
 	_credits_layer.visible = false
 	_new_game_button.grab_focus.call_deferred()
-	var audio_manager := get_node_or_null("/root/AudioManager")
-	if audio_manager != null:
-		audio_manager.play_music("title_theme", 0.6)
 	if not _get_electron_smoke_target().is_empty():
 		_run_electron_smoke_flow.call_deferred()
 
@@ -78,12 +75,13 @@ func select_difficulty(selected_difficulty_id: String) -> void:
 	_difficulty_layer.visible = false
 	get_tree().paused = false
 	_title_layer.visible = false
-	var audio_manager := get_node_or_null("/root/AudioManager")
-	if audio_manager != null:
-		audio_manager.play_music("level_01_rainy_harbor_noir", 0.55)
-	var level_one := get_node_or_null("Level01")
-	if level_one != null and level_one.has_method("begin_level_intro"):
-		level_one.begin_level_intro()
+	var tutorial_manager := get_node_or_null("/root/TutorialManager")
+	if tutorial_manager != null:
+		if not tutorial_manager.intro_ready.is_connected(_begin_level_intro):
+			tutorial_manager.intro_ready.connect(_begin_level_intro, CONNECT_ONE_SHOT)
+		tutorial_manager.begin_new_game_sequence()
+	else:
+		_begin_level_intro()
 
 
 func close_difficulty_selection() -> void:
@@ -152,6 +150,12 @@ func _play_ui_select() -> void:
 		audio_manager.play_ui_select()
 
 
+func _begin_level_intro() -> void:
+	var level_one := get_node_or_null("Level01")
+	if level_one != null and level_one.has_method("begin_level_intro"):
+		level_one.begin_level_intro()
+
+
 func _get_electron_smoke_target() -> String:
 	if not OS.has_feature("web"):
 		return ""
@@ -175,6 +179,25 @@ func _run_electron_smoke_flow() -> void:
 	if smoke_target == "ending":
 		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/ending.tscn")
+		return
+	if smoke_target == "transition_level_01":
+		var transition_save := get_node_or_null("/root/SaveSystem")
+		if transition_save != null:
+			transition_save.new_game("shrububu")
+		var transition_state := get_node_or_null("/root/GameState")
+		if transition_state != null:
+			transition_state.current_level_id = "level_01"
+			transition_state.current_room_id = "satyaki_waterfront"
+			transition_state.spawn_point = "from_records"
+			transition_state.pending_encounter_id = ""
+			transition_state.set_flag("satyaki_tirumal_defeated", true)
+			transition_state.set_flag("satyaki_defeat_seen", true)
+			transition_state.set_flag("tutorial_overworld_completed", true)
+			transition_state.set_flag("tutorial_battle_completed", true)
+			transition_state.set_current_objective("Walk east to Banana-burbs.")
+			transition_save.save_game("level_01", "from_records", "satyaki_waterfront")
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/levels/districts/level_01.tscn")
 		return
 	if smoke_target.begins_with("level_0"):
 		var level_number := smoke_target.trim_prefix("level_")

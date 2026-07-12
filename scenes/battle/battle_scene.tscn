@@ -29,44 +29,45 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("10_battle_bg")
 
 [node name="BattleReadabilityLayer" type="CanvasLayer" parent="."]
-transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="EnemyNameplate" type="Label" parent="BattleReadabilityLayer"]
-offset_left = 70.0
-offset_top = 3.0
-offset_right = 308.0
-offset_bottom = 15.0
+offset_left = 140.0
+offset_top = 6.0
+offset_right = 616.0
+offset_bottom = 34.0
 text = "Enemy"
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 
 [node name="ArenaInstruction" type="Label" parent="BattleReadabilityLayer"]
-offset_left = 70.0
-offset_top = 19.0
-offset_right = 308.0
-offset_bottom = 34.0
+offset_left = 140.0
+offset_top = 38.0
+offset_right = 616.0
+offset_bottom = 70.0
 text = "Dodge inside the box"
-theme_override_font_sizes/font_size = 6
-text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
 
 [node name="CommandHintStrip" type="Label" parent="BattleReadabilityLayer"]
 visible = false
-offset_left = 26.0
-offset_top = 158.0
-offset_right = 294.0
-offset_bottom = 176.0
+offset_left = 52.0
+offset_top = 316.0
+offset_right = 588.0
+offset_bottom = 352.0
 text = "Act builds RES | Item heals | Gear swaps | Guard halves damage"
 horizontal_alignment = 1
-text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
 
 [node name="BulletLegend" type="Label" parent="BattleReadabilityLayer"]
 visible = false
-offset_left = 38.0
-offset_top = 28.0
-offset_right = 282.0
-offset_bottom = 44.0
+offset_left = 76.0
+offset_top = 56.0
+offset_right = 564.0
+offset_bottom = 90.0
 text = "Pattern: badge warnings"
 horizontal_alignment = 1
-text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
 
 [node name="EnemyPlaceholder" type="Polygon2D" parent="."]
 visible = false
@@ -99,7 +100,6 @@ script = ExtResource("3_pattern")
 arena_size = Vector2(192, 76)
 
 [node name="HudLayer" type="CanvasLayer" parent="."]
-transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="BattleHud" parent="HudLayer" instance=ExtResource("4_hud")]
 

@@ -4,13 +4,17 @@ Shrugame is a five-district 2D pixel RPG about Shrububu's search for KFC through
 
 ## Release Status
 
-Version **1.0.0 release candidate** includes:
+Version **1.0.1** includes:
 
 - 27 connected rooms across Divorcee Harbour, Banana-burbs, Berry Barks, Auticity, and Area 111.
 - Ten multi-phase encounters with Strength and Resonance outcomes.
 - Two save-locked modes: Shrububu (extremely easy) and SRMT (extremely hard).
 - Five slim Shrububu growth forms and four persistent equipment rewards.
 - 28 data-driven cutscenes, five stateful dialogue sets, a clue journal, inventory, objectives, settings, controls, and credits.
+- Native 640x360 Atkinson Hyperlegible UI text instead of enlarged low-resolution body text.
+- First-play overworld and battle tutorials with device-aware prompts and in-game replay.
+- Automatic, save-first district transitions, including the repaired post-Satyaki route to Banana-burbs.
+- SFX-only audio with no looping music or ambience.
 - One atomic, migration-safe save file with corruption fallback.
 - Godot 4.7 Web embedded in a hardened Electron desktop shell.
 - Windows x64 installer/portable builds and unsigned macOS Intel/Apple-silicon CI targets.
@@ -40,10 +44,10 @@ npm start --prefix electron
 | Move | WASD / arrows | Left stick / D-pad |
 | Interact / confirm | E / Enter | South face button |
 | Cancel / pause | Escape | East face button |
-| Battle commands | 1–4 or menu navigation | D-pad + confirm |
+| Battle commands | 1-4 or menu navigation | D-pad + confirm |
 | Fullscreen | F11 or Alt+Enter | Settings menu |
 
-Bindings can be remapped in-game. Flash reduction, screen shake, high-contrast bullets, objective reminders, text speed, and independent volume controls persist outside the game save.
+Bindings can be remapped in-game. Flash reduction, screen shake, high-contrast bullets, objective reminders, text speed, and Master/SFX volume controls persist outside the game save.
 
 ## Verification
 
@@ -52,6 +56,7 @@ Bindings can be remapped in-game. Flash reduction, screen shake, high-contrast b
 .\tools\run_release_tests.ps1 -IncludeLegacy
 npm run build --prefix site
 npm run smoke --prefix electron -- level_01
+npm run smoke --prefix electron -- transition_level_01
 .\tools\audit_release_files.ps1
 ```
 
@@ -67,7 +72,7 @@ macOS x64 and arm64 packages are produced by `.github/workflows/release.yml` on 
 
 ## Project Guide
 
-- `assets/`: Runtime art, fonts, music, and sound effects.
+- `assets/`: Runtime art, fonts, and non-looping sound effects.
 - `source_art/`: Non-exported generated production sources; private identity references are not stored here.
 - `scenes/`: Main flow, 27 rooms, five district roots, battle, ending, and UI.
 - `scripts/`: State, save, input, dialogue, cutscene, battle, overworld, UI, and presentation systems.

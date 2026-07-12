@@ -153,6 +153,7 @@ func _build_exits() -> void:
 		area.set_script(TransitionScript)
 		area.position = _to_vector2(entry.get("position", []), Vector2.ZERO)
 		area.set("transition_id", str(entry.get("id", "exit")))
+		area.set("target_level_id", str(entry.get("target_level_id", "")))
 		area.set("target_room_id", str(entry.get("target_room_id", "")))
 		area.set("target_spawn_id", str(entry.get("target_spawn_id", "default")))
 		area.set("locked_objective", str(entry.get("locked_objective", "")))
@@ -163,6 +164,12 @@ func _build_exits() -> void:
 		shape.size = _to_vector2(entry.get("size", [32, 96]), Vector2(32, 96))
 		collision.shape = shape
 		area.add_child(collision)
+		var sprite := _create_actor(entry)
+		if sprite != null:
+			sprite.name = "Visual"
+			sprite.position = _to_vector2(entry.get("visual_offset", [0, 0]), Vector2.ZERO)
+			sprite.z_index = int(entry.get("z_index", int(area.position.y)))
+			area.add_child(sprite)
 
 
 func _add_blocker(parent: Node2D, blocker_name: String, rect: Rect2) -> void:

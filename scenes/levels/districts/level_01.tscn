@@ -20,12 +20,10 @@ intro_cutscene_id = "opening_arrival"
 [node name="Player" parent="." instance=ExtResource("2_player")]
 
 [node name="DialogueLayer" type="CanvasLayer" parent="."]
-transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="DialogueBox" parent="DialogueLayer" instance=ExtResource("3_dialogue")]
 
 [node name="UiLayer" type="CanvasLayer" parent="."]
-transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="ObjectiveTracker" parent="UiLayer" instance=ExtResource("4_objective")]
 

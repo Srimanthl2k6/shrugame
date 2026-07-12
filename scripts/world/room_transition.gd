@@ -2,6 +2,7 @@ class_name RoomTransition
 extends Area2D
 
 @export var transition_id := "exit"
+@export var target_level_id := ""
 @export var target_room_id := ""
 @export var target_spawn_id := "default"
 @export var required_flags: PackedStringArray = []
@@ -21,6 +22,16 @@ func _on_body_entered(body: Node2D) -> void:
 		var game_state := get_node_or_null("/root/GameState")
 		if game_state != null and not locked_objective.is_empty():
 			game_state.set_current_objective(locked_objective)
+		return
+	if not target_level_id.is_empty():
+		enabled = false
+		var level_manager := get_node_or_null("/root/LevelManager")
+		if level_manager == null:
+			enabled = true
+			return
+		var error: Error = level_manager.transition_to_level(target_level_id, target_room_id, target_spawn_id)
+		if error != OK:
+			enabled = true
 		return
 	var district := _find_district()
 	if district != null:

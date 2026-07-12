@@ -8,10 +8,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	if not ambience_id.is_empty():
-		var audio_manager := get_node_or_null("/root/AudioManager")
-		if audio_manager != null:
-			audio_manager.play_music(ambience_id)
+	pass
 
 
 func get_spawn_position(spawn_id: String) -> Vector2:

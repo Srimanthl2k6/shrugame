@@ -80,10 +80,12 @@
       "spawn_points": {"default": [88, 284], "from_plaza": [88, 284]},
       "blockers": [[90, 22, 460, 96]],
       "interactions": [
-        {"id": "MittaBoss", "position": [372, 220], "visual": "res://assets/level_04/sprites/boss_mitta_overworld.png", "display_name": "Mayor Mitta", "interaction_message": "Mitta waits under a spotlight that follows no one else.", "cutscene_id": "mitta_confrontation", "required_flags": ["aeon_festival_started"], "disabled_if_flag": "mitta_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]},
-        {"id": "Area111Road", "position": [534, 266], "visual": "res://assets/level_04/sprites/prop_area111_exit.png", "display_name": "Road to Area 111", "interaction_message": "Pink static flickers beyond the festival gate.", "target_scene_path": "res://scenes/levels/districts/level_05.tscn", "required_flags": ["mitta_defeated"], "locked_message": "Mitta has not surrendered the festival route.", "interaction_size": [68, 68]}
+        {"id": "MittaBoss", "position": [372, 220], "visual": "res://assets/level_04/sprites/boss_mitta_overworld.png", "display_name": "Mayor Mitta", "interaction_message": "Mitta waits under a spotlight that follows no one else.", "cutscene_id": "mitta_confrontation", "required_flags": ["aeon_festival_started"], "disabled_if_flag": "mitta_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]}
       ],
-      "exits": [{"id": "west_to_plaza", "position": [34, 280], "size": [40, 108], "target_room_id": "festival_plaza", "target_spawn_id": "from_stage"}]
+      "exits": [
+        {"id": "west_to_plaza", "position": [34, 280], "size": [40, 108], "target_room_id": "festival_plaza", "target_spawn_id": "from_stage"},
+        {"id": "east_to_area_111", "position": [574, 266], "size": [84, 120], "visual": "res://assets/level_04/sprites/prop_area111_exit.png", "bob_pixels": 2.0, "target_level_id": "level_05", "target_spawn_id": "start", "required_flags": ["mitta_defeated"], "locked_objective": "Mitta has not surrendered the festival route."}
+      ]
     }
   }
 }

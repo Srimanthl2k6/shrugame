@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/settings_panel.tscn" id="2_settings"]
+[ext_resource type="PackedScene" path="res://scenes/ui/controls_panel.tscn" id="3_controls"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_shell"]
 bg_color = Color(0.012, 0.019, 0.023, 0.98)
@@ -23,12 +24,11 @@ border_color = Color(0.25, 0.38, 0.39, 1)
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
 layer = 80
-transform = Transform2D(2, 0, 0, 2, 0, 0)
 script = ExtResource("1_pause")
 
 [node name="Root" type="Control" parent="."]
-offset_right = 320.0
-offset_bottom = 180.0
+offset_right = 640
+offset_bottom = 360
 
 [node name="Dim" type="ColorRect" parent="Root"]
 anchors_preset = 15
@@ -39,108 +39,117 @@ grow_vertical = 2
 color = Color(0.002, 0.005, 0.007, 0.86)
 
 [node name="Shell" type="Panel" parent="Root"]
-offset_left = 18.0
-offset_top = 12.0
-offset_right = 302.0
-offset_bottom = 168.0
+offset_left = 36
+offset_top = 24
+offset_right = 604
+offset_bottom = 336
 theme_override_styles/panel = SubResource("StyleBox_shell")
 
 [node name="Header" type="Label" parent="Root/Shell"]
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 272.0
-offset_bottom = 22.0
+offset_left = 24
+offset_top = 16
+offset_right = 544
+offset_bottom = 44
 theme_override_colors/font_color = Color(1, 0.93, 0.72, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 22
 text = "ISHIVILLE FIELD NOTES"
 
 [node name="Left" type="Control" parent="Root/Shell"]
-offset_left = 10.0
-offset_top = 30.0
-offset_right = 98.0
-offset_bottom = 146.0
+offset_left = 20
+offset_top = 60
+offset_right = 196
+offset_bottom = 292
 
 [node name="DifficultyLabel" type="Label" parent="Root/Shell/Left"]
-offset_right = 88.0
-offset_bottom = 12.0
+offset_right = 176
+offset_bottom = 24
 theme_override_colors/font_color = Color(0.56, 0.78, 0.78, 1)
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 13
 text = "MODE: SHRUBUBU"
 
 [node name="ResumeButton" type="Button" parent="Root/Shell/Left"]
-offset_top = 18.0
-offset_right = 88.0
-offset_bottom = 34.0
-theme_override_font_sizes/font_size = 7
+offset_top = 30
+offset_right = 176
+offset_bottom = 56
+theme_override_font_sizes/font_size = 15
 text = "RESUME"
 
 [node name="JournalButton" type="Button" parent="Root/Shell/Left"]
-offset_top = 38.0
-offset_right = 88.0
-offset_bottom = 54.0
-theme_override_font_sizes/font_size = 7
+offset_top = 60
+offset_right = 176
+offset_bottom = 86
+theme_override_font_sizes/font_size = 15
 text = "JOURNAL"
 
 [node name="ItemsButton" type="Button" parent="Root/Shell/Left"]
-offset_top = 58.0
-offset_right = 88.0
-offset_bottom = 74.0
-theme_override_font_sizes/font_size = 7
+offset_top = 90
+offset_right = 176
+offset_bottom = 116
+theme_override_font_sizes/font_size = 15
 text = "BAG & GEAR"
 
 [node name="OptionsButton" type="Button" parent="Root/Shell/Left"]
-offset_top = 78.0
-offset_right = 88.0
-offset_bottom = 94.0
-theme_override_font_sizes/font_size = 7
+offset_top = 120
+offset_right = 176
+offset_bottom = 146
+theme_override_font_sizes/font_size = 15
 text = "OPTIONS"
 
+[node name="ControlsButton" type="Button" parent="Root/Shell/Left"]
+offset_top = 150.0
+offset_right = 176.0
+offset_bottom = 176.0
+theme_override_font_sizes/font_size = 15
+text = "CONTROLS"
+
 [node name="SaveButton" type="Button" parent="Root/Shell/Left"]
-offset_top = 98.0
-offset_right = 88.0
-offset_bottom = 114.0
-theme_override_font_sizes/font_size = 7
+offset_top = 180
+offset_right = 176
+offset_bottom = 206
+theme_override_font_sizes/font_size = 15
 text = "SAVE"
 
 [node name="TitleButton" type="Button" parent="Root/Shell/Left"]
-offset_top = 118.0
-offset_right = 88.0
-offset_bottom = 134.0
-theme_override_font_sizes/font_size = 7
+offset_top = 210
+offset_right = 176
+offset_bottom = 236
+theme_override_font_sizes/font_size = 15
 text = "TITLE SCREEN"
 
 [node name="Content" type="Panel" parent="Root/Shell"]
-offset_left = 108.0
-offset_top = 30.0
-offset_right = 274.0
-offset_bottom = 146.0
+offset_left = 216
+offset_top = 60
+offset_right = 548
+offset_bottom = 292
 theme_override_styles/panel = SubResource("StyleBox_content")
 
 [node name="SectionTitle" type="Label" parent="Root/Shell/Content"]
-offset_left = 10.0
-offset_top = 8.0
-offset_right = 156.0
-offset_bottom = 20.0
+offset_left = 20
+offset_top = 16
+offset_right = 312
+offset_bottom = 40
 theme_override_colors/font_color = Color(0.94, 0.78, 0.34, 1)
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "CLUE JOURNAL"
 
 [node name="Rule" type="ColorRect" parent="Root/Shell/Content"]
-offset_left = 10.0
-offset_top = 25.0
-offset_right = 156.0
-offset_bottom = 26.0
+offset_left = 20
+offset_top = 50
+offset_right = 312
+offset_bottom = 52
 color = Color(0.24, 0.39, 0.4, 1)
 
 [node name="ContentText" type="RichTextLabel" parent="Root/Shell/Content"]
-offset_left = 10.0
-offset_top = 32.0
-offset_right = 156.0
-offset_bottom = 108.0
-theme_override_font_sizes/normal_font_size = 7
+offset_left = 20
+offset_top = 64
+offset_right = 312
+offset_bottom = 216
+theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 fit_content = false
 scroll_active = true
 text = "NO CLUES YET\n\nThe rain has not admitted anything useful."
 
 [node name="SettingsPanel" parent="Root" instance=ExtResource("2_settings")]
+
+[node name="ControlsPanel" parent="Root" instance=ExtResource("3_controls")]

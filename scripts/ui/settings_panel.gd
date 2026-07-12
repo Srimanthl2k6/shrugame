@@ -5,7 +5,6 @@ signal close_requested
 var _syncing := false
 
 @onready var _master: HSlider = $Dim/Panel/MasterSlider
-@onready var _music: HSlider = $Dim/Panel/MusicSlider
 @onready var _sfx: HSlider = $Dim/Panel/SfxSlider
 @onready var _fullscreen: CheckButton = $Dim/Panel/FullscreenToggle
 @onready var _screen_shake: CheckButton = $Dim/Panel/ShakeToggle
@@ -19,7 +18,6 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	visible = false
 	_master.value_changed.connect(_set_float.bind("master_volume"))
-	_music.value_changed.connect(_set_float.bind("music_volume"))
 	_sfx.value_changed.connect(_set_float.bind("sfx_volume"))
 	_fullscreen.toggled.connect(_set_bool.bind("fullscreen"))
 	_screen_shake.toggled.connect(_set_bool.bind("screen_shake"))
@@ -54,7 +52,6 @@ func _sync_from_manager() -> void:
 		return
 	_syncing = true
 	_master.value = float(manager.get_setting("master_volume", 0.85)) * 100.0
-	_music.value = float(manager.get_setting("music_volume", 0.72)) * 100.0
 	_sfx.value = float(manager.get_setting("sfx_volume", 0.9)) * 100.0
 	_fullscreen.button_pressed = bool(manager.get_setting("fullscreen", false))
 	_screen_shake.button_pressed = bool(manager.get_setting("screen_shake", true))

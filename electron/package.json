@@ -1,6 +1,6 @@
 {
   "name": "shrugame-desktop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Electron desktop shell for Shrugame",
   "main": "main.cjs",
   "author": "Shrugame",

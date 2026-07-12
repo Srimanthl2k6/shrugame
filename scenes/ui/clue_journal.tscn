@@ -12,22 +12,22 @@ border_color = Color(0.78, 0.72, 0.58, 1)
 
 [node name="ClueJournal" type="Control"]
 visible = false
-offset_right = 320.0
-offset_bottom = 180.0
+offset_right = 640
+offset_bottom = 360
 script = ExtResource("1_clue_journal")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 12.0
-offset_top = 118.0
-offset_right = 308.0
-offset_bottom = 162.0
+offset_left = 24
+offset_top = 236
+offset_right = 616
+offset_bottom = 324
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="ClueLabel" type="Label" parent="Panel"]
-offset_left = 6.0
-offset_top = 4.0
-offset_right = 298.0
-offset_bottom = 38.0
-theme_override_font_sizes/font_size = 7
+offset_left = 12
+offset_top = 8
+offset_right = 596
+offset_bottom = 76
+theme_override_font_sizes/font_size = 15
 text = "No clues yet."
 autowrap_mode = 3

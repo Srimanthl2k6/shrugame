@@ -35,7 +35,7 @@ func _test_room_graphs_and_interactions() -> void:
 		var visited: Dictionary = {}
 		var pending: Array[String] = [start_room]
 		var interaction_count := 0
-		var scene_targets: Array[String] = []
+		var level_targets: Array[String] = []
 		while not pending.is_empty():
 			var room_id: String = pending.pop_front()
 			if visited.has(room_id) or not rooms.has(room_id):
@@ -62,9 +62,15 @@ func _test_room_graphs_and_interactions() -> void:
 				var target_scene := str(interaction.get("target_scene_path", ""))
 				if not target_scene.is_empty():
 					_assert(ResourceLoader.exists(target_scene), "%s scene transition target is missing" % target_scene)
-					scene_targets.append(target_scene)
 			for exit_value in room.get("exits", []):
 				var exit_data: Dictionary = exit_value
+				var target_level := str(exit_data.get("target_level_id", ""))
+				if not target_level.is_empty():
+					var target_config := _load_json("res://data/levels/%s_config.json" % target_level)
+					_assert(str(target_config.get("level_id", "")) == target_level, "%s/%s targets missing level %s" % [level_id, room_id, target_level])
+					_assert(str(exit_data.get("target_spawn_id", "")) == "start", "%s/%s cross-level exit must use the canonical start spawn" % [level_id, room_id])
+					level_targets.append(target_level)
+					continue
 				var target_room := str(exit_data.get("target_room_id", ""))
 				var target_spawn := str(exit_data.get("target_spawn_id", "default"))
 				_assert(rooms.has(target_room), "%s/%s exit targets missing room %s" % [level_id, room_id, target_room])
@@ -76,8 +82,8 @@ func _test_room_graphs_and_interactions() -> void:
 		_assert(visited.size() == rooms.size(), "%s room graph has unreachable rooms" % level_id)
 		_assert(interaction_count >= (18 if level_number == 5 else 12), "%s needs enough authored interactions" % level_id)
 		if level_number < 5:
-			var expected_next := "res://scenes/levels/districts/level_%02d.tscn" % (level_number + 1)
-			_assert(scene_targets.has(expected_next), "%s must expose the canonical next route %s" % [level_id, expected_next])
+			var expected_next := "level_%02d" % (level_number + 1)
+			_assert(level_targets.has(expected_next), "%s must expose an automatic route to %s" % [level_id, expected_next])
 		else:
 			var birthday := _load_json("res://data/cutscenes/birthday_card.json")
 			var reaches_ending := false

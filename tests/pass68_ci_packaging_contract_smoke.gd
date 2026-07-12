@@ -19,7 +19,7 @@ func _run() -> void:
 	_assert(builder.contains("Setup.${ext}") and builder.contains("Portable.${ext}"), "Windows artifacts need non-colliding names")
 	_assert(builder.contains("identity: null"), "Initial macOS build must remain explicitly unsigned")
 	var version := _load_json("res://version.json")
-	_assert(str(version.get("version", "")) == "1.0.0", "Release version source must be 1.0.0")
+	_assert(str(version.get("version", "")) == "1.0.1", "Release version source must be 1.0.1")
 	_finish("Pass 68 CI and desktop packaging contract")
 
 

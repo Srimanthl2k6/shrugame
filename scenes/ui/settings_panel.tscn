@@ -16,8 +16,9 @@ corner_radius_bottom_left = 4
 
 [node name="SettingsPanel" type="Control"]
 process_mode = 3
-offset_right = 320.0
-offset_bottom = 180.0
+offset_right = 640
+offset_bottom = 360
+texture_filter = 1
 script = ExtResource("1_settings")
 
 [node name="Dim" type="ColorRect" parent="."]
@@ -29,154 +30,138 @@ grow_vertical = 2
 color = Color(0.003, 0.006, 0.008, 0.88)
 
 [node name="Panel" type="Panel" parent="Dim"]
-offset_left = 38.0
-offset_top = 6.0
-offset_right = 282.0
-offset_bottom = 174.0
+offset_left = 76
+offset_top = 12
+offset_right = 564
+offset_bottom = 348
 theme_override_styles/panel = SubResource("StyleBox_modal")
 
 [node name="Title" type="Label" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 232.0
-offset_bottom = 22.0
+offset_left = 24
+offset_top = 16
+offset_right = 464
+offset_bottom = 44
 theme_override_colors/font_color = Color(1, 0.93, 0.72, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 22
 text = "OPTIONS"
 
 [node name="AudioLabel" type="Label" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 28.0
-offset_right = 74.0
-offset_bottom = 38.0
+offset_left = 24
+offset_top = 56
+offset_right = 148
+offset_bottom = 76
 theme_override_colors/font_color = Color(0.55, 0.78, 0.78, 1)
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 13
 text = "AUDIO"
 
 [node name="MasterLabel" type="Label" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 42.0
-offset_right = 80.0
-offset_bottom = 52.0
-theme_override_font_sizes/font_size = 7
+offset_left = 24
+offset_top = 84
+offset_right = 160
+offset_bottom = 104
+theme_override_font_sizes/font_size = 15
 text = "MASTER"
 
 [node name="MasterSlider" type="HSlider" parent="Dim/Panel"]
-offset_left = 82.0
-offset_top = 41.0
-offset_right = 226.0
-offset_bottom = 53.0
+offset_left = 164
+offset_top = 82
+offset_right = 452
+offset_bottom = 106
 max_value = 100.0
 value = 85.0
 
-[node name="MusicLabel" type="Label" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 57.0
-offset_right = 80.0
-offset_bottom = 67.0
-theme_override_font_sizes/font_size = 7
-text = "MUSIC"
-
-[node name="MusicSlider" type="HSlider" parent="Dim/Panel"]
-offset_left = 82.0
-offset_top = 56.0
-offset_right = 226.0
-offset_bottom = 68.0
-max_value = 100.0
-value = 72.0
-
 [node name="SfxLabel" type="Label" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 72.0
-offset_right = 80.0
-offset_bottom = 82.0
-theme_override_font_sizes/font_size = 7
+offset_left = 24
+offset_top = 118
+offset_right = 160
+offset_bottom = 140
+theme_override_font_sizes/font_size = 15
 text = "SFX"
 
 [node name="SfxSlider" type="HSlider" parent="Dim/Panel"]
-offset_left = 82.0
-offset_top = 71.0
-offset_right = 226.0
-offset_bottom = 83.0
+offset_left = 164
+offset_top = 116
+offset_right = 452
+offset_bottom = 142
 max_value = 100.0
 value = 90.0
 
 [node name="DisplayLabel" type="Label" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 88.0
-offset_right = 90.0
-offset_bottom = 98.0
+offset_left = 24
+offset_top = 176
+offset_right = 180
+offset_bottom = 196
 theme_override_colors/font_color = Color(0.55, 0.78, 0.78, 1)
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 13
 text = "DISPLAY & ACCESS"
 
 [node name="FullscreenToggle" type="CheckButton" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 101.0
-offset_right = 112.0
-offset_bottom = 117.0
+offset_left = 24
+offset_top = 202
+offset_right = 224
+offset_bottom = 234
 text = "FULLSCREEN"
 
 [node name="ShakeToggle" type="CheckButton" parent="Dim/Panel"]
-offset_left = 122.0
-offset_top = 101.0
-offset_right = 228.0
-offset_bottom = 117.0
+offset_left = 244
+offset_top = 202
+offset_right = 456
+offset_bottom = 234
 button_pressed = true
 text = "SCREEN SHAKE"
 
 [node name="FlashToggle" type="CheckButton" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 118.0
-offset_right = 112.0
-offset_bottom = 134.0
+offset_left = 24
+offset_top = 236
+offset_right = 224
+offset_bottom = 268
 text = "REDUCE FLASH"
 
 [node name="ObjectivesToggle" type="CheckButton" parent="Dim/Panel"]
-offset_left = 122.0
-offset_top = 118.0
-offset_right = 228.0
-offset_bottom = 134.0
+offset_left = 244
+offset_top = 236
+offset_right = 456
+offset_bottom = 268
 button_pressed = true
 text = "OBJECTIVES"
 
 [node name="ContrastToggle" type="CheckButton" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 135.0
-offset_right = 116.0
-offset_bottom = 151.0
+offset_left = 24
+offset_top = 270
+offset_right = 232
+offset_bottom = 302
 text = "BRIGHT BULLETS"
 
 [node name="TextSpeedLabel" type="Label" parent="Dim/Panel"]
-offset_left = 122.0
-offset_top = 137.0
-offset_right = 160.0
-offset_bottom = 148.0
-theme_override_font_sizes/font_size = 6
+offset_left = 244
+offset_top = 274
+offset_right = 320
+offset_bottom = 296
+theme_override_font_sizes/font_size = 13
 text = "TEXT"
 
 [node name="TextSpeedSlider" type="HSlider" parent="Dim/Panel"]
-offset_left = 162.0
-offset_top = 135.0
-offset_right = 228.0
-offset_bottom = 149.0
+offset_left = 324
+offset_top = 270
+offset_right = 456
+offset_bottom = 298
 min_value = 0.5
 max_value = 2.0
 step = 0.25
 value = 1.0
 
 [node name="ResetButton" type="Button" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 153.0
-offset_right = 104.0
-offset_bottom = 168.0
-theme_override_font_sizes/font_size = 6
+offset_left = 24
+offset_top = 306
+offset_right = 208
+offset_bottom = 336
+theme_override_font_sizes/font_size = 15
 text = "RESET DEFAULTS"
 
 [node name="BackButton" type="Button" parent="Dim/Panel"]
-offset_left = 154.0
-offset_top = 153.0
-offset_right = 232.0
-offset_bottom = 168.0
-theme_override_font_sizes/font_size = 6
+offset_left = 308
+offset_top = 306
+offset_right = 464
+offset_bottom = 336
+theme_override_font_sizes/font_size = 15
 text = "BACK"

@@ -14,7 +14,4 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player") or (_played and one_shot):
 		return
-	var audio_manager := get_node_or_null("/root/AudioManager")
-	if audio_manager != null and not music_id.is_empty():
-		audio_manager.play_music(music_id)
 	_played = true

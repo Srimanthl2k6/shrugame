@@ -1,11 +1,11 @@
 extends CanvasLayer
 
-const VIEWPORT_SIZE := Vector2(320.0, 180.0)
+const VIEWPORT_SIZE := Vector2(640.0, 360.0)
 const PAUSE_MENU_SCENE := preload("res://scenes/ui/pause_menu.tscn")
 const WALL_THICKNESS := 8.0
-const OVERLAY_FONT_SIZE := 7
-const OVERLAY_SMALL_FONT_SIZE := 6
-const LEGEND_FONT_SIZE := 5
+const OVERLAY_FONT_SIZE := 15
+const OVERLAY_SMALL_FONT_SIZE := 13
+const LEGEND_FONT_SIZE := 13
 const WORLD_LABEL_FONT_SIZE := 5
 const WORLD_STEP_FONT_SIZE := 5
 const UI_OUTLINE_SIZE := 1
@@ -117,36 +117,36 @@ func build_pc_overlay() -> Control:
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	root.size = VIEWPORT_SIZE
-	root.scale = Vector2(2.0, 2.0)
+	root.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 
 	var top_bar := Panel.new()
 	top_bar.name = "TopBar"
 	top_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	top_bar.offset_left = 6.0
-	top_bar.offset_top = 5.0
-	top_bar.offset_right = 314.0
-	top_bar.offset_bottom = 21.0
+	top_bar.offset_left = 12.0
+	top_bar.offset_top = 10.0
+	top_bar.offset_right = 628.0
+	top_bar.offset_bottom = 54.0
 	top_bar.add_theme_stylebox_override("panel", _make_style_box(Color(0.015, 0.018, 0.026, 0.9), Color(0.66, 0.78, 0.86, 1.0)))
 	root.add_child(top_bar)
 
 	_area_label = Label.new()
 	_area_label.name = "AreaLabel"
-	_area_label.offset_left = 7.0
-	_area_label.offset_top = 2.0
-	_area_label.offset_right = 88.0
-	_area_label.offset_bottom = 14.0
+	_area_label.offset_left = 14.0
+	_area_label.offset_top = 8.0
+	_area_label.offset_right = 176.0
+	_area_label.offset_bottom = 36.0
 	_area_label.text = "Area"
 	_style_label(_area_label, OVERLAY_FONT_SIZE, Color(0.95, 0.9, 0.72, 1.0))
 	top_bar.add_child(_area_label)
 
 	_objective_label = Label.new()
 	_objective_label.name = "ObjectiveLabel"
-	_objective_label.offset_left = 92.0
-	_objective_label.offset_top = 2.0
-	_objective_label.offset_right = 302.0
-	_objective_label.offset_bottom = 14.0
+	_objective_label.offset_left = 184.0
+	_objective_label.offset_top = 6.0
+	_objective_label.offset_right = 604.0
+	_objective_label.offset_bottom = 40.0
 	_objective_label.text = "Goal: Find KFC."
-	_objective_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	_objective_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_style_label(_objective_label, OVERLAY_FONT_SIZE, Color(0.88, 0.95, 1.0, 1.0))
 	top_bar.add_child(_objective_label)
 
@@ -175,23 +175,23 @@ func build_pc_overlay() -> Control:
 	var prompt_panel := Panel.new()
 	prompt_panel.name = "PromptPanel"
 	prompt_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	prompt_panel.offset_left = 100.0
-	prompt_panel.offset_top = 140.0
-	prompt_panel.offset_right = 220.0
-	prompt_panel.offset_bottom = 152.0
+	prompt_panel.offset_left = 180.0
+	prompt_panel.offset_top = 282.0
+	prompt_panel.offset_right = 460.0
+	prompt_panel.offset_bottom = 326.0
 	prompt_panel.add_theme_stylebox_override("panel", _make_style_box(Color(0.012, 0.014, 0.02, 0.78), Color(0.86, 0.72, 0.34, 0.88)))
 	root.add_child(prompt_panel)
 	prompt_panel.visible = false
 
 	var prompt_label := Label.new()
 	prompt_label.name = "PromptLabel"
-	prompt_label.offset_left = 5.0
-	prompt_label.offset_top = 1.0
-	prompt_label.offset_right = 115.0
-	prompt_label.offset_bottom = 10.0
+	prompt_label.offset_left = 10.0
+	prompt_label.offset_top = 8.0
+	prompt_label.offset_right = 270.0
+	prompt_label.offset_bottom = 36.0
 	prompt_label.text = "E/Enter interact near labels"
 	prompt_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	prompt_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	prompt_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_style_label(prompt_label, OVERLAY_SMALL_FONT_SIZE, Color(0.98, 0.9, 0.62, 1.0))
 	prompt_panel.add_child(prompt_label)
 

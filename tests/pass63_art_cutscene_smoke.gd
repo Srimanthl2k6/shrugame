@@ -34,8 +34,9 @@ func _run() -> void:
 		for step_value in data.get("steps", []):
 			if typeof(step_value) == TYPE_DICTIONARY:
 				used_step_types[str((step_value as Dictionary).get("type", ""))] = true
-	for required_type in ["camera_pan", "camera_zoom", "actor_animation", "music_state", "checkpoint", "cut_in", "dialogue", "start_battle"]:
+	for required_type in ["camera_pan", "camera_zoom", "actor_animation", "checkpoint", "cut_in", "dialogue", "start_battle"]:
 		_assert(used_step_types.has(required_type), "Cutscene catalog must exercise %s" % required_type)
+	_assert(not used_step_types.has("music_state"), "SFX-only release must not schedule continuous music")
 
 	var production_text := ""
 	for path in ["res://scenes/main.tscn", "res://scripts/core/runtime_resource_manifest.gd"]:

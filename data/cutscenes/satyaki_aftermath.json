@@ -11,7 +11,11 @@
     {"type": "cut_in", "id": "growth_form_02", "title": "SHRUBUBU GREW"},
     {"type": "sfx", "id": "growth_transform"},
     {"type": "dialogue", "speaker": "Harbour Resident", "lines": ["The rain stopped spelling his name.", "Banana-burbs is inland. Everyone there smiles at the same time.", "That is not happiness. That is scheduling."]},
-    {"type": "set_objective", "text": "Leave Divorcee Harbour for Banana-burbs."},
+    {"type": "camera_pan", "target": "Player/Camera2D", "offset": [86, 0], "duration": 0.35},
+    {"type": "caption", "text": "WALK EAST TO BANANA-BURBS"},
+    {"type": "wait", "seconds": 0.7},
+    {"type": "camera_pan", "target": "Player/Camera2D", "offset": [0, 0], "duration": 0.3},
+    {"type": "set_objective", "text": "Walk east to Banana-burbs."},
     {"type": "lock_player", "locked": false}
   ]
 }

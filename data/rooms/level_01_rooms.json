@@ -79,10 +79,12 @@
       "spawn_points": {"default": [86, 284], "from_records": [86, 284]},
       "blockers": [[94, 30, 456, 96], [442, 148, 104, 68]],
       "interactions": [
-        {"id": "SatyakiBoss", "position": [418, 226], "visual": "res://assets/level_01/sprites/boss_satyaki_tirumal_overworld.png", "display_name": "Satyaki Tirumal", "interaction_message": "Satyaki waits with a folder and a grudge.", "cutscene_id": "satyaki_reveal", "required_flags": ["poojan_defeated", "divorce_records_collected"], "disabled_if_flag": "satyaki_tirumal_defeated", "hide_when_disabled": true, "interaction_size": [50, 62]},
-        {"id": "BananaRoad", "position": [544, 276], "visual": "res://assets/level_01/sprites/prop_dock_route.png", "display_name": "Road to Banana-burbs", "interaction_message": "The inland road smells faintly of bananas and municipal optimism.", "target_scene_path": "res://scenes/levels/districts/level_02.tscn", "required_flags": ["satyaki_tirumal_defeated"], "locked_message": "Satyaki still controls the waterfront.", "objective_text": "Continue the KFC search in Banana-burbs.", "interaction_size": [72, 58]}
+        {"id": "SatyakiBoss", "position": [418, 226], "visual": "res://assets/level_01/sprites/boss_satyaki_tirumal_overworld.png", "display_name": "Satyaki Tirumal", "interaction_message": "Satyaki waits with a folder and a grudge.", "cutscene_id": "satyaki_reveal", "required_flags": ["poojan_defeated", "divorce_records_collected"], "disabled_if_flag": "satyaki_tirumal_defeated", "hide_when_disabled": true, "interaction_size": [50, 62]}
       ],
-      "exits": [{"id": "west_to_records", "position": [34, 280], "size": [40, 108], "target_room_id": "records_alley", "target_spawn_id": "from_waterfront"}]
+      "exits": [
+        {"id": "west_to_records", "position": [34, 280], "size": [40, 108], "target_room_id": "records_alley", "target_spawn_id": "from_waterfront"},
+        {"id": "east_to_banana_burbs", "position": [574, 276], "size": [84, 116], "visual": "res://assets/level_01/sprites/prop_dock_route.png", "bob_pixels": 3.0, "target_level_id": "level_02", "target_spawn_id": "start", "required_flags": ["satyaki_tirumal_defeated"], "locked_objective": "Satyaki still controls the waterfront."}
+      ]
     }
   }
 }

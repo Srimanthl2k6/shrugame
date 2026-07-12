@@ -13,6 +13,8 @@ Tingu Verma
 
 ## Fonts
 
+Atkinson Hyperlegible by the Braille Institute, distributed under the SIL Open Font License. The license text is included at `assets/shared/fonts/ATKINSON-OFL.txt`.
+
 Silkscreen by Jason Kottke, distributed under the SIL Open Font License. The license text is included at `assets/shared/fonts/SILKSCREEN-OFL.txt`.
 
 ## Notices

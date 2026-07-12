@@ -23,7 +23,7 @@ const WEAPON_AUDIO_IDS := {
 	"berry_potions": "berry_potion",
 	"musical_guitar": "guitar_note"
 }
-const DEFAULT_BATTLE_BACKPLATE := "res://assets/level_01/backgrounds/divorcee_harbour_game.png"
+const DEFAULT_BATTLE_BACKPLATE := "res://assets/level_01/backgrounds/rooms/harbour_square.png"
 const DEFAULT_ENEMY_VISUALS := {
 	"poojan_strength_test": "res://assets/level_01/sprites/battle_poojan_strength_test.png",
 	"satyaki_tirumal_boss": "res://assets/level_01/sprites/battle_satyaki_tirumal.png"
@@ -157,9 +157,6 @@ func start_encounter(encounter_id: String) -> bool:
 
 	active_encounter_id = encounter_id
 	active_encounter = encounter.duplicate(true)
-	var audio_manager := get_tree().root.get_node_or_null("AudioManager")
-	if audio_manager != null:
-		audio_manager.play_music("srmt_finale" if encounter_id == "srmt_final_boss" else "boss_confrontation", 0.4)
 	difficulty_id = _resolve_difficulty_id()
 	difficulty_data = _get_difficulty_data(difficulty_id, encounter)
 	enemy_name = str(encounter.get("enemy_name", "Enemy"))
@@ -223,6 +220,9 @@ func start_encounter(encounter_id: String) -> bool:
 	apply_encounter_visuals(active_encounter_id)
 	_play_boss_cut_in()
 	_update_hud()
+	var tutorial_manager := get_node_or_null("/root/TutorialManager")
+	if tutorial_manager != null and tutorial_manager.has_method("begin_battle_command_tutorial"):
+		tutorial_manager.begin_battle_command_tutorial(active_encounter_id)
 	return true
 
 
@@ -486,9 +486,12 @@ func _start_enemy_phase() -> void:
 	if _soul_cursor != null and _soul_cursor.has_method("set_active"):
 		_soul_cursor.set_active(true, true)
 	_update_hud()
+	var tutorial_manager := get_node_or_null("/root/TutorialManager")
+	if tutorial_manager != null and tutorial_manager.has_method("begin_battle_enemy_tutorial"):
+		tutorial_manager.begin_battle_enemy_tutorial(active_encounter_id, _soul_cursor)
 	if is_inside_tree() and not Engine.is_editor_hint():
 		var telegraph_seconds := float(pattern_config.get("telegraph_seconds", TuningLoader.get_value(["battle", "pattern_telegraph_seconds"], 0.0)))
-		get_tree().create_timer(enemy_phase_seconds + telegraph_seconds).timeout.connect(finish_enemy_phase)
+		get_tree().create_timer(enemy_phase_seconds + telegraph_seconds, false).timeout.connect(finish_enemy_phase)
 
 
 func finish_enemy_phase() -> void:

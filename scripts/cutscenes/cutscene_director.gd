@@ -130,8 +130,6 @@ func _execute_step(step: Dictionary) -> void:
 			_spawn_actor(step)
 		"despawn_actor":
 			_despawn_actor(str(step.get("target", "")))
-		"music_state":
-			_set_music_state(step)
 		"wait_signal":
 			await _wait_for_signal(step)
 		"checkpoint":
@@ -264,17 +262,6 @@ func _despawn_actor(target_path: String) -> void:
 	var target := _find_target(target_path)
 	if target != null:
 		target.queue_free()
-
-
-func _set_music_state(step: Dictionary) -> void:
-	var audio_manager := get_node_or_null("/root/AudioManager")
-	if audio_manager == null:
-		return
-	var music_id := str(step.get("id", ""))
-	if music_id.is_empty() or bool(step.get("stop", false)):
-		audio_manager.stop_music()
-	else:
-		audio_manager.play_music(music_id, float(step.get("fade_seconds", 0.45)))
 
 
 func _wait_for_signal(step: Dictionary) -> void:
@@ -419,8 +406,6 @@ func _apply_skip_state(steps: Array) -> void:
 				_spawn_actor(step)
 			"despawn_actor":
 				_despawn_actor(str(step.get("target", "")))
-			"music_state":
-				_set_music_state(step)
 			"checkpoint":
 				_set_flag(str(step.get("flag", "%s_checkpoint" % active_cutscene_id)), true)
 			"set_visible":
@@ -474,7 +459,6 @@ func _ensure_overlay() -> void:
 		return
 	_overlay = LETTERBOX_SCENE.instantiate()
 	_overlay.name = "CutsceneOverlay"
-	_overlay.scale = Vector2(2.0, 2.0)
 	get_tree().root.add_child(_overlay)
 
 

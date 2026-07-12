@@ -3,7 +3,7 @@ const { spawn } = require("node:child_process");
 
 const electronBinary = require("electron");
 const appRoot = path.resolve(__dirname, "..");
-const outputDir = path.resolve(appRoot, "..", "builds", "qa", "electron");
+const outputDir = path.resolve(process.env.SHRUGAME_SMOKE_OUTPUT || path.resolve(appRoot, "..", "builds", "qa", "electron"));
 const smokeRoute = process.argv[2] || process.env.SHRUGAME_SMOKE_ROUTE || "1";
 const childEnvironment = { ...process.env };
 delete childEnvironment.ELECTRON_RUN_AS_NODE;

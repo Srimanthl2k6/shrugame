@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1 - 2026-07-12
+
+- Replaced functional Silkscreen body text with native-resolution Atkinson Hyperlegible UI typography.
+- Added first-play controls, movement, interaction, battle-command, and dodge tutorials with replay support.
+- Replaced direct post-boss scene links with automatic, atomic, save-first Level 1-5 transitions.
+- Fixed the post-Satyaki road so walking east reliably enters and saves Banana-burbs.
+- Removed all looping music and ambience; retained non-looping gameplay and interface SFX.
+- Added packaged Electron regression routes for tutorial input, three desktop sizes, SFX-only diagnostics, and Level 1 progression.
+
 ## 1.0.0 - 2026-07-11
 
 - Rebuilt five prototype maps as 27 connected 640x360 rooms.

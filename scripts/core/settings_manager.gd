@@ -7,7 +7,6 @@ const DEFAULT_SETTINGS_TEMP_PATH := "user://settings.tmp.json"
 const DEFAULT_SETTINGS_BACKUP_PATH := "user://settings.backup.json"
 const DEFAULTS := {
 	"master_volume": 0.85,
-	"music_volume": 0.72,
 	"sfx_volume": 0.9,
 	"fullscreen": false,
 	"screen_shake": true,
@@ -113,8 +112,6 @@ func _apply_setting(key: String, value) -> void:
 	match key:
 		"master_volume":
 			_set_bus_volume("Master", float(value))
-		"music_volume":
-			_set_bus_volume("Music", float(value))
 		"sfx_volume":
 			_set_bus_volume("SFX", float(value))
 		"fullscreen":

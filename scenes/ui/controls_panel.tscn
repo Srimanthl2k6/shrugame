@@ -16,8 +16,9 @@ corner_radius_bottom_left = 4
 
 [node name="ControlsPanel" type="Control"]
 process_mode = 3
-offset_right = 320.0
-offset_bottom = 180.0
+offset_right = 640
+offset_bottom = 360
+texture_filter = 1
 script = ExtResource("1_controls")
 
 [node name="Dim" type="ColorRect" parent="."]
@@ -29,49 +30,57 @@ grow_vertical = 2
 color = Color(0.003, 0.006, 0.008, 0.9)
 
 [node name="Panel" type="Panel" parent="Dim"]
-offset_left = 38.0
-offset_top = 8.0
-offset_right = 282.0
-offset_bottom = 172.0
+offset_left = 76
+offset_top = 16
+offset_right = 564
+offset_bottom = 344
 theme_override_styles/panel = SubResource("StyleBox_controls")
 
 [node name="Title" type="Label" parent="Dim/Panel"]
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 232.0
-offset_bottom = 22.0
-theme_override_font_sizes/font_size = 10
+offset_left = 24
+offset_top = 16
+offset_right = 464
+offset_bottom = 44
+theme_override_font_sizes/font_size = 20
 text = "CONTROLS"
 
 [node name="Rows" type="VBoxContainer" parent="Dim/Panel"]
-offset_left = 14.0
-offset_top = 28.0
-offset_right = 230.0
-offset_bottom = 124.0
-theme_override_constants/separation = 2
+offset_left = 28
+offset_top = 56
+offset_right = 460
+offset_bottom = 248
+theme_override_constants/separation = 4
 
 [node name="Status" type="Label" parent="Dim/Panel"]
-offset_left = 14.0
-offset_top = 127.0
-offset_right = 230.0
-offset_bottom = 138.0
+offset_left = 28
+offset_top = 254
+offset_right = 460
+offset_bottom = 276
 theme_override_colors/font_color = Color(0.55, 0.78, 0.78, 1)
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 13
 text = "SELECT A BINDING"
 horizontal_alignment = 1
 
 [node name="ResetButton" type="Button" parent="Dim/Panel"]
-offset_left = 14.0
-offset_top = 142.0
-offset_right = 112.0
-offset_bottom = 157.0
-theme_override_font_sizes/font_size = 6
+offset_left = 24
+offset_top = 284
+offset_right = 166
+offset_bottom = 314
+theme_override_font_sizes/font_size = 15
 text = "RESET DEFAULTS"
 
+[node name="ReplayButton" type="Button" parent="Dim/Panel"]
+offset_left = 174.0
+offset_top = 284.0
+offset_right = 322.0
+offset_bottom = 314.0
+theme_override_font_sizes/font_size = 15
+text = "REPLAY TUTORIAL"
+
 [node name="BackButton" type="Button" parent="Dim/Panel"]
-offset_left = 154.0
-offset_top = 142.0
-offset_right = 230.0
-offset_bottom = 157.0
-theme_override_font_sizes/font_size = 6
+offset_left = 330
+offset_top = 284
+offset_right = 464
+offset_bottom = 314
+theme_override_font_sizes/font_size = 15
 text = "BACK"

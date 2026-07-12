@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var _section_title: Label = $Root/Shell/Content/SectionTitle
 @onready var _content_text: RichTextLabel = $Root/Shell/Content/ContentText
 @onready var _settings_panel: Control = $Root/SettingsPanel
+@onready var _controls_panel: Control = $Root/ControlsPanel
 
 
 func _ready() -> void:
@@ -14,15 +15,18 @@ func _ready() -> void:
 	$Root/Shell/Left/JournalButton.pressed.connect(show_journal)
 	$Root/Shell/Left/ItemsButton.pressed.connect(show_items)
 	$Root/Shell/Left/OptionsButton.pressed.connect(open_options)
+	$Root/Shell/Left/ControlsButton.pressed.connect(open_controls)
 	$Root/Shell/Left/SaveButton.pressed.connect(save_game)
 	$Root/Shell/Left/TitleButton.pressed.connect(quit_to_title)
 	_settings_panel.close_requested.connect(_return_from_options)
+	_controls_panel.close_requested.connect(_return_from_controls)
+	_controls_panel.replay_requested.connect(_replay_tutorial)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("ui_cancel"):
 		return
-	if _settings_panel.visible:
+	if _settings_panel.visible or _controls_panel.visible:
 		return
 	var director := get_node_or_null("/root/CutsceneDirector")
 	if director != null and director.is_playing:
@@ -45,6 +49,7 @@ func open_menu() -> void:
 func close_menu() -> void:
 	_root.visible = false
 	_settings_panel.visible = false
+	_controls_panel.visible = false
 	get_tree().paused = false
 
 
@@ -62,8 +67,24 @@ func open_options() -> void:
 	_settings_panel.open()
 
 
+func open_controls() -> void:
+	_controls_panel.open()
+
+
 func _return_from_options() -> void:
 	$Root/Shell/Left/OptionsButton.grab_focus.call_deferred()
+
+
+func _return_from_controls() -> void:
+	$Root/Shell/Left/ControlsButton.grab_focus.call_deferred()
+
+
+func _replay_tutorial() -> void:
+	_controls_panel.close()
+	close_menu()
+	var tutorial_manager := get_node_or_null("/root/TutorialManager")
+	if tutorial_manager != null:
+		tutorial_manager.replay_overworld_tutorial()
 
 
 func save_game() -> void:

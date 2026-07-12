@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/visual/scene_transition.gd" id="1_transition"]
 
 [node name="SceneTransition" type="ColorRect"]
-offset_right = 320.0
-offset_bottom = 180.0
+offset_right = 640
+offset_bottom = 360
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 script = ExtResource("1_transition")

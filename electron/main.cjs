@@ -201,7 +201,8 @@ async function collectRuntimeProbe(window) {
       frameReadyState: frameDocument ? frameDocument.readyState : 'missing',
       indexedDbWritable: storageResult,
       keyboardTarget: frameDocument ? frameDocument.activeElement && frameDocument.activeElement.tagName : 'missing',
-      godotDiagnostics: frameWindow ? frameWindow.__shrugameDiagnostics || null : null
+      godotDiagnostics: frameWindow ? frameWindow.__shrugameDiagnostics || null : null,
+      gameAudio: frameWindow ? frameWindow.__shrugameAudioDiagnostics || null : null
     };
   })()`);
 }
@@ -232,10 +233,9 @@ async function runSmokeProbe(window) {
 		window.webContents.sendInputEvent({ type: "mouseUp", x, y, button: "left", clickCount: 1 });
 	};
 	if (SMOKE_ROUTE === "1") {
-		await clickCanvas(992, 256);
-		await wait(250);
-		await clickCanvas(384, 312);
-		await wait(1200);
+		await wait(1900);
+		await pressKey("Enter");
+		await wait(500);
 		for (let index = 0; index < 8; index += 1) {
 			await pressKey("E");
 			await wait(320);
@@ -248,7 +248,7 @@ async function runSmokeProbe(window) {
 		}
 	}
 	window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
-	await wait(600);
+	await wait(SMOKE_ROUTE === "transition_level_01" ? 7200 : 600);
 	window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
 	await wait(800);
 
@@ -269,7 +269,13 @@ async function runSmokeProbe(window) {
     smokeRoute: SMOKE_ROUTE
   };
   fs.writeFileSync(path.join(outputDir, "electron-runtime-report.json"), `${JSON.stringify(report, null, 2)}\n`);
-  const passed = report.canvasFound && report.indexedDbWritable && report.audioState === "running" && report.consoleErrors.length === 0;
+  const passed = report.canvasFound
+    && report.indexedDbWritable
+    && report.audioState === "running"
+    && report.gameAudio?.mode === "sfx-only"
+    && report.gameAudio?.continuousPlayers === 0
+    && (SMOKE_ROUTE !== "transition_level_01" || report.godotDiagnostics?.level_id === "level_02")
+    && report.consoleErrors.length === 0;
   process.exitCode = passed ? 0 : 1;
   await wait(250);
   app.quit();

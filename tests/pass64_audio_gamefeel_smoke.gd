@@ -9,24 +9,25 @@ func _init() -> void:
 
 func _run() -> void:
 	var catalog := _load_json("res://data/audio/audio_catalog.json")
-	_assert(catalog.size() >= 20, "Audio catalog must cover music, UI, weapons, bosses, clues, and transitions")
-	var music_count := 0
+	_assert(catalog.size() >= 12, "SFX catalog must cover UI, weapons, bosses, clues, and transitions")
 	for audio_id in catalog:
 		var entry: Dictionary = catalog[audio_id]
 		var path := str(entry.get("path", ""))
-		var stream := load(path) as AudioStream
-		_assert(stream != null, "%s audio must import" % audio_id)
-		if str(entry.get("type", "")) == "music":
-			music_count += 1
-			_assert(bool(entry.get("loop", false)), "%s music must loop" % audio_id)
-			if stream != null:
-				_assert(stream.get_length() >= 10.0, "%s music loop is too short" % audio_id)
-	_assert(music_count >= 9, "Release requires title, five districts, boss, SRMT, and ending music")
-	_assert(ResourceLoader.exists("res://default_bus_layout.tres"), "Audio bus layout is missing")
+		_assert(str(entry.get("type", "")) == "sfx", "%s must be an SFX entry" % audio_id)
+		_assert(not bool(entry.get("loop", true)), "%s must never loop" % audio_id)
+		_assert(load(path) is AudioStream, "%s SFX must import" % audio_id)
+	_assert(not DirAccess.dir_exists_absolute(ProjectSettings.globalize_path("res://assets/shared/audio/music")), "Continuous music assets must not ship")
+	var bus_layout_text := FileAccess.get_file_as_string("res://default_bus_layout.tres")
+	_assert(not bus_layout_text.contains("&\"Music\""), "Music bus must be removed")
+	_assert(bus_layout_text.contains("&\"SFX\""), "SFX bus must remain")
+	var audio_manager := root.get_node_or_null("AudioManager")
+	_assert(audio_manager != null and not audio_manager.has_continuous_audio_player(), "Audio manager must have no continuous player")
+	_assert(audio_manager != null and audio_manager.play_ui_select(), "UI SFX must remain playable")
 	var settings := root.get_node_or_null("SettingsManager")
-	for key in ["master_volume", "music_volume", "sfx_volume", "flash_reduction", "screen_shake", "high_contrast_bullets"]:
+	for key in ["master_volume", "sfx_volume", "flash_reduction", "screen_shake", "high_contrast_bullets"]:
 		_assert(settings != null and settings.DEFAULTS.has(key), "Settings must expose %s" % key)
-	_finish("Pass 64 audio and game-feel contract")
+	_assert(settings != null and not settings.DEFAULTS.has("music_volume"), "Obsolete music setting must be ignored")
+	_finish("Pass 64 SFX-only audio and game-feel contract")
 
 
 func _load_json(path: String) -> Dictionary:

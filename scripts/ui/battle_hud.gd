@@ -79,7 +79,7 @@ func _show_choice_menu(title: String, entries: Array[Dictionary], selected_signa
 		var button := Button.new()
 		button.text = str(entry.get("label", entry.get("id", "Choice")))
 		button.tooltip_text = str(entry.get("description", ""))
-		button.add_theme_font_size_override("font_size", 6)
+		button.add_theme_font_size_override("font_size", 15)
 		button.pressed.connect(_select_choice.bind(str(entry.get("id", "")), selected_signal))
 		choices.add_child(button)
 	choice_panel.visible = true

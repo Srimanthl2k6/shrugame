@@ -47,7 +47,7 @@
     {"id": "licensed_fonts_final", "prefix": "res://assets/shared/fonts/", "status": "final", "reason": "Licensed Silkscreen font files with bundled OFL notice."},
     {"id": "shared_ui_draft", "prefix": "res://assets/shared/ui/", "status": "draft", "reason": "Functional theme pending 640x360 and accessibility migration."},
     {"id": "shared_sprite_draft", "prefix": "res://assets/shared/sprites/", "status": "draft", "reason": "Shared battle, cut-in, and UI sprites require final consistency review."},
-    {"id": "audio_draft", "prefix": "res://assets/shared/audio/", "status": "draft", "reason": "Generated placeholder music and sound effects pending intentional audio production."},
+    {"id": "audio_sfx", "prefix": "res://assets/shared/audio/", "status": "curated", "reason": "SFX-only release catalog; all continuous music and ambience assets are removed."},
     {"id": "level_scenes_draft", "prefix": "res://scenes/levels/", "status": "draft", "reason": "Playable one-screen compositions pending multi-room production."},
     {"id": "battle_scenes_draft", "prefix": "res://scenes/battle/", "status": "draft", "reason": "Functional battle presentation pending production framework upgrade."},
     {"id": "ui_scenes_draft", "prefix": "res://scenes/ui/", "status": "draft", "reason": "Functional UI pending final layout, accessibility, and input polish."},

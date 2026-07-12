@@ -58,6 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			var director := get_node_or_null("/root/CutsceneDirector")
 			if director != null and not director.is_playing:
 				director.play(cutscene_id, _find_level_root())
+			_notify_tutorial_interaction()
 			if one_shot:
 				call_deferred("_disable_interaction")
 			get_viewport().set_input_as_handled()
@@ -68,6 +69,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_play_ui_select()
 		_play_contextual_interaction_sfx()
 		_apply_progression_rewards()
+		_notify_tutorial_interaction()
 		if not flag_on_interact.is_empty() and dialogue_id.is_empty():
 			_set_story_flag(flag_on_interact)
 			_notify_level_controller(flag_on_interact)
@@ -273,6 +275,12 @@ func _play_contextual_interaction_sfx() -> void:
 	if dialogue_id == "opening_not_kfc" or flag_on_interact == "building_broken":
 		audio_manager.play_sfx("door_slam")
 		audio_manager.play_sfx("building_break")
+
+
+func _notify_tutorial_interaction() -> void:
+	var tutorial_manager := get_node_or_null("/root/TutorialManager")
+	if tutorial_manager != null and tutorial_manager.has_method("notify_interaction_completed"):
+		tutorial_manager.notify_interaction_completed(self)
 
 
 func _split_camel_case(value: String) -> String:

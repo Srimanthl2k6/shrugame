@@ -6,7 +6,6 @@
   "skippable": true,
   "steps": [
     {"type": "lock_player", "locked": true},
-    {"type": "music_state", "id": "level_05_ruined_club_court_finale", "fade_seconds": 0.55},
     {"type": "fade", "alpha": 1.0, "duration": 0.35},
     {"type": "sfx", "id": "transition_wipe"},
     {"type": "fade", "alpha": 0.0, "duration": 0.6},

@@ -85,10 +85,12 @@
       "spawn_points": {"default": [88, 284], "from_clearing": [88, 284]},
       "blockers": [[88, 24, 464, 98]],
       "interactions": [
-        {"id": "AnkitBoss", "position": [378, 226], "visual": "res://assets/level_03/sprites/boss_ankit_overworld.png", "display_name": "Ankit", "interaction_message": "Ankit arrives with an empty plate and a full grievance.", "cutscene_id": "ankit_confrontation", "required_flags": ["berries_shared"], "disabled_if_flag": "ankit_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]},
-        {"id": "AuticityRoad", "position": [536, 270], "visual": "res://assets/level_03/sprites/prop_auticity_exit_arch.png", "display_name": "Mist road to Auticity", "interaction_message": "Hospital light glows beyond the fir mist.", "target_scene_path": "res://scenes/levels/districts/level_04.tscn", "required_flags": ["ankit_defeated"], "locked_message": "Ankit blocks the exit with an empty plate.", "interaction_size": [66, 66]}
+        {"id": "AnkitBoss", "position": [378, 226], "visual": "res://assets/level_03/sprites/boss_ankit_overworld.png", "display_name": "Ankit", "interaction_message": "Ankit arrives with an empty plate and a full grievance.", "cutscene_id": "ankit_confrontation", "required_flags": ["berries_shared"], "disabled_if_flag": "ankit_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]}
       ],
-      "exits": [{"id": "west_to_clearing", "position": [34, 280], "size": [40, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_gate"}]
+      "exits": [
+        {"id": "west_to_clearing", "position": [34, 280], "size": [40, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_gate"},
+        {"id": "east_to_auticity", "position": [574, 270], "size": [84, 120], "visual": "res://assets/level_03/sprites/prop_auticity_exit_arch.png", "bob_pixels": 2.0, "target_level_id": "level_04", "target_spawn_id": "start", "required_flags": ["ankit_defeated"], "locked_objective": "Ankit blocks the exit with an empty plate."}
+      ]
     }
   }
 }

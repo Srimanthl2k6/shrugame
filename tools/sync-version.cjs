@@ -28,6 +28,14 @@ function replace(relativePath, pattern, replacement) {
 
 writeJson("electron/package.json", (data) => { data.version = version; });
 writeJson("site/package.json", (data) => { data.version = version; });
+writeJson("electron/package-lock.json", (data) => {
+  data.version = version;
+  if (data.packages?.[""]) data.packages[""].version = version;
+});
+writeJson("site/package-lock.json", (data) => {
+  data.version = version;
+  if (data.packages?.[""]) data.packages[""].version = version;
+});
 replace("project.godot", /config\/version="[^"]+"/, `config/version="${version}"`);
 replace("export_presets.cfg", /application\/file_version="[^"]+"/, `application/file_version="${version}.0"`);
 replace("export_presets.cfg", /application\/product_version="[^"]+"/, `application/product_version="${version}"`);

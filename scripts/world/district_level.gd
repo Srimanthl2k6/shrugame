@@ -28,6 +28,7 @@ var runtime_diagnostics: Dictionary = {}
 
 func _ready() -> void:
 	_index_rooms()
+	_record_diagnostic("level_id", level_id)
 	_record_diagnostic("indexed_rooms", _room_paths.size())
 	var game_state := get_node_or_null("/root/GameState")
 	var initial_room := start_room_id

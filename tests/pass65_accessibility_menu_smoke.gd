@@ -26,8 +26,12 @@ func _run() -> void:
 	for node_name in ["NewGameButton", "ContinueButton", "OptionsButton", "ControlsButton", "CreditsButton", "QuitButton", "OverwriteDialog"]:
 		_assert(main_text.contains(node_name), "Title screen is missing %s" % node_name)
 	var settings_text := FileAccess.get_file_as_string("res://scenes/ui/settings_panel.tscn")
-	for control in ["MasterSlider", "MusicSlider", "SfxSlider", "FlashToggle", "ShakeToggle", "ObjectivesToggle", "ContrastToggle", "TextSpeedSlider"]:
+	for control in ["MasterSlider", "SfxSlider", "FlashToggle", "ShakeToggle", "ObjectivesToggle", "ContrastToggle", "TextSpeedSlider"]:
 		_assert(settings_text.contains(control), "Settings panel is missing %s" % control)
+	_assert(not settings_text.contains("MusicSlider"), "SFX-only settings must not expose a music slider")
+	var controls_text := FileAccess.get_file_as_string("res://scenes/ui/controls_panel.tscn")
+	_assert(controls_text.contains("ReplayButton"), "In-game controls must offer tutorial replay")
+	_assert(root.get_node_or_null("TutorialManager") != null, "First-play tutorial manager must be registered")
 	var modes := _load_json("res://data/difficulty/difficulty_modes.json")
 	_assert(str((modes.get("shrububu", {}) as Dictionary).get("description", "")).contains("Extremely easy"), "Shrububu difficulty must be explicit")
 	_assert(str((modes.get("srmt", {}) as Dictionary).get("description", "")).contains("Extremely hard"), "SRMT difficulty must be explicit")

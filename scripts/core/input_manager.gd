@@ -43,6 +43,49 @@ func get_cancel_prompt() -> String:
 	return "B" if last_device_id == "controller" else "ESC"
 
 
+func get_action_prompt(action: String) -> String:
+	if not InputMap.has_action(action):
+		return "-"
+	var wants_controller := last_device_id == "controller"
+	for event in InputMap.action_get_events(action):
+		if wants_controller and event is InputEventJoypadButton:
+			return _joy_button_name(int((event as InputEventJoypadButton).button_index))
+		if wants_controller and event is InputEventJoypadMotion:
+			return "LEFT STICK"
+		if not wants_controller and event is InputEventKey:
+			var key := (event as InputEventKey).physical_keycode
+			if key == 0:
+				key = (event as InputEventKey).keycode
+			var label := OS.get_keycode_string(key).to_upper()
+			if not label.is_empty():
+				return label
+	return get_binding_label(action)
+
+
+func get_movement_prompt() -> String:
+	if last_device_id == "controller":
+		return "LEFT STICK / D-PAD"
+	var defaults := {
+		"move_up": "W",
+		"move_left": "A",
+		"move_down": "S",
+		"move_right": "D"
+	}
+	var uses_defaults := true
+	for action in defaults:
+		if get_action_prompt(action) != defaults[action]:
+			uses_defaults = false
+			break
+	if uses_defaults:
+		return "WASD / ARROW KEYS"
+	return "UP %s  LEFT %s  DOWN %s  RIGHT %s" % [
+		get_action_prompt("move_up"),
+		get_action_prompt("move_left"),
+		get_action_prompt("move_down"),
+		get_action_prompt("move_right")
+	]
+
+
 func rebind_key(action: String, keycode: Key) -> bool:
 	if not InputMap.has_action(action):
 		return false
@@ -77,10 +120,9 @@ func get_binding_label(action: String) -> String:
 				key = (event as InputEventKey).keycode
 			keyboard = OS.get_keycode_string(key)
 		elif event is InputEventJoypadButton and controller == "-":
-			controller = "PAD %d" % int((event as InputEventJoypadButton).button_index)
+			controller = _joy_button_name(int((event as InputEventJoypadButton).button_index))
 		elif event is InputEventJoypadMotion and controller == "-":
-			var motion := event as InputEventJoypadMotion
-			controller = "AXIS %d%s" % [int(motion.axis), "+" if motion.axis_value > 0 else "-"]
+			controller = _joy_motion_name(event as InputEventJoypadMotion)
 	return "%s / %s" % [keyboard, controller]
 
 
@@ -225,3 +267,29 @@ func _add_button_binding(action: String, button: JoyButton) -> void:
 	var event := InputEventJoypadButton.new()
 	event.button_index = button
 	InputMap.action_add_event(action, event)
+
+
+func _joy_button_name(button_index: int) -> String:
+	var names := {
+		JOY_BUTTON_A: "A",
+		JOY_BUTTON_B: "B",
+		JOY_BUTTON_X: "X",
+		JOY_BUTTON_Y: "Y",
+		JOY_BUTTON_LEFT_SHOULDER: "LB",
+		JOY_BUTTON_RIGHT_SHOULDER: "RB",
+		JOY_BUTTON_BACK: "BACK",
+		JOY_BUTTON_START: "START",
+		JOY_BUTTON_DPAD_UP: "D-PAD UP",
+		JOY_BUTTON_DPAD_DOWN: "D-PAD DOWN",
+		JOY_BUTTON_DPAD_LEFT: "D-PAD LEFT",
+		JOY_BUTTON_DPAD_RIGHT: "D-PAD RIGHT"
+	}
+	return str(names.get(button_index, "PAD %d" % button_index))
+
+
+func _joy_motion_name(motion: InputEventJoypadMotion) -> String:
+	if motion.axis == JOY_AXIS_LEFT_X:
+		return "LEFT STICK RIGHT" if motion.axis_value > 0 else "LEFT STICK LEFT"
+	if motion.axis == JOY_AXIS_LEFT_Y:
+		return "LEFT STICK DOWN" if motion.axis_value > 0 else "LEFT STICK UP"
+	return "STICK AXIS %d%s" % [int(motion.axis), "+" if motion.axis_value > 0 else "-"]

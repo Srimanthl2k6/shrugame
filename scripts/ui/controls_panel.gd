@@ -1,6 +1,7 @@
 extends Control
 
 signal close_requested
+signal replay_requested
 
 const ACTION_LABELS := {
 	"move_up": "MOVE UP",
@@ -23,12 +24,14 @@ func _ready() -> void:
 	visible = false
 	_build_rows()
 	$Dim/Panel/ResetButton.pressed.connect(_reset)
+	$Dim/Panel/ReplayButton.pressed.connect(_replay)
 	$Dim/Panel/BackButton.pressed.connect(close)
 
 
 func open() -> void:
 	_refresh_labels()
 	_status.text = "SELECT A BINDING"
+	$Dim/Panel/ReplayButton.visible = _has_pause_menu_ancestor()
 	visible = true
 	if not _buttons.is_empty():
 		(_buttons.values()[0] as Button).grab_focus.call_deferred()
@@ -58,14 +61,14 @@ func _unhandled_input(event: InputEvent) -> void:
 func _build_rows() -> void:
 	for action in ACTION_LABELS:
 		var row := HBoxContainer.new()
-		row.custom_minimum_size = Vector2(210, 15)
+		row.custom_minimum_size = Vector2(420, 24)
 		var label := Label.new()
 		label.text = str(ACTION_LABELS[action])
-		label.custom_minimum_size = Vector2(82, 15)
-		label.add_theme_font_size_override("font_size", 6)
+		label.custom_minimum_size = Vector2(164, 24)
+		label.add_theme_font_size_override("font_size", 15)
 		var button := Button.new()
-		button.custom_minimum_size = Vector2(124, 15)
-		button.add_theme_font_size_override("font_size", 6)
+		button.custom_minimum_size = Vector2(248, 24)
+		button.add_theme_font_size_override("font_size", 15)
 		button.pressed.connect(_begin_rebind.bind(action))
 		row.add_child(label)
 		row.add_child(button)
@@ -92,3 +95,16 @@ func _reset() -> void:
 		manager.reset_bindings()
 	_refresh_labels()
 	_status.text = "DEFAULT BINDINGS RESTORED"
+
+
+func _replay() -> void:
+	replay_requested.emit()
+
+
+func _has_pause_menu_ancestor() -> bool:
+	var ancestor := get_parent()
+	while ancestor != null:
+		if ancestor.name == "PauseMenu":
+			return true
+		ancestor = ancestor.get_parent()
+	return false

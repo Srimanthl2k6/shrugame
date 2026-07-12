@@ -29,9 +29,9 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="Ending" type="Control"]
-offset_right = 320.0
-offset_bottom = 180.0
-scale = Vector2(2, 2)
+offset_right = 640
+offset_bottom = 360
+texture_filter = 1
 script = ExtResource("2_controller")
 
 [node name="CourtBackdrop" type="TextureRect" parent="."]
@@ -55,70 +55,70 @@ color = Color(0.012, 0.02, 0.027, 0.58)
 
 [node name="FeastImage" type="Sprite2D" parent="."]
 texture_filter = 0
-position = Vector2(68, 62)
-scale = Vector2(1.08, 1.08)
+position = Vector2(136, 124)
+scale = Vector2(2.16, 2.16)
 texture = ExtResource("3_feast")
 
 [node name="StoryPanel" type="Panel" parent="."]
-offset_left = 128.0
-offset_top = 18.0
-offset_right = 306.0
-offset_bottom = 90.0
+offset_left = 256
+offset_top = 36
+offset_right = 612
+offset_bottom = 180
 theme_override_styles/panel = SubResource("StyleBoxFlat_story")
 
 [node name="TitleLabel" type="Label" parent="StoryPanel"]
-offset_left = 10.0
-offset_top = 8.0
-offset_right = 168.0
-offset_bottom = 25.0
+offset_left = 20
+offset_top = 16
+offset_right = 336
+offset_bottom = 50
 theme_override_colors/font_color = Color(1, 0.94, 0.77, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 24
 text = "ISHIVILLE EATS."
 
 [node name="BodyLabel" type="Label" parent="StoryPanel"]
-offset_left = 10.0
-offset_top = 30.0
-offset_right = 168.0
-offset_bottom = 64.0
+offset_left = 20
+offset_top = 60
+offset_right = 336
+offset_bottom = 128
 theme_override_colors/font_color = Color(0.8, 0.85, 0.82, 1)
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 13
 text = "SRMT falls. IshiYoga is free.\nThe dungeon opens. KFC is real.\nThe search is finally over."
 autowrap_mode = 2
 
 [node name="BirthdayCard" type="Panel" parent="."]
-offset_left = 34.0
-offset_top = 106.0
-offset_right = 286.0
-offset_bottom = 166.0
+offset_left = 68
+offset_top = 212
+offset_right = 572
+offset_bottom = 332
 theme_override_styles/panel = SubResource("StyleBoxFlat_birthday")
 
 [node name="CardEyebrow" type="Label" parent="BirthdayCard"]
-offset_left = 12.0
-offset_top = 7.0
-offset_right = 240.0
-offset_bottom = 18.0
+offset_left = 24
+offset_top = 14
+offset_right = 480
+offset_bottom = 36
 theme_override_colors/font_color = Color(0.96, 0.79, 0.35, 1)
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 13
 text = "ONE LAST MESSAGE FROM ISHIVILLE"
 horizontal_alignment = 1
 
 [node name="BirthdayMessage" type="Label" parent="BirthdayCard"]
-offset_left = 12.0
-offset_top = 22.0
-offset_right = 240.0
-offset_bottom = 53.0
+offset_left = 24
+offset_top = 44
+offset_right = 480
+offset_bottom = 106
 theme_override_colors/font_color = Color(1, 0.95, 0.84, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 22
 text = "Happy Birthday Tingu Verma.\n~ Taklu Taklu Chuha."
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ContinueHint" type="Label" parent="."]
-offset_left = 88.0
-offset_top = 169.0
-offset_right = 232.0
-offset_bottom = 178.0
+offset_left = 176
+offset_top = 338
+offset_right = 464
+offset_bottom = 356
 theme_override_colors/font_color = Color(0.54, 0.65, 0.64, 1)
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 13
 text = "ENTER: TITLE  /  ESC: QUIT"
 horizontal_alignment = 1

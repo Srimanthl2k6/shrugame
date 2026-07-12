@@ -77,10 +77,12 @@
       "spawn_points": {"default": [320, 292], "from_plaza": [320, 292]},
       "blockers": [[82, 24, 476, 110]],
       "interactions": [
-        {"id": "DeepakBoss", "position": [330, 208], "visual": "res://assets/level_02/sprites/boss_deepak_reddy_overworld.png", "display_name": "Mayor Deepak Reddy", "interaction_message": "Deepak waits beneath a smile that no longer reaches the plaza.", "cutscene_id": "deepak_confrontation", "required_flags": ["monkeys_spell_broken"], "disabled_if_flag": "deepak_reddy_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]},
-        {"id": "BerryBarksRoad", "position": [532, 270], "visual": "res://assets/level_02/sprites/prop_banana_exit_gate.png", "display_name": "Road to Berry Barks", "interaction_message": "The monkey army opens the road toward the red-berry firs.", "target_scene_path": "res://scenes/levels/districts/level_03.tscn", "required_flags": ["deepak_reddy_defeated"], "locked_message": "Deepak still controls the mayor gate.", "interaction_size": [72, 64]}
+        {"id": "DeepakBoss", "position": [330, 208], "visual": "res://assets/level_02/sprites/boss_deepak_reddy_overworld.png", "display_name": "Mayor Deepak Reddy", "interaction_message": "Deepak waits beneath a smile that no longer reaches the plaza.", "cutscene_id": "deepak_confrontation", "required_flags": ["monkeys_spell_broken"], "disabled_if_flag": "deepak_reddy_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]}
       ],
-      "exits": [{"id": "south_to_plaza", "position": [320, 320], "size": [112, 40], "target_room_id": "monkey_plaza", "target_spawn_id": "from_mayor"}]
+      "exits": [
+        {"id": "south_to_plaza", "position": [320, 320], "size": [112, 40], "target_room_id": "monkey_plaza", "target_spawn_id": "from_mayor"},
+        {"id": "east_to_berry_barks", "position": [574, 270], "size": [84, 120], "visual": "res://assets/level_02/sprites/prop_banana_exit_gate.png", "bob_pixels": 2.0, "target_level_id": "level_03", "target_spawn_id": "start", "required_flags": ["deepak_reddy_defeated"], "locked_objective": "Deepak still controls the mayor gate."}
+      ]
     }
   }
 }
