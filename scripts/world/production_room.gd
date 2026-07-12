@@ -4,6 +4,9 @@ extends "res://scripts/world/world_room.gd"
 const InteractionScript := preload("res://scripts/overworld/interaction_area.gd")
 const TransitionScript := preload("res://scripts/world/room_transition.gd")
 const ActorScript := preload("res://scripts/world/room_actor.gd")
+const EDGE_WALL_THICKNESS := 4.0
+const EDGE_TRIGGER_WIDTH := 16.0
+const EDGE_TRIGGER_INSET := 4.0
 
 const INTERACTION_PROPERTIES := [
 	"interaction_message", "display_name", "target_scene_path", "dialogue_id", "dialogue_file_path",
@@ -77,8 +80,8 @@ func _build_boundaries() -> void:
 	add_child(root)
 	_add_blocker(root, "TopWall", Rect2(0, 0, room_size.x, 20))
 	_add_blocker(root, "BottomWall", Rect2(0, room_size.y - 20, room_size.x, 20))
-	_add_blocker(root, "LeftWall", Rect2(0, 0, 20, room_size.y))
-	_add_blocker(root, "RightWall", Rect2(room_size.x - 20, 0, 20, room_size.y))
+	_add_blocker(root, "LeftWall", Rect2(0, 0, EDGE_WALL_THICKNESS, room_size.y))
+	_add_blocker(root, "RightWall", Rect2(room_size.x - EDGE_WALL_THICKNESS, 0, EDGE_WALL_THICKNESS, room_size.y))
 
 
 func _build_blockers() -> void:
@@ -148,10 +151,12 @@ func _build_exits() -> void:
 		if typeof(entry_value) != TYPE_DICTIONARY:
 			continue
 		var entry: Dictionary = entry_value
+		var authored_position := _to_vector2(entry.get("position", []), Vector2.ZERO)
+		var exit_position := _edge_aligned_position(entry, authored_position)
 		var area := Area2D.new()
 		area.name = str(entry.get("id", "Exit"))
 		area.set_script(TransitionScript)
-		area.position = _to_vector2(entry.get("position", []), Vector2.ZERO)
+		area.position = exit_position
 		area.set("transition_id", str(entry.get("id", "exit")))
 		area.set("target_level_id", str(entry.get("target_level_id", "")))
 		area.set("target_room_id", str(entry.get("target_room_id", "")))
@@ -161,15 +166,39 @@ func _build_exits() -> void:
 		root.add_child(area)
 		var collision := CollisionShape2D.new()
 		var shape := RectangleShape2D.new()
-		shape.size = _to_vector2(entry.get("size", [32, 96]), Vector2(32, 96))
+		var exit_size := _to_vector2(entry.get("size", [32, 96]), Vector2(32, 96))
+		if not _exit_edge(entry).is_empty():
+			exit_size.x = EDGE_TRIGGER_WIDTH
+		shape.size = exit_size
 		collision.shape = shape
 		area.add_child(collision)
 		var sprite := _create_actor(entry)
 		if sprite != null:
 			sprite.name = "Visual"
-			sprite.position = _to_vector2(entry.get("visual_offset", [0, 0]), Vector2.ZERO)
+			sprite.position = authored_position - exit_position + _to_vector2(entry.get("visual_offset", [0, 0]), Vector2.ZERO)
 			sprite.z_index = int(entry.get("z_index", int(area.position.y)))
 			area.add_child(sprite)
+
+
+func _edge_aligned_position(entry: Dictionary, authored_position: Vector2) -> Vector2:
+	var side := _exit_edge(entry)
+	if side == "right":
+		return Vector2(room_size.x - EDGE_TRIGGER_INSET, authored_position.y)
+	if side == "left":
+		return Vector2(EDGE_TRIGGER_INSET, authored_position.y)
+	return authored_position
+
+
+func _exit_edge(entry: Dictionary) -> String:
+	var explicit_side := str(entry.get("edge", "")).to_lower()
+	if explicit_side == "right" or explicit_side == "left":
+		return explicit_side
+	var exit_id := str(entry.get("id", "")).to_lower()
+	if exit_id.begins_with("east_to_"):
+		return "right"
+	if exit_id.begins_with("west_to_"):
+		return "left"
+	return ""
 
 
 func _add_blocker(parent: Node2D, blocker_name: String, rect: Rect2) -> void:

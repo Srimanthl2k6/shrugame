@@ -11,5 +11,5 @@
   "next_level_id": "level_03",
   "required_story_flags": ["165_files_collected", "nitin_defeated", "monkeys_spell_broken", "deepak_reddy_defeated"],
   "start_room_id": "suburb",
-  "room_scene_paths": ["res://scenes/levels/rooms/level_02/suburb.tscn", "res://scenes/levels/rooms/level_02/monkey_plaza.tscn", "res://scenes/levels/rooms/level_02/lab_approach.tscn", "res://scenes/levels/rooms/level_02/laboratory.tscn", "res://scenes/levels/rooms/level_02/mayor_complex.tscn"]
+  "room_scene_paths": ["res://scenes/levels/rooms/level_02/suburb.tscn", "res://scenes/levels/rooms/level_02/monkey_plaza.tscn", "res://scenes/levels/rooms/level_02/laboratory.tscn", "res://scenes/levels/rooms/level_02/lab_approach.tscn", "res://scenes/levels/rooms/level_02/mayor_complex.tscn"]
 }

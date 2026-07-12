@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, session, shell } = require("electron");
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const http = require("node:http");
+const os = require("node:os");
 const path = require("node:path");
 
 const APP_ORIGIN = "http://127.0.0.1:47111";
@@ -13,6 +14,9 @@ const IS_SMOKE = process.env.SHRUGAME_SMOKE === "1";
 const SMOKE_ROUTE = process.env.SHRUGAME_SMOKE_ROUTE || "1";
 const WINDOW_WIDTH = Math.max(960, Number.parseInt(process.env.SHRUGAME_WINDOW_WIDTH || "1280", 10));
 const WINDOW_HEIGHT = Math.max(540, Number.parseInt(process.env.SHRUGAME_WINDOW_HEIGHT || "720", 10));
+if (IS_SMOKE) {
+  app.setPath("userData", path.join(os.tmpdir(), `shrugame-electron-smoke-${process.pid}`));
+}
 const MIME_TYPES = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
@@ -202,7 +206,8 @@ async function collectRuntimeProbe(window) {
       indexedDbWritable: storageResult,
       keyboardTarget: frameDocument ? frameDocument.activeElement && frameDocument.activeElement.tagName : 'missing',
       godotDiagnostics: frameWindow ? frameWindow.__shrugameDiagnostics || null : null,
-      gameAudio: frameWindow ? frameWindow.__shrugameAudioDiagnostics || null : null
+      gameAudio: frameWindow ? frameWindow.__shrugameAudioDiagnostics || null : null,
+      godotSmokeTarget: frameWindow ? frameWindow.__shrugameSmokeTarget || null : null
     };
   })()`);
 }
@@ -248,7 +253,10 @@ async function runSmokeProbe(window) {
 		}
 	}
 	window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
-	await wait(SMOKE_ROUTE === "transition_level_01" ? 7200 : 600);
+	const movementDuration = SMOKE_ROUTE === "transition_level_01"
+		? 7200
+		: (SMOKE_ROUTE === "right_edge_level_02" ? 2400 : 600);
+	await wait(movementDuration);
 	window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
 	await wait(800);
 
@@ -275,10 +283,10 @@ async function runSmokeProbe(window) {
     && report.gameAudio?.mode === "sfx-only"
     && report.gameAudio?.continuousPlayers === 0
     && (SMOKE_ROUTE !== "transition_level_01" || report.godotDiagnostics?.level_id === "level_02")
+    && (SMOKE_ROUTE !== "right_edge_level_02" || report.godotDiagnostics?.current_room === "lab_approach")
     && report.consoleErrors.length === 0;
-  process.exitCode = passed ? 0 : 1;
   await wait(250);
-  app.quit();
+  app.exit(passed ? 0 : 1);
 }
 
 ipcMain.handle("window:toggle-fullscreen", () => {

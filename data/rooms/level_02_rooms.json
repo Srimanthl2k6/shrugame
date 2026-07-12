@@ -18,7 +18,7 @@
         {"id": "MonkeyLawnkeeper", "position": [330, 244], "visual": "res://assets/level_02/sprites/npc_happy_monkey_idle.png", "display_name": "Happy Lawnkeeper", "dialogue_id": "monkey_lawnkeeper", "dialogue_file_path": "res://data/dialogue/level_02_dialogue.json", "post_flag": "monkeys_spell_broken", "post_dialogue_id": "banana_post_clear_army", "flip_h": true, "interaction_size": [38, 46]},
         {"id": "SmileMeter", "position": [470, 230], "visual": "res://assets/level_02/sprites/prop_banana_mailbox.png", "display_name": "Municipal smile meter", "dialogue_id": "clue_smile_meter", "dialogue_file_path": "res://data/dialogue/level_02_dialogue.json", "clue_id": "smile_meter", "one_shot": true, "interaction_size": [34, 34]}
       ],
-      "exits": [{"id": "east_to_plaza", "position": [606, 278], "size": [40, 108], "target_room_id": "monkey_plaza", "target_spawn_id": "from_suburb"}]
+      "exits": [{"id": "east_to_plaza", "position": [636, 278], "size": [16, 108], "target_room_id": "monkey_plaza", "target_spawn_id": "from_suburb"}]
     },
     "monkey_plaza": {
       "id": "monkey_plaza",
@@ -31,12 +31,11 @@
         {"id": "MonkeyAccountant", "position": [176, 250], "visual": "res://assets/level_02/sprites/npc_happy_monkey_idle.png", "display_name": "Happy Accountant", "dialogue_id": "monkey_accountant", "dialogue_file_path": "res://data/dialogue/level_02_dialogue.json", "post_flag": "monkeys_spell_broken", "post_dialogue_id": "banana_post_clear_army", "interaction_size": [38, 46]},
         {"id": "MonkeyChild", "position": [258, 278], "visual": "res://assets/level_02/sprites/npc_happy_monkey_idle.png", "display_name": "Happy Young Monkey", "dialogue_id": "monkey_child", "dialogue_file_path": "res://data/dialogue/level_02_dialogue.json", "post_flag": "monkeys_spell_broken", "post_dialogue_id": "banana_post_clear_army", "scale": [0.82, 0.82], "interaction_size": [34, 40]},
         {"id": "MonkeyRadioHost", "position": [434, 254], "visual": "res://assets/level_02/sprites/npc_happy_monkey_idle.png", "display_name": "Happy Radio Host", "dialogue_id": "monkey_radio_host", "dialogue_file_path": "res://data/dialogue/level_02_dialogue.json", "post_flag": "monkeys_spell_broken", "post_dialogue_id": "banana_post_clear_army", "flip_h": true, "interaction_size": [38, 46]},
-        {"id": "PopcornBreak", "position": [330, 212], "visual": "res://assets/level_02/sprites/prop_kfc_popcorn_box.png", "display_name": "Backup popcorn box", "interaction_message": "The backup popcorn could interrupt the synchronized smiles.", "cutscene_id": "popcorn_spell_break", "required_flags": ["nitin_defeated", "165_files_collected"], "locked_message": "Shrububu needs proof and a clear lab exit first.", "disabled_if_flag": "monkeys_spell_broken", "one_shot": true, "interaction_size": [48, 40]}
+        {"id": "PlazaRouteSign", "position": [528, 232], "visual": "res://assets/level_02/sprites/prop_banana_mailbox.png", "display_name": "Lab route marker", "interaction_message": "The laboratory road continues east.", "interaction_size": [34, 34]}
       ],
       "exits": [
         {"id": "west_to_suburb", "position": [34, 278], "size": [40, 108], "target_room_id": "suburb", "target_spawn_id": "from_plaza"},
-        {"id": "east_to_lab", "position": [606, 278], "size": [40, 108], "target_room_id": "lab_approach", "target_spawn_id": "from_plaza"},
-        {"id": "north_to_mayor", "position": [320, 44], "size": [112, 42], "target_room_id": "mayor_complex", "target_spawn_id": "from_plaza", "required_flags": ["monkeys_spell_broken"], "locked_objective": "Break the mandatory-happiness spell before approaching the mayor."}
+        {"id": "east_to_laboratory", "position": [636, 278], "size": [16, 108], "target_room_id": "laboratory", "target_spawn_id": "from_plaza"}
       ]
     },
     "lab_approach": {
@@ -44,15 +43,16 @@
       "display_name": "Abandoned Lab Approach",
       "background": "res://assets/level_02/backgrounds/rooms/lab_approach.png",
       "ambience_id": "level_02_uncanny_suburb_jingle",
-      "spawn_points": {"default": [88, 284], "from_plaza": [88, 284], "from_lab": [548, 284]},
+      "spawn_points": {"default": [88, 284], "from_laboratory": [88, 284], "from_mayor": [548, 284]},
       "blockers": [[116, 24, 408, 116]],
       "interactions": [
-        {"id": "NitinBoss", "position": [366, 236], "visual": "res://assets/level_02/sprites/boss_nitin_overworld.png", "display_name": "Nitin the Janitor", "interaction_message": "Nitin blocks the return path with a security mop.", "cutscene_id": "nitin_confrontation", "required_flags": ["165_files_collected"], "disabled_if_flag": "nitin_defeated", "hide_when_disabled": true, "interaction_size": [48, 60]},
-        {"id": "MayorPoster", "position": [482, 218], "visual": "res://assets/level_02/sprites/prop_banana_mailbox.png", "display_name": "Deepak campaign poster", "dialogue_id": "clue_mayor_poster", "dialogue_file_path": "res://data/dialogue/level_02_dialogue.json", "clue_id": "mayor_poster", "one_shot": true, "interaction_size": [34, 34]}
+        {"id": "NitinBoss", "position": [366, 236], "visual": "res://assets/level_02/sprites/boss_nitin_overworld.png", "display_name": "Nitin the Janitor", "interaction_message": "Nitin blocks the road ahead with a security mop.", "cutscene_id": "nitin_confrontation", "required_flags": ["165_files_collected"], "disabled_if_flag": "nitin_defeated", "hide_when_disabled": true, "interaction_size": [48, 60]},
+        {"id": "MayorPoster", "position": [210, 218], "visual": "res://assets/level_02/sprites/prop_banana_mailbox.png", "display_name": "Deepak campaign poster", "dialogue_id": "clue_mayor_poster", "dialogue_file_path": "res://data/dialogue/level_02_dialogue.json", "clue_id": "mayor_poster", "one_shot": true, "interaction_size": [34, 34]},
+        {"id": "PopcornBreak", "position": [512, 238], "visual": "res://assets/level_02/sprites/prop_kfc_popcorn_box.png", "display_name": "Backup popcorn box", "interaction_message": "The monkeys followed Shrububu to the lab. The backup popcorn could break their routine.", "cutscene_id": "popcorn_spell_break", "required_flags": ["nitin_defeated", "165_files_collected"], "locked_message": "Nitin still blocks the road east.", "disabled_if_flag": "monkeys_spell_broken", "one_shot": true, "interaction_size": [48, 40]}
       ],
       "exits": [
-        {"id": "west_to_plaza", "position": [34, 280], "size": [40, 108], "target_room_id": "monkey_plaza", "target_spawn_id": "from_lab"},
-        {"id": "east_to_laboratory", "position": [606, 280], "size": [40, 108], "target_room_id": "laboratory", "target_spawn_id": "from_approach"}
+        {"id": "west_to_laboratory", "position": [4, 280], "size": [16, 108], "target_room_id": "laboratory", "target_spawn_id": "from_approach"},
+        {"id": "east_to_mayor", "position": [636, 280], "size": [16, 108], "target_room_id": "mayor_complex", "target_spawn_id": "from_lab", "required_flags": ["monkeys_spell_broken"], "locked_objective": "Use the backup popcorn beside the lab, then keep walking east."}
       ]
     },
     "laboratory": {
@@ -60,28 +60,31 @@
       "display_name": "File 165 Laboratory",
       "background": "res://assets/level_02/backgrounds/rooms/laboratory.png",
       "ambience_id": "level_02_uncanny_suburb_jingle",
-      "spawn_points": {"default": [90, 282], "from_approach": [90, 282]},
+      "spawn_points": {"default": [90, 282], "from_plaza": [90, 282], "from_approach": [548, 282]},
       "blockers": [[38, 20, 564, 118], [260, 170, 120, 84]],
       "interactions": [
         {"id": "LabRecords", "position": [320, 212], "display_name": "165-files terminal", "interaction_message": "The terminal contains Deepak's mandatory-happiness program.", "cutscene_id": "banana_lab_discovery", "disabled_if_flag": "165_files_collected", "one_shot": true, "interaction_size": [72, 52]},
         {"id": "BananaGunCase", "position": [474, 246], "visual": "res://assets/level_02/sprites/prop_165_files.png", "display_name": "Banana gun prototype case", "dialogue_id": "clue_lab_banana_gun_case", "dialogue_file_path": "res://data/dialogue/level_02_dialogue.json", "clue_id": "banana_gun_case", "one_shot": true, "interaction_size": [38, 36]},
-        {"id": "LabSave", "position": [188, 270], "visual": "res://assets/level_02/sprites/prop_banana_mailbox.png", "display_name": "Unplugged joy terminal", "interaction_message": "A terminal with no smile icon saves your place.", "save_on_interact": true, "level_id": "level_02", "spawn_point": "from_approach", "interaction_size": [34, 34]}
+        {"id": "LabSave", "position": [188, 270], "visual": "res://assets/level_02/sprites/prop_banana_mailbox.png", "display_name": "Unplugged joy terminal", "interaction_message": "A terminal with no smile icon saves your place.", "save_on_interact": true, "level_id": "level_02", "spawn_point": "from_plaza", "interaction_size": [34, 34]}
       ],
-      "exits": [{"id": "west_to_approach", "position": [34, 280], "size": [40, 108], "target_room_id": "lab_approach", "target_spawn_id": "from_lab"}]
+      "exits": [
+        {"id": "west_to_plaza", "position": [4, 280], "size": [16, 108], "target_room_id": "monkey_plaza", "target_spawn_id": "from_lab"},
+        {"id": "east_to_approach", "position": [636, 280], "size": [16, 108], "target_room_id": "lab_approach", "target_spawn_id": "from_laboratory", "required_flags": ["165_files_collected"], "locked_objective": "Read the 165-files terminal before continuing east."}
+      ]
     },
     "mayor_complex": {
       "id": "mayor_complex",
       "display_name": "Deepak's Mayor Complex",
       "background": "res://assets/level_02/backgrounds/rooms/mayor_complex.png",
       "ambience_id": "level_02_uncanny_suburb_jingle",
-      "spawn_points": {"default": [320, 292], "from_plaza": [320, 292]},
+      "spawn_points": {"default": [88, 292], "from_lab": [88, 292]},
       "blockers": [[82, 24, 476, 110]],
       "interactions": [
         {"id": "DeepakBoss", "position": [330, 208], "visual": "res://assets/level_02/sprites/boss_deepak_reddy_overworld.png", "display_name": "Mayor Deepak Reddy", "interaction_message": "Deepak waits beneath a smile that no longer reaches the plaza.", "cutscene_id": "deepak_confrontation", "required_flags": ["monkeys_spell_broken"], "disabled_if_flag": "deepak_reddy_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]}
       ],
       "exits": [
-        {"id": "south_to_plaza", "position": [320, 320], "size": [112, 40], "target_room_id": "monkey_plaza", "target_spawn_id": "from_mayor"},
-        {"id": "east_to_berry_barks", "position": [574, 270], "size": [84, 120], "visual": "res://assets/level_02/sprites/prop_banana_exit_gate.png", "bob_pixels": 2.0, "target_level_id": "level_03", "target_spawn_id": "start", "required_flags": ["deepak_reddy_defeated"], "locked_objective": "Deepak still controls the mayor gate."}
+        {"id": "west_to_approach", "position": [4, 280], "size": [16, 108], "target_room_id": "lab_approach", "target_spawn_id": "from_mayor"},
+        {"id": "east_to_berry_barks", "position": [636, 270], "size": [16, 120], "visual": "res://assets/level_02/sprites/prop_banana_exit_gate.png", "visual_offset": [-62, 0], "bob_pixels": 2.0, "target_level_id": "level_03", "target_spawn_id": "start", "required_flags": ["deepak_reddy_defeated"], "locked_objective": "Deepak still controls the mayor gate."}
       ]
     }
   }

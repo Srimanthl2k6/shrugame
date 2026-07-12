@@ -21,7 +21,7 @@
         {"id": "MistRanger", "position": [380, 248], "visual": "res://assets/level_03/sprites/npc_mist_ranger_idle.png", "display_name": "Mist Ranger", "dialogue_id": "mist_ranger", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "post_flag": "ankit_defeated", "post_dialogue_id": "berry_post_clear_path", "interaction_size": [40, 52]},
         {"id": "BerryMap", "position": [486, 222], "visual": "res://assets/level_03/sprites/prop_berry_contract.png", "display_name": "Red berry map", "dialogue_id": "clue_red_berry_map", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "clue_id": "red_berry_map", "one_shot": true, "interaction_size": [36, 38]}
       ],
-      "exits": [{"id": "east_to_paths", "position": [606, 278], "size": [40, 108], "target_room_id": "berry_paths", "target_spawn_id": "from_entrance"}]
+      "exits": [{"id": "east_to_paths", "position": [636, 278], "size": [16, 108], "target_room_id": "berry_paths", "target_spawn_id": "from_entrance"}]
     },
     "berry_paths": {
       "id": "berry_paths",
@@ -39,7 +39,7 @@
       ],
       "exits": [
         {"id": "west_to_entrance", "position": [34, 280], "size": [40, 108], "target_room_id": "forest_entrance", "target_spawn_id": "from_paths"},
-        {"id": "east_to_hut", "position": [606, 280], "size": [40, 108], "target_room_id": "chef_hut", "target_spawn_id": "from_paths"}
+        {"id": "east_to_hut", "position": [636, 280], "size": [16, 108], "target_room_id": "chef_hut", "target_spawn_id": "from_paths"}
       ]
     },
     "chef_hut": {
@@ -56,7 +56,7 @@
       ],
       "exits": [
         {"id": "west_to_paths", "position": [34, 280], "size": [40, 108], "target_room_id": "berry_paths", "target_spawn_id": "from_hut"},
-        {"id": "east_to_clearing", "position": [606, 280], "size": [40, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_hut", "required_flags": ["niggesh_nishal_defeated"], "locked_objective": "Nishal is still holding the berry order."}
+        {"id": "east_to_clearing", "position": [636, 280], "size": [16, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_hut", "required_flags": ["niggesh_nishal_defeated"], "locked_objective": "Nishal is still holding the berry order."}
       ]
     },
     "sharing_clearing": {
@@ -74,7 +74,7 @@
       ],
       "exits": [
         {"id": "west_to_hut", "position": [34, 280], "size": [40, 108], "target_room_id": "chef_hut", "target_spawn_id": "from_clearing"},
-        {"id": "east_to_gate", "position": [606, 280], "size": [40, 108], "target_room_id": "ankit_gate", "target_spawn_id": "from_clearing", "required_flags": ["berries_shared"], "locked_objective": "Share the berries before leaving the town."}
+        {"id": "east_to_gate", "position": [636, 280], "size": [16, 108], "target_room_id": "ankit_gate", "target_spawn_id": "from_clearing", "required_flags": ["berries_shared"], "locked_objective": "Share the berries before leaving the town."}
       ]
     },
     "ankit_gate": {
@@ -89,7 +89,7 @@
       ],
       "exits": [
         {"id": "west_to_clearing", "position": [34, 280], "size": [40, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_gate"},
-        {"id": "east_to_auticity", "position": [574, 270], "size": [84, 120], "visual": "res://assets/level_03/sprites/prop_auticity_exit_arch.png", "bob_pixels": 2.0, "target_level_id": "level_04", "target_spawn_id": "start", "required_flags": ["ankit_defeated"], "locked_objective": "Ankit blocks the exit with an empty plate."}
+        {"id": "east_to_auticity", "position": [636, 270], "size": [16, 120], "visual": "res://assets/level_03/sprites/prop_auticity_exit_arch.png", "visual_offset": [-62, 0], "bob_pixels": 2.0, "target_level_id": "level_04", "target_spawn_id": "start", "required_flags": ["ankit_defeated"], "locked_objective": "Ankit blocks the exit with an empty plate."}
       ]
     }
   }

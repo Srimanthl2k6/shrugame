@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.2 - 2026-07-12
+
+- Anchored every forward room and district transition to the far-right edge of the screen.
+- Reduced side-wall collision margins so the player can physically reach edge triggers.
+- Reordered Banana-burbs into a linear plaza, laboratory, Nitin/popcorn, and mayor route.
+- Removed the hidden north mayor exit and all required north/south progression exits.
+- Added clean-session Electron smoke coverage that walks across a real Level 2 edge transition.
+- Fixed Electron smoke failures so they return a nonzero process status instead of being masked by application shutdown.
+
 ## 1.0.1 - 2026-07-12
 
 - Replaced functional Silkscreen body text with native-resolution Atkinson Hyperlegible UI typography.

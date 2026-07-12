@@ -4,7 +4,7 @@ Shrugame is a five-district 2D pixel RPG about Shrububu's search for KFC through
 
 ## Release Status
 
-Version **1.0.1** includes:
+Version **1.0.2** includes:
 
 - 27 connected rooms across Divorcee Harbour, Banana-burbs, Berry Barks, Auticity, and Area 111.
 - Ten multi-phase encounters with Strength and Resonance outcomes.
@@ -14,6 +14,8 @@ Version **1.0.1** includes:
 - Native 640x360 Atkinson Hyperlegible UI text instead of enlarged low-resolution body text.
 - First-play overworld and battle tutorials with device-aware prompts and in-game replay.
 - Automatic, save-first district transitions, including the repaired post-Satyaki route to Banana-burbs.
+- A consistent navigation rule: every new room and district is entered by walking through the far-right screen edge.
+- A linear Banana-burbs route with no hidden north exit or required backward search after the laboratory.
 - SFX-only audio with no looping music or ambience.
 - One atomic, migration-safe save file with corruption fallback.
 - Godot 4.7 Web embedded in a hardened Electron desktop shell.
@@ -57,6 +59,7 @@ Bindings can be remapped in-game. Flash reduction, screen shake, high-contrast b
 npm run build --prefix site
 npm run smoke --prefix electron -- level_01
 npm run smoke --prefix electron -- transition_level_01
+npm run smoke --prefix electron -- right_edge_level_02
 .\tools\audit_release_files.ps1
 ```
 

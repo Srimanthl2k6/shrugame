@@ -41,7 +41,8 @@ $releaseTests = @(
     "tests/pass67_site_contract_smoke.gd",
     "tests/pass68_ci_packaging_contract_smoke.gd",
     "tests/pass69_progression_and_combat_qa.gd",
-    "tests/pass71_usability_hotfix_smoke.gd"
+    "tests/pass71_usability_hotfix_smoke.gd",
+    "tests/pass72_right_edge_navigation_smoke.gd"
 )
 
 if ($IncludeLegacy) {

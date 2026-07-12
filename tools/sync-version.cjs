@@ -40,8 +40,10 @@ replace("project.godot", /config\/version="[^"]+"/, `config/version="${version}"
 replace("export_presets.cfg", /application\/file_version="[^"]+"/, `application/file_version="${version}.0"`);
 replace("export_presets.cfg", /application\/product_version="[^"]+"/, `application/product_version="${version}"`);
 replace("electron/electron-builder.yml", /  version: [^\r\n]+/, `  version: ${version}`);
+replace("scenes/main.tscn", /DESKTOP \d+\.\d+\.\d+/, `DESKTOP ${version}`);
 replace("site/index.html", /Download \d+\.\d+\.\d+/, `Download ${version}`);
 replace("site/index.html", /DESKTOP \d+\.\d+\.\d+/, `DESKTOP ${version}`);
 replace("site/index.html", /<span id="version">[^<]+<\/span>/, `<span id="version">${version}</span>`);
 fs.writeFileSync(path.join(root, "site", "public", "version.json"), `${JSON.stringify({ version }, null, 2)}\n`);
+replace("site/public/press-kit/README.txt", /SHRUGAME \d+\.\d+\.\d+ PRESS KIT/, `SHRUGAME ${version} PRESS KIT`);
 console.log(`Synchronized Shrugame ${version}`);

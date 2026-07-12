@@ -7,7 +7,7 @@
   "steps": [
     {"type": "lock_player", "locked": true},
     {"type": "dialogue", "speaker": "Nitin", "lines": ["The evidence is no longer contained.", "The monkeys will not believe a document. They believe routines.", "Break the routine with something stronger than mandatory happiness."]},
-    {"type": "set_objective", "text": "Return to the monkey plaza with the backup popcorn box."},
+    {"type": "set_objective", "text": "Share the backup popcorn beside the lab, then keep walking east."},
     {"type": "lock_player", "locked": false}
   ]
 }

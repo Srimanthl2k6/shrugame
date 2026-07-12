@@ -18,7 +18,7 @@
         {"id": "RuinVendor", "position": [390, 250], "visual": "res://assets/level_05/sprites/npc_ruin_vendor_idle.png", "display_name": "Cute-Ruin Vendor", "dialogue_id": "hello_ruin_vendor", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "post_flag": "srmt_defeated", "post_dialogue_id": "area111_post_clear_pub", "interaction_size": [42, 56]},
         {"id": "PubMenuClue", "position": [500, 222], "visual": "res://assets/level_05/sprites/prop_gummies_bar.png", "scale": [0.42, 0.42], "display_name": "Gummies menu", "dialogue_id": "clue_pub_menu", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "clue_id": "pub_menu", "one_shot": true, "interaction_size": [50, 40]}
       ],
-      "exits": [{"id": "east_to_pub", "position": [606, 278], "size": [40, 108], "target_room_id": "gummies_pub", "target_spawn_id": "from_boulevard"}]
+      "exits": [{"id": "east_to_pub", "position": [636, 278], "size": [16, 108], "target_room_id": "gummies_pub", "target_spawn_id": "from_boulevard"}]
     },
     "gummies_pub": {
       "id": "gummies_pub",
@@ -34,7 +34,7 @@
       ],
       "exits": [
         {"id": "west_to_boulevard", "position": [34, 280], "size": [40, 108], "target_room_id": "ruined_boulevard", "target_spawn_id": "from_pub"},
-        {"id": "east_to_alley", "position": [606, 280], "size": [40, 108], "target_room_id": "hooligan_alley", "target_spawn_id": "from_pub", "required_flags": ["suhas_defeated"], "locked_objective": "Suhas still owns the alley, bike, and volume level."}
+        {"id": "east_to_alley", "position": [636, 280], "size": [16, 108], "target_room_id": "hooligan_alley", "target_spawn_id": "from_pub", "required_flags": ["suhas_defeated"], "locked_objective": "Suhas still owns the alley, bike, and volume level."}
       ]
     },
     "hooligan_alley": {
@@ -54,7 +54,7 @@
       ],
       "exits": [
         {"id": "west_to_pub", "position": [34, 280], "size": [40, 108], "target_room_id": "gummies_pub", "target_spawn_id": "from_alley"},
-        {"id": "east_to_bike", "position": [606, 280], "size": [40, 108], "target_room_id": "bike_route", "target_spawn_id": "from_alley", "required_flags": ["bike_acquired", "guitar_acquired"], "locked_objective": "Take the bike and musical guitar before leaving the alley."}
+        {"id": "east_to_bike", "position": [636, 280], "size": [16, 108], "target_room_id": "bike_route", "target_spawn_id": "from_alley", "required_flags": ["bike_acquired", "guitar_acquired"], "locked_objective": "Take the bike and musical guitar before leaving the alley."}
       ]
     },
     "bike_route": {
@@ -70,7 +70,7 @@
       ],
       "exits": [
         {"id": "west_to_alley", "position": [34, 280], "size": [40, 108], "target_room_id": "hooligan_alley", "target_spawn_id": "from_bike"},
-        {"id": "east_to_mansion", "position": [606, 280], "size": [40, 108], "target_room_id": "mansion_foyer", "target_spawn_id": "from_bike", "required_flags": ["bike_route_completed"], "locked_objective": "Ride the marked route before entering the mansion."}
+        {"id": "east_to_mansion", "position": [636, 280], "size": [16, 108], "target_room_id": "mansion_foyer", "target_spawn_id": "from_bike", "required_flags": ["bike_route_completed"], "locked_objective": "Ride the marked route before entering the mansion."}
       ]
     },
     "mansion_foyer": {
@@ -86,7 +86,7 @@
       ],
       "exits": [
         {"id": "west_to_bike", "position": [34, 280], "size": [40, 108], "target_room_id": "bike_route", "target_spawn_id": "from_mansion"},
-        {"id": "east_to_clues", "position": [606, 280], "size": [40, 108], "target_room_id": "clue_chambers", "target_spawn_id": "from_foyer", "required_flags": ["mansion_foyer_solved"], "locked_objective": "Solve the foyer console before entering the clue chambers."}
+        {"id": "east_to_clues", "position": [636, 280], "size": [16, 108], "target_room_id": "clue_chambers", "target_spawn_id": "from_foyer", "required_flags": ["mansion_foyer_solved"], "locked_objective": "Solve the foyer console before entering the clue chambers."}
       ]
     },
     "clue_chambers": {
@@ -103,7 +103,7 @@
       ],
       "exits": [
         {"id": "west_to_foyer", "position": [34, 280], "size": [40, 108], "target_room_id": "mansion_foyer", "target_spawn_id": "from_clues"},
-        {"id": "east_to_court", "position": [606, 280], "size": [40, 108], "target_room_id": "ruined_court", "target_spawn_id": "from_clues", "required_flags": ["mansion_court_clues_collected", "guitar_acquired"], "locked_objective": "The ruined court requires the completed clue lock and musical guitar."}
+        {"id": "east_to_court", "position": [636, 280], "size": [16, 108], "target_room_id": "ruined_court", "target_spawn_id": "from_clues", "required_flags": ["mansion_court_clues_collected", "guitar_acquired"], "locked_objective": "The ruined court requires the completed clue lock and musical guitar."}
       ]
     },
     "ruined_court": {

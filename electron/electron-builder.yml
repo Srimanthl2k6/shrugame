@@ -11,7 +11,7 @@ files:
   - assets/**/*
 extraMetadata:
   name: shrugame-desktop
-  version: 1.0.1
+  version: 1.0.2
 win:
   icon: assets/app-icon.png
   target:

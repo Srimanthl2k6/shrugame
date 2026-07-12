@@ -18,7 +18,7 @@
         {"id": "FakeChickenSign", "position": [468, 194], "display_name": "Suspicious chicken sign", "dialogue_id": "clue_fake_chicken_sign", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "clue_id": "fake_chicken_sign", "one_shot": true, "interaction_size": [38, 34]},
         {"id": "LanternResident", "position": [188, 252], "visual": "res://assets/level_01/sprites/npc_lantern_woman_idle.png", "display_name": "Lantern Woman", "dialogue_id": "divorcee_lantern_woman", "dialogue_file_path": "res://data/dialogue/level_01_dialogue.json", "post_flag": "satyaki_tirumal_defeated", "post_dialogue_id": "harbour_post_clear_resident", "interaction_size": [38, 48], "bob_pixels": 1.0}
       ],
-      "exits": [{"id": "east_to_square", "position": [606, 276], "size": [44, 112], "target_room_id": "harbour_square", "target_spawn_id": "from_arrival"}]
+      "exits": [{"id": "east_to_square", "position": [636, 276], "size": [16, 112], "target_room_id": "harbour_square", "target_spawn_id": "from_arrival"}]
     },
     "harbour_square": {
       "id": "harbour_square",
@@ -34,7 +34,7 @@
       ],
       "exits": [
         {"id": "west_to_arrival", "position": [34, 278], "size": [40, 108], "target_room_id": "arrival", "target_spawn_id": "from_square"},
-        {"id": "east_to_docks", "position": [606, 278], "size": [40, 108], "target_room_id": "residences_docks", "target_spawn_id": "from_square"}
+        {"id": "east_to_docks", "position": [636, 278], "size": [16, 108], "target_room_id": "residences_docks", "target_spawn_id": "from_square"}
       ]
     },
     "residences_docks": {
@@ -51,7 +51,7 @@
       ],
       "exits": [
         {"id": "west_to_square", "position": [34, 278], "size": [40, 108], "target_room_id": "harbour_square", "target_spawn_id": "from_docks"},
-        {"id": "east_to_records", "position": [606, 278], "size": [40, 108], "target_room_id": "records_alley", "target_spawn_id": "from_docks", "required_flags": ["poojan_defeated"], "locked_objective": "Poojan must finish the strength test before the records office opens."}
+        {"id": "east_to_records", "position": [636, 278], "size": [16, 108], "target_room_id": "records_alley", "target_spawn_id": "from_docks", "required_flags": ["poojan_defeated"], "locked_objective": "Poojan must finish the strength test before the records office opens."}
       ]
     },
     "records_alley": {
@@ -68,7 +68,7 @@
       ],
       "exits": [
         {"id": "west_to_docks", "position": [34, 280], "size": [40, 108], "target_room_id": "residences_docks", "target_spawn_id": "from_records"},
-        {"id": "east_to_waterfront", "position": [606, 280], "size": [40, 108], "target_room_id": "satyaki_waterfront", "target_spawn_id": "from_records", "required_flags": ["divorce_records_collected"], "locked_objective": "Find the records tying Satyaki to the harbour."}
+        {"id": "east_to_waterfront", "position": [636, 280], "size": [16, 108], "target_room_id": "satyaki_waterfront", "target_spawn_id": "from_records", "required_flags": ["divorce_records_collected"], "locked_objective": "Find the records tying Satyaki to the harbour."}
       ]
     },
     "satyaki_waterfront": {
@@ -83,7 +83,7 @@
       ],
       "exits": [
         {"id": "west_to_records", "position": [34, 280], "size": [40, 108], "target_room_id": "records_alley", "target_spawn_id": "from_waterfront"},
-        {"id": "east_to_banana_burbs", "position": [574, 276], "size": [84, 116], "visual": "res://assets/level_01/sprites/prop_dock_route.png", "bob_pixels": 3.0, "target_level_id": "level_02", "target_spawn_id": "start", "required_flags": ["satyaki_tirumal_defeated"], "locked_objective": "Satyaki still controls the waterfront."}
+        {"id": "east_to_banana_burbs", "position": [636, 276], "size": [16, 116], "visual": "res://assets/level_01/sprites/prop_dock_route.png", "visual_offset": [-62, 0], "bob_pixels": 3.0, "target_level_id": "level_02", "target_spawn_id": "start", "required_flags": ["satyaki_tirumal_defeated"], "locked_objective": "Satyaki still controls the waterfront."}
       ]
     }
   }

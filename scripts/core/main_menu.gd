@@ -166,6 +166,7 @@ func _get_electron_smoke_target() -> String:
 func _run_electron_smoke_flow() -> void:
 	await get_tree().create_timer(1.5, true, false, true).timeout
 	var smoke_target := _get_electron_smoke_target()
+	JavaScriptBridge.eval("window.__shrugameSmokeTarget = %s" % JSON.stringify(smoke_target), true)
 	if smoke_target == "battle":
 		var save_system := get_node_or_null("/root/SaveSystem")
 		if save_system != null:
@@ -198,6 +199,24 @@ func _run_electron_smoke_flow() -> void:
 			transition_save.save_game("level_01", "from_records", "satyaki_waterfront")
 		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/levels/districts/level_01.tscn")
+		return
+	if smoke_target == "right_edge_level_02":
+		var edge_save := get_node_or_null("/root/SaveSystem")
+		if edge_save != null:
+			edge_save.new_game("shrububu")
+		var edge_state := get_node_or_null("/root/GameState")
+		if edge_state != null:
+			edge_state.current_level_id = "level_02"
+			edge_state.current_room_id = "laboratory"
+			edge_state.spawn_point = "from_approach"
+			edge_state.pending_encounter_id = ""
+			edge_state.set_flag("165_files_collected", true)
+			edge_state.set_flag("tutorial_overworld_completed", true)
+			edge_state.set_flag("tutorial_battle_completed", true)
+			edge_state.set_current_objective("Keep walking east.")
+			edge_save.save_game("level_02", "from_approach", "laboratory")
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/levels/districts/level_02.tscn")
 		return
 	if smoke_target.begins_with("level_0"):
 		var level_number := smoke_target.trim_prefix("level_")

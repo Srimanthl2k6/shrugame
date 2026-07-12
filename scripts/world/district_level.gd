@@ -97,6 +97,7 @@ func switch_room(target_room_id: String, target_spawn_id: String = "default", sa
 		return false
 	room_container.add_child(current_room)
 	current_room_id = target_room_id
+	_record_diagnostic("current_room", current_room_id)
 	current_room.configure_player_camera(player)
 	if player != null:
 		player.global_position = current_room.get_spawn_position(target_spawn_id)
