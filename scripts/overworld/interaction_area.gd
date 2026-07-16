@@ -1,3 +1,4 @@
+class_name InteractionArea
 extends Area2D
 
 signal interacted(message: String)
@@ -26,6 +27,8 @@ const TuningLoader := preload("res://scripts/core/tuning_loader.gd")
 @export var growth_stage_on_interact := 0
 @export var objective_text := ""
 @export var interaction_size := Vector2(34.0, 22.0)
+@export var interaction_padding := Vector2(-1.0, -1.0)
+@export var focus_priority := 0
 @export var disabled_if_flag := ""
 @export var one_shot := false
 @export var hide_when_disabled := false
@@ -37,14 +40,24 @@ const TuningLoader := preload("res://scripts/core/tuning_loader.gd")
 var _player_inside := false
 var _disabled := false
 var _activation_in_progress := false
+var _focused := false
+var _focus_marker: Label
 
 
 func _ready() -> void:
 	_apply_tuning()
+	_create_focus_marker()
+	add_to_group("interaction_targets")
 	if not disabled_if_flag.is_empty() and _get_story_flag(disabled_if_flag):
 		_disable_interaction()
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+
+
+func _exit_tree() -> void:
+	var interaction_manager := get_node_or_null("/root/InteractionManager")
+	if interaction_manager != null:
+		interaction_manager.unregister_candidate(self)
 
 
 func _process(_delta: float) -> void:
@@ -52,16 +65,9 @@ func _process(_delta: float) -> void:
 		_try_auto_activate()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if _disabled or not _player_inside:
-		return
-	if event.is_action_pressed("interact"):
-		if try_activate():
-			get_viewport().set_input_as_handled()
-
-
 func try_activate() -> bool:
-	if _disabled or not _player_inside or _activation_in_progress:
+	var player := get_tree().get_first_node_in_group("player") as Node2D if is_inside_tree() else null
+	if _disabled or _activation_in_progress or (not _player_inside and not _focused and not is_player_candidate(player)):
 		return false
 	if not _has_required_flags():
 		print(locked_message)
@@ -128,8 +134,9 @@ func _try_start_cutscene() -> bool:
 func _on_body_entered(body: Node2D) -> void:
 	if not _disabled and body.is_in_group("player"):
 		_player_inside = true
-		_set_focus_highlight(true)
-		print(get_focus_prompt())
+		var interaction_manager := get_node_or_null("/root/InteractionManager")
+		if interaction_manager != null:
+			interaction_manager.register_candidate(self, body)
 		if auto_activate_on_body_enter and _has_required_flags():
 			call_deferred("_try_auto_activate")
 
@@ -137,7 +144,10 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_inside = false
-		_set_focus_highlight(false)
+		var interaction_manager := get_node_or_null("/root/InteractionManager")
+		if interaction_manager != null:
+			interaction_manager.unregister_candidate(self)
+		set_focused(false)
 
 
 func _try_auto_activate() -> void:
@@ -159,6 +169,33 @@ func get_focus_prompt() -> String:
 	return "%s: %s" % [resolved_prompt, get_display_name()]
 
 
+func is_player_candidate(player: Node2D) -> bool:
+	if _disabled or player == null or not player.is_in_group("player"):
+		return false
+	var player_half_size := Vector2(8.0, 12.0)
+	var player_collision := player.get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if player_collision != null and player_collision.shape is RectangleShape2D:
+		player_half_size = (player_collision.shape as RectangleShape2D).size * 0.5
+	var delta := (global_position - player.global_position).abs()
+	var reach := interaction_size * 0.5 + interaction_padding + player_half_size
+	return delta.x <= reach.x and delta.y <= reach.y
+
+
+func set_focused(focused: bool) -> void:
+	_focused = focused and not _disabled
+	_set_focus_highlight(_focused)
+	if _focus_marker != null:
+		_focus_marker.visible = _focused
+	refresh_focus_prompt()
+
+
+func refresh_focus_prompt() -> void:
+	if _focus_marker == null:
+		return
+	var input_manager := get_node_or_null("/root/InputManager") if is_inside_tree() else null
+	_focus_marker.text = "[%s]" % (input_manager.get_action_prompt("interact") if input_manager != null else "E")
+
+
 func _has_required_flags() -> bool:
 	if required_flags.is_empty():
 		return true
@@ -172,11 +209,13 @@ func _has_required_flags() -> bool:
 
 
 func _apply_tuning() -> void:
-	interaction_size = TuningLoader.get_vector2(["overworld", "interaction_size"], interaction_size)
+	if interaction_padding.x < 0.0 or interaction_padding.y < 0.0:
+		interaction_padding = TuningLoader.get_vector2(["overworld", "interaction_padding"], Vector2(24.0, 20.0))
 	var collision: CollisionShape2D = get_node_or_null("CollisionShape2D")
 	if collision != null and collision.shape is RectangleShape2D:
-		var rect := collision.shape as RectangleShape2D
-		rect.size = interaction_size
+		var rect := collision.shape.duplicate() as RectangleShape2D
+		rect.size = interaction_size + interaction_padding * 2.0
+		collision.shape = rect
 
 
 func resolve_dialogue_id() -> String:
@@ -209,7 +248,10 @@ func _get_story_flag(flag_name: String) -> bool:
 
 
 func _disable_interaction() -> void:
-	_set_focus_highlight(false)
+	var interaction_manager := get_node_or_null("/root/InteractionManager") if is_inside_tree() else null
+	if interaction_manager != null:
+		interaction_manager.unregister_candidate(self)
+	set_focused(false)
 	_disabled = true
 	_player_inside = false
 	monitoring = false
@@ -222,6 +264,8 @@ func _set_focus_highlight(active: bool) -> void:
 	if not focus_highlight:
 		return
 	for child in get_children():
+		if child == _focus_marker:
+			continue
 		var item := child as CanvasItem
 		if item == null:
 			continue
@@ -229,6 +273,24 @@ func _set_focus_highlight(active: bool) -> void:
 			item.set_meta("interaction_base_modulate", item.modulate)
 		var base: Color = item.get_meta("interaction_base_modulate")
 		item.modulate = base.lerp(Color(1.18, 1.14, 0.9, base.a), 0.34) if active else base
+
+
+func _create_focus_marker() -> void:
+	_focus_marker = Label.new()
+	_focus_marker.name = "InteractionButtonMarker"
+	_focus_marker.position = Vector2(-24.0, -interaction_size.y * 0.5 - 30.0)
+	_focus_marker.size = Vector2(48.0, 22.0)
+	_focus_marker.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_focus_marker.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_focus_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_focus_marker.z_index = 4096
+	_focus_marker.add_theme_font_size_override("font_size", 13)
+	_focus_marker.add_theme_color_override("font_color", Color(1.0, 0.94, 0.64, 1.0))
+	_focus_marker.add_theme_color_override("font_outline_color", Color(0.02, 0.02, 0.03, 1.0))
+	_focus_marker.add_theme_constant_override("outline_size", 3)
+	_focus_marker.visible = false
+	add_child(_focus_marker)
+	refresh_focus_prompt()
 
 
 func _find_level_root() -> Node:

@@ -1,4 +1,4 @@
-# Shrugame 1.0.4 QA Report
+# Shrugame 1.0.5 QA Report
 
 Date: 2026-07-16
 Engine: Godot 4.7 stable
@@ -6,47 +6,47 @@ Desktop shell: Electron 43.1.0
 
 ## Automated Baseline
 
-- 32 release-contract tests pass in the standard suite.
-- All JSON parses, all active scripts load, and the Godot editor parse completes without errors.
-- Pass 71 covers native UI, tutorials, both Satyaki outcomes, old-save compatibility, atomic transitions, and the full Level 1-5 chain.
-- Pass 72 audits all 27 rooms, every canonical forward route, edge geometry, and the linear Banana-burbs progression.
-- Pass 73 drives the universal threshold through every room-to-room transition across all five districts.
-- Pass 74 activates the real 165-files interaction, verifies atomic persistence and Nitin startup, and checks every reverse route plus the held-input latch.
+- All 35 active release tests pass in two consecutive final runs.
+- Pass 75 verifies the Auticity terminal, schema-4 migration, authored interaction geometry, four-direction approach positions, deterministic focus, and state suppression.
+- Pass 76 compares every regenerated horizontal frame against the correct source pose for all five Shrububu forms and checks runtime facing updates.
+- Pass 77 drives live district scenes through all 27 rooms and ten battle scenes on both difficulties, including required clues, gear, growth, saves, restarts, IshiYoga's rescue, and the birthday ending.
+- The reachability audit expands blockers by Shrububu's largest collision footprint and verifies activation positions for every critical interaction and east exit.
 
 ## Ten QA Passes
 
 | # | Scope | Result | Evidence |
 | ---: | --- | --- | --- |
-| 1 | Resource, JSON, scene, script, and font parsing | Pass | Godot editor parse; all `data/**/*.json`; Atkinson imports |
-| 2 | New Game, Continue, migration, atomic writes, and corrupt-save recovery | Pass | Passes 31, 48, 66, and 71 |
-| 3 | Five-level progression, post-Satyaki, and bidirectional navigation | Pass | Passes 69, 71, 72, 73, and 74; packaged Electron transition routes |
-| 4 | Interactions, tutorials, Level 2 laboratory, device prompts, remapping, and replay | Pass | Passes 65, 71, and 74; tutorial screenshots |
-| 5 | All ten bosses on Shrububu mode | Pass | Passes 51 and 69 |
-| 6 | All ten bosses on SRMT mode | Pass | Passes 32, 41, 51, and 69 |
-| 7 | Native UI visual QA at minimum/default/1080p | Pass | Electron captures at 960x540, 1280x720, and 1920x1080 |
-| 8 | Dialogue, cutscene, pause, controls, settings, battle, and ending layout | Pass | Native Vulkan captures in `builds/qa/hotfix/` |
-| 9 | SFX-only Electron runtime and offline persistence | Pass | Zero continuous players, 15 SFX entries, writable IndexedDB, zero console errors |
-| 10 | Site, versioning, packages, checksums, credits, and private-file audit | Pass | Passes 33, 62, 67, and 68; Vite and release audit |
+| 1 | Resource, JSON, scene, script, and version parsing | Pass | 35-test suite; editor/script parse contracts; synchronized `1.0.5` metadata |
+| 2 | Save migration, atomic writes, restart, and Continue | Pass | Passes 31, 66, 71, 75, and 77; schema-4 rewrite fixture |
+| 3 | Complete progression graph and softlock search | Pass | Pass 77 on both modes; all 27 rooms and ten bosses |
+| 4 | Interactions, clues, items, rewards, and room exits | Pass | Passes 74, 75, and 77; collision-footprint reachability audit |
+| 5 | Ten encounters on Shrububu difficulty | Pass | Passes 51, 69, and 77 |
+| 6 | Ten encounters on SRMT difficulty | Pass | Passes 32, 41, 51, 69, and 77 |
+| 7 | Shrububu orientation and action-sheet consistency | Pass | Pass 76 pixel comparisons and runtime-facing assertions |
+| 8 | Keyboard/controller focus, pause, dialogue, cutscene, and locked states | Pass | Pass 75 plus existing input, tutorial, and accessibility contracts |
+| 9 | Electron Web runtime, offline persistence, and SFX-only audio | Pass | Default, Level 2, Auticity, and full-progression Electron probes |
+| 10 | Packages, checksums, versions, website, and private-file leak audit | Pass | Release audit; four staged artifacts; Vite build |
 
 ## Runtime Evidence
 
-- Electron passed at 960x540, 1280x720, and 1920x1080 with a focused 640x360 canvas and successful input-driven frame changes.
-- The packaged-style post-Satyaki route loaded `level_02/suburb/start` after walking east and persisted the transition.
-- The clean-session `right_edge_level_02` route loaded a laboratory save, walked right without interaction input, and arrived in `lab_approach`.
-- The `right_edge_harbour_square` route reproduces the reported second-room position and requires arrival in `residences_docks`.
-- The `level_02_lab_progression` route starts from an uncompleted laboratory save, collects the visible files, walks east, and must launch `nitin_janitor_boss`.
-- Holding left after a west transition cannot cross another room until the directional input returns to neutral.
-- Title, dialogue, tutorial, controls, settings, pause, Poojan battle, and ending captures contain no clipped required text.
-- Runtime diagnostics report `mode: sfx-only`, `continuousPlayers: 0`, and no renderer console errors.
+- Source Electron smokes pass independently for default boot, the full Level 2 laboratory route, Auticity records-to-Sushan, and the five-level save/transition chain.
+- The final Windows portable executable completes the Auticity keyboard route in `serum_ward`, focuses `DoctorSushan`, and launches `doctor_sushan_boss`.
+- The same portable executable verifies four persisted district transitions and reaches `level_05/ruined_boulevard` with no reported failures.
+- Both portable probes find a focused `640x360` canvas, writable IndexedDB, changing frames after input, zero renderer console errors, and zero continuous audio players.
+- The active suite performs two complete deterministic gameplay routes through live scenes and interactions, one per difficulty, and reloads the save after each district transition.
 
 ## Artifacts
 
-- `Shrugame-1.0.4-windows-x64-Setup.exe`
-- `Shrugame-1.0.4-windows-x64-Portable.exe`
-- Unsigned macOS x64 and arm64 DMG/ZIP packages generated by release CI.
-- SHA-256 checksum and artifact manifests attached to the GitHub Release.
+- `Shrugame-1.0.5-windows-x64-Setup.exe`
+- `Shrugame-1.0.5-windows-x64-Portable.exe`
+- `Shrugame-1.0.5-macos-x64.zip`
+- `Shrugame-1.0.5-macos-arm64.zip`
+- `SHA256SUMS.txt`, `ARTIFACTS.txt`, and `artifact-manifest.json`
+
+The macOS archives contain the correct x86_64/arm64 Mach-O executables, `1.0.5` plist metadata, executable modes, and 14 framework symlinks. They were structurally validated on Windows with WSL; this is not a native macOS runtime test.
 
 ## Residual Limitations
 
-- Builds are unsigned and may trigger platform security warnings.
+- All desktop builds are unsigned and may trigger platform security warnings.
+- Native macOS runtime CI depends on the GitHub-hosted macOS runner. If the repository billing lock prevents that job from starting, macOS validation remains structural-only for this release.
 - Historical Pass 1-29 prototype tests remain excluded because they assert retired blockout behavior.

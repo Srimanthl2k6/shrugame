@@ -1,0 +1,92 @@
+{
+  "difficulties": ["shrububu", "srmt"],
+  "levels": [
+    {
+      "level_id": "level_01",
+      "start_room": "arrival",
+      "steps": [
+        {"type": "interaction", "room": "arrival", "id": "KfcDoor", "expect_flag": "building_broken"},
+        {"type": "edge", "room": "arrival", "expect_room": "harbour_square"},
+        {"type": "battle", "room": "harbour_square", "id": "SheriffPoojan", "encounter": "poojan_strength_test", "expect_flag": "poojan_defeated"},
+        {"type": "edge", "room": "harbour_square", "expect_room": "residences_docks"},
+        {"type": "edge", "room": "residences_docks", "expect_room": "records_alley"},
+        {"type": "interaction", "room": "records_alley", "id": "DivorceRecords", "expect_flag": "divorce_records_collected", "expect_clue": "divorce_records"},
+        {"type": "edge", "room": "records_alley", "expect_room": "satyaki_waterfront"},
+        {"type": "battle", "room": "satyaki_waterfront", "id": "SatyakiBoss", "encounter": "satyaki_tirumal_boss", "expect_flag": "satyaki_tirumal_defeated"},
+        {"type": "level_edge", "room": "satyaki_waterfront", "target_level": "level_02", "expect_room": "suburb"}
+      ]
+    },
+    {
+      "level_id": "level_02",
+      "start_room": "suburb",
+      "steps": [
+        {"type": "edge", "room": "suburb", "expect_room": "monkey_plaza"},
+        {"type": "edge", "room": "monkey_plaza", "expect_room": "laboratory"},
+        {"type": "interaction", "room": "laboratory", "id": "LabRecords", "expect_flag": "165_files_collected", "expect_clue": "165_files"},
+        {"type": "edge", "room": "laboratory", "expect_room": "lab_approach"},
+        {"type": "battle", "room": "lab_approach", "id": "NitinBoss", "encounter": "nitin_janitor_boss", "expect_flag": "nitin_defeated"},
+        {"type": "interaction", "room": "lab_approach", "id": "PopcornBreak", "expect_flag": "monkeys_spell_broken"},
+        {"type": "edge", "room": "lab_approach", "expect_room": "mayor_complex"},
+        {"type": "battle", "room": "mayor_complex", "id": "DeepakBoss", "encounter": "deepak_reddy_boss", "expect_flag": "deepak_reddy_defeated"},
+        {"type": "level_edge", "room": "mayor_complex", "target_level": "level_03", "expect_room": "forest_entrance"}
+      ]
+    },
+    {
+      "level_id": "level_03",
+      "start_room": "forest_entrance",
+      "steps": [
+        {"type": "edge", "room": "forest_entrance", "expect_room": "berry_paths"},
+        {"type": "interaction", "room": "berry_paths", "id": "BerryCluster01", "expect_flag": "berry_cluster_01"},
+        {"type": "interaction", "room": "berry_paths", "id": "BerryCluster02", "expect_flag": "berry_cluster_02"},
+        {"type": "interaction", "room": "berry_paths", "id": "BerryCluster03", "expect_flag": "berry_cluster_03"},
+        {"type": "interaction", "room": "berry_paths", "id": "BerryCluster04", "expect_flag": "berries_collected"},
+        {"type": "edge", "room": "berry_paths", "expect_room": "chef_hut"},
+        {"type": "interaction", "room": "chef_hut", "id": "BerryContract", "expect_flag": "berry_contract_collected", "expect_clue": "berry_contract"},
+        {"type": "battle", "room": "chef_hut", "id": "NishalBoss", "encounter": "niggesh_nishal_boss", "expect_flag": "niggesh_nishal_defeated"},
+        {"type": "edge", "room": "chef_hut", "expect_room": "sharing_clearing"},
+        {"type": "interaction", "room": "sharing_clearing", "id": "BerryShare", "expect_flag": "berries_shared"},
+        {"type": "edge", "room": "sharing_clearing", "expect_room": "ankit_gate"},
+        {"type": "battle", "room": "ankit_gate", "id": "AnkitBoss", "encounter": "ankit_boss", "expect_flag": "ankit_defeated"},
+        {"type": "level_edge", "room": "ankit_gate", "target_level": "level_04", "expect_room": "pun_street"}
+      ]
+    },
+    {
+      "level_id": "level_04",
+      "start_room": "pun_street",
+      "steps": [
+        {"type": "edge", "room": "pun_street", "expect_room": "hospital_reception"},
+        {"type": "interaction", "room": "hospital_reception", "id": "HospitalRecords", "expect_flag": "hospital_records_collected", "expect_clue": "hospital_records"},
+        {"type": "edge", "room": "hospital_reception", "expect_room": "serum_ward"},
+        {"type": "battle", "room": "serum_ward", "id": "DoctorSushan", "encounter": "doctor_sushan_boss", "expect_flag": "doctor_sushan_defeated"},
+        {"type": "edge", "room": "serum_ward", "expect_room": "festival_plaza"},
+        {"type": "interaction", "room": "festival_plaza", "id": "AeonFestival", "expect_flag": "aeon_festival_started"},
+        {"type": "edge", "room": "festival_plaza", "expect_room": "mayor_stage"},
+        {"type": "battle", "room": "mayor_stage", "id": "MittaBoss", "encounter": "mitta_boss", "expect_flag": "mitta_defeated"},
+        {"type": "level_edge", "room": "mayor_stage", "target_level": "level_05", "expect_room": "ruined_boulevard"}
+      ]
+    },
+    {
+      "level_id": "level_05",
+      "start_room": "ruined_boulevard",
+      "steps": [
+        {"type": "edge", "room": "ruined_boulevard", "expect_room": "gummies_pub"},
+        {"type": "battle", "room": "gummies_pub", "id": "GummiesBar", "encounter": "suhas_bar_fight", "expect_flag": "suhas_defeated"},
+        {"type": "edge", "room": "gummies_pub", "expect_room": "hooligan_alley"},
+        {"type": "interaction", "room": "hooligan_alley", "id": "BikeKeysClue", "expect_flag": "bike_keys_collected", "expect_clue": "bike_keys"},
+        {"type": "edge", "room": "hooligan_alley", "expect_room": "bike_route"},
+        {"type": "interaction", "room": "bike_route", "id": "BikeRouteCheckpoint", "expect_flag": "bike_route_completed"},
+        {"type": "edge", "room": "bike_route", "expect_room": "mansion_foyer"},
+        {"type": "interaction", "room": "mansion_foyer", "id": "MansionConsole", "expect_flag": "mansion_foyer_solved", "expect_clue": "mansion_foyer"},
+        {"type": "edge", "room": "mansion_foyer", "expect_room": "clue_chambers"},
+        {"type": "interaction", "room": "clue_chambers", "id": "CourtClueConsole", "expect_flag": "mansion_court_clues_collected", "expect_clue": "mansion_court_clues"},
+        {"type": "edge", "room": "clue_chambers", "expect_room": "ruined_court"},
+        {"type": "battle", "room": "ruined_court", "id": "SrmtBoss", "encounter": "srmt_final_boss", "expect_flag": "srmt_defeated"},
+        {"type": "interaction", "room": "ruined_court", "id": "IshiYogaCell", "expect_flag": "ishiyoga_rescued"},
+        {"type": "interaction", "room": "ruined_court", "id": "FinalFeast", "expect_flag": "birthday_card_seen", "expect_scene": "res://scenes/ending.tscn"}
+      ]
+    }
+  ],
+  "final_flags": ["satyaki_tirumal_defeated", "deepak_reddy_defeated", "ankit_defeated", "mitta_defeated", "srmt_defeated", "ishiyoga_rescued", "birthday_card_seen"],
+  "final_gear": ["revolver", "banana_gun", "berry_potions", "musical_guitar"],
+  "final_growth_stage": 5
+}

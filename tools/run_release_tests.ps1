@@ -44,7 +44,10 @@ $releaseTests = @(
     "tests/pass71_usability_hotfix_smoke.gd",
     "tests/pass72_right_edge_navigation_smoke.gd",
     "tests/pass73_universal_edge_transition_smoke.gd",
-    "tests/pass74_level02_bidirectional_hotfix_smoke.gd"
+    "tests/pass74_level02_bidirectional_hotfix_smoke.gd",
+    "tests/pass75_auticity_interaction_hotfix_smoke.gd",
+    "tests/pass76_shrububu_direction_regression.gd",
+    "tests/pass77_full_walkthrough_regression.gd"
 )
 
 if ($IncludeLegacy) {

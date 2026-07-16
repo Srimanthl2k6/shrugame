@@ -13,7 +13,8 @@ const INTERACTION_PROPERTIES := [
 	"flag_on_interact", "post_flag", "post_dialogue_id", "locked_message", "save_on_interact",
 	"level_id", "spawn_point", "encounter_id", "clue_id", "item_id", "item_amount", "gear_id",
 	"growth_stage_on_interact", "objective_text", "disabled_if_flag", "one_shot", "hide_when_disabled",
-	"cutscene_id", "focus_highlight", "auto_activate_on_body_enter", "persist_progress_on_activate"
+	"cutscene_id", "focus_highlight", "auto_activate_on_body_enter", "persist_progress_on_activate",
+	"interaction_size", "interaction_padding", "focus_priority"
 ]
 
 @export_file("*.json") var definition_path := ""
@@ -123,16 +124,20 @@ func _build_interactions() -> void:
 		area.name = str(entry.get("id", "Interaction"))
 		area.set_script(InteractionScript)
 		area.position = _to_vector2(entry.get("position", []), Vector2.ZERO)
-		root.add_child(area)
 		for property_name in INTERACTION_PROPERTIES:
 			if entry.has(property_name):
-				area.set(property_name, entry[property_name])
+				if property_name in ["interaction_size", "interaction_padding"]:
+					area.set(property_name, _to_vector2(entry[property_name], area.get(property_name)))
+				else:
+					area.set(property_name, entry[property_name])
 		if entry.has("required_flags"):
 			area.set("required_flags", PackedStringArray(entry["required_flags"]))
 		var collision := CollisionShape2D.new()
 		collision.name = "CollisionShape2D"
 		var shape := RectangleShape2D.new()
-		shape.size = _to_vector2(entry.get("interaction_size", [44, 36]), Vector2(44, 36))
+		var authored_size := _to_vector2(entry.get("interaction_size", [44, 36]), Vector2(44, 36))
+		var padding := _to_vector2(entry.get("interaction_padding", [24, 20]), Vector2(24, 20))
+		shape.size = authored_size + padding * 2.0
 		collision.shape = shape
 		area.add_child(collision)
 		var sprite := _create_actor(entry)
@@ -141,6 +146,7 @@ func _build_interactions() -> void:
 			sprite.position = _to_vector2(entry.get("visual_offset", [0, 0]), Vector2.ZERO)
 			sprite.z_index = int(entry.get("z_index", int(area.position.y)))
 			area.add_child(sprite)
+		root.add_child(area)
 
 
 func _build_exits() -> void:

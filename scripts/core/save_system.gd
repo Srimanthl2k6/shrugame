@@ -1,6 +1,6 @@
 extends Node
 
-const SAVE_SCHEMA_VERSION := 3
+const SAVE_SCHEMA_VERSION := 4
 
 const LEVEL_SCENES := {
 	"level_01": "res://scenes/levels/districts/level_01.tscn",
@@ -22,6 +22,7 @@ const LEVEL_PACKED_SCENES := {
 var save_path := "user://savegame.json"
 var backup_path := "user://savegame.backup.json"
 var temporary_path := "user://savegame.tmp.json"
+var _migration_rewrite_required := false
 
 
 func save_game(level_id: String, spawn_point: String = "default", room_id: String = "") -> bool:
@@ -87,6 +88,7 @@ func save_game(level_id: String, spawn_point: String = "default", room_id: Strin
 
 
 func load_game() -> Dictionary:
+	_migration_rewrite_required = false
 	var data = _read_save_candidate(save_path)
 	if data.is_empty():
 		data = _load_backup()
@@ -125,6 +127,13 @@ func load_game() -> Dictionary:
 		game_state.save_created_unix = int(data.get("save_created_unix", 0))
 		if game_state.has_method("rebuild_defeated_bosses_from_flags"):
 			game_state.rebuild_defeated_bosses_from_flags()
+	if _migration_rewrite_required:
+		var migrated_level := str(data.get("level_id", "level_01"))
+		var migrated_room := str(data.get("room_id", _default_room_for_level(migrated_level)))
+		var migrated_spawn := str(data.get("spawn_point", "start"))
+		if not save_game(migrated_level, migrated_spawn, migrated_room):
+			push_warning("Loaded a migrated save, but could not rewrite it atomically.")
+		_migration_rewrite_required = false
 	return data
 
 
@@ -216,6 +225,7 @@ func _is_valid_save_data(data: Dictionary, allow_legacy: bool = false) -> bool:
 
 func _migrate_save_data(data: Dictionary) -> Dictionary:
 	var migrated := data.duplicate(true)
+	var original_schema := int(migrated.get("schema_version", 0))
 	var level_id := str(migrated.get("level_id", "level_01"))
 	if not migrated.has("schema_version"):
 		migrated["schema_version"] = SAVE_SCHEMA_VERSION
@@ -230,6 +240,22 @@ func _migrate_save_data(data: Dictionary) -> Dictionary:
 		migrated["save_created_unix"] = int(Time.get_unix_time_from_system())
 	if not migrated.has("last_saved_unix"):
 		migrated["last_saved_unix"] = migrated["save_created_unix"]
+	for dictionary_key in ["story_flags", "inventory", "gear", "clues", "defeated_bosses"]:
+		if not migrated.has(dictionary_key) or typeof(migrated[dictionary_key]) != TYPE_DICTIONARY:
+			migrated[dictionary_key] = {}
+	var flags: Dictionary = migrated["story_flags"]
+	var clues: Dictionary = migrated["clues"]
+	var read_legacy_hospital_map := bool(flags.get("hospital_map_collected", false)) \
+		or bool(flags.get("clue_hospital_map_seen", false)) \
+		or bool(clues.get("hospital_map", false))
+	if read_legacy_hospital_map and not bool(flags.get("hospital_records_collected", false)):
+		flags["hospital_records_collected"] = true
+		clues["hospital_records"] = true
+		if level_id == "level_04" and not bool(flags.get("doctor_sushan_defeated", false)):
+			migrated["current_objective"] = "Walk right into the Pattern Serum ward and confront Doctor Sushan."
+		_migration_rewrite_required = true
+	if original_schema != SAVE_SCHEMA_VERSION:
+		_migration_rewrite_required = true
 	return migrated
 
 

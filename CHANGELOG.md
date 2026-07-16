@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.5 - 2026-07-16
+
+- Consolidated Auticity's optional hospital map and required records into one visible progression terminal.
+- Added schema-4 migration that recovers existing saves which already read the old hospital map.
+- Centralized interaction selection so one nearest, faced object receives input and a visible device-aware marker.
+- Preserved authored interaction footprints and added 24x20 pixels of approach padding on every side.
+- Kept prompts available when objectives are hidden and suppressed targeting during dialogue, cutscenes, pause, battles, and transitions.
+- Corrected Shrububu's left/right turnaround mapping and regenerated all five forms, door slams, and weapon attacks.
+- Added a 27-room, ten-boss deterministic walkthrough on both difficulties with save/restart checks after every district.
+- Added reachability audits and packaged Electron probes for Auticity records-to-Sushan and the complete level-transition chain.
+
 ## 1.0.4 - 2026-07-16
 
 - Made the visible, reachable laboratory files the canonical Level 2 progression interaction.

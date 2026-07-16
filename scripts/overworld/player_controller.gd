@@ -49,6 +49,13 @@ func set_movement_locked(locked: bool) -> void:
 		velocity = Vector2.ZERO
 
 
+func set_facing_direction(direction: String) -> void:
+	if direction not in ["down", "left", "up", "right"]:
+		return
+	facing_direction = direction
+	_set_animation_texture("idle_%s" % facing_direction, _get_growth_stage())
+
+
 func configure_room_bounds(bounds: Rect2) -> void:
 	var camera := get_node_or_null("Camera2D") as Camera2D
 	if camera == null:
@@ -137,6 +144,7 @@ func _set_animation_texture(animation_name: String, stage: int) -> void:
 	_current_texture_path = path
 	current_animation = animation_name
 	_sprite.texture = texture
+	_sprite.flip_h = false
 	_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_sprite.hframes = get_animation_frame_count(animation_name)
 	_sprite.vframes = 1

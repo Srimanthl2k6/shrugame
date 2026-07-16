@@ -51,7 +51,7 @@ func _test_save_recovery_and_migration() -> void:
 	legacy.store_string(JSON.stringify({"level_id": "level_03", "spawn_point": "default", "story_flags": {}, "difficulty_id": "shrububu"}))
 	legacy = null
 	var migrated: Dictionary = save_system.load_game()
-	_assert(int(migrated.get("schema_version", 0)) == 3, "Legacy save must migrate to schema 3")
+	_assert(int(migrated.get("schema_version", 0)) == 4, "Legacy save must migrate to schema 4")
 	_assert(str(migrated.get("room_id", "")) == "forest_entrance", "Legacy save must recover a valid default room")
 	save_system.clear_save()
 	save_system.save_path = original_paths[0]

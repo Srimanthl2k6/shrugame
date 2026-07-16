@@ -1,7 +1,7 @@
 extends Node
 
 const DIFFICULTY_PATH := "res://data/difficulty/difficulty_modes.json"
-const SAVE_SCHEMA_VERSION := 3
+const SAVE_SCHEMA_VERSION := 4
 
 var story_flags: Dictionary = {}
 var schema_version := SAVE_SCHEMA_VERSION

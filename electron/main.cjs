@@ -208,6 +208,9 @@ async function collectRuntimeProbe(window) {
       godotDiagnostics: frameWindow ? frameWindow.__shrugameDiagnostics || null : null,
       gameAudio: frameWindow ? frameWindow.__shrugameAudioDiagnostics || null : null,
       encounterDiagnostics: frameWindow ? frameWindow.__shrugameEncounterDiagnostics || null : null,
+      interactionDiagnostics: frameWindow ? frameWindow.__shrugameInteractionDiagnostics || null : null,
+      dialogueDiagnostics: frameWindow ? frameWindow.__shrugameDialogueDiagnostics || null : null,
+      fullProgressionDiagnostics: frameWindow ? frameWindow.__shrugameFullProgressionDiagnostics || null : null,
       godotSmokeTarget: frameWindow ? frameWindow.__shrugameSmokeTarget || null : null
     };
   })()`);
@@ -258,6 +261,35 @@ async function runSmokeProbe(window) {
 			await wait(260);
 		}
 		await wait(1500);
+	} else if (SMOKE_ROUTE === "level_04_hospital_progression") {
+		runDefaultMovement = false;
+		await wait(5000);
+		window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
+		await wait(4200);
+		window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
+		for (let index = 0; index < 30; index += 1) {
+			await pressKey("E");
+			await wait(250);
+		}
+		window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
+		await wait(3500);
+		window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
+		await wait(500);
+		for (let index = 0; index < 5; index += 1) {
+			window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
+			await wait(300);
+			window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
+			await pressKey("E");
+			await wait(160);
+		}
+		await wait(500);
+		window.webContents.sendInputEvent({ type: "keyDown", keyCode: "Escape" });
+		await wait(1000);
+		window.webContents.sendInputEvent({ type: "keyUp", keyCode: "Escape" });
+		await wait(2000);
+	} else if (SMOKE_ROUTE === "full_progression") {
+		runDefaultMovement = false;
+		await wait(9000);
 	} else if (SMOKE_ROUTE === "1") {
 		await wait(1900);
 		await pressKey("Enter");
@@ -311,6 +343,15 @@ async function runSmokeProbe(window) {
 	&& (SMOKE_ROUTE !== "level_02_lab_progression" || (
 		report.godotDiagnostics?.current_room === "lab_approach"
 		&& report.encounterDiagnostics?.encounter_id === "nitin_janitor_boss"
+	))
+	&& (SMOKE_ROUTE !== "level_04_hospital_progression" || (
+		report.godotDiagnostics?.current_room === "serum_ward"
+		&& report.encounterDiagnostics?.encounter_id === "doctor_sushan_boss"
+	))
+	&& (SMOKE_ROUTE !== "full_progression" || (
+		report.fullProgressionDiagnostics?.complete === true
+		&& report.fullProgressionDiagnostics?.saves_verified === 4
+		&& report.fullProgressionDiagnostics?.final_level === "level_05"
 	))
     && report.consoleErrors.length === 0;
   await wait(250);

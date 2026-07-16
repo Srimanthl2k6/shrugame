@@ -4,7 +4,7 @@ Shrugame is a five-district 2D pixel RPG about Shrububu's search for KFC through
 
 ## Release Status
 
-Version **1.0.4** includes:
+Version **1.0.5** includes:
 
 - 27 connected rooms across Divorcee Harbour, Banana-burbs, Berry Barks, Auticity, and Area 111.
 - Ten multi-phase encounters with Strength and Resonance outcomes.
@@ -19,6 +19,10 @@ Version **1.0.4** includes:
 - Symmetric left/right edge transitions that permit only one room crossing per directional input.
 - A linear Banana-burbs route with no hidden north exit or required backward search after the laboratory.
 - Reachable visible 165-files and automatic required encounters through the complete Level 2 route.
+- A repaired Auticity hospital route: the glowing records terminal now owns the required clue, objective, and atomic save.
+- Schema-4 recovery for saves that already read the former hospital-map interaction.
+- Centralized, nearest-target interactions with authored footprints, generous padding, a single world marker, and device-aware prompts.
+- Correct left/right Shrububu sprites, door-slam poses, weapon poses, and immediate cutscene-facing updates across all five forms.
 - SFX-only audio with no looping music or ambience.
 - One atomic, migration-safe save file with corruption fallback.
 - Godot 4.7 Web embedded in a hardened Electron desktop shell.
@@ -65,10 +69,12 @@ npm run smoke --prefix electron -- transition_level_01
 npm run smoke --prefix electron -- right_edge_level_02
 npm run smoke --prefix electron -- right_edge_harbour_square
 npm run smoke --prefix electron -- level_02_lab_progression
+npm run smoke --prefix electron -- level_04_hospital_progression
+npm run smoke --prefix electron -- full_progression
 .\tools\audit_release_files.ps1
 ```
 
-The release suite validates story placement, assets, animation contracts, audio, menus, accessibility, save recovery, Electron isolation, website media, room connectivity, progression gates, and all ten bosses on both modes. See [QA_REPORT.md](docs/QA_REPORT.md).
+The 35-test release suite validates story placement, assets, animation contracts, audio, menus, accessibility, save recovery, Electron isolation, website media, room connectivity, progression gates, reachable interaction positions, and a complete ten-boss walkthrough on both modes. See [QA_REPORT.md](docs/QA_REPORT.md).
 
 ## Build
 

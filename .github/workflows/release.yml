@@ -8,7 +8,7 @@ on:
       tag:
         description: Existing version tag
         required: true
-        default: v1.0.4
+        default: v1.0.5
 
 permissions:
   contents: write
@@ -62,6 +62,10 @@ jobs:
           npm run smoke --prefix electron -- right_edge_harbour_square
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           npm run smoke --prefix electron -- level_02_lab_progression
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run smoke --prefix electron -- level_04_hospital_progression
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run smoke --prefix electron -- full_progression
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@v4
         with:

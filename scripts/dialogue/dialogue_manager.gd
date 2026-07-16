@@ -40,6 +40,7 @@ func start_dialogue(dialogue_id: String, flag_on_complete: String = "") -> bool:
 		_active_flag = entry.get("complete_flag", "")
 
 	dialogue_started.emit(_active_entry.get("speaker", ""), str(_active_lines[_active_index]))
+	_publish_web_diagnostics()
 	return true
 
 
@@ -51,6 +52,7 @@ func start_inline_dialogue(speaker: String, lines: Array, flag_on_complete: Stri
 	_active_index = 0
 	_active_flag = flag_on_complete
 	dialogue_started.emit(speaker, str(_active_lines[0]))
+	_publish_web_diagnostics()
 	return true
 
 
@@ -63,6 +65,7 @@ func cancel_dialogue(emit_finished: bool = true) -> void:
 	_active_flag = ""
 	if emit_finished:
 		dialogue_finished.emit("")
+	_publish_web_diagnostics()
 
 
 func advance() -> bool:
@@ -72,6 +75,7 @@ func advance() -> bool:
 	_active_index += 1
 	if _active_index < _active_lines.size():
 		dialogue_advanced.emit(_active_entry.get("speaker", ""), str(_active_lines[_active_index]))
+		_publish_web_diagnostics()
 		return true
 
 	var completed_flag := _active_flag
@@ -85,8 +89,20 @@ func advance() -> bool:
 		if game_state != null:
 			game_state.set_flag(completed_flag, true)
 	dialogue_finished.emit(completed_flag)
+	_publish_web_diagnostics()
 	return false
 
 
 func is_active() -> bool:
 	return not _active_lines.is_empty()
+
+
+func _publish_web_diagnostics() -> void:
+	if not OS.has_feature("web"):
+		return
+	var payload := {
+		"active": is_active(),
+		"line_index": _active_index,
+		"line_count": _active_lines.size()
+	}
+	JavaScriptBridge.eval("window.__shrugameDialogueDiagnostics = %s" % JSON.stringify(payload), true)

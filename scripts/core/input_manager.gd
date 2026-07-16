@@ -1,6 +1,7 @@
 extends Node
 
 signal input_device_changed(device_id: String)
+signal bindings_changed
 
 const ACTIONS := ["move_left", "move_right", "move_up", "move_down", "interact", "ui_accept", "ui_cancel"]
 const DEFAULT_BINDINGS_PATH := "user://input_bindings.json"
@@ -96,6 +97,7 @@ func rebind_key(action: String, keycode: Key) -> bool:
 	key_event.physical_keycode = keycode
 	InputMap.action_add_event(action, key_event)
 	save_bindings()
+	bindings_changed.emit()
 	return true
 
 
@@ -107,6 +109,7 @@ func rebind_event(action: String, input_event: InputEvent) -> bool:
 			InputMap.action_erase_event(action, existing)
 	InputMap.action_add_event(action, input_event.duplicate())
 	save_bindings()
+	bindings_changed.emit()
 	return true
 
 
@@ -157,6 +160,7 @@ func load_bindings() -> bool:
 			var event := _deserialize_event(event_data)
 			if event != null:
 				InputMap.action_add_event(action, event)
+	bindings_changed.emit()
 	return true
 
 
@@ -168,6 +172,7 @@ func reset_bindings() -> void:
 	for path in [bindings_path, bindings_temporary_path, bindings_backup_path]:
 		if FileAccess.file_exists(path):
 			DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	bindings_changed.emit()
 
 
 func _commit_bindings() -> bool:

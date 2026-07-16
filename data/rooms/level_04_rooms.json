@@ -28,14 +28,16 @@
       "ambience_id": "level_04_hospital_festival_synth",
       "spawn_points": {"default": [88, 284], "from_street": [88, 284], "from_ward": [548, 284]},
       "blockers": [[74, 22, 492, 112], [226, 146, 188, 48]],
+      "decorations": [
+        {"id": "HospitalMapDisplay", "position": [350, 220], "visual": "res://assets/level_04/sprites/prop_save_kiosk.png", "modulate": [0.58, 0.62, 0.68, 1.0], "z_index": 220}
+      ],
       "interactions": [
         {"id": "ClinicReceptionist", "position": [208, 244], "visual": "res://assets/level_04/sprites/npc_clinic_receptionist_idle.png", "display_name": "Clinic Receptionist", "dialogue_id": "clinic_receptionist", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "post_flag": "doctor_sushan_defeated", "post_dialogue_id": "auticity_post_clear_resident", "interaction_size": [40, 52]},
-        {"id": "HospitalRecords", "position": [350, 220], "visual": "res://assets/level_04/sprites/prop_hospital_records_terminal.png", "display_name": "Hospital records terminal", "dialogue_id": "hospital_records", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "clue_id": "hospital_records", "one_shot": true, "interaction_size": [46, 48], "objective_text": "Confront Doctor Sushan in the Pattern Serum ward."},
-        {"id": "HospitalMap", "position": [478, 226], "visual": "res://assets/level_04/sprites/prop_save_kiosk.png", "display_name": "Hospital map", "dialogue_id": "clue_hospital_map", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "clue_id": "hospital_map", "one_shot": true, "interaction_size": [34, 40]}
+        {"id": "HospitalRecords", "position": [478, 266], "visual": "res://assets/level_04/sprites/prop_hospital_records_terminal.png", "display_name": "Glowing hospital records terminal", "dialogue_id": "hospital_records", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "clue_id": "hospital_records", "disabled_if_flag": "hospital_records_collected", "one_shot": true, "interaction_size": [46, 48], "focus_priority": 10, "persist_progress_on_activate": true, "objective_text": "Walk right into the Pattern Serum ward and confront Doctor Sushan."}
       ],
       "exits": [
         {"id": "west_to_street", "position": [4, 280], "size": [16, 108], "target_room_id": "pun_street", "target_spawn_id": "from_hospital"},
-        {"id": "east_to_ward", "position": [636, 280], "size": [16, 108], "target_room_id": "serum_ward", "target_spawn_id": "from_reception", "required_flags": ["hospital_records_collected"], "locked_objective": "Read the hospital records before entering the restricted ward."}
+        {"id": "east_to_ward", "position": [636, 280], "size": [16, 108], "target_room_id": "serum_ward", "target_spawn_id": "from_reception", "required_flags": ["hospital_records_collected"], "locked_objective": "Inspect the glowing hospital records terminal, then keep walking right."}
       ]
     },
     "serum_ward": {

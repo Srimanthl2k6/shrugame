@@ -236,6 +236,30 @@ func _run_electron_smoke_flow() -> void:
 		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/levels/districts/level_02.tscn")
 		return
+	if smoke_target == "level_04_hospital_progression":
+		var hospital_save := get_node_or_null("/root/SaveSystem")
+		if hospital_save != null:
+			hospital_save.new_game("shrububu")
+		var hospital_state := get_node_or_null("/root/GameState")
+		if hospital_state != null:
+			hospital_state.current_level_id = "level_04"
+			hospital_state.current_room_id = "hospital_reception"
+			hospital_state.spawn_point = "from_street"
+			hospital_state.pending_encounter_id = ""
+			hospital_state.set_growth_stage(4)
+			hospital_state.set_flag("tutorial_overworld_completed", true)
+			hospital_state.set_flag("tutorial_battle_completed", true)
+			hospital_state.set_current_objective("Inspect the glowing hospital records terminal.")
+			hospital_save.save_game("level_04", "from_street", "hospital_reception")
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/levels/districts/level_04.tscn")
+		return
+	if smoke_target == "full_progression":
+		var probe := Node.new()
+		probe.set_script(preload("res://scripts/core/release_progression_probe.gd"))
+		get_tree().root.add_child(probe)
+		probe.call_deferred("run")
+		return
 	if smoke_target == "right_edge_harbour_square":
 		var harbour_save := get_node_or_null("/root/SaveSystem")
 		if harbour_save != null:

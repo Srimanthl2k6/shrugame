@@ -251,7 +251,10 @@ func _refresh_presentation() -> void:
 			show_objectives = bool(settings_manager.get_setting("show_objectives", true))
 		var director := get_node_or_null("/root/CutsceneDirector")
 		var cutscene_active: bool = director != null and bool(director.is_playing)
-		_overlay.visible = not _title_layer_is_visible() and not cutscene_active and show_objectives
+		_overlay.visible = not _title_layer_is_visible() and not cutscene_active
+		var top_bar := _overlay.get_node_or_null("TopBar") as Control
+		if top_bar != null:
+			top_bar.visible = show_objectives
 	_update_overlay_text(level_root)
 	_update_context_prompt(level_root)
 
@@ -303,24 +306,16 @@ func _update_context_prompt(level_root: Node) -> void:
 	var prompt_label := _overlay.get_node_or_null("PromptPanel/PromptLabel") as Label
 	if prompt_panel == null or prompt_label == null:
 		return
-	var focused_area := _find_focused_area(level_root)
+	var focused_area: Area2D = null
+	var interaction_manager := get_node_or_null("/root/InteractionManager")
+	if interaction_manager != null:
+		focused_area = interaction_manager.get_focused_interaction()
 	prompt_panel.visible = focused_area != null and _overlay.visible
 	if focused_area != null:
 		if focused_area.has_method("get_focus_prompt"):
 			prompt_label.text = focused_area.get_focus_prompt()
 		else:
 			prompt_label.text = "E/Enter: %s" % get_area_display_name(focused_area)
-
-
-func _find_focused_area(node: Node) -> Area2D:
-	for child in node.get_children():
-		var area := child as Area2D
-		if area != null and bool(area.get("_player_inside")):
-			return area
-		var nested := _find_focused_area(child)
-		if nested != null:
-			return nested
-	return null
 
 
 func _add_level_boundaries(world: Node2D) -> void:

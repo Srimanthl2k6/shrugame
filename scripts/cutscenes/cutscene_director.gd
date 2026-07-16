@@ -83,6 +83,15 @@ func play_sequence(data: Dictionary, context_root: Node = null) -> bool:
 	cutscene_started.emit(active_cutscene_id)
 
 	var steps: Array = data.get("steps", [])
+	if Engine.has_meta("shrugame_deterministic_walkthrough"):
+		for index in range(steps.size()):
+			var test_step = steps[index]
+			if typeof(test_step) == TYPE_DICTIONARY:
+				step_started.emit(active_cutscene_id, index, str(test_step.get("type", "wait")))
+		_apply_skip_state(steps)
+		_apply_completion_state(data)
+		_finish_cutscene(true)
+		return true
 	for index in range(steps.size()):
 		if _skip_requested:
 			break
@@ -226,7 +235,9 @@ func _face_actor(step: Dictionary) -> void:
 	if target == null:
 		return
 	var direction := str(step.get("direction", "down"))
-	if "facing_direction" in target:
+	if target.has_method("set_facing_direction"):
+		target.call("set_facing_direction", direction)
+	elif "facing_direction" in target:
 		target.set("facing_direction", direction)
 	if target.has_method("apply_growth_visual"):
 		target.call("apply_growth_visual")
@@ -384,8 +395,12 @@ func _start_battle(step: Dictionary) -> void:
 
 
 func _change_scene(path: String) -> void:
-	if not path.is_empty():
-		get_tree().change_scene_to_file(path)
+	if path.is_empty():
+		return
+	if Engine.has_meta("shrugame_deterministic_walkthrough"):
+		Engine.set_meta("shrugame_walkthrough_requested_scene", path)
+		return
+	get_tree().change_scene_to_file(path)
 
 
 func _apply_skip_state(steps: Array) -> void:

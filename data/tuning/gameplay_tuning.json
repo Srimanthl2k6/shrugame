@@ -3,7 +3,7 @@
     "player_speed": 86.0,
     "player_collision_size": [10.0, 16.0],
     "camera_smoothing_speed": 9.5,
-    "interaction_size": [38.0, 24.0]
+    "interaction_padding": [24.0, 20.0]
   },
   "battle": {
     "enemy_phase_seconds": 1.35,

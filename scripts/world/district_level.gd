@@ -24,6 +24,7 @@ var _transitioning := false
 var _idle_seconds := 0.0
 var _reminder_sent := false
 var _edge_input_consumed := false
+var _web_diagnostic_elapsed := 0.0
 var runtime_diagnostics: Dictionary = {}
 
 @onready var room_container: Node2D = get_node_or_null("RoomContainer") as Node2D
@@ -60,6 +61,13 @@ func begin_level_intro() -> void:
 
 
 func _process(delta: float) -> void:
+	if OS.has_feature("web") and player != null and current_room != null:
+		_web_diagnostic_elapsed += delta
+		if _web_diagnostic_elapsed >= 0.25:
+			_web_diagnostic_elapsed = 0.0
+			var local_player_position := current_room.to_local(player.global_position)
+			_record_diagnostic("player_x", snappedf(local_player_position.x, 0.1))
+			_record_diagnostic("player_y", snappedf(local_player_position.y, 0.1))
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state == null or not game_state.is_story_difficulty():
 		_idle_seconds = 0.0
