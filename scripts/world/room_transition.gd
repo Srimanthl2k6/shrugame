@@ -12,7 +12,10 @@ var enabled := true
 
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+	# Edge exits are polled centrally by DistrictLevel so one held input cannot
+	# activate multiple rooms. Non-edge transitions retain overlap behavior.
+	if get_edge_side().is_empty():
+		body_entered.connect(_on_body_entered)
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -45,7 +48,16 @@ func try_transition(body: Node2D) -> bool:
 
 
 func is_forward_exit() -> bool:
-	return transition_id.to_lower().begins_with("east_to_")
+	return get_edge_side() == "right"
+
+
+func get_edge_side() -> String:
+	var normalized_id := transition_id.to_lower()
+	if normalized_id.begins_with("east_to_"):
+		return "right"
+	if normalized_id.begins_with("west_to_"):
+		return "left"
+	return ""
 
 
 func _requirements_met() -> bool:

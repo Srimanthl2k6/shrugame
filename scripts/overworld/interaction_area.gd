@@ -31,9 +31,12 @@ const TuningLoader := preload("res://scripts/core/tuning_loader.gd")
 @export var hide_when_disabled := false
 @export var cutscene_id := ""
 @export var focus_highlight := true
+@export var auto_activate_on_body_enter := false
+@export var persist_progress_on_activate := false
 
 var _player_inside := false
 var _disabled := false
+var _activation_in_progress := false
 
 
 func _ready() -> void:
@@ -44,58 +47,82 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 
 
+func _process(_delta: float) -> void:
+	if auto_activate_on_body_enter and _player_inside and not _disabled and not _activation_in_progress and _has_required_flags():
+		_try_auto_activate()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if _disabled or not _player_inside:
 		return
 	if event.is_action_pressed("interact"):
-		if not _has_required_flags():
-			print(locked_message)
-			interacted.emit(locked_message)
+		if try_activate():
 			get_viewport().set_input_as_handled()
-			return
-		if not cutscene_id.is_empty():
-			_play_ui_select()
-			var director := get_node_or_null("/root/CutsceneDirector")
-			if director != null and not director.is_playing:
-				director.play(cutscene_id, _find_level_root())
-			_notify_tutorial_interaction()
-			if one_shot:
-				call_deferred("_disable_interaction")
-			get_viewport().set_input_as_handled()
-			return
 
-		print(interaction_message)
-		interacted.emit(interaction_message)
-		_play_ui_select()
-		_play_contextual_interaction_sfx()
-		_apply_progression_rewards()
-		_notify_tutorial_interaction()
-		if not flag_on_interact.is_empty() and dialogue_id.is_empty():
-			_set_story_flag(flag_on_interact)
-			_notify_level_controller(flag_on_interact)
-		if save_on_interact:
-			var save_system := get_node_or_null("/root/SaveSystem")
-			if save_system != null:
-				save_system.save_game(level_id, spawn_point)
-				_set_story_flag("%s_saved" % level_id)
-				_play_save_chime()
-		if not dialogue_id.is_empty():
-			var manager := get_node_or_null("/root/DialogueManager")
-			if manager != null:
-				if not dialogue_file_path.is_empty():
-					manager.load_dialogue_file(dialogue_file_path)
-				manager.start_dialogue(resolve_dialogue_id(), flag_on_interact)
-		if not target_scene_path.is_empty():
-			if not encounter_id.is_empty():
-				var game_state := get_node_or_null("/root/GameState")
-				if game_state != null:
-					game_state.pending_encounter_id = encounter_id
-				_play_encounter_start()
-			_play_transition_wipe()
-			get_tree().change_scene_to_file(target_scene_path)
-		if one_shot:
-			call_deferred("_disable_interaction")
-		get_viewport().set_input_as_handled()
+
+func try_activate() -> bool:
+	if _disabled or not _player_inside or _activation_in_progress:
+		return false
+	if not _has_required_flags():
+		print(locked_message)
+		interacted.emit(locked_message)
+		return true
+	if not cutscene_id.is_empty():
+		return _try_start_cutscene()
+
+	print(interaction_message)
+	interacted.emit(interaction_message)
+	_play_ui_select()
+	_play_contextual_interaction_sfx()
+	_apply_progression_rewards()
+	_notify_tutorial_interaction()
+	if not flag_on_interact.is_empty() and dialogue_id.is_empty():
+		_set_story_flag(flag_on_interact)
+		_notify_level_controller(flag_on_interact)
+	if save_on_interact:
+		var save_system := get_node_or_null("/root/SaveSystem")
+		if save_system != null:
+			save_system.save_game(level_id, spawn_point)
+			_set_story_flag("%s_saved" % level_id)
+			_play_save_chime()
+	if persist_progress_on_activate:
+		_persist_current_progress()
+	if not dialogue_id.is_empty():
+		var manager := get_node_or_null("/root/DialogueManager")
+		if manager != null:
+			if not dialogue_file_path.is_empty():
+				manager.load_dialogue_file(dialogue_file_path)
+			manager.start_dialogue(resolve_dialogue_id(), flag_on_interact)
+	if not target_scene_path.is_empty():
+		if not encounter_id.is_empty():
+			var game_state := get_node_or_null("/root/GameState")
+			if game_state != null:
+				game_state.pending_encounter_id = encounter_id
+			_play_encounter_start()
+		_play_transition_wipe()
+		get_tree().change_scene_to_file(target_scene_path)
+	if one_shot:
+		call_deferred("_disable_interaction")
+	return true
+
+
+func _try_start_cutscene() -> bool:
+	var director := get_node_or_null("/root/CutsceneDirector")
+	if director == null or director.is_playing or director.load_cutscene(cutscene_id).is_empty():
+		return false
+	_activation_in_progress = true
+	_play_ui_select()
+	_apply_progression_rewards()
+	if not flag_on_interact.is_empty():
+		_set_story_flag(flag_on_interact)
+		_notify_level_controller(flag_on_interact)
+	if persist_progress_on_activate:
+		_persist_current_progress()
+	director.play(cutscene_id, _find_level_root())
+	_notify_tutorial_interaction()
+	if one_shot:
+		call_deferred("_disable_interaction")
+	return true
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -103,12 +130,19 @@ func _on_body_entered(body: Node2D) -> void:
 		_player_inside = true
 		_set_focus_highlight(true)
 		print(get_focus_prompt())
+		if auto_activate_on_body_enter and _has_required_flags():
+			call_deferred("_try_auto_activate")
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_inside = false
 		_set_focus_highlight(false)
+
+
+func _try_auto_activate() -> void:
+	if _player_inside and not _disabled and not _activation_in_progress and _has_required_flags():
+		try_activate()
 
 
 func get_display_name() -> String:
@@ -160,6 +194,13 @@ func _set_story_flag(flag_name: String) -> void:
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state != null:
 		game_state.set_flag(flag_name, true)
+
+
+func _persist_current_progress() -> void:
+	var game_state := get_node_or_null("/root/GameState")
+	var save_system := get_node_or_null("/root/SaveSystem")
+	if game_state != null and save_system != null:
+		save_system.save_game(str(game_state.current_level_id), str(game_state.spawn_point), str(game_state.current_room_id))
 
 
 func _get_story_flag(flag_name: String) -> bool:

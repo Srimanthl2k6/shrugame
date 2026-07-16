@@ -24,4 +24,4 @@
 - Tested targets: 960x540, 1280x720, and 1920x1080
 - The game renders internally at 640x360 with nearest-neighbor integer scaling.
 
-Version 1.0.3 packages are unsigned. Windows SmartScreen or macOS Gatekeeper may require an explicit first-launch confirmation.
+Version 1.0.4 packages are unsigned. Windows SmartScreen or macOS Gatekeeper may require an explicit first-launch confirmation.

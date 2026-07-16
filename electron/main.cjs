@@ -207,6 +207,7 @@ async function collectRuntimeProbe(window) {
       keyboardTarget: frameDocument ? frameDocument.activeElement && frameDocument.activeElement.tagName : 'missing',
       godotDiagnostics: frameWindow ? frameWindow.__shrugameDiagnostics || null : null,
       gameAudio: frameWindow ? frameWindow.__shrugameAudioDiagnostics || null : null,
+      encounterDiagnostics: frameWindow ? frameWindow.__shrugameEncounterDiagnostics || null : null,
       godotSmokeTarget: frameWindow ? frameWindow.__shrugameSmokeTarget || null : null
     };
   })()`);
@@ -237,7 +238,27 @@ async function runSmokeProbe(window) {
 		await wait(80);
 		window.webContents.sendInputEvent({ type: "mouseUp", x, y, button: "left", clickCount: 1 });
 	};
-	if (SMOKE_ROUTE === "1") {
+	let runDefaultMovement = true;
+	if (SMOKE_ROUTE === "level_02_lab_progression") {
+		runDefaultMovement = false;
+		await wait(5000);
+		window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
+		await wait(3000);
+		window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
+		for (let index = 0; index < 8; index += 1) {
+			await pressKey("E");
+			await wait(260);
+		}
+		await wait(500);
+		window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
+		await wait(7500);
+		window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
+		for (let index = 0; index < 12; index += 1) {
+			await pressKey("E");
+			await wait(260);
+		}
+		await wait(1500);
+	} else if (SMOKE_ROUTE === "1") {
 		await wait(1900);
 		await pressKey("Enter");
 		await wait(500);
@@ -252,13 +273,15 @@ async function runSmokeProbe(window) {
 			await wait(1200);
 		}
 	}
-	window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
-	const movementDuration = SMOKE_ROUTE === "transition_level_01"
-		? 7200
-		: (["right_edge_level_02", "right_edge_harbour_square"].includes(SMOKE_ROUTE) ? 2400 : 600);
-	await wait(movementDuration);
-	window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
-	await wait(800);
+	if (runDefaultMovement) {
+		window.webContents.sendInputEvent({ type: "keyDown", keyCode: "D" });
+		const movementDuration = SMOKE_ROUTE === "transition_level_01"
+			? 7200
+			: (["right_edge_level_02", "right_edge_harbour_square"].includes(SMOKE_ROUTE) ? 2400 : 600);
+		await wait(movementDuration);
+		window.webContents.sendInputEvent({ type: "keyUp", keyCode: "D" });
+		await wait(800);
+	}
 
   const after = await window.capturePage();
   const afterBuffer = after.toPNG();
@@ -285,6 +308,10 @@ async function runSmokeProbe(window) {
     && (SMOKE_ROUTE !== "transition_level_01" || report.godotDiagnostics?.level_id === "level_02")
     && (SMOKE_ROUTE !== "right_edge_level_02" || report.godotDiagnostics?.current_room === "lab_approach")
     && (SMOKE_ROUTE !== "right_edge_harbour_square" || report.godotDiagnostics?.current_room === "residences_docks")
+	&& (SMOKE_ROUTE !== "level_02_lab_progression" || (
+		report.godotDiagnostics?.current_room === "lab_approach"
+		&& report.encounterDiagnostics?.encounter_id === "nitin_janitor_boss"
+	))
     && report.consoleErrors.length === 0;
   await wait(250);
   app.exit(passed ? 0 : 1);

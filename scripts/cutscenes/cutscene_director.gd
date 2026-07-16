@@ -372,8 +372,14 @@ func _set_target_property(step: Dictionary) -> void:
 
 func _start_battle(step: Dictionary) -> void:
 	var game_state := get_node_or_null("/root/GameState")
+	var encounter_id := str(step.get("encounter_id", ""))
 	if game_state != null:
-		game_state.pending_encounter_id = str(step.get("encounter_id", ""))
+		game_state.pending_encounter_id = encounter_id
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval(
+			"window.__shrugameEncounterDiagnostics = %s" % JSON.stringify({"encounter_id": encounter_id}),
+			true
+		)
 	_change_scene(str(step.get("scene", "res://scenes/battle/battle_scene.tscn")))
 
 

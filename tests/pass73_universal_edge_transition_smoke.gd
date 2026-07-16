@@ -35,9 +35,9 @@ func _test_transition_contract() -> void:
 	var menu_source := FileAccess.get_file_as_string("res://scripts/core/main_menu.gd")
 	var electron_source := FileAccess.get_file_as_string("res://electron/main.cjs")
 	var release_source := FileAccess.get_file_as_string("res://.github/workflows/release.yml")
-	_assert(district_source.contains("FORWARD_EDGE_MARGIN := 40.0"), "Districts must activate exits before collision can stop the player")
-	_assert(district_source.contains("current_room.try_forward_exit(player)"), "Districts must directly activate the current forward exit")
-	_assert(room_source.contains("func try_forward_exit"), "Every room must expose a shared forward-exit API")
+	_assert(district_source.contains("EDGE_MARGIN := 40.0"), "Districts must activate exits before collision can stop the player")
+	_assert(district_source.contains("request_edge_transition(side, player)"), "Districts must centrally activate directional edge exits")
+	_assert(room_source.contains("func try_edge_exit"), "Every room must expose a shared edge-exit API")
 	_assert(transition_source.contains("func try_transition"), "Area and threshold transitions must share one implementation")
 	_assert(menu_source.contains("right_edge_harbour_square"), "The reported Harbour Square save state must have a runtime probe")
 	_assert(electron_source.contains("current_room === \"residences_docks\""), "Electron must verify the Harbour Square destination")
@@ -82,8 +82,14 @@ func _test_every_room_threshold() -> void:
 			if district.get_current_room_id() != source_room:
 				district.switch_room(source_room, "default", false)
 			district.player.global_position = Vector2(601.0, 280.0)
+			Input.action_release("move_left")
+			Input.action_release("move_right")
+			district.call("_physics_process", 0.0)
+			Input.action_press("move_right")
 			district.call("_physics_process", 0.0)
 			_assert(district.get_current_room_id() == target_room, "%s/%s must move to %s at x=600 without Area2D overlap" % [level_id, source_room, target_room])
+			Input.action_release("move_right")
+			district.call("_physics_process", 0.0)
 		district.queue_free()
 		await process_frame
 
@@ -99,6 +105,8 @@ func _prepare_temporary_save() -> void:
 
 
 func _cleanup_temporary_save() -> void:
+	Input.action_release("move_left")
+	Input.action_release("move_right")
 	if _save_system == null:
 		return
 	_save_system.clear_save()

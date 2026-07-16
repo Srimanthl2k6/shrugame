@@ -13,7 +13,7 @@ const INTERACTION_PROPERTIES := [
 	"flag_on_interact", "post_flag", "post_dialogue_id", "locked_message", "save_on_interact",
 	"level_id", "spawn_point", "encounter_id", "clue_id", "item_id", "item_amount", "gear_id",
 	"growth_stage_on_interact", "objective_text", "disabled_if_flag", "one_shot", "hide_when_disabled",
-	"cutscene_id", "focus_highlight"
+	"cutscene_id", "focus_highlight", "auto_activate_on_body_enter", "persist_progress_on_activate"
 ]
 
 @export_file("*.json") var definition_path := ""

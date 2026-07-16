@@ -34,7 +34,7 @@
         {"id": "HospitalMap", "position": [478, 226], "visual": "res://assets/level_04/sprites/prop_save_kiosk.png", "display_name": "Hospital map", "dialogue_id": "clue_hospital_map", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "clue_id": "hospital_map", "one_shot": true, "interaction_size": [34, 40]}
       ],
       "exits": [
-        {"id": "west_to_street", "position": [34, 280], "size": [40, 108], "target_room_id": "pun_street", "target_spawn_id": "from_hospital"},
+        {"id": "west_to_street", "position": [4, 280], "size": [16, 108], "target_room_id": "pun_street", "target_spawn_id": "from_hospital"},
         {"id": "east_to_ward", "position": [636, 280], "size": [16, 108], "target_room_id": "serum_ward", "target_spawn_id": "from_reception", "required_flags": ["hospital_records_collected"], "locked_objective": "Read the hospital records before entering the restricted ward."}
       ]
     },
@@ -51,7 +51,7 @@
         {"id": "WardSave", "position": [500, 268], "visual": "res://assets/level_04/sprites/prop_save_kiosk.png", "display_name": "Quiet hospital kiosk", "interaction_message": "A kiosk with its pattern scanner disabled saves your place.", "save_on_interact": true, "level_id": "level_04", "spawn_point": "from_reception", "interaction_size": [34, 40]}
       ],
       "exits": [
-        {"id": "west_to_reception", "position": [34, 280], "size": [40, 108], "target_room_id": "hospital_reception", "target_spawn_id": "from_ward"},
+        {"id": "west_to_reception", "position": [4, 280], "size": [16, 108], "target_room_id": "hospital_reception", "target_spawn_id": "from_ward"},
         {"id": "east_to_plaza", "position": [636, 280], "size": [16, 108], "target_room_id": "festival_plaza", "target_spawn_id": "from_ward", "required_flags": ["doctor_sushan_defeated"], "locked_objective": "Sushan still controls the ward doors."}
       ]
     },
@@ -68,7 +68,7 @@
         {"id": "MaskMaker", "position": [458, 258], "visual": "res://assets/level_04/sprites/npc_pun_vendor_idle.png", "display_name": "Aeon Mask Maker", "dialogue_id": "aeon_mask_maker", "dialogue_file_path": "res://data/dialogue/level_04_dialogue.json", "post_flag": "mitta_defeated", "post_dialogue_id": "auticity_post_clear_resident", "flip_h": true, "interaction_size": [40, 52]}
       ],
       "exits": [
-        {"id": "west_to_ward", "position": [34, 280], "size": [40, 108], "target_room_id": "serum_ward", "target_spawn_id": "from_plaza"},
+        {"id": "west_to_ward", "position": [4, 280], "size": [16, 108], "target_room_id": "serum_ward", "target_spawn_id": "from_plaza"},
         {"id": "east_to_stage", "position": [636, 280], "size": [16, 108], "target_room_id": "mayor_stage", "target_spawn_id": "from_plaza", "required_flags": ["aeon_festival_started"], "locked_objective": "Start the Aeon Festival before approaching Mitta's stage."}
       ]
     },
@@ -83,7 +83,7 @@
         {"id": "MittaBoss", "position": [372, 220], "visual": "res://assets/level_04/sprites/boss_mitta_overworld.png", "display_name": "Mayor Mitta", "interaction_message": "Mitta waits under a spotlight that follows no one else.", "cutscene_id": "mitta_confrontation", "required_flags": ["aeon_festival_started"], "disabled_if_flag": "mitta_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]}
       ],
       "exits": [
-        {"id": "west_to_plaza", "position": [34, 280], "size": [40, 108], "target_room_id": "festival_plaza", "target_spawn_id": "from_stage"},
+        {"id": "west_to_plaza", "position": [4, 280], "size": [16, 108], "target_room_id": "festival_plaza", "target_spawn_id": "from_stage"},
         {"id": "east_to_area_111", "position": [636, 266], "size": [16, 120], "visual": "res://assets/level_04/sprites/prop_area111_exit.png", "visual_offset": [-62, 0], "bob_pixels": 2.0, "target_level_id": "level_05", "target_spawn_id": "start", "required_flags": ["mitta_defeated"], "locked_objective": "Mitta has not surrendered the festival route."}
       ]
     }

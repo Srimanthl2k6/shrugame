@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.4 - 2026-07-16
+
+- Made the visible, reachable laboratory files the canonical Level 2 progression interaction.
+- Persisted the 165-files clue and story flag before the discovery cutscene, with existing-save compatibility.
+- Automatically trigger the required Nitin, popcorn, and Deepak sequences when Shrububu reaches them.
+- Centralized left and right edge transitions and consume one horizontal input per room crossing.
+- Fixed held-left input skipping two rooms and normalized every west-edge trigger across all five districts.
+- Added engine and packaged Electron regressions for the laboratory-to-Nitin path and reverse navigation.
+
 ## 1.0.3 - 2026-07-12
 
 - Fixed Harbour Square and other rooms where collision geometry could stop Shrububu before the edge Area2D activated.

@@ -218,6 +218,24 @@ func _run_electron_smoke_flow() -> void:
 		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/levels/districts/level_02.tscn")
 		return
+	if smoke_target == "level_02_lab_progression":
+		var lab_save := get_node_or_null("/root/SaveSystem")
+		if lab_save != null:
+			lab_save.new_game("shrububu")
+		var lab_state := get_node_or_null("/root/GameState")
+		if lab_state != null:
+			lab_state.current_level_id = "level_02"
+			lab_state.current_room_id = "laboratory"
+			lab_state.spawn_point = "from_plaza"
+			lab_state.pending_encounter_id = ""
+			lab_state.set_growth_stage(2)
+			lab_state.set_flag("tutorial_overworld_completed", true)
+			lab_state.set_flag("tutorial_battle_completed", true)
+			lab_state.set_current_objective("Recover the visible 165-files.")
+			lab_save.save_game("level_02", "from_plaza", "laboratory")
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/levels/districts/level_02.tscn")
+		return
 	if smoke_target == "right_edge_harbour_square":
 		var harbour_save := get_node_or_null("/root/SaveSystem")
 		if harbour_save != null:

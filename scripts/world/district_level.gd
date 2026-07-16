@@ -2,8 +2,9 @@ class_name DistrictLevel
 extends Node2D
 
 const RuntimeResourceManifest := preload("res://scripts/core/runtime_resource_manifest.gd")
-const FORWARD_EDGE_MARGIN := 40.0
-const FORWARD_EDGE_REARM_DISTANCE := 20.0
+const EDGE_MARGIN := 40.0
+const EDGE_INPUT_THRESHOLD := 0.5
+const EDGE_INPUT_NEUTRAL_THRESHOLD := 0.2
 
 signal room_change_started(from_room_id: String, to_room_id: String)
 signal room_changed(room_id: String, spawn_id: String)
@@ -22,7 +23,7 @@ var _room_paths: Dictionary = {}
 var _transitioning := false
 var _idle_seconds := 0.0
 var _reminder_sent := false
-var _forward_edge_armed := true
+var _edge_input_consumed := false
 var runtime_diagnostics: Dictionary = {}
 
 @onready var room_container: Node2D = get_node_or_null("RoomContainer") as Node2D
@@ -77,15 +78,33 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	if player == null or current_room == null or _transitioning:
 		return
+	var director := get_node_or_null("/root/CutsceneDirector")
+	if director != null and director.is_playing:
+		return
+	if not player.is_physics_processing() or bool(player.get("movement_locked")):
+		return
+	var horizontal_input := Input.get_axis("move_left", "move_right")
+	if absf(horizontal_input) <= EDGE_INPUT_NEUTRAL_THRESHOLD:
+		_edge_input_consumed = false
+		return
+	if _edge_input_consumed:
+		return
 	var local_x := current_room.to_local(player.global_position).x
-	var trigger_x := current_room.room_size.x - FORWARD_EDGE_MARGIN
-	if local_x < trigger_x - FORWARD_EDGE_REARM_DISTANCE:
-		_forward_edge_armed = true
+	var side := ""
+	if horizontal_input <= -EDGE_INPUT_THRESHOLD and local_x <= EDGE_MARGIN:
+		side = "left"
+	elif horizontal_input >= EDGE_INPUT_THRESHOLD and local_x >= current_room.room_size.x - EDGE_MARGIN:
+		side = "right"
+	if side.is_empty():
 		return
-	if not _forward_edge_armed or local_x < trigger_x:
-		return
-	_forward_edge_armed = false
-	current_room.try_forward_exit(player)
+	request_edge_transition(side, player)
+
+
+func request_edge_transition(side: String, body: Node2D) -> bool:
+	if _transitioning or _edge_input_consumed or current_room == null or side not in ["left", "right"]:
+		return false
+	_edge_input_consumed = true
+	return current_room.try_edge_exit(body, side)
 
 
 func request_room_change(target_room_id: String, target_spawn_id: String = "default") -> bool:
@@ -114,10 +133,10 @@ func switch_room(target_room_id: String, target_spawn_id: String = "default", sa
 		return false
 	room_container.add_child(current_room)
 	current_room_id = target_room_id
-	_forward_edge_armed = true
 	_record_diagnostic("current_room", current_room_id)
 	current_room.configure_player_camera(player)
 	if player != null:
+		player.velocity = Vector2.ZERO
 		player.global_position = current_room.get_spawn_position(target_spawn_id)
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state != null:

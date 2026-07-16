@@ -33,10 +33,14 @@ func configure_player_camera(player: Node) -> void:
 
 
 func try_forward_exit(body: Node2D) -> bool:
+	return try_edge_exit(body, "right")
+
+
+func try_edge_exit(body: Node2D, side: String) -> bool:
 	var exits := get_node_or_null("Exits")
 	if exits == null:
 		return false
 	for candidate in exits.get_children():
-		if candidate.has_method("is_forward_exit") and candidate.call("is_forward_exit"):
+		if candidate.has_method("get_edge_side") and str(candidate.call("get_edge_side")) == side:
 			return bool(candidate.call("try_transition", body))
 	return false

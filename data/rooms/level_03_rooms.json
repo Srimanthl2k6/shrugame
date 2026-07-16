@@ -38,7 +38,7 @@
         {"id": "BerryPicker", "position": [330, 216], "visual": "res://assets/level_03/sprites/npc_berry_picker_idle.png", "display_name": "Berry Picker", "dialogue_id": "berry_picker_kid", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "post_flag": "ankit_defeated", "post_dialogue_id": "berry_post_clear_potions", "interaction_size": [38, 48]}
       ],
       "exits": [
-        {"id": "west_to_entrance", "position": [34, 280], "size": [40, 108], "target_room_id": "forest_entrance", "target_spawn_id": "from_paths"},
+        {"id": "west_to_entrance", "position": [4, 280], "size": [16, 108], "target_room_id": "forest_entrance", "target_spawn_id": "from_paths"},
         {"id": "east_to_hut", "position": [636, 280], "size": [16, 108], "target_room_id": "chef_hut", "target_spawn_id": "from_paths"}
       ]
     },
@@ -55,7 +55,7 @@
         {"id": "EmptyFryer", "position": [492, 246], "visual": "res://assets/level_03/sprites/prop_berry_share_table.png", "display_name": "Empty fryer", "dialogue_id": "clue_empty_fryer", "dialogue_file_path": "res://data/dialogue/level_03_dialogue.json", "clue_id": "empty_fryer", "one_shot": true, "interaction_size": [42, 38]}
       ],
       "exits": [
-        {"id": "west_to_paths", "position": [34, 280], "size": [40, 108], "target_room_id": "berry_paths", "target_spawn_id": "from_hut"},
+        {"id": "west_to_paths", "position": [4, 280], "size": [16, 108], "target_room_id": "berry_paths", "target_spawn_id": "from_hut"},
         {"id": "east_to_clearing", "position": [636, 280], "size": [16, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_hut", "required_flags": ["niggesh_nishal_defeated"], "locked_objective": "Nishal is still holding the berry order."}
       ]
     },
@@ -73,7 +73,7 @@
         {"id": "BerrySave", "position": [520, 214], "visual": "res://assets/level_03/sprites/prop_berry_watch_save.png", "display_name": "Berry watch", "interaction_message": "A berry watch marks this moment in syrup and saves.", "save_on_interact": true, "level_id": "level_03", "spawn_point": "from_hut", "interaction_size": [34, 42]}
       ],
       "exits": [
-        {"id": "west_to_hut", "position": [34, 280], "size": [40, 108], "target_room_id": "chef_hut", "target_spawn_id": "from_clearing"},
+        {"id": "west_to_hut", "position": [4, 280], "size": [16, 108], "target_room_id": "chef_hut", "target_spawn_id": "from_clearing"},
         {"id": "east_to_gate", "position": [636, 280], "size": [16, 108], "target_room_id": "ankit_gate", "target_spawn_id": "from_clearing", "required_flags": ["berries_shared"], "locked_objective": "Share the berries before leaving the town."}
       ]
     },
@@ -88,7 +88,7 @@
         {"id": "AnkitBoss", "position": [378, 226], "visual": "res://assets/level_03/sprites/boss_ankit_overworld.png", "display_name": "Ankit", "interaction_message": "Ankit arrives with an empty plate and a full grievance.", "cutscene_id": "ankit_confrontation", "required_flags": ["berries_shared"], "disabled_if_flag": "ankit_defeated", "hide_when_disabled": true, "interaction_size": [52, 64]}
       ],
       "exits": [
-        {"id": "west_to_clearing", "position": [34, 280], "size": [40, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_gate"},
+        {"id": "west_to_clearing", "position": [4, 280], "size": [16, 108], "target_room_id": "sharing_clearing", "target_spawn_id": "from_gate"},
         {"id": "east_to_auticity", "position": [636, 270], "size": [16, 120], "visual": "res://assets/level_03/sprites/prop_auticity_exit_arch.png", "visual_offset": [-62, 0], "bob_pixels": 2.0, "target_level_id": "level_04", "target_spawn_id": "start", "required_flags": ["ankit_defeated"], "locked_objective": "Ankit blocks the exit with an empty plate."}
       ]
     }

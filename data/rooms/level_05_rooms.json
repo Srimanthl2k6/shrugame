@@ -33,7 +33,7 @@
         {"id": "SuhasBoss", "position": [454, 246], "visual": "res://assets/level_05/sprites/boss_suhas_overworld.png", "display_name": "Suhas", "interaction_message": "Suhas is already involved once the bar argument begins.", "cutscene_id": "area111_bar_fight", "disabled_if_flag": "suhas_defeated", "hide_when_disabled": true, "interaction_size": [50, 64]}
       ],
       "exits": [
-        {"id": "west_to_boulevard", "position": [34, 280], "size": [40, 108], "target_room_id": "ruined_boulevard", "target_spawn_id": "from_pub"},
+        {"id": "west_to_boulevard", "position": [4, 280], "size": [16, 108], "target_room_id": "ruined_boulevard", "target_spawn_id": "from_pub"},
         {"id": "east_to_alley", "position": [636, 280], "size": [16, 108], "target_room_id": "hooligan_alley", "target_spawn_id": "from_pub", "required_flags": ["suhas_defeated"], "locked_objective": "Suhas still owns the alley, bike, and volume level."}
       ]
     },
@@ -53,7 +53,7 @@
         {"id": "BikeKeysClue", "position": [344, 278], "visual": "res://assets/level_05/sprites/prop_suhas_motorcycle.png", "scale": [0.48, 0.48], "display_name": "Suhas's bike keys", "dialogue_id": "clue_bike_keys", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "clue_id": "bike_keys", "required_flags": ["suhas_defeated"], "one_shot": true, "interaction_size": [52, 42]}
       ],
       "exits": [
-        {"id": "west_to_pub", "position": [34, 280], "size": [40, 108], "target_room_id": "gummies_pub", "target_spawn_id": "from_alley"},
+        {"id": "west_to_pub", "position": [4, 280], "size": [16, 108], "target_room_id": "gummies_pub", "target_spawn_id": "from_alley"},
         {"id": "east_to_bike", "position": [636, 280], "size": [16, 108], "target_room_id": "bike_route", "target_spawn_id": "from_alley", "required_flags": ["bike_acquired", "guitar_acquired"], "locked_objective": "Take the bike and musical guitar before leaving the alley."}
       ]
     },
@@ -69,7 +69,7 @@
         {"id": "BikeRouteCheckpoint", "position": [324, 280], "visual": "res://assets/level_05/sprites/prop_musical_guitar.png", "scale": [0.52, 0.52], "display_name": "Musical bike checkpoint", "interaction_message": "The bike crosses the neon ruin while the guitar answers every broken streetlight.", "flag_on_interact": "bike_route_completed", "required_flags": ["bike_acquired", "guitar_acquired"], "one_shot": true, "objective_text": "Enter the fallen mansion and assemble the court clues.", "interaction_size": [48, 44]}
       ],
       "exits": [
-        {"id": "west_to_alley", "position": [34, 280], "size": [40, 108], "target_room_id": "hooligan_alley", "target_spawn_id": "from_bike"},
+        {"id": "west_to_alley", "position": [4, 280], "size": [16, 108], "target_room_id": "hooligan_alley", "target_spawn_id": "from_bike"},
         {"id": "east_to_mansion", "position": [636, 280], "size": [16, 108], "target_room_id": "mansion_foyer", "target_spawn_id": "from_bike", "required_flags": ["bike_route_completed"], "locked_objective": "Ride the marked route before entering the mansion."}
       ]
     },
@@ -85,7 +85,7 @@
         {"id": "CourtEcho", "position": [478, 258], "visual": "res://assets/level_05/sprites/npc_ruin_vendor_idle.png", "display_name": "Court Bailiff Echo", "dialogue_id": "court_bailiff_echo", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "post_flag": "srmt_defeated", "post_dialogue_id": "area111_post_clear_court", "flip_h": true, "interaction_size": [42, 56]}
       ],
       "exits": [
-        {"id": "west_to_bike", "position": [34, 280], "size": [40, 108], "target_room_id": "bike_route", "target_spawn_id": "from_mansion"},
+        {"id": "west_to_bike", "position": [4, 280], "size": [16, 108], "target_room_id": "bike_route", "target_spawn_id": "from_mansion"},
         {"id": "east_to_clues", "position": [636, 280], "size": [16, 108], "target_room_id": "clue_chambers", "target_spawn_id": "from_foyer", "required_flags": ["mansion_foyer_solved"], "locked_objective": "Solve the foyer console before entering the clue chambers."}
       ]
     },
@@ -102,7 +102,7 @@
         {"id": "MansionSave", "position": [188, 266], "visual": "res://assets/level_05/sprites/prop_musical_guitar.png", "scale": [0.46, 0.46], "display_name": "Resonant mansion string", "interaction_message": "A loose string hums the route back and saves your place.", "save_on_interact": true, "level_id": "level_05", "spawn_point": "from_foyer", "interaction_size": [38, 44]}
       ],
       "exits": [
-        {"id": "west_to_foyer", "position": [34, 280], "size": [40, 108], "target_room_id": "mansion_foyer", "target_spawn_id": "from_clues"},
+        {"id": "west_to_foyer", "position": [4, 280], "size": [16, 108], "target_room_id": "mansion_foyer", "target_spawn_id": "from_clues"},
         {"id": "east_to_court", "position": [636, 280], "size": [16, 108], "target_room_id": "ruined_court", "target_spawn_id": "from_clues", "required_flags": ["mansion_court_clues_collected", "guitar_acquired"], "locked_objective": "The ruined court requires the completed clue lock and musical guitar."}
       ]
     },
@@ -120,7 +120,7 @@
         {"id": "IshiYoga", "position": [516, 258], "visual": "res://assets/level_05/sprites/npc_ishiyoga_idle.png", "display_name": "IshiYoga", "dialogue_id": "ishiyoga_rescue", "dialogue_file_path": "res://data/dialogue/level_05_dialogue.json", "required_flags": ["srmt_defeated"], "disabled_if_flag": "ishiyoga_rescued", "interaction_size": [46, 64]},
         {"id": "FinalFeast", "position": [294, 272], "visual": "res://assets/level_05/sprites/prop_ending_feast.png", "display_name": "Ishiville's KFC feast", "interaction_message": "Shrububu and IshiYoga finally sit down with the real chicken.", "cutscene_id": "birthday_card", "required_flags": ["ishiyoga_rescued"], "interaction_size": [92, 62]}
       ],
-      "exits": [{"id": "west_to_clues", "position": [34, 280], "size": [40, 108], "target_room_id": "clue_chambers", "target_spawn_id": "from_court"}]
+      "exits": [{"id": "west_to_clues", "position": [4, 280], "size": [16, 108], "target_room_id": "clue_chambers", "target_spawn_id": "from_court"}]
     }
   }
 }
