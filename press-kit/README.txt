@@ -1,4 +1,4 @@
-SHRUGAME 1.0.5 PRESS KIT
+SHRUGAME 1.0.6 PRESS KIT
 
 Narrative pixel RPG / turn-based bullet-dodging encounters.
 Five districts. Ten bosses. Two difficulty modes. One KFC search.
