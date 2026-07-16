@@ -141,6 +141,17 @@ func continue_game() -> void:
 
 func quit_game() -> void:
 	_play_ui_select()
+	if OS.has_feature("web"):
+		var electron_quit = JavaScriptBridge.eval("""
+			(() => {
+				const desktop = window.parent && window.parent.shrugameDesktop;
+				if (!desktop || typeof desktop.quit !== 'function') return false;
+				desktop.quit();
+				return true;
+			})()
+		""", true)
+		if bool(electron_quit):
+			return
 	get_tree().quit()
 
 
@@ -164,6 +175,15 @@ func _get_electron_smoke_target() -> String:
 
 
 func _run_electron_smoke_flow() -> void:
+	var claimed = JavaScriptBridge.eval("""
+		(() => {
+			if (window.parent.__shrugameSmokeFlowStarted) return false;
+			window.parent.__shrugameSmokeFlowStarted = true;
+			return true;
+		})()
+	""", true)
+	if not bool(claimed):
+		return
 	await get_tree().create_timer(1.5, true, false, true).timeout
 	var smoke_target := _get_electron_smoke_target()
 	JavaScriptBridge.eval("window.__shrugameSmokeTarget = %s" % JSON.stringify(smoke_target), true)
@@ -180,6 +200,16 @@ func _run_electron_smoke_flow() -> void:
 	if smoke_target == "ending":
 		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/ending.tscn")
+		return
+	if smoke_target == "ending_media":
+		var ending_state := get_node_or_null("/root/GameState")
+		if ending_state != null:
+			ending_state.set_flag("srmt_defeated", true)
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/ending.tscn")
+		return
+	if smoke_target == "quit_button":
+		quit_game()
 		return
 	if smoke_target == "transition_level_01":
 		var transition_save := get_node_or_null("/root/SaveSystem")

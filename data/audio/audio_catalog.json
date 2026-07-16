@@ -1,4 +1,6 @@
 {
+	"children_yay": {"description": "Children cheering once when the birthday card appears.", "loop": false, "path": "res://assets/shared/audio/sfx/children_yay.mp3", "type": "sfx"},
+	"literally_my_life": {"description": "The single looping story track, stopped after SRMT is defeated.", "loop": true, "path": "res://assets/shared/audio/music/literally_my_life.mp3", "type": "music"},
 	"banana_gun": {"description": "Banana gun curved shot cue.", "loop": false, "path": "res://assets/shared/audio/sfx/banana_gun.wav", "type": "sfx"},
 	"battle_phase": {"description": "Battle phase change cue.", "loop": false, "path": "res://assets/shared/audio/sfx/battle_phase.wav", "type": "sfx"},
 	"berry_potion": {"description": "Berry potion splash and heal cue.", "loop": false, "path": "res://assets/shared/audio/sfx/berry_potion.wav", "type": "sfx"},

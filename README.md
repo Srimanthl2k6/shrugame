@@ -4,7 +4,7 @@ Shrugame is a five-district 2D pixel RPG about Shrububu's search for KFC through
 
 ## Release Status
 
-Version **1.0.5** includes:
+Version **1.0.6** includes:
 
 - 27 connected rooms across Divorcee Harbour, Banana-burbs, Berry Barks, Auticity, and Area 111.
 - Ten multi-phase encounters with Strength and Resonance outcomes.
@@ -22,8 +22,11 @@ Version **1.0.5** includes:
 - A repaired Auticity hospital route: the glowing records terminal now owns the required clue, objective, and atomic save.
 - Schema-4 recovery for saves that already read the former hospital-map interaction.
 - Centralized, nearest-target interactions with authored footprints, generous padding, a single world marker, and device-aware prompts.
-- Correct left/right Shrububu sprites, door-slam poses, weapon poses, and immediate cutscene-facing updates across all five forms.
-- SFX-only audio with no looping music or ambience.
+- Correct per-form left/right Shrububu sprites, including repaired Forms 1-2 door-slam and weapon poses with Forms 3-5 unchanged.
+- One persistent story song from launch through SRMT's defeat, with all other audio retained as one-shot SFX.
+- The supplied birthday photograph and one-shot children-cheering cue on the final card.
+- Enter, E, Escape, controller Confirm, and controller Cancel all return from the birthday card to the title.
+- A working Electron Quit command with the native Godot fallback retained.
 - One atomic, migration-safe save file with corruption fallback.
 - Godot 4.7 Web embedded in a hardened Electron desktop shell.
 - Windows x64 installer/portable builds and unsigned macOS Intel/Apple-silicon CI targets.
@@ -71,10 +74,12 @@ npm run smoke --prefix electron -- right_edge_harbour_square
 npm run smoke --prefix electron -- level_02_lab_progression
 npm run smoke --prefix electron -- level_04_hospital_progression
 npm run smoke --prefix electron -- full_progression
+npm run smoke --prefix electron -- ending_media
+npm run smoke --prefix electron -- quit_button
 .\tools\audit_release_files.ps1
 ```
 
-The 35-test release suite validates story placement, assets, animation contracts, audio, menus, accessibility, save recovery, Electron isolation, website media, room connectivity, progression gates, reachable interaction positions, and a complete ten-boss walkthrough on both modes. See [QA_REPORT.md](docs/QA_REPORT.md).
+The 36-test release suite validates story placement, assets, animation contracts, audio, menus, accessibility, save recovery, Electron isolation, website media, room connectivity, progression gates, reachable interaction positions, and a complete ten-boss walkthrough on both modes. See [QA_REPORT.md](docs/QA_REPORT.md).
 
 ## Build
 
@@ -86,7 +91,7 @@ macOS x64 and arm64 packages are produced by `.github/workflows/release.yml` on 
 
 ## Project Guide
 
-- `assets/`: Runtime art, fonts, and non-looping sound effects.
+- `assets/`: Runtime art, fonts, the single story track, and one-shot sound effects.
 - `source_art/`: Non-exported generated production sources; private identity references are not stored here.
 - `scenes/`: Main flow, 27 rooms, five district roots, battle, ending, and UI.
 - `scripts/`: State, save, input, dialogue, cutscene, battle, overworld, UI, and presentation systems.

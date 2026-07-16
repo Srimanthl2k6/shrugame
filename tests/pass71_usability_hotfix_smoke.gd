@@ -20,7 +20,7 @@ func _run() -> void:
 	await _test_satyaki_resolution_routes()
 	await _test_complete_level_chain()
 	_cleanup_temporary_save()
-	_finish("Pass 71 readable UI, tutorials, SFX-only audio, and persistent level transitions")
+	_finish("Pass 71 readable UI, tutorials, persistent audio, and level transitions")
 
 
 func _test_readable_native_ui() -> void:

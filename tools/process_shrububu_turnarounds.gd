@@ -17,11 +17,12 @@ const ATTACK_NAMES := [
 	"attack_musical_guitar"
 ]
 const DIRECTIONS := ["down", "left", "up", "right"]
-const POSE_INDEX_BY_DIRECTION := {
-	"down": 0,
-	"right": 1,
-	"up": 2,
-	"left": 3
+const POSE_INDEX_BY_STAGE := {
+	1: {"down": 0, "left": 1, "up": 2, "right": 3},
+	2: {"down": 0, "left": 1, "up": 2, "right": 3},
+	3: {"down": 0, "right": 1, "up": 2, "left": 3},
+	4: {"down": 0, "right": 1, "up": 2, "left": 3},
+	5: {"down": 0, "right": 1, "up": 2, "left": 3}
 }
 
 
@@ -108,19 +109,21 @@ func _harden_alpha(image: Image) -> void:
 
 func _write_stage(stage: int, poses: Array[Image]) -> void:
 	var stage_dir := "%s/form_%02d" % [OUTPUT_ROOT, stage]
+	var pose_indices: Dictionary = POSE_INDEX_BY_STAGE[stage]
+	var right_pose_index := int(pose_indices["right"])
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(stage_dir))
 	for direction_value in DIRECTIONS:
 		var direction := str(direction_value)
-		var source_pose_index := int(POSE_INDEX_BY_DIRECTION[direction])
+		var source_pose_index := int(pose_indices[direction])
 		_write_motion_sheet(stage_dir, "idle_%s" % direction, poses[source_pose_index], 2, "idle", stage)
 		_write_motion_sheet(stage_dir, "walk_%s" % direction, poses[source_pose_index], 4, "walk", stage)
 	_write_motion_sheet(stage_dir, "battle_idle", poses[0], 4, "battle", stage)
 	_write_motion_sheet(stage_dir, "hurt", poses[0], 2, "hurt", stage)
 	_write_motion_sheet(stage_dir, "victory", poses[0], 4, "victory", stage)
 	_write_motion_sheet(stage_dir, "interact", poses[0], 4, "interact", stage)
-	_write_motion_sheet(stage_dir, "door_slam", poses[1], 6, "door_slam", stage)
+	_write_motion_sheet(stage_dir, "door_slam", poses[right_pose_index], 6, "door_slam", stage)
 	_write_motion_sheet(stage_dir, "growth_transform", poses[0], 8, "growth", stage)
-	_write_motion_sheet(stage_dir, ATTACK_NAMES[stage - 1], poses[1], 6, "attack", stage)
+	_write_motion_sheet(stage_dir, ATTACK_NAMES[stage - 1], poses[right_pose_index], 6, "attack", stage)
 
 
 func _write_motion_sheet(stage_dir: String, animation_name: String, pose: Image, frame_count: int, action: String, stage: int) -> void:

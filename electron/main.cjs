@@ -33,6 +33,8 @@ const MIME_TYPES = {
 let mainWindow = null;
 let localServer = null;
 const consoleErrors = [];
+let lastInputDiagnostics = null;
+let lastEndingForwardResult = null;
 
 app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
 app.commandLine.appendSwitch("disable-features", "HardwareMediaKeyHandling");
@@ -137,7 +139,36 @@ function createWindow() {
     }
   });
   mainWindow.webContents.on("before-input-event", (event, input) => {
+	lastInputDiagnostics = {
+		alt: input.alt,
+		code: input.code,
+		control: input.control,
+		key: input.key,
+		meta: input.meta,
+		type: input.type
+	};
     if (input.type !== "keyDown") return;
+	const endingKey = !input.alt && !input.control && !input.meta && (
+		input.key === "Enter" || input.key === "Escape" || String(input.key).toLowerCase() === "e"
+	);
+	if (endingKey) {
+		mainWindow.webContents.executeJavaScript(`(() => {
+			const frame = document.querySelector('#game-frame');
+			const gameWindow = frame && frame.contentWindow;
+			if (gameWindow && gameWindow.__shrugameEndingDiagnostics?.scene === 'ending'
+				&& typeof gameWindow.__shrugameReturnToTitle === 'function') {
+				gameWindow.__shrugameReturnToTitle();
+				return { called: true, callbackType: 'function', scene: 'ending' };
+			}
+			return {
+				called: false,
+				callbackType: gameWindow ? typeof gameWindow.__shrugameReturnToTitle : 'missing-window',
+				scene: gameWindow?.__shrugameEndingDiagnostics?.scene || 'missing'
+			};
+		})()`).then((result) => { lastEndingForwardResult = result; }).catch((error) => {
+			lastEndingForwardResult = { called: false, error: error.message };
+		});
+	}
     if (input.key === "F11" || (input.alt && input.key === "Enter")) {
       event.preventDefault();
       mainWindow.setFullScreen(!mainWindow.isFullScreen());
@@ -154,7 +185,11 @@ function createWindow() {
   mainWindow.once("ready-to-show", () => mainWindow.show());
   mainWindow.loadURL(`${APP_ORIGIN}/renderer/index.html${IS_SMOKE ? `?smoke=${encodeURIComponent(SMOKE_ROUTE)}` : ""}`);
   if (IS_SMOKE) {
-    mainWindow.webContents.once("did-finish-load", () => runSmokeProbe(mainWindow));
+	if (SMOKE_ROUTE === "quit_button") {
+		setTimeout(() => app.exit(1), 15000);
+	} else {
+		mainWindow.webContents.once("did-finish-load", () => runSmokeProbe(mainWindow));
+	}
   }
 }
 
@@ -169,6 +204,8 @@ async function collectRuntimeProbe(window) {
     const frameDocument = frame && frame.contentDocument;
     const canvas = frameDocument && frameDocument.querySelector('canvas');
     if (canvas) {
+	  frame.focus();
+	  if (frameWindow) frameWindow.focus();
       canvas.focus();
       canvas.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientX: canvas.width / 2, clientY: canvas.height / 2 }));
       canvas.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, clientX: canvas.width / 2, clientY: canvas.height / 2 }));
@@ -211,6 +248,7 @@ async function collectRuntimeProbe(window) {
       interactionDiagnostics: frameWindow ? frameWindow.__shrugameInteractionDiagnostics || null : null,
       dialogueDiagnostics: frameWindow ? frameWindow.__shrugameDialogueDiagnostics || null : null,
       fullProgressionDiagnostics: frameWindow ? frameWindow.__shrugameFullProgressionDiagnostics || null : null,
+	  endingDiagnostics: frameWindow ? frameWindow.__shrugameEndingDiagnostics || null : null,
       godotSmokeTarget: frameWindow ? frameWindow.__shrugameSmokeTarget || null : null
     };
   })()`);
@@ -290,6 +328,16 @@ async function runSmokeProbe(window) {
 	} else if (SMOKE_ROUTE === "full_progression") {
 		runDefaultMovement = false;
 		await wait(9000);
+	} else if (SMOKE_ROUTE === "ending_media") {
+		runDefaultMovement = false;
+		await wait(2500);
+		const endingFrame = await window.capturePage();
+		fs.writeFileSync(path.join(outputDir, "electron-ending-media.png"), endingFrame.toPNG());
+		window.focus();
+		await collectRuntimeProbe(window);
+		await wait(200);
+		await pressKey("Enter");
+		await wait(1800);
 	} else if (SMOKE_ROUTE === "1") {
 		await wait(1900);
 		await pressKey("Enter");
@@ -329,14 +377,23 @@ async function runSmokeProbe(window) {
     consoleErrors,
     frameChangedAfterInput: beforeHash !== afterHash,
     generatedAt: new Date().toISOString(),
+	desktopInput: lastInputDiagnostics,
+	endingForward: lastEndingForwardResult,
     smokeRoute: SMOKE_ROUTE
   };
   fs.writeFileSync(path.join(outputDir, "electron-runtime-report.json"), `${JSON.stringify(report, null, 2)}\n`);
   const passed = report.canvasFound
     && report.indexedDbWritable
     && report.audioState === "running"
-    && report.gameAudio?.mode === "sfx-only"
-    && report.gameAudio?.continuousPlayers === 0
+	&& report.gameAudio?.mode === "single-story-loop"
+	&& report.gameAudio?.continuousPlayers === (SMOKE_ROUTE === "ending_media" ? 0 : 1)
+	&& report.gameAudio?.storyMusicPlaying === (SMOKE_ROUTE !== "ending_media")
+	&& (SMOKE_ROUTE !== "ending_media" || (
+		report.gameAudio?.lastSfxId === "children_yay"
+		&& report.endingDiagnostics?.returnedToTitle === true
+		&& report.endingDiagnostics?.photoWidth === 1194
+		&& report.endingDiagnostics?.photoHeight === 1600
+	))
     && (SMOKE_ROUTE !== "transition_level_01" || report.godotDiagnostics?.level_id === "level_02")
     && (SMOKE_ROUTE !== "right_edge_level_02" || report.godotDiagnostics?.current_room === "lab_approach")
     && (SMOKE_ROUTE !== "right_edge_harbour_square" || report.godotDiagnostics?.current_room === "residences_docks")
@@ -381,7 +438,14 @@ ipcMain.handle("link:open-external", async (_event, target) => {
     return false;
   }
 });
-ipcMain.on("app:quit", () => app.quit());
+ipcMain.on("app:quit", () => {
+  if (IS_SMOKE && SMOKE_ROUTE === "quit_button") {
+	const outputDir = path.resolve(process.env.SHRUGAME_SMOKE_OUTPUT || path.join(ROOT, "..", "builds", "qa", "electron"));
+	fs.mkdirSync(outputDir, { recursive: true });
+	fs.writeFileSync(path.join(outputDir, "electron-quit-verified.json"), `${JSON.stringify({ quitReceived: true }, null, 2)}\n`);
+  }
+  app.quit();
+});
 
 app.on("second-instance", () => {
   if (!mainWindow) return;

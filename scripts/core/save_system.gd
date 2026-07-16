@@ -134,11 +134,24 @@ func load_game() -> Dictionary:
 		if not save_game(migrated_level, migrated_spawn, migrated_room):
 			push_warning("Loaded a migrated save, but could not rewrite it atomically.")
 		_migration_rewrite_required = false
+	_sync_story_music()
 	return data
 
 
 func has_save() -> bool:
 	return FileAccess.file_exists(save_path)
+
+
+func has_saved_flag(flag_name: String) -> bool:
+	if flag_name.is_empty():
+		return false
+	var data := _read_save_candidate(save_path)
+	if data.is_empty():
+		data = _read_save_candidate(backup_path)
+	if data.is_empty():
+		return false
+	var flags = data.get("story_flags", {})
+	return typeof(flags) == TYPE_DICTIONARY and bool((flags as Dictionary).get(flag_name, false))
 
 
 func new_game(selected_difficulty_id: String = "shrububu") -> void:
@@ -160,6 +173,7 @@ func new_game(selected_difficulty_id: String = "shrububu") -> void:
 	game_state.set_current_objective("Find KFC in Divorcee Harbour.")
 	game_state.lock_difficulty()
 	save_game("level_01", "start", "arrival")
+	_sync_story_music(true)
 
 
 func get_level_scene_path(level_id: String) -> String:
@@ -274,3 +288,13 @@ func _get_game_state() -> Node:
 	if is_inside_tree():
 		return get_tree().root.get_node_or_null("GameState")
 	return null
+
+
+func _sync_story_music(restart_from_beginning: bool = false) -> void:
+	if not is_inside_tree():
+		return
+	var audio_manager := get_tree().root.get_node_or_null("AudioManager")
+	if audio_manager != null and audio_manager.has_method("sync_story_music"):
+		if restart_from_beginning and audio_manager.has_method("stop_story_music"):
+			audio_manager.stop_story_music()
+		audio_manager.sync_story_music()

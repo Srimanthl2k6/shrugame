@@ -1,5 +1,7 @@
 extends Node
 
+signal story_flag_changed(flag_name: String, value: bool)
+
 const DIFFICULTY_PATH := "res://data/difficulty/difficulty_modes.json"
 const SAVE_SCHEMA_VERSION := 4
 
@@ -34,12 +36,15 @@ func _process(delta: float) -> void:
 func set_flag(flag_name: String, value: bool = true) -> void:
 	if flag_name.is_empty():
 		return
+	var previous_value := bool(story_flags.get(flag_name, false))
 	story_flags[flag_name] = value
 	if flag_name.ends_with("_defeated"):
 		if value:
 			defeated_bosses[flag_name] = true
 		else:
 			defeated_bosses.erase(flag_name)
+	if previous_value != value:
+		story_flag_changed.emit(flag_name, value)
 
 
 func get_flag(flag_name: String, default_value: bool = false) -> bool:

@@ -31,12 +31,13 @@ func _run() -> void:
 
 func _test_processor_contract() -> void:
 	var processor := FileAccess.get_file_as_string("res://tools/process_shrububu_turnarounds.gd")
-	_assert(processor.contains('"right": 1'), "Right must map to source pose 1")
-	_assert(processor.contains('"left": 3'), "Left must map to source pose 3")
+	_assert(processor.contains('1: {"down": 0, "left": 1, "up": 2, "right": 3}'), "Form 1 must use its left/right source order")
+	_assert(processor.contains('2: {"down": 0, "left": 1, "up": 2, "right": 3}'), "Form 2 must use its left/right source order")
+	_assert(processor.contains('3: {"down": 0, "right": 1, "up": 2, "left": 3}'), "Forms 3-5 must retain their source order")
 	_assert(processor.contains('"up": 2'), "Up must map to source pose 2")
 	_assert(processor.contains('"down": 0'), "Down must map to source pose 0")
-	_assert(processor.contains('"door_slam", poses[1]'), "Door slam must start from the right-facing pose")
-	_assert(processor.contains('ATTACK_NAMES[stage - 1], poses[1]'), "Weapon attacks must start from the right-facing pose")
+	_assert(processor.contains('"door_slam", poses[right_pose_index]'), "Door slam must start from each form's right-facing pose")
+	_assert(processor.contains('ATTACK_NAMES[stage - 1], poses[right_pose_index]'), "Weapon attacks must start from each form's right-facing pose")
 	var director := FileAccess.get_file_as_string("res://scripts/cutscenes/cutscene_director.gd")
 	_assert(director.contains('target.call("set_facing_direction", direction)'), "Cutscene facing must use PlayerController's immediate facing API")
 
@@ -49,12 +50,14 @@ func _test_generated_sheets() -> void:
 		_assert(source != null and not source.is_empty(), "Form %d turnaround source must load" % stage)
 		if source == null or source.is_empty():
 			continue
-		var expected_right := _extract_pose(source, 1, frame_size)
-		var expected_left := _extract_pose(source, 3, frame_size)
-		_assert(_first_frame_matches(stage, "idle_right", expected_right, frame_size), "Form %d idle_right must use source pose 1" % stage)
-		_assert(_first_frame_matches(stage, "walk_right", _offset_pose(expected_right, Vector2i(-1, 0)), frame_size), "Form %d walk_right must use source pose 1" % stage)
-		_assert(_first_frame_matches(stage, "idle_left", expected_left, frame_size), "Form %d idle_left must use source pose 3" % stage)
-		_assert(_first_frame_matches(stage, "walk_left", _offset_pose(expected_left, Vector2i(-1, 0)), frame_size), "Form %d walk_left must use source pose 3" % stage)
+		var right_source_index := 3 if stage <= 2 else 1
+		var left_source_index := 1 if stage <= 2 else 3
+		var expected_right := _extract_pose(source, right_source_index, frame_size)
+		var expected_left := _extract_pose(source, left_source_index, frame_size)
+		_assert(_first_frame_matches(stage, "idle_right", expected_right, frame_size), "Form %d idle_right must use source pose %d" % [stage, right_source_index])
+		_assert(_first_frame_matches(stage, "walk_right", _offset_pose(expected_right, Vector2i(-1, 0)), frame_size), "Form %d walk_right must use source pose %d" % [stage, right_source_index])
+		_assert(_first_frame_matches(stage, "idle_left", expected_left, frame_size), "Form %d idle_left must use source pose %d" % [stage, left_source_index])
+		_assert(_first_frame_matches(stage, "walk_left", _offset_pose(expected_left, Vector2i(-1, 0)), frame_size), "Form %d walk_left must use source pose %d" % [stage, left_source_index])
 		_assert(_first_frame_matches(stage, "door_slam", expected_right, frame_size), "Form %d door slam must face right" % stage)
 		_assert(_first_frame_matches(stage, ATTACK_NAMES[stage - 1], expected_right, frame_size), "Form %d weapon attack must face right" % stage)
 

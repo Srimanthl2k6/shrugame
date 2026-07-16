@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.6 - 2026-07-16
+
+- Added the supplied Nightcore story track as the game's only music loop from launch until SRMT is defeated.
+- Added the supplied children-cheering cue to the birthday card and kept it as a one-shot SFX.
+- Replaced the ending feast sprite with the complete, uncropped supplied birthday photograph.
+- Repaired Forms 1-2 horizontal source mappings, door-slam poses, and weapon poses without changing Forms 3-5.
+- Replaced the ending's fixed delay with an input-release latch and routed Enter, E, Escape, Confirm, and Cancel to the title.
+- Routed the Electron Quit button through the secure preload IPC API while retaining native Godot Quit.
+- Added final media, completed-save music, both SRMT outcomes, ending navigation, and real Electron Quit regressions.
+
 ## 1.0.5 - 2026-07-16
 
 - Consolidated Auticity's optional hospital map and required records into one visible progression terminal.

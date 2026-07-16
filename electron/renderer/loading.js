@@ -17,6 +17,8 @@ async function updateVersion() {
 function revealGame() {
   loading.classList.add("is-hidden");
   const canvas = frame.contentDocument && frame.contentDocument.querySelector("canvas");
+  frame.focus();
+  if (frame.contentWindow) frame.contentWindow.focus();
   if (canvas) canvas.focus();
 }
 
